@@ -16,6 +16,7 @@ public class JFrameMain extends javax.swing.JFrame {
      */
     public JFrameMain() {
         initComponents();
+        jMenuBarBarraPrincipal.setVisible(false);
     }
 
     /**
@@ -35,6 +36,12 @@ public class JFrameMain extends javax.swing.JFrame {
         jComboBoxDominio = new javax.swing.JComboBox<>();
         txtSenha = new javax.swing.JPasswordField();
         jLabelDominio = new javax.swing.JLabel();
+        jMenuBarBarraPrincipal = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuCadastros = new javax.swing.JMenu();
+        jMenuItemCVeiculo = new javax.swing.JMenuItem();
+        jMenuItemCCliente = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LocCar");
@@ -59,7 +66,7 @@ public class JFrameMain extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxDominio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Funcionário", "Administrador", " " }));
+        jComboBoxDominio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Funcionário", "Administrador" }));
         jComboBoxDominio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxDominioActionPerformed(evt);
@@ -120,41 +127,83 @@ public class JFrameMain extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jMenu1.setText("File");
+        jMenuBarBarraPrincipal.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBarBarraPrincipal.add(jMenu2);
+
+        jMenuCadastros.setText("Cadastro");
+
+        jMenuItemCVeiculo.setText("Cadastro Veiculo");
+        jMenuItemCVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCVeiculoActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuItemCVeiculo);
+
+        jMenuItemCCliente.setText("Cadastro Cliente");
+        jMenuItemCCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCClienteActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuItemCCliente);
+
+        jMenuBarBarraPrincipal.add(jMenuCadastros);
+
+        setJMenuBar(jMenuBarBarraPrincipal);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
+                .addGap(47, 47, 47)
                 .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(44, 44, 44)
                 .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogarActionPerformed
+    private void jMenuItemCVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCVeiculoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonLogarActionPerformed
+        new JFrameCadastroVeiculos().setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItemCVeiculoActionPerformed
 
     private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSenhaActionPerformed
 
+    private void jComboBoxDominioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDominioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxDominioActionPerformed
+
+    private void jButtonLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogarActionPerformed
+
+        jPanelLogin.setVisible(false);
+
+        jMenuBarBarraPrincipal.setVisible(true);
+    }//GEN-LAST:event_jButtonLogarActionPerformed
+
     private void txtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLoginActionPerformed
 
-    private void jComboBoxDominioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDominioActionPerformed
+    private void jMenuItemCClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxDominioActionPerformed
+        new JFrameCadastroCliente().setVisible(true);
+    }//GEN-LAST:event_jMenuItemCClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,6 +246,12 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDominio;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelSenha;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBarBarraPrincipal;
+    private javax.swing.JMenu jMenuCadastros;
+    private javax.swing.JMenuItem jMenuItemCCliente;
+    private javax.swing.JMenuItem jMenuItemCVeiculo;
     private javax.swing.JPanel jPanelLogin;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;
