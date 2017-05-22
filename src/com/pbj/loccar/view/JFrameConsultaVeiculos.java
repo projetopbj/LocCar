@@ -68,8 +68,6 @@ public class JFrameConsultaVeiculos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableVeiculos);
 
-        jPanelConsVeic.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
         jButtonCadasNovo.setText("Cadastrar Novo");
         jButtonCadasNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,11 +217,11 @@ public class JFrameConsultaVeiculos extends javax.swing.JFrame {
         jPanelCVLayout.setVerticalGroup(
             jPanelCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCVLayout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jPanelPesq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanelConsVeic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -245,7 +243,12 @@ public class JFrameConsultaVeiculos extends javax.swing.JFrame {
     private void jButtonExcluirCadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirCadasActionPerformed
         // TODO add your handling code here:
         
-        JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Exluir?");
+      int resp =  JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Exluir?");
+      
+      if(resp == 0){
+         
+      }
+      
     }//GEN-LAST:event_jButtonExcluirCadasActionPerformed
 
     private void jRadioButtonModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonModeloActionPerformed

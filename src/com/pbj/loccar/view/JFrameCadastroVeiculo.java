@@ -47,7 +47,6 @@ public class JFrameCadastroVeiculo extends javax.swing.JFrame {
         txtNPortas = new javax.swing.JTextField();
         jLabelCor = new javax.swing.JLabel();
         jComboBoxCor = new javax.swing.JComboBox<>();
-        jPanelBotoes = new javax.swing.JPanel();
         jButtonSalvarVeiculo = new javax.swing.JButton();
         jButtonLimpar = new javax.swing.JButton();
 
@@ -166,7 +165,7 @@ public class JFrameCadastroVeiculo extends javax.swing.JFrame {
                                     .addGap(0, 0, Short.MAX_VALUE))))
                         .addGroup(jPanelDadosVeiculoLayout.createSequentialGroup()
                             .addComponent(jComboBoxCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(23, 23, 23)))))
+                            .addContainerGap()))))
         );
         jPanelDadosVeiculoLayout.setVerticalGroup(
             jPanelDadosVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,8 +205,6 @@ public class JFrameCadastroVeiculo extends javax.swing.JFrame {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
-        jPanelBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
         jButtonSalvarVeiculo.setText("Salvar");
         jButtonSalvarVeiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,46 +219,31 @@ public class JFrameCadastroVeiculo extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanelBotoesLayout = new javax.swing.GroupLayout(jPanelBotoes);
-        jPanelBotoes.setLayout(jPanelBotoesLayout);
-        jPanelBotoesLayout.setHorizontalGroup(
-            jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBotoesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonLimpar)
-                .addGap(44, 44, 44)
-                .addComponent(jButtonSalvarVeiculo)
-                .addGap(32, 32, 32))
-        );
-        jPanelBotoesLayout.setVerticalGroup(
-            jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBotoesLayout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
-                .addGroup(jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSalvarVeiculo)
-                    .addComponent(jButtonLimpar))
-                .addGap(33, 33, 33))
-        );
-
         javax.swing.GroupLayout jPanelCadastroVeiculosLayout = new javax.swing.GroupLayout(jPanelCadastroVeiculos);
         jPanelCadastroVeiculos.setLayout(jPanelCadastroVeiculosLayout);
         jPanelCadastroVeiculosLayout.setHorizontalGroup(
             jPanelCadastroVeiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCadastroVeiculosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelCadastroVeiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanelDadosVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelDadosVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCadastroVeiculosLayout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonSalvarVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
         jPanelCadastroVeiculosLayout.setVerticalGroup(
             jPanelCadastroVeiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCadastroVeiculosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelDadosVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(57, 57, 57)
+                .addGroup(jPanelCadastroVeiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSalvarVeiculo)
+                    .addComponent(jButtonLimpar))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -373,7 +355,6 @@ public class JFrameCadastroVeiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelModelo;
     private javax.swing.JLabel jLabelNportas;
     private javax.swing.JLabel jLabelPlaca;
-    private javax.swing.JPanel jPanelBotoes;
     private javax.swing.JPanel jPanelCadastroVeiculos;
     private javax.swing.JPanel jPanelDadosVeiculo;
     private javax.swing.JTextField txtAno;

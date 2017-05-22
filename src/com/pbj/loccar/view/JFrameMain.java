@@ -46,11 +46,13 @@ public class JFrameMain extends javax.swing.JFrame {
         jMenuLocacao = new javax.swing.JMenu();
         jMenuItemLocar = new javax.swing.JMenuItem();
         jMenuItemDevolver = new javax.swing.JMenuItem();
+        jMenuRelatorios = new javax.swing.JMenu();
+        jMenuFatLoc = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LocCar");
 
-        jPanelLogin.setBackground(new java.awt.Color(204, 204, 204));
+        jPanelLogin.setBackground(new java.awt.Color(255, 255, 255));
         jPanelLogin.setBorder(javax.swing.BorderFactory.createTitledBorder("Autentificação"));
 
         jLabelLogin.setText("Login");
@@ -174,12 +176,34 @@ public class JFrameMain extends javax.swing.JFrame {
         jMenuLocacao.setText("Locação");
 
         jMenuItemLocar.setText("Locar Veículo");
+        jMenuItemLocar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemLocarActionPerformed(evt);
+            }
+        });
         jMenuLocacao.add(jMenuItemLocar);
 
         jMenuItemDevolver.setText("Devolver Veículo");
+        jMenuItemDevolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDevolverActionPerformed(evt);
+            }
+        });
         jMenuLocacao.add(jMenuItemDevolver);
 
         jMenuBarBarraPrincipal.add(jMenuLocacao);
+
+        jMenuRelatorios.setText("Relatórios");
+
+        jMenuFatLoc.setText("Faturas de Locação");
+        jMenuFatLoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFatLocActionPerformed(evt);
+            }
+        });
+        jMenuRelatorios.add(jMenuFatLoc);
+
+        jMenuBarBarraPrincipal.add(jMenuRelatorios);
 
         setJMenuBar(jMenuBarBarraPrincipal);
 
@@ -244,6 +268,23 @@ public class JFrameMain extends javax.swing.JFrame {
         new JFrameConsultaClientes().setVisible(true);
     }//GEN-LAST:event_jMenuConsClientesActionPerformed
 
+    private void jMenuItemDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDevolverActionPerformed
+        // TODO add your handling code here:
+        new JFrameBuscaDevol().setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItemDevolverActionPerformed
+
+    private void jMenuItemLocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLocarActionPerformed
+        // TODO add your handling code here:
+        new JFrameLocar().setVisible(true);
+    }//GEN-LAST:event_jMenuItemLocarActionPerformed
+
+    private void jMenuFatLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFatLocActionPerformed
+        // TODO add your handling code here:
+        
+        new JFrameFaturaLoc().setVisible(true);
+    }//GEN-LAST:event_jMenuFatLocActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -290,11 +331,13 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuConsClientes;
     private javax.swing.JMenuItem jMenuConsVeiculos;
     private javax.swing.JMenu jMenuConsultas;
+    private javax.swing.JMenuItem jMenuFatLoc;
     private javax.swing.JMenuItem jMenuItemCadasCliente;
     private javax.swing.JMenuItem jMenuItemCadasVeiculo;
     private javax.swing.JMenuItem jMenuItemDevolver;
     private javax.swing.JMenuItem jMenuItemLocar;
     private javax.swing.JMenu jMenuLocacao;
+    private javax.swing.JMenu jMenuRelatorios;
     private javax.swing.JPanel jPanelLogin;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;

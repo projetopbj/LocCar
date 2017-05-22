@@ -33,17 +33,16 @@ public class JFrameConsultaClientes extends javax.swing.JFrame {
         jPanelCC = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableClientes = new javax.swing.JTable();
-        jPanelBotoes = new javax.swing.JPanel();
-        jButtonEditarCadas = new javax.swing.JButton();
-        jButtonCadasNovo = new javax.swing.JButton();
-        jButtonExcluirCadas = new javax.swing.JButton();
-        jButtonDetalhers = new javax.swing.JButton();
         jPanelConsulClientes = new javax.swing.JPanel();
         txtConsulta = new javax.swing.JTextField();
         jButtonBusca = new javax.swing.JButton();
         jPanelFilt = new javax.swing.JPanel();
         jRadioButtonNome = new javax.swing.JRadioButton();
         jRadioButtonCPF = new javax.swing.JRadioButton();
+        jButtonCadasNovo = new javax.swing.JButton();
+        jButtonDetalhers = new javax.swing.JButton();
+        jButtonEditarCadas = new javax.swing.JButton();
+        jButtonExcluirCadas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta Clientes");
@@ -66,61 +65,14 @@ public class JFrameConsultaClientes extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableClientes);
 
-        jPanelBotoes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        jButtonEditarCadas.setText("Editar");
-        jButtonEditarCadas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarCadasActionPerformed(evt);
-            }
-        });
-
-        jButtonCadasNovo.setText("Cadastrar Novo");
-        jButtonCadasNovo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCadasNovoActionPerformed(evt);
-            }
-        });
-
-        jButtonExcluirCadas.setText("Excluir");
-        jButtonExcluirCadas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExcluirCadasActionPerformed(evt);
-            }
-        });
-
-        jButtonDetalhers.setText("+ Detalhes");
-
-        javax.swing.GroupLayout jPanelBotoesLayout = new javax.swing.GroupLayout(jPanelBotoes);
-        jPanelBotoes.setLayout(jPanelBotoesLayout);
-        jPanelBotoesLayout.setHorizontalGroup(
-            jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBotoesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButtonDetalhers)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonEditarCadas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonCadasNovo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonExcluirCadas)
-                .addGap(14, 14, 14))
-        );
-        jPanelBotoesLayout.setVerticalGroup(
-            jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBotoesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCadasNovo)
-                    .addComponent(jButtonEditarCadas)
-                    .addComponent(jButtonExcluirCadas)
-                    .addComponent(jButtonDetalhers))
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
-
         jPanelConsulClientes.setBorder(javax.swing.BorderFactory.createTitledBorder("Consulta Clientes"));
 
         jButtonBusca.setText("Buscar");
+        jButtonBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscaActionPerformed(evt);
+            }
+        });
 
         jPanelFilt.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtrar Por"));
 
@@ -167,7 +119,7 @@ public class JFrameConsultaClientes extends javax.swing.JFrame {
             jPanelConsulClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelConsulClientesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtConsulta)
+                .addComponent(txtConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonBusca)
                 .addGap(18, 18, 18)
@@ -176,16 +128,39 @@ public class JFrameConsultaClientes extends javax.swing.JFrame {
         );
         jPanelConsulClientesLayout.setVerticalGroup(
             jPanelConsulClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConsulClientesLayout.createSequentialGroup()
+            .addGroup(jPanelConsulClientesLayout.createSequentialGroup()
                 .addComponent(jPanelFilt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 7, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConsulClientesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 19, Short.MAX_VALUE))
+            .addGroup(jPanelConsulClientesLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
                 .addGroup(jPanelConsulClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBusca))
-                .addGap(30, 30, 30))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jButtonCadasNovo.setText("Cadastrar Novo");
+        jButtonCadasNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadasNovoActionPerformed(evt);
+            }
+        });
+
+        jButtonDetalhers.setText("+ Detalhes");
+
+        jButtonEditarCadas.setText("Editar");
+        jButtonEditarCadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarCadasActionPerformed(evt);
+            }
+        });
+
+        jButtonExcluirCadas.setText("Excluir");
+        jButtonExcluirCadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirCadasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelCCLayout = new javax.swing.GroupLayout(jPanelCC);
         jPanelCC.setLayout(jPanelCCLayout);
@@ -194,21 +169,33 @@ public class JFrameConsultaClientes extends javax.swing.JFrame {
             .addGroup(jPanelCCLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelCCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelCCLayout.createSequentialGroup()
+                        .addComponent(jButtonDetalhers, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59)
+                        .addComponent(jButtonCadasNovo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonEditarCadas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonExcluirCadas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
-                    .addComponent(jPanelBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanelConsulClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelCCLayout.setVerticalGroup(
             jPanelCCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCCLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(4, 4, 4)
                 .addComponent(jPanelConsulClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelCCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCadasNovo)
+                    .addComponent(jButtonDetalhers)
+                    .addComponent(jButtonExcluirCadas)
+                    .addComponent(jButtonEditarCadas))
+                .addGap(41, 41, 41))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -248,6 +235,10 @@ public class JFrameConsultaClientes extends javax.swing.JFrame {
     private void jRadioButtonNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonNomeActionPerformed
+
+    private void jButtonBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonBuscaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,7 +282,6 @@ public class JFrameConsultaClientes extends javax.swing.JFrame {
     private javax.swing.JButton jButtonDetalhers;
     private javax.swing.JButton jButtonEditarCadas;
     private javax.swing.JButton jButtonExcluirCadas;
-    private javax.swing.JPanel jPanelBotoes;
     private javax.swing.JPanel jPanelCC;
     private javax.swing.JPanel jPanelConsulClientes;
     private javax.swing.JPanel jPanelFilt;
