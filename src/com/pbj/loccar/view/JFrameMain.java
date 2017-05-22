@@ -37,11 +37,15 @@ public class JFrameMain extends javax.swing.JFrame {
         txtSenha = new javax.swing.JPasswordField();
         jLabelDominio = new javax.swing.JLabel();
         jMenuBarBarraPrincipal = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
         jMenuCadastros = new javax.swing.JMenu();
-        jMenuItemCVeiculo = new javax.swing.JMenuItem();
-        jMenuItemCCliente = new javax.swing.JMenuItem();
+        jMenuItemCadasVeiculo = new javax.swing.JMenuItem();
+        jMenuItemCadasCliente = new javax.swing.JMenuItem();
+        jMenuConsultas = new javax.swing.JMenu();
+        jMenuConsVeiculos = new javax.swing.JMenuItem();
+        jMenuConsClientes = new javax.swing.JMenuItem();
+        jMenuLocacao = new javax.swing.JMenu();
+        jMenuItemLocar = new javax.swing.JMenuItem();
+        jMenuItemDevolver = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LocCar");
@@ -127,31 +131,55 @@ public class JFrameMain extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jMenu1.setText("File");
-        jMenuBarBarraPrincipal.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBarBarraPrincipal.add(jMenu2);
-
         jMenuCadastros.setText("Cadastro");
 
-        jMenuItemCVeiculo.setText("Cadastro Veiculo");
-        jMenuItemCVeiculo.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemCadasVeiculo.setText("Cadastrar Veiculo");
+        jMenuItemCadasVeiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCVeiculoActionPerformed(evt);
+                jMenuItemCadasVeiculoActionPerformed(evt);
             }
         });
-        jMenuCadastros.add(jMenuItemCVeiculo);
+        jMenuCadastros.add(jMenuItemCadasVeiculo);
 
-        jMenuItemCCliente.setText("Cadastro Cliente");
-        jMenuItemCCliente.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemCadasCliente.setText("Cadastrar Cliente");
+        jMenuItemCadasCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCClienteActionPerformed(evt);
+                jMenuItemCadasClienteActionPerformed(evt);
             }
         });
-        jMenuCadastros.add(jMenuItemCCliente);
+        jMenuCadastros.add(jMenuItemCadasCliente);
 
         jMenuBarBarraPrincipal.add(jMenuCadastros);
+
+        jMenuConsultas.setText("Consulta");
+
+        jMenuConsVeiculos.setText("Consultar Veiculos");
+        jMenuConsVeiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuConsVeiculosActionPerformed(evt);
+            }
+        });
+        jMenuConsultas.add(jMenuConsVeiculos);
+
+        jMenuConsClientes.setText("Consultar Clientes");
+        jMenuConsClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuConsClientesActionPerformed(evt);
+            }
+        });
+        jMenuConsultas.add(jMenuConsClientes);
+
+        jMenuBarBarraPrincipal.add(jMenuConsultas);
+
+        jMenuLocacao.setText("Locação");
+
+        jMenuItemLocar.setText("Locar Veículo");
+        jMenuLocacao.add(jMenuItemLocar);
+
+        jMenuItemDevolver.setText("Devolver Veículo");
+        jMenuLocacao.add(jMenuItemDevolver);
+
+        jMenuBarBarraPrincipal.add(jMenuLocacao);
 
         setJMenuBar(jMenuBarBarraPrincipal);
 
@@ -175,11 +203,11 @@ public class JFrameMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItemCVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCVeiculoActionPerformed
+    private void jMenuItemCadasVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadasVeiculoActionPerformed
         // TODO add your handling code here:
-        new JFrameCadastroVeiculos().setVisible(true);
+        new JFrameCadastroVeiculo().setVisible(true);
         
-    }//GEN-LAST:event_jMenuItemCVeiculoActionPerformed
+    }//GEN-LAST:event_jMenuItemCadasVeiculoActionPerformed
 
     private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
         // TODO add your handling code here:
@@ -200,10 +228,21 @@ public class JFrameMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtLoginActionPerformed
 
-    private void jMenuItemCClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCClienteActionPerformed
+    private void jMenuItemCadasClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadasClienteActionPerformed
         // TODO add your handling code here:
         new JFrameCadastroCliente().setVisible(true);
-    }//GEN-LAST:event_jMenuItemCClienteActionPerformed
+    }//GEN-LAST:event_jMenuItemCadasClienteActionPerformed
+
+    private void jMenuConsVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsVeiculosActionPerformed
+        // TODO add your handling code here:
+        new JFrameConsultaVeiculos().setVisible(true);
+    }//GEN-LAST:event_jMenuConsVeiculosActionPerformed
+
+    private void jMenuConsClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsClientesActionPerformed
+        // TODO add your handling code here:
+        
+        new JFrameConsultaClientes().setVisible(true);
+    }//GEN-LAST:event_jMenuConsClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,12 +285,16 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDominio;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelSenha;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBarBarraPrincipal;
     private javax.swing.JMenu jMenuCadastros;
-    private javax.swing.JMenuItem jMenuItemCCliente;
-    private javax.swing.JMenuItem jMenuItemCVeiculo;
+    private javax.swing.JMenuItem jMenuConsClientes;
+    private javax.swing.JMenuItem jMenuConsVeiculos;
+    private javax.swing.JMenu jMenuConsultas;
+    private javax.swing.JMenuItem jMenuItemCadasCliente;
+    private javax.swing.JMenuItem jMenuItemCadasVeiculo;
+    private javax.swing.JMenuItem jMenuItemDevolver;
+    private javax.swing.JMenuItem jMenuItemLocar;
+    private javax.swing.JMenu jMenuLocacao;
     private javax.swing.JPanel jPanelLogin;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;
