@@ -5,17 +5,21 @@
  */
 package com.pbj.loccar.view;
 
+import java.awt.GridBagLayout;
+
 /**
  *
  * @author Akr-Taku
  */
-public class JFrameDevolucao extends javax.swing.JFrame {
+public final class JFrameDevolucao extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameDevolucao
      */
     public JFrameDevolucao() {
         initComponents();
+        setLocationRelativeTo(null);
+        setLayout(new GridBagLayout());
     }
 
     /**
@@ -63,6 +67,7 @@ public class JFrameDevolucao extends javax.swing.JFrame {
         txtDiasExc = new javax.swing.JTextField();
         jButtonFatLoca = new javax.swing.JButton();
         jButtonDevolver = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
 
         jLabel3.setText("jLabel3");
 
@@ -340,6 +345,13 @@ public class JFrameDevolucao extends javax.swing.JFrame {
             }
         });
 
+        jButtonCancel.setText("Cancelar");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -353,9 +365,11 @@ public class JFrameDevolucao extends javax.swing.JFrame {
                             .addComponent(jPanelLocPreco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jButtonFatLoca)
+                        .addGap(24, 24, 24)
+                        .addComponent(jButtonCancel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonFatLoca)
+                        .addGap(95, 95, 95)
                         .addComponent(jButtonDevolver)
                         .addGap(44, 44, 44))))
         );
@@ -369,7 +383,8 @@ public class JFrameDevolucao extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonDevolver)
-                    .addComponent(jButtonFatLoca))
+                    .addComponent(jButtonFatLoca)
+                    .addComponent(jButtonCancel))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -423,6 +438,12 @@ public class JFrameDevolucao extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGetDataHActionPerformed
 
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        // TODO add your handling code here:
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonCancelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -459,6 +480,7 @@ public class JFrameDevolucao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonDevolver;
     private javax.swing.JButton jButtonFatLoca;
     private javax.swing.JLabel jLabel1;

@@ -5,19 +5,22 @@
  */
 package com.pbj.loccar.view;
 
+import java.awt.GridBagLayout;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Akr-Taku
  */
-public class JFrameBuscaDevol extends javax.swing.JFrame {
+public final class JFrameBuscaDevol extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameDevolverVeiculo
      */
     public JFrameBuscaDevol() {
         initComponents();
+        setLocationRelativeTo(null);
+        setLayout(new GridBagLayout());
     }
 
     /**
@@ -42,6 +45,7 @@ public class JFrameBuscaDevol extends javax.swing.JFrame {
         jRadioButtonPlaca = new javax.swing.JRadioButton();
         jRadioButtonCarro = new javax.swing.JRadioButton();
         jButtonChamaDevol = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Locações");
@@ -140,31 +144,44 @@ public class JFrameBuscaDevol extends javax.swing.JFrame {
             }
         });
 
+        jButtonCancel.setText("Cancelar");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelBuscaLocLayout = new javax.swing.GroupLayout(jPanelBuscaLoc);
         jPanelBuscaLoc.setLayout(jPanelBuscaLocLayout);
         jPanelBuscaLocLayout.setHorizontalGroup(
             jPanelBuscaLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBuscaLocLayout.createSequentialGroup()
+            .addGroup(jPanelBuscaLocLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelBuscaLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
-                    .addComponent(jPanelBusca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBuscaLocLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonChamaDevol, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(242, 242, 242))
+                .addGroup(jPanelBuscaLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBuscaLocLayout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonChamaDevol, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(77, 77, 77))
+                    .addGroup(jPanelBuscaLocLayout.createSequentialGroup()
+                        .addGroup(jPanelBuscaLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanelBusca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanelBuscaLocLayout.setVerticalGroup(
             jPanelBuscaLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBuscaLocLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                .addGap(35, 35, 35)
-                .addComponent(jButtonChamaDevol)
-                .addGap(33, 33, 33))
+                .addGap(49, 49, 49)
+                .addGroup(jPanelBuscaLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonChamaDevol)
+                    .addComponent(jButtonCancel))
+                .addGap(31, 31, 31))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -200,6 +217,11 @@ public class JFrameBuscaDevol extends javax.swing.JFrame {
          
         
     }//GEN-LAST:event_jButtonChamaDevolActionPerformed
+
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        // TODO add your handling code here:
+         this.setVisible(false);
+    }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,6 +264,7 @@ public class JFrameBuscaDevol extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.JButton jButtonBuscar;
+    private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonChamaDevol;
     private javax.swing.JPanel jPanelBusca;
     private javax.swing.JPanel jPanelBuscaLoc;

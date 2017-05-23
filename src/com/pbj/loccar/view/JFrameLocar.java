@@ -5,17 +5,21 @@
  */
 package com.pbj.loccar.view;
 
+import java.awt.GridBagLayout;
+
 /**
  *
  * @author Akr-Taku
  */
-public class JFrameLocar extends javax.swing.JFrame {
+public final class JFrameLocar extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameLocar
      */
     public JFrameLocar() {
         initComponents();
+        setLocationRelativeTo(null);
+        setLayout(new GridBagLayout());
     }
 
     /**
@@ -55,6 +59,7 @@ public class JFrameLocar extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtDataDevol = new javax.swing.JFormattedTextField();
         jButtonLocar = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Locar Carro");
@@ -259,6 +264,13 @@ public class JFrameLocar extends javax.swing.JFrame {
 
         jButtonLocar.setText("Locar");
 
+        jButtonCancel.setText("Cancelar");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelInfoLocLayout = new javax.swing.GroupLayout(jPanelInfoLoc);
         jPanelInfoLoc.setLayout(jPanelInfoLocLayout);
         jPanelInfoLocLayout.setHorizontalGroup(
@@ -269,10 +281,12 @@ public class JFrameLocar extends javax.swing.JFrame {
                     .addComponent(jPanelInfoLoc2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(jPanelInfoLocLayout.createSequentialGroup()
-                .addGap(177, 177, 177)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInfoLocLayout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jButtonCancel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonLocar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(46, 46, 46))
         );
         jPanelInfoLocLayout.setVerticalGroup(
             jPanelInfoLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,7 +296,9 @@ public class JFrameLocar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addComponent(jButtonLocar)
+                .addGroup(jPanelInfoLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonLocar)
+                    .addComponent(jButtonCancel))
                 .addGap(42, 42, 42))
         );
 
@@ -311,6 +327,11 @@ public class JFrameLocar extends javax.swing.JFrame {
     private void txtDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDiasActionPerformed
+
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -348,6 +369,7 @@ public class JFrameLocar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonLocar;
     private javax.swing.JComboBox<String> jComboBoxDesc;
     private javax.swing.JComboBox<String> jComboBoxEscClient;

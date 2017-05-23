@@ -5,19 +5,29 @@
  */
 package com.pbj.loccar.view;
 
+import java.awt.GridBagLayout;
+
+
+
 /**
  *
  * @author Akr-Taku
  */
-public class JFrameMain extends javax.swing.JFrame {
+public final class JFrameMain extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameMain
      */
-    public JFrameMain() {
+    
+    
+    public JFrameMain() {      
         initComponents();
+        setLocationRelativeTo(null);
+        setLayout(new GridBagLayout());
         jMenuBarBarraPrincipal.setVisible(false);
+        
     }
+         
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,6 +47,9 @@ public class JFrameMain extends javax.swing.JFrame {
         txtSenha = new javax.swing.JPasswordField();
         jLabelDominio = new javax.swing.JLabel();
         jMenuBarBarraPrincipal = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuDeslogar = new javax.swing.JMenuItem();
+        jMenuSair = new javax.swing.JMenuItem();
         jMenuCadastros = new javax.swing.JMenu();
         jMenuItemCadasVeiculo = new javax.swing.JMenuItem();
         jMenuItemCadasCliente = new javax.swing.JMenuItem();
@@ -48,6 +61,7 @@ public class JFrameMain extends javax.swing.JFrame {
         jMenuItemDevolver = new javax.swing.JMenuItem();
         jMenuRelatorios = new javax.swing.JMenu();
         jMenuFatLoc = new javax.swing.JMenuItem();
+        jMenuAjuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LocCar");
@@ -133,6 +147,28 @@ public class JFrameMain extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jMenu1.setBorder(null);
+        jMenu1.setForeground(new java.awt.Color(51, 102, 0));
+        jMenu1.setText("[Logado]");
+
+        jMenuDeslogar.setText("Deslogar");
+        jMenuDeslogar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuDeslogarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuDeslogar);
+
+        jMenuSair.setText("Sair");
+        jMenuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSairActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuSair);
+
+        jMenuBarBarraPrincipal.add(jMenu1);
+
         jMenuCadastros.setText("Cadastro");
 
         jMenuItemCadasVeiculo.setText("Cadastrar Veiculo");
@@ -205,6 +241,9 @@ public class JFrameMain extends javax.swing.JFrame {
 
         jMenuBarBarraPrincipal.add(jMenuRelatorios);
 
+        jMenuAjuda.setText("Ajuda");
+        jMenuBarBarraPrincipal.add(jMenuAjuda);
+
         setJMenuBar(jMenuBarBarraPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -221,7 +260,7 @@ public class JFrameMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -285,6 +324,18 @@ public class JFrameMain extends javax.swing.JFrame {
         new JFrameFaturaLoc().setVisible(true);
     }//GEN-LAST:event_jMenuFatLocActionPerformed
 
+    private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jMenuSairActionPerformed
+
+    private void jMenuDeslogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuDeslogarActionPerformed
+        // TODO add your handling code here:
+        jPanelLogin.setVisible(true);
+
+        jMenuBarBarraPrincipal.setVisible(false);
+    }//GEN-LAST:event_jMenuDeslogarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -326,11 +377,14 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDominio;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelSenha;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenuAjuda;
     private javax.swing.JMenuBar jMenuBarBarraPrincipal;
     private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenuItem jMenuConsClientes;
     private javax.swing.JMenuItem jMenuConsVeiculos;
     private javax.swing.JMenu jMenuConsultas;
+    private javax.swing.JMenuItem jMenuDeslogar;
     private javax.swing.JMenuItem jMenuFatLoc;
     private javax.swing.JMenuItem jMenuItemCadasCliente;
     private javax.swing.JMenuItem jMenuItemCadasVeiculo;
@@ -338,6 +392,7 @@ public class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemLocar;
     private javax.swing.JMenu jMenuLocacao;
     private javax.swing.JMenu jMenuRelatorios;
+    private javax.swing.JMenuItem jMenuSair;
     private javax.swing.JPanel jPanelLogin;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;

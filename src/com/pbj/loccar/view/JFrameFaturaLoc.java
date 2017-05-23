@@ -5,17 +5,21 @@
  */
 package com.pbj.loccar.view;
 
+import java.awt.GridBagLayout;
+
 /**
  *
  * @author Akr-Taku
  */
-public class JFrameFaturaLoc extends javax.swing.JFrame {
+public final class JFrameFaturaLoc extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameFaturaLoc
      */
     public JFrameFaturaLoc() {
         initComponents();
+        setLocationRelativeTo(null);
+        setLayout(new GridBagLayout());
     }
 
     /**
@@ -28,6 +32,7 @@ public class JFrameFaturaLoc extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroupFilt = new javax.swing.ButtonGroup();
+        jPanelFatBotoes = new javax.swing.JPanel();
         jPanelGerarFat = new javax.swing.JPanel();
         jLabelCliente = new javax.swing.JLabel();
         txtBusc = new javax.swing.JTextField();
@@ -44,6 +49,7 @@ public class JFrameFaturaLoc extends javax.swing.JFrame {
         txtGetGataI = new javax.swing.JFormattedTextField();
         txtGetDataF = new javax.swing.JFormattedTextField();
         jButtonGerarFatLoc = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerar Fatura de Locação");
@@ -202,32 +208,54 @@ public class JFrameFaturaLoc extends javax.swing.JFrame {
                 .addGroup(jPanelGerarFatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtGetDataF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtGetGataI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         jButtonGerarFatLoc.setText("Gerar Fatura de Locação");
+
+        jButtonCancel.setText("Cancelar");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelFatBotoesLayout = new javax.swing.GroupLayout(jPanelFatBotoes);
+        jPanelFatBotoes.setLayout(jPanelFatBotoesLayout);
+        jPanelFatBotoesLayout.setHorizontalGroup(
+            jPanelFatBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelFatBotoesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelGerarFat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFatBotoesLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonGerarFatLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
+        );
+        jPanelFatBotoesLayout.setVerticalGroup(
+            jPanelFatBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelFatBotoesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelGerarFat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addGroup(jPanelFatBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonGerarFatLoc)
+                    .addComponent(jButtonCancel))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelGerarFat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonGerarFatLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(187, 187, 187))
+            .addComponent(jPanelFatBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelGerarFat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonGerarFatLoc)
-                .addContainerGap(33, Short.MAX_VALUE))
+            .addComponent(jPanelFatBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -252,6 +280,11 @@ public class JFrameFaturaLoc extends javax.swing.JFrame {
     private void txtGetDataFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGetDataFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGetDataFActionPerformed
+
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,6 +324,7 @@ public class JFrameFaturaLoc extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupFilt;
     private javax.swing.JButton jButtonBuscar;
+    private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonGerarFatLoc;
     private javax.swing.JComboBox<String> jComboBoxGetAlug;
     private javax.swing.JLabel jLabelCliente;
@@ -298,6 +332,7 @@ public class JFrameFaturaLoc extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDatF;
     private javax.swing.JLabel jLabelDatI;
     private javax.swing.JLabel jLabelVeic;
+    private javax.swing.JPanel jPanelFatBotoes;
     private javax.swing.JPanel jPanelFilt;
     private javax.swing.JPanel jPanelGerarFat;
     private javax.swing.JRadioButton jRadioButtonCPF;

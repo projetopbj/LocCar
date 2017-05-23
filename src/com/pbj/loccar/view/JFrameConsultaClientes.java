@@ -5,19 +5,22 @@
  */
 package com.pbj.loccar.view;
 
+import java.awt.GridBagLayout;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Akr-Taku
  */
-public class JFrameConsultaClientes extends javax.swing.JFrame {
+public final class JFrameConsultaClientes extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameConsultaClientes
      */
     public JFrameConsultaClientes() {
         initComponents();
+        setLocationRelativeTo(null);
+        setLayout(new GridBagLayout());
     }
 
     /**
@@ -43,6 +46,7 @@ public class JFrameConsultaClientes extends javax.swing.JFrame {
         jButtonDetalhers = new javax.swing.JButton();
         jButtonEditarCadas = new javax.swing.JButton();
         jButtonExcluirCadas = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta Clientes");
@@ -162,6 +166,13 @@ public class JFrameConsultaClientes extends javax.swing.JFrame {
             }
         });
 
+        jButtonCancel.setText("Cancelar");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCCLayout = new javax.swing.GroupLayout(jPanelCC);
         jPanelCC.setLayout(jPanelCCLayout);
         jPanelCCLayout.setHorizontalGroup(
@@ -170,13 +181,16 @@ public class JFrameConsultaClientes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelCCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCCLayout.createSequentialGroup()
-                        .addComponent(jButtonDetalhers, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59)
-                        .addComponent(jButtonCadasNovo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonEditarCadas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonCancel)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonExcluirCadas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonDetalhers, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonCadasNovo)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonEditarCadas, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonExcluirCadas, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
                     .addComponent(jPanelConsulClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -194,7 +208,8 @@ public class JFrameConsultaClientes extends javax.swing.JFrame {
                     .addComponent(jButtonCadasNovo)
                     .addComponent(jButtonDetalhers)
                     .addComponent(jButtonExcluirCadas)
-                    .addComponent(jButtonEditarCadas))
+                    .addComponent(jButtonEditarCadas)
+                    .addComponent(jButtonCancel))
                 .addGap(41, 41, 41))
         );
 
@@ -240,6 +255,11 @@ public class JFrameConsultaClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonBuscaActionPerformed
 
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonCancelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -279,6 +299,7 @@ public class JFrameConsultaClientes extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupFiltro;
     private javax.swing.JButton jButtonBusca;
     private javax.swing.JButton jButtonCadasNovo;
+    private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonDetalhers;
     private javax.swing.JButton jButtonEditarCadas;
     private javax.swing.JButton jButtonExcluirCadas;

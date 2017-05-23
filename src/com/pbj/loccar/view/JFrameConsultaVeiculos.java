@@ -5,19 +5,22 @@
  */
 package com.pbj.loccar.view;
 
+import java.awt.GridBagLayout;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Akr-Taku
  */
-public class JFrameConsultaVeiculos extends javax.swing.JFrame {
+public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameConsultaVeiculos
      */
     public JFrameConsultaVeiculos() {
         initComponents();
+        setLocationRelativeTo(null);
+        setLayout(new GridBagLayout());
     }
 
     /**
@@ -38,6 +41,7 @@ public class JFrameConsultaVeiculos extends javax.swing.JFrame {
         jButtonEditarCadas = new javax.swing.JButton();
         jButtonExcluirCadas = new javax.swing.JButton();
         jButtonDetalhers = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
         jPanelPesq = new javax.swing.JPanel();
         txtConsulta = new javax.swing.JTextField();
         jButtonBusca = new javax.swing.JButton();
@@ -86,18 +90,27 @@ public class JFrameConsultaVeiculos extends javax.swing.JFrame {
 
         jButtonDetalhers.setText("+ Detalhes");
 
+        jButtonCancel.setText("Cancelar");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelConsVeicLayout = new javax.swing.GroupLayout(jPanelConsVeic);
         jPanelConsVeic.setLayout(jPanelConsVeicLayout);
         jPanelConsVeicLayout.setHorizontalGroup(
             jPanelConsVeicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConsVeicLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButtonDetalhers)
+                .addGap(20, 20, 20)
+                .addComponent(jButtonCancel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonDetalhers)
+                .addGap(69, 69, 69)
                 .addComponent(jButtonEditarCadas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonCadasNovo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(19, 19, 19)
                 .addComponent(jButtonExcluirCadas)
                 .addGap(14, 14, 14))
         );
@@ -109,7 +122,8 @@ public class JFrameConsultaVeiculos extends javax.swing.JFrame {
                     .addComponent(jButtonCadasNovo)
                     .addComponent(jButtonEditarCadas)
                     .addComponent(jButtonExcluirCadas)
-                    .addComponent(jButtonDetalhers))
+                    .addComponent(jButtonDetalhers)
+                    .addComponent(jButtonCancel))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -261,6 +275,12 @@ public class JFrameConsultaVeiculos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonCadasNovoActionPerformed
 
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        // TODO add your handling code here:
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonCancelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -300,6 +320,7 @@ public class JFrameConsultaVeiculos extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupFiltra;
     private javax.swing.JButton jButtonBusca;
     private javax.swing.JButton jButtonCadasNovo;
+    private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonDetalhers;
     private javax.swing.JButton jButtonEditarCadas;
     private javax.swing.JButton jButtonExcluirCadas;

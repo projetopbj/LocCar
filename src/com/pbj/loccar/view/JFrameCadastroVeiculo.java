@@ -5,19 +5,22 @@
  */
 package com.pbj.loccar.view;
 
+import java.awt.GridBagLayout;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Akr-Taku
  */
-public class JFrameCadastroVeiculo extends javax.swing.JFrame {
+public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameCadastroVeiculos
      */
     public JFrameCadastroVeiculo() {
         initComponents();
+        setLocationRelativeTo(null);
+        setLayout(new GridBagLayout());
     }
 
     /**
@@ -49,6 +52,7 @@ public class JFrameCadastroVeiculo extends javax.swing.JFrame {
         jComboBoxCor = new javax.swing.JComboBox<>();
         jButtonSalvarVeiculo = new javax.swing.JButton();
         jButtonLimpar = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Veículos");
@@ -219,6 +223,13 @@ public class JFrameCadastroVeiculo extends javax.swing.JFrame {
             }
         });
 
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCadastroVeiculosLayout = new javax.swing.GroupLayout(jPanelCadastroVeiculos);
         jPanelCadastroVeiculos.setLayout(jPanelCadastroVeiculosLayout);
         jPanelCadastroVeiculosLayout.setHorizontalGroup(
@@ -228,11 +239,13 @@ public class JFrameCadastroVeiculo extends javax.swing.JFrame {
                 .addComponent(jPanelDadosVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCadastroVeiculosLayout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonSalvarVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(jButtonSalvarVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
         );
         jPanelCadastroVeiculosLayout.setVerticalGroup(
             jPanelCadastroVeiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,7 +255,8 @@ public class JFrameCadastroVeiculo extends javax.swing.JFrame {
                 .addGap(57, 57, 57)
                 .addGroup(jPanelCadastroVeiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSalvarVeiculo)
-                    .addComponent(jButtonLimpar))
+                    .addComponent(jButtonLimpar)
+                    .addComponent(jButtonCancelar))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
 
@@ -306,6 +320,11 @@ public class JFrameCadastroVeiculo extends javax.swing.JFrame {
         txtChassi.setText("");
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -343,6 +362,9 @@ public class JFrameCadastroVeiculo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCancel;
+    private javax.swing.JButton jButtonCancel1;
+    private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JButton jButtonSalvarVeiculo;
     private javax.swing.JComboBox<String> jComboBoxCategoria;
