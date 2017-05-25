@@ -65,5 +65,7 @@ public class Veiculo {
         this.fabricante = fabricante;
     }
     
+    public static void Cadastro(){
     
+    }
 }

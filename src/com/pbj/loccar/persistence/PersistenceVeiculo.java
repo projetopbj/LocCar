@@ -5,10 +5,17 @@
  */
 package com.pbj.loccar.persistence;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 /**
  *
  * @author lucas
  */
 public class PersistenceVeiculo {
+    private static Statement stmt;
+    private static ResultSet rs;
+    
+    private static Conexao conexao = new Conexao();
     
 }

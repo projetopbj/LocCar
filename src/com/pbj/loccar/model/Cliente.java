@@ -182,5 +182,7 @@ public class Cliente {
         this.data_matricula = data_matricula;
     }
     
-    
+    public static void Cadastro(){
+        
+    }
 }

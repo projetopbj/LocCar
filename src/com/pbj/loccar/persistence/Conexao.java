@@ -17,8 +17,8 @@ import java.sql.Statement;
 public class Conexao {
     private static Connection con;
     private static String url;
-    private static String username;
-    private static String password;
+    private static String username = "root";
+    private static String password = "lucas";
     
 //    passar o url,username e password como sendo root,...
     public Connection getConnection(){
