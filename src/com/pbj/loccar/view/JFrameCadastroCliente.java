@@ -5,7 +5,6 @@
  */
 package com.pbj.loccar.view;
 
-import java.awt.GridBagLayout;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,8 +18,7 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
      */
     public JFrameCadastroCliente() {
         initComponents();
-        setLocationRelativeTo(null);
-        setLayout(new GridBagLayout());
+
     }
 
     /**
@@ -31,6 +29,7 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanelCadastroBotoes = new javax.swing.JPanel();
         jPanelCadastroCliente = new javax.swing.JPanel();
@@ -73,6 +72,7 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro Clientes");
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanelCadastroCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));
 
@@ -401,7 +401,7 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
                 .addGroup(jPanelCadastroBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelCadastroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanelCadastroBotoesLayout.setVerticalGroup(
             jPanelCadastroBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,22 +413,16 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelCadastroBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelCadastroBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 27;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 11, 0);
+        getContentPane().add(jPanelCadastroBotoes, gridBagConstraints);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtFCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFCpfActionPerformed
@@ -498,7 +492,7 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+         this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**

@@ -19,8 +19,6 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
      */
     public JFrameConsultaVeiculos() {
         initComponents();
-        setLocationRelativeTo(null);
-        setLayout(new GridBagLayout());
     }
 
     /**
@@ -31,6 +29,7 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroupFiltra = new javax.swing.ButtonGroup();
         jPanelCV = new javax.swing.JPanel();
@@ -53,6 +52,7 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta Veículos");
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jTableVeiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -240,18 +240,15 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelCV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelCV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipady = 204;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(jPanelCV, gridBagConstraints);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonExcluirCadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirCadasActionPerformed
@@ -278,7 +275,7 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
         
-        this.setVisible(false);
+         this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**

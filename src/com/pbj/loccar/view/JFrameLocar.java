@@ -5,7 +5,6 @@
  */
 package com.pbj.loccar.view;
 
-import java.awt.GridBagLayout;
 
 /**
  *
@@ -18,8 +17,7 @@ public final class JFrameLocar extends javax.swing.JFrame {
      */
     public JFrameLocar() {
         initComponents();
-        setLocationRelativeTo(null);
-        setLayout(new GridBagLayout());
+     
     }
 
     /**
@@ -30,6 +28,7 @@ public final class JFrameLocar extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanelInfoLoc = new javax.swing.JPanel();
         jPanelInfoLoc2 = new javax.swing.JPanel();
@@ -63,6 +62,7 @@ public final class JFrameLocar extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Locar Carro");
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanelInfoLoc2.setBorder(javax.swing.BorderFactory.createTitledBorder("Locação"));
 
@@ -128,17 +128,17 @@ public final class JFrameLocar extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInfoLoc2Layout.createSequentialGroup()
                         .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanelInfoLoc2Layout.createSequentialGroup()
-                                .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jComboBoxEscVeic, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabelEscCLient, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBoxEscClient, 0, 241, Short.MAX_VALUE)
-                                    .addComponent(jLabelEscVeic, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabelCPF)
-                                    .addComponent(txtGetCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                                    .addComponent(jLabelPlaca)
-                                    .addComponent(txtGetPlaca)))
+                                    .addComponent(jLabelEscCLient)
+                                    .addComponent(jLabelEscVeic)
+                                    .addComponent(jComboBoxEscClient, 0, 140, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxEscVeic, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtGetCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelCPF, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtGetPlaca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelPlaca, javax.swing.GroupLayout.Alignment.LEADING)))
                             .addGroup(jPanelInfoLoc2Layout.createSequentialGroup()
                                 .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtGetCor, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -147,9 +147,9 @@ public final class JFrameLocar extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabelCateg)
-                                    .addComponent(txtGetCategoria)
                                     .addComponent(jLabelValorDiaria)
-                                    .addComponent(txtGetValorDiaria, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))))
+                                    .addComponent(txtGetValorDiaria)
+                                    .addComponent(txtGetCategoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))))
                         .addGap(63, 63, 63))
                     .addGroup(jPanelInfoLoc2Layout.createSequentialGroup()
                         .addComponent(jComboBoxDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -259,7 +259,7 @@ public final class JFrameLocar extends javax.swing.JFrame {
                     .addComponent(txtFDataLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDataDevol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButtonLocar.setText("Locar");
@@ -295,25 +295,23 @@ public final class JFrameLocar extends javax.swing.JFrame {
                 .addComponent(jPanelInfoLoc2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelInfoLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonLocar)
                     .addComponent(jButtonCancel))
                 .addGap(42, 42, 42))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelInfoLoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelInfoLoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 29;
+        gridBagConstraints.ipady = 48;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(jPanelInfoLoc, gridBagConstraints);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtGetCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGetCorActionPerformed
@@ -330,7 +328,7 @@ public final class JFrameLocar extends javax.swing.JFrame {
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+         this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**

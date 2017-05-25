@@ -19,8 +19,6 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
      */
     public JFrameConsultaClientes() {
         initComponents();
-        setLocationRelativeTo(null);
-        setLayout(new GridBagLayout());
     }
 
     /**
@@ -31,8 +29,10 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroupFiltro = new javax.swing.ButtonGroup();
+        entityManager1 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory(null).createEntityManager();
         jPanelCC = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableClientes = new javax.swing.JTable();
@@ -50,6 +50,7 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta Clientes");
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,7 +124,7 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
             jPanelConsulClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelConsulClientesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                .addComponent(txtConsulta)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonBusca)
                 .addGap(18, 18, 18)
@@ -181,7 +182,7 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelCCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCCLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 21, Short.MAX_VALUE)
                         .addComponent(jButtonCancel)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonDetalhers, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -192,7 +193,7 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonExcluirCadas, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addComponent(jPanelConsulClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -213,18 +214,16 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
                 .addGap(41, 41, 41))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelCC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelCC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 21;
+        gridBagConstraints.ipady = 148;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(jPanelCC, gridBagConstraints);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCadasNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadasNovoActionPerformed
@@ -257,7 +256,7 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+         this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**
@@ -297,6 +296,7 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupFiltro;
+    private javax.persistence.EntityManager entityManager1;
     private javax.swing.JButton jButtonBusca;
     private javax.swing.JButton jButtonCadasNovo;
     private javax.swing.JButton jButtonCancel;

@@ -5,7 +5,6 @@
  */
 package com.pbj.loccar.view;
 
-import java.awt.GridBagLayout;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,8 +18,7 @@ public final class JFrameBuscaDevol extends javax.swing.JFrame {
      */
     public JFrameBuscaDevol() {
         initComponents();
-        setLocationRelativeTo(null);
-        setLayout(new GridBagLayout());
+     
     }
 
     /**
@@ -31,6 +29,7 @@ public final class JFrameBuscaDevol extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup = new javax.swing.ButtonGroup();
         jPanelBuscaLoc = new javax.swing.JPanel();
@@ -49,6 +48,7 @@ public final class JFrameBuscaDevol extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Locações");
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -184,18 +184,16 @@ public final class JFrameBuscaDevol extends javax.swing.JFrame {
                 .addGap(31, 31, 31))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelBuscaLoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelBuscaLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 226;
+        gridBagConstraints.ipady = 149;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(jPanelBuscaLoc, gridBagConstraints);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonClienteActionPerformed
@@ -220,7 +218,7 @@ public final class JFrameBuscaDevol extends javax.swing.JFrame {
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
-         this.setVisible(false);
+         this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**

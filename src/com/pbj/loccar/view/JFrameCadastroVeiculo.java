@@ -19,8 +19,6 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
      */
     public JFrameCadastroVeiculo() {
         initComponents();
-        setLocationRelativeTo(null);
-        setLayout(new GridBagLayout());
     }
 
     /**
@@ -31,6 +29,7 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanelCadastroVeiculos = new javax.swing.JPanel();
         jPanelDadosVeiculo = new javax.swing.JPanel();
@@ -56,6 +55,7 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Veículos");
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanelDadosVeiculo.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Veículo"));
 
@@ -257,21 +257,18 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
                     .addComponent(jButtonSalvarVeiculo)
                     .addComponent(jButtonLimpar)
                     .addComponent(jButtonCancelar))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelCadastroVeiculos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelCadastroVeiculos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipady = 45;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(jPanelCadastroVeiculos, gridBagConstraints);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModeloActionPerformed
@@ -322,7 +319,7 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+         this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
@@ -362,8 +359,6 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCancel;
-    private javax.swing.JButton jButtonCancel1;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JButton jButtonSalvarVeiculo;
