@@ -5,7 +5,7 @@
  */
 package com.pbj.loccar.view;
 
-import java.awt.GridBagLayout;
+import com.pbj.loccar.util.DataHora;
 
 
 
@@ -22,9 +22,9 @@ public final class JFrameMain extends javax.swing.JFrame {
     
     public JFrameMain() {      
         initComponents();
-        setLocationRelativeTo(null);
-        setLayout(new GridBagLayout());
         jMenuBarBarraPrincipal.setVisible(false);
+                jPanelDataHora.setVisible(false);
+
         
     }
          
@@ -46,8 +46,11 @@ public final class JFrameMain extends javax.swing.JFrame {
         jComboBoxDominio = new javax.swing.JComboBox<>();
         txtSenha = new javax.swing.JPasswordField();
         jLabelDominio = new javax.swing.JLabel();
+        jPanelDataHora = new javax.swing.JPanel();
+        jLabelData = new javax.swing.JLabel();
+        jLabelHora = new javax.swing.JLabel();
         jMenuBarBarraPrincipal = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jMenuLogin = new javax.swing.JMenu();
         jMenuDeslogar = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenuItem();
         jMenuCadastros = new javax.swing.JMenu();
@@ -65,6 +68,11 @@ public final class JFrameMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LocCar");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanelLogin.setBackground(new java.awt.Color(255, 255, 255));
         jPanelLogin.setBorder(javax.swing.BorderFactory.createTitledBorder("Autentificação"));
@@ -147,9 +155,46 @@ public final class JFrameMain extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jMenu1.setBorder(null);
-        jMenu1.setForeground(new java.awt.Color(51, 102, 0));
-        jMenu1.setText("[Logado]");
+        jPanelDataHora.setBackground(new java.awt.Color(51, 51, 51));
+        jPanelDataHora.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanelDataHora.setFocusable(false);
+        jPanelDataHora.setPreferredSize(new java.awt.Dimension(120, 110));
+
+        jLabelData.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelData.setFont(new java.awt.Font("Meiryo", 3, 12)); // NOI18N
+        jLabelData.setForeground(new java.awt.Color(204, 204, 204));
+        jLabelData.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelData.setText("Data");
+
+        jLabelHora.setFont(new java.awt.Font("Meiryo", 0, 22)); // NOI18N
+        jLabelHora.setForeground(new java.awt.Color(204, 204, 204));
+        jLabelHora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelHora.setText("Hora");
+
+        javax.swing.GroupLayout jPanelDataHoraLayout = new javax.swing.GroupLayout(jPanelDataHora);
+        jPanelDataHora.setLayout(jPanelDataHoraLayout);
+        jPanelDataHoraLayout.setHorizontalGroup(
+            jPanelDataHoraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabelData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanelDataHoraLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanelDataHoraLayout.setVerticalGroup(
+            jPanelDataHoraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDataHoraLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelData, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jMenuBarBarraPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+
+        jMenuLogin.setBorder(null);
+        jMenuLogin.setForeground(new java.awt.Color(51, 102, 0));
+        jMenuLogin.setText("[Logado]");
 
         jMenuDeslogar.setText("Deslogar");
         jMenuDeslogar.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +202,7 @@ public final class JFrameMain extends javax.swing.JFrame {
                 jMenuDeslogarActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuDeslogar);
+        jMenuLogin.add(jMenuDeslogar);
 
         jMenuSair.setText("Sair");
         jMenuSair.addActionListener(new java.awt.event.ActionListener() {
@@ -165,9 +210,9 @@ public final class JFrameMain extends javax.swing.JFrame {
                 jMenuSairActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuSair);
+        jMenuLogin.add(jMenuSair);
 
-        jMenuBarBarraPrincipal.add(jMenu1);
+        jMenuBarBarraPrincipal.add(jMenuLogin);
 
         jMenuCadastros.setText("Cadastro");
 
@@ -250,20 +295,23 @@ public final class JFrameMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelDataHora, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(132, 132, 132)
                 .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(52, 52, 52)
                 .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addComponent(jPanelDataHora, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemCadasVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadasVeiculoActionPerformed
@@ -283,8 +331,9 @@ public final class JFrameMain extends javax.swing.JFrame {
     private void jButtonLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogarActionPerformed
 
         jPanelLogin.setVisible(false);
-
+        jPanelDataHora.setVisible(true);
         jMenuBarBarraPrincipal.setVisible(true);
+        
     }//GEN-LAST:event_jButtonLogarActionPerformed
 
     private void txtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginActionPerformed
@@ -327,6 +376,9 @@ public final class JFrameMain extends javax.swing.JFrame {
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
         // TODO add your handling code here:
         System.exit(0);
+       
+
+         
     }//GEN-LAST:event_jMenuSairActionPerformed
 
     private void jMenuDeslogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuDeslogarActionPerformed
@@ -334,7 +386,25 @@ public final class JFrameMain extends javax.swing.JFrame {
         jPanelLogin.setVisible(true);
 
         jMenuBarBarraPrincipal.setVisible(false);
+        jPanelDataHora.setVisible(false);
     }//GEN-LAST:event_jMenuDeslogarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        //this.setExtendedState(MAXIMIZED_BOTH);
+
+       jLabelData.setText(DataHora.getData());
+       
+       
+       new Thread(){
+           public void run(){
+               while(true){
+                    jLabelHora.setText(DataHora.getHora());
+               }
+           }
+       }.start();
+       
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -374,10 +444,11 @@ public final class JFrameMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogar;
     private javax.swing.JComboBox<String> jComboBoxDominio;
+    private javax.swing.JLabel jLabelData;
     private javax.swing.JLabel jLabelDominio;
+    private javax.swing.JLabel jLabelHora;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelSenha;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenuAjuda;
     private javax.swing.JMenuBar jMenuBarBarraPrincipal;
     private javax.swing.JMenu jMenuCadastros;
@@ -391,8 +462,10 @@ public final class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemDevolver;
     private javax.swing.JMenuItem jMenuItemLocar;
     private javax.swing.JMenu jMenuLocacao;
+    private javax.swing.JMenu jMenuLogin;
     private javax.swing.JMenu jMenuRelatorios;
     private javax.swing.JMenuItem jMenuSair;
+    private javax.swing.JPanel jPanelDataHora;
     private javax.swing.JPanel jPanelLogin;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;

@@ -5,7 +5,6 @@
  */
 package com.pbj.loccar.view;
 
-import java.awt.GridBagLayout;
 
 /**
  *
@@ -18,8 +17,6 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
      */
     public JFrameDevolucao() {
         initComponents();
-        setLocationRelativeTo(null);
-        setLayout(new GridBagLayout());
     }
 
     /**
@@ -30,11 +27,12 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jLabel3 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
+        jPanelLocDev = new javax.swing.JPanel();
         jPanelInfoLoc = new javax.swing.JPanel();
         jLabelClient = new javax.swing.JLabel();
         jLabelCPF = new javax.swing.JLabel();
@@ -77,6 +75,7 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Devolver Veículo");
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanelInfoLoc.setBorder(javax.swing.BorderFactory.createTitledBorder("Informações da Locação"));
 
@@ -225,7 +224,7 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
                                         .addComponent(jLabel1)
                                         .addGap(82, 82, 82)
                                         .addComponent(jLabelDesco)))))
-                        .addGap(0, 54, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanelInfoLocLayout.setVerticalGroup(
             jPanelInfoLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,7 +308,7 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
                         .addComponent(txtKmA, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtDiasExc, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(jPanelLocPrecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtGetTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelTotal))
@@ -352,19 +351,19 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelLocDevLayout = new javax.swing.GroupLayout(jPanelLocDev);
+        jPanelLocDev.setLayout(jPanelLocDevLayout);
+        jPanelLocDevLayout.setHorizontalGroup(
+            jPanelLocDevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLocDevLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelLocDevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelLocDevLayout.createSequentialGroup()
+                        .addGroup(jPanelLocDevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanelInfoLoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanelLocPreco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanelLocDevLayout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jButtonCancel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -373,33 +372,31 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
                         .addComponent(jButtonDevolver)
                         .addGap(44, 44, 44))))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanelLocDevLayout.setVerticalGroup(
+            jPanelLocDevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLocDevLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelInfoLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelLocPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelLocDevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonDevolver)
                     .addComponent(jButtonFatLoca)
                     .addComponent(jButtonCancel))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 37;
+        gridBagConstraints.ipady = 26;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(jPanelLocDev, gridBagConstraints);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtGetClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGetClienteActionPerformed
@@ -441,7 +438,7 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
         
-        this.setVisible(false);
+         this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**
@@ -498,8 +495,8 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelQtdDias;
     private javax.swing.JLabel jLabelTotal;
     private javax.swing.JLabel jLabelVeic;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelInfoLoc;
+    private javax.swing.JPanel jPanelLocDev;
     private javax.swing.JPanel jPanelLocPreco;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField8;
