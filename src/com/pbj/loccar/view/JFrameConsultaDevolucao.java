@@ -11,12 +11,12 @@ import javax.swing.JOptionPane;
  *
  * @author Akr-Taku
  */
-public final class JFrameBuscaDevol extends javax.swing.JFrame {
+public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameDevolverVeiculo
      */
-    public JFrameBuscaDevol() {
+    public JFrameConsultaDevolucao() {
         initComponents();
      
     }
@@ -48,6 +48,7 @@ public final class JFrameBuscaDevol extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Locações");
+        setPreferredSize(new java.awt.Dimension(600, 450));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -238,14 +239,18 @@ public final class JFrameBuscaDevol extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrameBuscaDevol.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameConsultaDevolucao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrameBuscaDevol.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameConsultaDevolucao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrameBuscaDevol.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameConsultaDevolucao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrameBuscaDevol.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameConsultaDevolucao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -254,7 +259,7 @@ public final class JFrameBuscaDevol extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrameBuscaDevol().setVisible(true);
+                new JFrameConsultaDevolucao().setVisible(true);
             }
         });
     }

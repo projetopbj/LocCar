@@ -43,9 +43,7 @@ public final class JFrameMain extends javax.swing.JFrame {
         jLabelSenha = new javax.swing.JLabel();
         txtLogin = new javax.swing.JTextField();
         jButtonLogar = new javax.swing.JButton();
-        jComboBoxDominio = new javax.swing.JComboBox<>();
         txtSenha = new javax.swing.JPasswordField();
-        jLabelDominio = new javax.swing.JLabel();
         jPanelDataHora = new javax.swing.JPanel();
         jLabelData = new javax.swing.JLabel();
         jLabelHora = new javax.swing.JLabel();
@@ -54,11 +52,15 @@ public final class JFrameMain extends javax.swing.JFrame {
         jMenuDeslogar = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenuItem();
         jMenuCadastros = new javax.swing.JMenu();
-        jMenuItemCadasVeiculo = new javax.swing.JMenuItem();
         jMenuItemCadasCliente = new javax.swing.JMenuItem();
+        jMenuItemCadasVeiculo = new javax.swing.JMenuItem();
+        jMenuCadastroCategoria = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuConsultas = new javax.swing.JMenu();
-        jMenuConsVeiculos = new javax.swing.JMenuItem();
         jMenuConsClientes = new javax.swing.JMenuItem();
+        jMenuConsVeiculos = new javax.swing.JMenuItem();
+        jMenuConsultaCategorias = new javax.swing.JMenuItem();
         jMenuLocacao = new javax.swing.JMenu();
         jMenuItemLocar = new javax.swing.JMenuItem();
         jMenuItemDevolver = new javax.swing.JMenuItem();
@@ -94,20 +96,11 @@ public final class JFrameMain extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxDominio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Funcionário", "Administrador" }));
-        jComboBoxDominio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxDominioActionPerformed(evt);
-            }
-        });
-
         txtSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSenhaActionPerformed(evt);
             }
         });
-
-        jLabelDominio.setText("Domínio");
 
         javax.swing.GroupLayout jPanelLoginLayout = new javax.swing.GroupLayout(jPanelLogin);
         jPanelLogin.setLayout(jPanelLoginLayout);
@@ -117,21 +110,15 @@ public final class JFrameMain extends javax.swing.JFrame {
                 .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelLoginLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
+                        .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelSenha)
+                            .addComponent(jLabelLogin))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanelLoginLayout.createSequentialGroup()
-                                .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelSenha)
-                                    .addComponent(jLabelLogin))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                                    .addComponent(txtSenha)))
-                            .addGroup(jPanelLoginLayout.createSequentialGroup()
-                                .addComponent(jLabelDominio)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBoxDominio, 0, 195, Short.MAX_VALUE))))
+                            .addComponent(txtLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                            .addComponent(txtSenha)))
                     .addGroup(jPanelLoginLayout.createSequentialGroup()
-                        .addGap(122, 122, 122)
+                        .addGap(123, 123, 123)
                         .addComponent(jButtonLogar)))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
@@ -146,13 +133,9 @@ public final class JFrameMain extends javax.swing.JFrame {
                 .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelSenha))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxDominio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDominio))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addComponent(jButtonLogar)
-                .addContainerGap())
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jPanelDataHora.setBackground(new java.awt.Color(51, 51, 51));
@@ -216,14 +199,6 @@ public final class JFrameMain extends javax.swing.JFrame {
 
         jMenuCadastros.setText("Cadastro");
 
-        jMenuItemCadasVeiculo.setText("Cadastrar Veiculo");
-        jMenuItemCadasVeiculo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCadasVeiculoActionPerformed(evt);
-            }
-        });
-        jMenuCadastros.add(jMenuItemCadasVeiculo);
-
         jMenuItemCadasCliente.setText("Cadastrar Cliente");
         jMenuItemCadasCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,9 +207,42 @@ public final class JFrameMain extends javax.swing.JFrame {
         });
         jMenuCadastros.add(jMenuItemCadasCliente);
 
+        jMenuItemCadasVeiculo.setText("Cadastrar Veiculo");
+        jMenuItemCadasVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadasVeiculoActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuItemCadasVeiculo);
+
+        jMenuCadastroCategoria.setText("Cadastrar Categoria");
+        jMenuCadastroCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCadastroCategoriaActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuCadastroCategoria);
+        jMenuCadastros.add(jSeparator1);
+
+        jMenuItem1.setText("Cadastrar Usuário");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuItem1);
+
         jMenuBarBarraPrincipal.add(jMenuCadastros);
 
         jMenuConsultas.setText("Consulta");
+
+        jMenuConsClientes.setText("Consultar Clientes");
+        jMenuConsClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuConsClientesActionPerformed(evt);
+            }
+        });
+        jMenuConsultas.add(jMenuConsClientes);
 
         jMenuConsVeiculos.setText("Consultar Veiculos");
         jMenuConsVeiculos.addActionListener(new java.awt.event.ActionListener() {
@@ -244,13 +252,13 @@ public final class JFrameMain extends javax.swing.JFrame {
         });
         jMenuConsultas.add(jMenuConsVeiculos);
 
-        jMenuConsClientes.setText("Consultar Clientes");
-        jMenuConsClientes.addActionListener(new java.awt.event.ActionListener() {
+        jMenuConsultaCategorias.setText("Consulta Categorias");
+        jMenuConsultaCategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuConsClientesActionPerformed(evt);
+                jMenuConsultaCategoriasActionPerformed(evt);
             }
         });
-        jMenuConsultas.add(jMenuConsClientes);
+        jMenuConsultas.add(jMenuConsultaCategorias);
 
         jMenuBarBarraPrincipal.add(jMenuConsultas);
 
@@ -306,7 +314,7 @@ public final class JFrameMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addComponent(jPanelDataHora, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -323,10 +331,6 @@ public final class JFrameMain extends javax.swing.JFrame {
     private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSenhaActionPerformed
-
-    private void jComboBoxDominioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDominioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxDominioActionPerformed
 
     private void jButtonLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogarActionPerformed
 
@@ -358,7 +362,7 @@ public final class JFrameMain extends javax.swing.JFrame {
 
     private void jMenuItemDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDevolverActionPerformed
         // TODO add your handling code here:
-        new JFrameBuscaDevol().setVisible(true);
+        new JFrameConsultaDevolucao().setVisible(true);
         
     }//GEN-LAST:event_jMenuItemDevolverActionPerformed
 
@@ -406,6 +410,24 @@ public final class JFrameMain extends javax.swing.JFrame {
        
     }//GEN-LAST:event_formWindowOpened
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        
+        new JFrameCadastroUsuario().setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuCadastroCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroCategoriaActionPerformed
+        // TODO add your handling code here:
+        new JFrameCadastroCategoria().setVisible(true);
+    }//GEN-LAST:event_jMenuCadastroCategoriaActionPerformed
+
+    private void jMenuConsultaCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultaCategoriasActionPerformed
+        // TODO add your handling code here:
+
+        new JFrameConsultaCategoria().setVisible(true);
+
+    }//GEN-LAST:event_jMenuConsultaCategoriasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -443,20 +465,21 @@ public final class JFrameMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogar;
-    private javax.swing.JComboBox<String> jComboBoxDominio;
     private javax.swing.JLabel jLabelData;
-    private javax.swing.JLabel jLabelDominio;
     private javax.swing.JLabel jLabelHora;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelSenha;
     private javax.swing.JMenu jMenuAjuda;
     private javax.swing.JMenuBar jMenuBarBarraPrincipal;
+    private javax.swing.JMenuItem jMenuCadastroCategoria;
     private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenuItem jMenuConsClientes;
     private javax.swing.JMenuItem jMenuConsVeiculos;
+    private javax.swing.JMenuItem jMenuConsultaCategorias;
     private javax.swing.JMenu jMenuConsultas;
     private javax.swing.JMenuItem jMenuDeslogar;
     private javax.swing.JMenuItem jMenuFatLoc;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemCadasCliente;
     private javax.swing.JMenuItem jMenuItemCadasVeiculo;
     private javax.swing.JMenuItem jMenuItemDevolver;
@@ -467,6 +490,7 @@ public final class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuSair;
     private javax.swing.JPanel jPanelDataHora;
     private javax.swing.JPanel jPanelLogin;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
