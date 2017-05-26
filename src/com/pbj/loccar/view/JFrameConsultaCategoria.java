@@ -130,6 +130,7 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
         getContentPane().add(jPanelConsultaBotoes, new java.awt.GridBagConstraints());
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
