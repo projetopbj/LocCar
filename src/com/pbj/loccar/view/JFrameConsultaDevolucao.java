@@ -48,6 +48,7 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Locações");
+        setPreferredSize(new java.awt.Dimension(600, 450));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
