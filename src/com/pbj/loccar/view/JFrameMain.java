@@ -50,14 +50,17 @@ public final class JFrameMain extends javax.swing.JFrame {
         jMenuBarBarraPrincipal = new javax.swing.JMenuBar();
         jMenuLogin = new javax.swing.JMenu();
         jMenuDeslogar = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenuItem();
         jMenuCadastros = new javax.swing.JMenu();
-        jMenuItemCadasVeiculo = new javax.swing.JMenuItem();
         jMenuItemCadasCliente = new javax.swing.JMenuItem();
+        jMenuItemCadasVeiculo = new javax.swing.JMenuItem();
+        jMenuCadastroCategoria = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuConsultas = new javax.swing.JMenu();
-        jMenuConsVeiculos = new javax.swing.JMenuItem();
         jMenuConsClientes = new javax.swing.JMenuItem();
+        jMenuConsVeiculos = new javax.swing.JMenuItem();
+        jMenuConsultaCategorias = new javax.swing.JMenuItem();
         jMenuLocacao = new javax.swing.JMenu();
         jMenuItemLocar = new javax.swing.JMenuItem();
         jMenuItemDevolver = new javax.swing.JMenuItem();
@@ -184,14 +187,6 @@ public final class JFrameMain extends javax.swing.JFrame {
         });
         jMenuLogin.add(jMenuDeslogar);
 
-        jMenuItem1.setText("Cadastrar Usuário");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenuLogin.add(jMenuItem1);
-
         jMenuSair.setText("Sair");
         jMenuSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,14 +199,6 @@ public final class JFrameMain extends javax.swing.JFrame {
 
         jMenuCadastros.setText("Cadastro");
 
-        jMenuItemCadasVeiculo.setText("Cadastrar Veiculo");
-        jMenuItemCadasVeiculo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCadasVeiculoActionPerformed(evt);
-            }
-        });
-        jMenuCadastros.add(jMenuItemCadasVeiculo);
-
         jMenuItemCadasCliente.setText("Cadastrar Cliente");
         jMenuItemCadasCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,9 +207,42 @@ public final class JFrameMain extends javax.swing.JFrame {
         });
         jMenuCadastros.add(jMenuItemCadasCliente);
 
+        jMenuItemCadasVeiculo.setText("Cadastrar Veiculo");
+        jMenuItemCadasVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadasVeiculoActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuItemCadasVeiculo);
+
+        jMenuCadastroCategoria.setText("Cadastrar Categoria");
+        jMenuCadastroCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCadastroCategoriaActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuCadastroCategoria);
+        jMenuCadastros.add(jSeparator1);
+
+        jMenuItem1.setText("Cadastrar Usuário");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuItem1);
+
         jMenuBarBarraPrincipal.add(jMenuCadastros);
 
         jMenuConsultas.setText("Consulta");
+
+        jMenuConsClientes.setText("Consultar Clientes");
+        jMenuConsClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuConsClientesActionPerformed(evt);
+            }
+        });
+        jMenuConsultas.add(jMenuConsClientes);
 
         jMenuConsVeiculos.setText("Consultar Veiculos");
         jMenuConsVeiculos.addActionListener(new java.awt.event.ActionListener() {
@@ -232,13 +252,13 @@ public final class JFrameMain extends javax.swing.JFrame {
         });
         jMenuConsultas.add(jMenuConsVeiculos);
 
-        jMenuConsClientes.setText("Consultar Clientes");
-        jMenuConsClientes.addActionListener(new java.awt.event.ActionListener() {
+        jMenuConsultaCategorias.setText("Consulta Categorias");
+        jMenuConsultaCategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuConsClientesActionPerformed(evt);
+                jMenuConsultaCategoriasActionPerformed(evt);
             }
         });
-        jMenuConsultas.add(jMenuConsClientes);
+        jMenuConsultas.add(jMenuConsultaCategorias);
 
         jMenuBarBarraPrincipal.add(jMenuConsultas);
 
@@ -342,7 +362,7 @@ public final class JFrameMain extends javax.swing.JFrame {
 
     private void jMenuItemDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDevolverActionPerformed
         // TODO add your handling code here:
-        new JFrameBuscaDevol().setVisible(true);
+        new JFrameConsultaDevolucao().setVisible(true);
         
     }//GEN-LAST:event_jMenuItemDevolverActionPerformed
 
@@ -396,6 +416,15 @@ public final class JFrameMain extends javax.swing.JFrame {
         new JFrameCadastroUsuario().setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuCadastroCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroCategoriaActionPerformed
+        // TODO add your handling code here:
+        new JFrameCadastroCategoria().setVisible(true);
+    }//GEN-LAST:event_jMenuCadastroCategoriaActionPerformed
+
+    private void jMenuConsultaCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultaCategoriasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuConsultaCategoriasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -439,9 +468,11 @@ public final class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSenha;
     private javax.swing.JMenu jMenuAjuda;
     private javax.swing.JMenuBar jMenuBarBarraPrincipal;
+    private javax.swing.JMenuItem jMenuCadastroCategoria;
     private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenuItem jMenuConsClientes;
     private javax.swing.JMenuItem jMenuConsVeiculos;
+    private javax.swing.JMenuItem jMenuConsultaCategorias;
     private javax.swing.JMenu jMenuConsultas;
     private javax.swing.JMenuItem jMenuDeslogar;
     private javax.swing.JMenuItem jMenuFatLoc;
@@ -456,6 +487,7 @@ public final class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuSair;
     private javax.swing.JPanel jPanelDataHora;
     private javax.swing.JPanel jPanelLogin;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
