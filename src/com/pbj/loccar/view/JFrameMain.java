@@ -423,6 +423,7 @@ public final class JFrameMain extends javax.swing.JFrame {
 
     private void jMenuConsultaCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultaCategoriasActionPerformed
         // TODO add your handling code here:
+        new JFrameConsultaCategoria().setVisible(true);
     }//GEN-LAST:event_jMenuConsultaCategoriasActionPerformed
 
     /**

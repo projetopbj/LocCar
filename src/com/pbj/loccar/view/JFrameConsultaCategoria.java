@@ -36,7 +36,7 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
         jButtonExcluir = new javax.swing.JButton();
         jButtonAlterar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanelConsultaCateg.setBorder(javax.swing.BorderFactory.createTitledBorder("Consulta Categorias"));
