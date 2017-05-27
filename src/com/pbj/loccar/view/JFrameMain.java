@@ -67,6 +67,7 @@ public final class JFrameMain extends javax.swing.JFrame {
         jMenuRelatorios = new javax.swing.JMenu();
         jMenuFatLoc = new javax.swing.JMenuItem();
         jMenuAjuda = new javax.swing.JMenu();
+        jMenuConfigBD = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LocCar");
@@ -295,6 +296,15 @@ public final class JFrameMain extends javax.swing.JFrame {
         jMenuBarBarraPrincipal.add(jMenuRelatorios);
 
         jMenuAjuda.setText("Ajuda");
+
+        jMenuConfigBD.setText("Configurações");
+        jMenuConfigBD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuConfigBDActionPerformed(evt);
+            }
+        });
+        jMenuAjuda.add(jMenuConfigBD);
+
         jMenuBarBarraPrincipal.add(jMenuAjuda);
 
         setJMenuBar(jMenuBarBarraPrincipal);
@@ -428,6 +438,11 @@ public final class JFrameMain extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuConsultaCategoriasActionPerformed
 
+    private void jMenuConfigBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConfigBDActionPerformed
+        // TODO add your handling code here
+        new JFrameConfigBD().setVisible(true);
+    }//GEN-LAST:event_jMenuConfigBDActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -473,6 +488,7 @@ public final class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBarBarraPrincipal;
     private javax.swing.JMenuItem jMenuCadastroCategoria;
     private javax.swing.JMenu jMenuCadastros;
+    private javax.swing.JMenuItem jMenuConfigBD;
     private javax.swing.JMenuItem jMenuConsClientes;
     private javax.swing.JMenuItem jMenuConsVeiculos;
     private javax.swing.JMenuItem jMenuConsultaCategorias;
