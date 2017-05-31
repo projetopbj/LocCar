@@ -1,4 +1,4 @@
-CREATE DATABASE  locadora; /*DEFAULT CHARACTER SET utf8 */;
+--CREATE DATABASE  locadora; /*DEFAULT CHARACTER SET utf8 */;
 
 CREATE TABLE `Cliente` (
     id int NOT NULL,
