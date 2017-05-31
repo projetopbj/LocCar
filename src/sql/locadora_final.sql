@@ -20,6 +20,17 @@ CREATE TABLE `Cliente` (
     PRIMARY KEY(id)
 ) ;
 
+CREATE TABLE `Categoria` (
+    id int not null,
+    nome varchar(25),
+    valorDia decimal(6,4) not null,
+    valorKm decimal(6,4) not null,
+    ar boolean,
+    vidro boolean,
+    direcao boolean,
+    PRIMARY KEY(id)
+);
+
 CREATE TABLE `Veiculo` (
     id int NOT NULL,
     placa varchar(8) NOT NULL UNIQUE,
@@ -43,6 +54,10 @@ CREATE TABLE `Locacao`(
     dataDaDevolucao date not null,
     valorDiaria decimal(6,4) not null,
     subTotal decimal(6,4)  not null,
+    atrasoLocacao boolean,
+    diasAtraso int,
+    dataRetorno date,
+    valorFinal decimal(6,4),
     idCliente int not null, -- chave estrangeira para o cliente
     idVeiculo int not null, -- chave estrangeira para o veículo
     PRIMARY KEY(id),
@@ -58,26 +73,4 @@ CREATE TABLE `Usuario`(
     nomeUser varchar(64) not null,
     acessoUser varchar(10),
     PRIMARY KEY(id)
-);
-
-CREATE TABLE `Categoria` (
-    id int not null,
-    nome varchar(25),
-    valorDia decimal(6,4) not null,
-    valorKm decimal(6,4) not null,
-    ar boolean,
-    vidro boolean,
-    direcao boolean,
-    PRIMARY KEY(id)
-);
-
-CREATE TABLE `LocacaoFinal`(
-    idLocacao int not null ,
-    idCliente int not null ,
-    dataRetorno date not null,
-    atrasoLocacao boolean,
-    valorFinal decimal(6,4) not null,
-    PRIMARY KEY(idCliente,idLocacao),
-    foreign key(idCliente) references `Cliente`(id),
-    foreign key(idLocacao) references `Locacao`(id)
 );
