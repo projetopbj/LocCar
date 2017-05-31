@@ -3,7 +3,7 @@ CREATE DATABASE  locadora; /*DEFAULT CHARACTER SET utf8 */;
 CREATE TABLE `Cliente` (
     id int NOT NULL,
     nomeCliente varchar(64) NOT NULL,
-    rgCliente int(16) NOT NULL,
+    rgCliente varchar(16) NOT NULL,
     cpfCliente varchar(12) NOT NULL UNIQUE,
     estadoCivilCliente varchar(4) NOT NULL, -- S (solteiro), C (casado), V (viúvo), UE (União Estável), D (divorciado) 
     sexoCliente varchar(4) NOT NULL, -- M (masculino),  F (feminino)
@@ -58,6 +58,8 @@ CREATE TABLE `Locacao`(
     diasAtraso int,
     dataRetorno date,
     valorFinal decimal(6,4),
+    isDesconto boolean,
+    valorDesconto decimal(6,4),
     idCliente int not null, -- chave estrangeira para o cliente
     idVeiculo int not null, -- chave estrangeira para o veículo
     PRIMARY KEY(id),
