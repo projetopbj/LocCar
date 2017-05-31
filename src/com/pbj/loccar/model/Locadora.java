@@ -5,41 +5,88 @@
  */
 package com.pbj.loccar.model;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.Objects;
 
 /**
  *
  * @author lucas
+ * 
+ * Classe que realiza a locação no banco de dados faz papel de relacionamento
  */
 public class Locadora {
+    
+    private static int iterador; //Variavel statica para iterar;
+
+    
     private int id;
     private String descricao;
     private int qtdDias;
-    private Date dataDoAluquel;
-    private Date dataDaDevolucao;
+    private Calendar dataDoAluquel;
+    private Calendar dataDaDevolucao;
     private double valorDiaria;
+    private boolean isDesconto; // Bolean que guarda se existe desconto;
+    private int desconto;    // Valor em Porcentagem que não será guardado no Banco de dados
+    private double valorDesconto; // Valor final calculado do desconto que será guardado no banco
     private double subTotal;
     private boolean atrasoLocacao;
     private int diasAtraso;
-    private Date dataRetorno;
+    private Calendar dataRetorno;
     private double valorFinal;
-    private Cliente idClientel; // chave estrangeira para o cliente
-    private Veiculo idVeiculo; // chave estrangeira para o veículo
-
-    public Veiculo getIdVeiculo() {
-        return idVeiculo;
+    private Cliente clientel; // chave estrangeira para o cliente
+    private Veiculo veiculo; // chave estrangeira para o veículo
+    
+    
+    //Construtor Vazio que apenas inicializa o ID
+    public Locadora(){
+        
+        Iterador.iterar(iterador, id);
+        
+        
+    }
+    //Construtor que Inicializa o ID e Já recebe os Clientes e Veiculo
+    public Locadora(Cliente cliente, Veiculo veiculo){
+        
+        Iterador.iterar(iterador, id);
+        
+        this.veiculo = veiculo;
+        this.clientel = cliente;
     }
 
-    public void setIdVeiculo(Veiculo idVeiculo) {
-        this.idVeiculo = idVeiculo;
+    public boolean isIsDesconto() {
+        return isDesconto;
     }
 
+    public void setIsDesconto(boolean isDesconto) {
+        this.isDesconto = isDesconto;
+    }
+
+    public int getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(int desconto) {
+        this.desconto = desconto;
+    }
+
+    public double getValorDesconto() {
+        return valorDesconto;
+    }
+
+    public void setValorDesconto(double valorDesconto) {
+        this.valorDesconto = valorDesconto;
+    }
+    
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo idVeiculo) {
+        this.veiculo = idVeiculo;
     }
 
     public String getDescricao() {
@@ -58,19 +105,19 @@ public class Locadora {
         this.qtdDias = qtdDias;
     }
 
-    public Date getDataDoAluquel() {
+    public Calendar getDataDoAluquel() {
         return dataDoAluquel;
     }
 
-    public void setDataDoAluquel(Date dataDoAluquel) {
+    public void setDataDoAluquel(Calendar dataDoAluquel) {
         this.dataDoAluquel = dataDoAluquel;
     }
 
-    public Date getDataDaDevolucao() {
+    public Calendar getDataDaDevolucao() {
         return dataDaDevolucao;
     }
 
-    public void setDataDaDevolucao(Date dataDaDevolucao) {
+    public void setDataDaDevolucao(Calendar dataDaDevolucao) {
         this.dataDaDevolucao = dataDaDevolucao;
     }
 
@@ -106,11 +153,11 @@ public class Locadora {
         this.diasAtraso = diasAtraso;
     }
 
-    public Date getDataRetorno() {
+    public Calendar getDataRetorno() {
         return dataRetorno;
     }
 
-    public void setDataRetorno(Date dataRetorno) {
+    public void setDataRetorno(Calendar dataRetorno) {
         this.dataRetorno = dataRetorno;
     }
 
@@ -122,85 +169,55 @@ public class Locadora {
         this.valorFinal = valorFinal;
     }
 
-    public Cliente getIdClientel() {
-        return idClientel;
+    public Cliente getClientel() {
+        return clientel;
     }
 
-    public void setIdClientel(Cliente idClientel) {
-        this.idClientel = idClientel;
+    public void setClientel(Cliente idClientel) {
+        this.clientel = idClientel;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + this.id;
+        hash = 17 * hash + Objects.hashCode(this.clientel);
+        hash = 17 * hash + Objects.hashCode(this.veiculo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Locadora other = (Locadora) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.clientel, other.clientel)) {
+            return false;
+        }
+        return Objects.equals(this.veiculo, other.veiculo);
+    }   
 
     @Override
     public String toString() {
-        return "Locadora{" + "id=" + id + ", descricao=" + descricao + ", qtdDias=" + qtdDias + ", dataDoAluquel=" + dataDoAluquel + ", dataDaDevolucao=" + dataDaDevolucao + ", valorDiaria=" + valorDiaria + ", subTotal=" + subTotal + ", atrasoLocacao=" + atrasoLocacao + ", diasAtraso=" + diasAtraso + ", dataRetorno=" + dataRetorno + ", valorFinal=" + valorFinal + ", idClientel=" + idClientel + ", idVeiculo=" + idVeiculo + '}';
+        return "Locadora{" + "id=" + id + ", descricao=" + descricao + ", qtdDias=" + qtdDias + 
+                ", dataDoAluquel=" + dataDoAluquel + ", dataDaDevolucao=" + dataDaDevolucao + 
+                ", valorDiaria=" + valorDiaria + ", isDesconto=" + isDesconto + ", desconto=" + desconto + 
+                ", valorDesconto=" + valorDesconto + ", subTotal=" + subTotal + ", atrasoLocacao=" + atrasoLocacao + 
+                ", diasAtraso=" + diasAtraso + ", dataRetorno=" + dataRetorno + ", valorFinal=" + valorFinal + 
+                ", clientel=" + clientel + ", veiculo=" + veiculo + '}';
     }
+
+ 
+ 
     
-    
-    public Locadora(int id){
-    
-    }
-    
-    public Locadora(int id,String descricao){
-    
-    }
-    
-    public Locadora(int id, String descricao,int qtdDias){
-    
-    }
-    
-    public Locadora(int id, String descricao,int qtdDias,Date dataDoAluquel){
-    
-    }
-    
-    public Locadora(int id, String descricao,int qtdDias,Date dataDoAluquel,Date dataDaDevolucao){
-    
-    }
-    
-    public Locadora(int id, String descricao,int qtdDias,Date dataDoAluquel,Date dataDaDevolucao,double valorDiaria){
-    
-    }
-    
-    public Locadora(int id, String descricao,int qtdDias,Date dataDoAluquel,Date dataDaDevolucao,double valorDiaria,double subTotal){
-    
-    }
-    
-    public Locadora(int id, String descricao,int qtdDias,Date dataDoAluquel,Date dataDaDevolucao,double valorDiaria,double subTotal,boolean atrasoLocacao){
-    
-    }
-    
-    public Locadora(int id, String descricao,int qtdDias,Date dataDoAluquel,Date dataDaDevolucao,double valorDiaria,double subTotal,boolean atrasoLocacao,int diasAtraso){
-    
-    }
-    
-    public Locadora(int id, String descricao,int qtdDias,Date dataDoAluquel,Date dataDaDevolucao,double valorDiaria,double subTotal,boolean atrasoLocacao,int diasAtraso,Date dataRetorno){
-    
-    }
-    
-    public Locadora(int id, String descricao,int qtdDias,Date dataDoAluquel,Date dataDaDevolucao,double valorDiaria,double subTotal,boolean atrasoLocacao,int diasAtraso,Date dataRetorno,double valorFinal){
-    
-    }
-    
-    public Locadora(int id, String descricao,int qtdDias,Date dataDoAluquel,Date dataDaDevolucao,double valorDiaria,double subTotal,boolean atrasoLocacao,int diasAtraso,Date dataRetorno,double valorFinal,Cliente idClientel){
-    
-    }
-    
-    public Locadora(int id, String descricao,int qtdDias,Date dataDoAluquel,Date dataDaDevolucao,double valorDiaria,double subTotal,boolean atrasoLocacao,int diasAtraso,Date dataRetorno,double valorFinal,Cliente idClientel,Veiculo idVeiculo){
-    
-    }
-    
-    
-    
-    
-    public static void Cadastro(){
-    
-    }
-    
-    public static void Listar(){
-    
-    }
-    
-    public static void Alterar(){
-    
-    }
 }

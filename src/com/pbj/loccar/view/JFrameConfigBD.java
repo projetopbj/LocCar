@@ -80,6 +80,7 @@ public class JFrameConfigBD extends javax.swing.JFrame {
         jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Configurar Banco");
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jPanelCampoBD.setBorder(javax.swing.BorderFactory.createTitledBorder("Configuração Banco de Dados"));

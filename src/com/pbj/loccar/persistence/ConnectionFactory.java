@@ -22,29 +22,27 @@ import java.util.logging.Logger;
  */
 public class ConnectionFactory {
     
-    private final String driver;
-    private final String url;
-    private final String user;
-    private final String pass;
     private static final Properties prop = Propriedade.getProp(".\\src\\com\\pbj\\loccar\\properties\\conn.properties");
     
+    private static final  String DRIVER = prop.getProperty("prop.driver");
+    private static final  String URL = prop.getProperty("prop.url");
+    private static final  String USER = prop.getProperty("prop.user");
+    private static final  String PASS = prop.getProperty("prop.pass");
     
-    public ConnectionFactory(){
+    
+    
+    private ConnectionFactory(){
         
-        this.driver = prop.getProperty("prop.driver");
-        this.url = prop.getProperty("prop.url");
-        this.user = prop.getProperty("prop.user");
-        this.pass = prop.getProperty("prop.pass");
         
     }
     
     //Método para capturar uma conexão com o banco de dados;
-    public Connection getConnection(){
+    public static Connection getConnection(){
         
         try {
-            Class.forName(driver);
+            Class.forName(DRIVER);
             
-            return DriverManager.getConnection(url,user,pass);
+            return DriverManager.getConnection(URL,USER,PASS);
             
         } catch (ClassNotFoundException | SQLException ex) {
                 

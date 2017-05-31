@@ -45,8 +45,6 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
         jComboBoxVidro = new javax.swing.JComboBox<>();
         jLabelMotor = new javax.swing.JLabel();
         txtMotor = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBoxBanco = new javax.swing.JComboBox<>();
         jButtonCancel = new javax.swing.JButton();
         jButtonCadastro = new javax.swing.JButton();
 
@@ -83,10 +81,6 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
 
         jLabelMotor.setText("Motor");
 
-        jLabel4.setText("Banco de Couro");
-
-        jComboBoxBanco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
-
         javax.swing.GroupLayout jPanelCadastroCategLayout = new javax.swing.GroupLayout(jPanelCadastroCateg);
         jPanelCadastroCateg.setLayout(jPanelCadastroCategLayout);
         jPanelCadastroCategLayout.setHorizontalGroup(
@@ -94,27 +88,25 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
             .addGroup(jPanelCadastroCategLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelNomeCateg)
-                    .addComponent(txtNomeCateg, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabelMotor)
-                        .addComponent(txtMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabelValorDia)
-                        .addComponent(txtValorDia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel6)
-                        .addComponent(jComboBoxDirecaoH, 0, 153, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelValorKMExc)
-                    .addComponent(txtKMExc, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jComboBoxArCond, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelVidroEletrico)
-                    .addComponent(jLabel4)
-                    .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jComboBoxBanco, javax.swing.GroupLayout.Alignment.LEADING, 0, 158, Short.MAX_VALUE)
-                        .addComponent(jComboBoxVidro, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanelCadastroCategLayout.createSequentialGroup()
+                        .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelNomeCateg)
+                            .addComponent(txtNomeCateg, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabelMotor)
+                                .addComponent(txtMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelValorDia)
+                                .addComponent(txtValorDia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtKMExc, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabelVidroEletrico)
+                            .addComponent(jComboBoxVidro, 0, 158, Short.MAX_VALUE)
+                            .addComponent(jComboBoxDirecaoH, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBoxArCond, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabelValorKMExc))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanelCadastroCategLayout.setVerticalGroup(
@@ -138,23 +130,19 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
                         .addComponent(jLabelVidroEletrico)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBoxVidro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addGap(17, 17, 17)
                 .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabelValorDia))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxDirecaoH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxBanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelValorKMExc)
-                    .addComponent(jLabelValorDia))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtKMExc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtValorDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelValorKMExc)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtKMExc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
 
         jButtonCancel.setText("Cancelar");
@@ -177,7 +165,7 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
             .addGroup(jPanelCampoBotoesLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jButtonCancel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
                 .addComponent(jButtonCadastro)
                 .addGap(71, 71, 71))
         );
@@ -254,11 +242,9 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCadastro;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JComboBox<String> jComboBoxArCond;
-    private javax.swing.JComboBox<String> jComboBoxBanco;
     private javax.swing.JComboBox<String> jComboBoxDirecaoH;
     private javax.swing.JComboBox<String> jComboBoxVidro;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelMotor;

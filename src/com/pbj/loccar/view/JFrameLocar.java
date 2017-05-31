@@ -5,6 +5,8 @@
  */
 package com.pbj.loccar.view;
 
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -15,10 +17,18 @@ public final class JFrameLocar extends javax.swing.JFrame {
     /**
      * Creates new form JFrameLocar
      */
+    
     public JFrameLocar() {
+    
         initComponents();
+         
+        jPanelDesc.setVisible(false);
+        
+        
      
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,6 +40,7 @@ public final class JFrameLocar extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jCheckBox1 = new javax.swing.JCheckBox();
         jPanelInfoLoc = new javax.swing.JPanel();
         jPanelInfoLoc2 = new javax.swing.JPanel();
         jComboBoxEscClient = new javax.swing.JComboBox<>();
@@ -45,10 +56,8 @@ public final class JFrameLocar extends javax.swing.JFrame {
         txtGetCategoria = new javax.swing.JTextField();
         txtGetCor = new javax.swing.JTextField();
         jLabelValorDiaria = new javax.swing.JLabel();
-        jComboBoxDesc = new javax.swing.JComboBox<>();
-        jLabelDesco = new javax.swing.JLabel();
         txtGetValorDiaria = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
+        jPanelOther = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtDias = new javax.swing.JTextField();
@@ -57,8 +66,13 @@ public final class JFrameLocar extends javax.swing.JFrame {
         txtFSubTotal = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
         txtDataDevol = new javax.swing.JFormattedTextField();
+        jCheckBoxDesconto = new javax.swing.JCheckBox();
+        jPanelDesc = new javax.swing.JPanel();
+        txtDesconto = new javax.swing.JTextField();
         jButtonLocar = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
+
+        jCheckBox1.setText("jCheckBox1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Locar Carro");
@@ -106,15 +120,6 @@ public final class JFrameLocar extends javax.swing.JFrame {
 
         jLabelValorDiaria.setText("Valor Diária");
 
-        jComboBoxDesc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Não", "Sim" }));
-        jComboBoxDesc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxDescActionPerformed(evt);
-            }
-        });
-
-        jLabelDesco.setText("Desconto");
-
         txtGetValorDiaria.setEditable(false);
         txtGetValorDiaria.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -124,36 +129,35 @@ public final class JFrameLocar extends javax.swing.JFrame {
             jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelInfoLoc2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInfoLoc2Layout.createSequentialGroup()
-                        .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanelInfoLoc2Layout.createSequentialGroup()
-                                .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabelEscCLient)
-                                    .addComponent(jLabelEscVeic)
-                                    .addComponent(jComboBoxEscClient, 0, 140, Short.MAX_VALUE)
-                                    .addComponent(jComboBoxEscVeic, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtGetCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelCPF, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtGetPlaca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelPlaca, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelInfoLoc2Layout.createSequentialGroup()
+                        .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelInfoLoc2Layout.createSequentialGroup()
                                 .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtGetCor, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelCor)
-                                    .addComponent(jLabelDesco))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabelCateg)
-                                    .addComponent(jLabelValorDiaria)
-                                    .addComponent(txtGetValorDiaria)
-                                    .addComponent(txtGetCategoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))))
-                        .addGap(63, 63, 63))
+                                    .addComponent(jLabelEscCLient)
+                                    .addComponent(jLabelEscVeic))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanelInfoLoc2Layout.createSequentialGroup()
+                                .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jComboBoxEscClient, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxEscVeic, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(127, 127, 127)))
+                        .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtGetCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelCPF, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtGetPlaca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelPlaca, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addGroup(jPanelInfoLoc2Layout.createSequentialGroup()
-                        .addComponent(jComboBoxDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelCor)
+                            .addComponent(txtGetCor, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabelCateg)
+                            .addComponent(jLabelValorDiaria)
+                            .addComponent(txtGetValorDiaria)
+                            .addComponent(txtGetCategoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))))
+                .addGap(63, 63, 63))
         );
         jPanelInfoLoc2Layout.setVerticalGroup(
             jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,18 +186,14 @@ public final class JFrameLocar extends javax.swing.JFrame {
                 .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtGetCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtGetCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelValorDiaria)
-                    .addComponent(jLabelDesco))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelInfoLoc2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtGetValorDiaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addComponent(jLabelValorDiaria)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtGetValorDiaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanelOther.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel1.setText("Data do Aluguel");
 
@@ -212,57 +212,120 @@ public final class JFrameLocar extends javax.swing.JFrame {
         txtFSubTotal.setEditable(false);
         txtFSubTotal.setBackground(new java.awt.Color(204, 204, 204));
         txtFSubTotal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
+        txtFSubTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFSubTotalActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Data de Devolução");
 
         txtDataDevol.setEditable(false);
         txtDataDevol.setBackground(new java.awt.Color(204, 204, 204));
         txtDataDevol.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
+        txtDataDevol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDataDevolActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jCheckBoxDesconto.setText("Desconto");
+        jCheckBoxDesconto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCheckBoxDescontoMouseClicked(evt);
+            }
+        });
+        jCheckBoxDesconto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxDescontoActionPerformed(evt);
+            }
+        });
+
+        txtDesconto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtDescontoMouseClicked(evt);
+            }
+        });
+        txtDesconto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescontoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelDescLayout = new javax.swing.GroupLayout(jPanelDesc);
+        jPanelDesc.setLayout(jPanelDescLayout);
+        jPanelDescLayout.setHorizontalGroup(
+            jPanelDescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDescLayout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+        jPanelDescLayout.setVerticalGroup(
+            jPanelDescLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelDescLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(txtFDataLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtDataDevol, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanelOtherLayout = new javax.swing.GroupLayout(jPanelOther);
+        jPanelOther.setLayout(jPanelOtherLayout);
+        jPanelOtherLayout.setHorizontalGroup(
+            jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelOtherLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelOtherLayout.createSequentialGroup()
+                        .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(txtFDataLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)))
+                    .addComponent(jCheckBoxDesconto)
+                    .addComponent(jPanelDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(txtDataDevol, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(txtFSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(59, 59, 59))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jPanelOtherLayout.setVerticalGroup(
+            jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelOtherLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFDataLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDataDevol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelOtherLayout.createSequentialGroup()
+                        .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFDataLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDataDevol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtDias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBoxDesconto)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButtonLocar.setText("Locar");
+        jButtonLocar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLocarActionPerformed(evt);
+            }
+        });
 
         jButtonCancel.setText("Cancelar");
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -275,31 +338,26 @@ public final class JFrameLocar extends javax.swing.JFrame {
         jPanelInfoLoc.setLayout(jPanelInfoLocLayout);
         jPanelInfoLocLayout.setHorizontalGroup(
             jPanelInfoLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelInfoLocLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelInfoLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelInfoLoc2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(jPanelOther, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelInfoLoc2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInfoLocLayout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addComponent(jButtonCancel)
+                .addGap(33, 33, 33)
+                .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonLocar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addGap(47, 47, 47))
         );
         jPanelInfoLocLayout.setVerticalGroup(
             jPanelInfoLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelInfoLocLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
                 .addComponent(jPanelInfoLoc2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelOther, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addGroup(jPanelInfoLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonLocar)
                     .addComponent(jButtonCancel))
-                .addGap(42, 42, 42))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -318,10 +376,6 @@ public final class JFrameLocar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGetCorActionPerformed
 
-    private void jComboBoxDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDescActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxDescActionPerformed
-
     private void txtDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDiasActionPerformed
@@ -330,6 +384,49 @@ public final class JFrameLocar extends javax.swing.JFrame {
         // TODO add your handling code here:
          this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
+
+    private void txtDescontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescontoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescontoActionPerformed
+
+    private void jCheckBoxDescontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxDescontoActionPerformed
+        // TODO add your handling code here:
+        jPanelDesc.setVisible(jCheckBoxDesconto.isSelected());
+            
+        
+    }//GEN-LAST:event_jCheckBoxDescontoActionPerformed
+
+    private void txtDescontoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDescontoMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtDescontoMouseClicked
+
+    private void jCheckBoxDescontoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBoxDescontoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxDescontoMouseClicked
+
+    private void jButtonLocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLocarActionPerformed
+        // TODO add your handling code here:
+        boolean bool;
+        bool = jCheckBoxDesconto.isSelected();
+        if(bool == true){
+            
+            JOptionPane.showMessageDialog(null, "Selecionado");
+            
+        }else{
+           JOptionPane.showMessageDialog(null, "Não Selecionado");
+  
+        }
+        
+    }//GEN-LAST:event_jButtonLocarActionPerformed
+
+    private void txtDataDevolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataDevolActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataDevolActionPerformed
+
+    private void txtFSubTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFSubTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFSubTotalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -369,7 +466,8 @@ public final class JFrameLocar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonLocar;
-    private javax.swing.JComboBox<String> jComboBoxDesc;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBoxDesconto;
     private javax.swing.JComboBox<String> jComboBoxEscClient;
     private javax.swing.JComboBox<String> jComboBoxEscVeic;
     private javax.swing.JLabel jLabel1;
@@ -379,15 +477,16 @@ public final class JFrameLocar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelCPF;
     private javax.swing.JLabel jLabelCateg;
     private javax.swing.JLabel jLabelCor;
-    private javax.swing.JLabel jLabelDesco;
     private javax.swing.JLabel jLabelEscCLient;
     private javax.swing.JLabel jLabelEscVeic;
     private javax.swing.JLabel jLabelPlaca;
     private javax.swing.JLabel jLabelValorDiaria;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanelDesc;
     private javax.swing.JPanel jPanelInfoLoc;
     private javax.swing.JPanel jPanelInfoLoc2;
+    private javax.swing.JPanel jPanelOther;
     private javax.swing.JFormattedTextField txtDataDevol;
+    private javax.swing.JTextField txtDesconto;
     private javax.swing.JTextField txtDias;
     private javax.swing.JFormattedTextField txtFDataLoc;
     private javax.swing.JFormattedTextField txtFSubTotal;

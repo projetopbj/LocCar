@@ -5,11 +5,18 @@
  */
 package com.pbj.loccar.model;
 
+import java.util.Objects;
+
 /**
  *
  * @author lucas
+ * 
+ * Classe de Categoria que vai ser usado com composição da classe veiculo;
  */
 public class Categoria {
+    
+    private static int iterador; //Variavel statica para iterar;
+    
     private int id;
     private String nome;
     private boolean ar;
@@ -18,13 +25,41 @@ public class Categoria {
     private double valorDia;
     private double valorKm;
     
+    /*
+    *
+    * Varias SobreCargas de Construtores
+    * Cada um recebe algo diferente.
+    */
+    
+    
+    
+    public Categoria(){
+           
+           Iterador.iterar(iterador,id);
+    }
+
+    public Categoria(String nome){
+        
+        Iterador.iterar(iterador,id);
+        this.nome = nome;
+        
+    }
+     
+    public Categoria(String nome,boolean ar,boolean vidro,boolean direcao,double valorDia,double valorKm ){
+        Iterador.iterar(iterador,id);
+        this.nome = nome;
+        this.ar = ar;
+        this.vidro = vidro;
+        this.direcao = direcao;
+        this.valorDia = valorDia;
+        this.valorKm = valorKm;
+        
+    }
+    
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;
@@ -74,54 +109,39 @@ public class Categoria {
         this.valorKm = valorKm;
     }
 
-    @Override
+
+
+    @Override //HashCode
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + this.id;
+        hash = 89 * hash + Objects.hashCode(this.nome);
+        return hash;
+    }
+
+    @Override//Equals
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Categoria other = (Categoria) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return Objects.equals(this.nome, other.nome);
+    }
+
+    
+    
+        @Override//ToString
     public String toString() {
         return "Categoria{" + "id=" + id + ", nome=" + nome + ", ar=" + ar + ", vidro=" + vidro + ", direcao=" + direcao + ", valorDia=" + valorDia + ", valorKm=" + valorKm + '}';
     }
-    
-    
-    
-    public Categoria(int id){
-        
-    }
-    
-    public Categoria(int id, String nome){
-        
-    }
-    
-    public Categoria(int id, String nome,boolean ar){
-        
-    }
-    
-    public Categoria(int id, String nome,boolean ar,boolean vidro){
-        
-    }
-    
-    public Categoria(int id, String nome,boolean ar,boolean vidro,boolean direcao){
-        
-    }
-    
-    public Categoria(int id, String nome,boolean ar,boolean vidro,boolean direcao,double valorDia){
-        
-    }
-    
-    public Categoria(int id, String nome,boolean ar,boolean vidro,boolean direcao,double valorDia,double valorKm ){
-        
-    }
 
- 
-    
-    
-    
-    public static void Cadastro(){
-    
-    }
-    
-    public static void Listar(){
-    
-    }
-    
-    public static void Alterar(){
-    
-    }
 }

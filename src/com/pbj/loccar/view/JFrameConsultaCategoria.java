@@ -46,11 +46,11 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
 
             },
             new String [] {
-                "#", "Nome", "Motor", "Preço Dia", "Taxa Km", "Ar", "Direção", "Vidro", "Banco"
+                "#", "Nome", "Motor", "Preço Dia", "Taxa Km", "Ar", "Direção", "Vidro"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

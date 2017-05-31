@@ -5,23 +5,49 @@
  */
 package com.pbj.loccar.model;
 
+import java.util.Objects;
+
 /**
  *
  * @author lucas
  */
 public class Usuario {
+    
+    
+    private static int iterador; //Variavel statica para iterar;
+    
     private int id;
     private String loginUser;
     private String senhaUser;
     private String nomeUser;
-    private String acessoUser;
+    private NivelAcesso acessoUser;
 
-    public int getId() {
-        return id;
+    
+    public Usuario(){ 
+        
+      Iterador.iterar(iterador,id);
+
     }
 
-    public void setId(int id) {
-        this.id = id;
+    /**
+     *
+     * @param login
+     * @param nome
+     * @param acesso
+     */
+    public Usuario(String login, String nome, NivelAcesso acesso){
+        
+        Iterador.iterar(iterador, id);
+
+        this.loginUser = login;
+        this.nomeUser = nome;
+        this.acessoUser = acesso;
+        
+        
+    }
+    
+    public int getId() {
+        return id;
     }
 
     public String getLoginUser() {
@@ -48,52 +74,49 @@ public class Usuario {
         this.nomeUser = nomeUser;
     }
 
-    public String getAcessoUser() {
+    public NivelAcesso getAcessoUser() {
         return acessoUser;
     }
 
-    public void setAcessoUser(String acessoUser) {
+    public void setAcessoUser(NivelAcesso acessoUser) {
         this.acessoUser = acessoUser;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + this.id;
+        hash = 89 * hash + Objects.hashCode(this.loginUser);
+        hash = 89 * hash + Objects.hashCode(this.acessoUser);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.loginUser, other.loginUser)) {
+            return false;
+        }
+        return this.acessoUser == other.acessoUser;
+    }
+    
+    
 
     @Override
     public String toString() {
         return "Usuario{" + "id=" + id + ", loginUser=" + loginUser + ", senhaUser=" + senhaUser + ", nomeUser=" + nomeUser + ", acessoUser=" + acessoUser + '}';
     }
-    
-    public Usuario(int id){
-    
-    }
-    
-    public Usuario(int id,String loginUser){
-    
-    }
-    
-    public Usuario(int id,String loginUser,String senhaUser){
-    
-    }
-    
-    public Usuario(int id,String loginUser,String senhaUser,String nomeUser){
-    
-    }
-    
-    public Usuario(int id,String loginUser,String senhaUser,String nomeUser,String acessoUser){
-    
-    }
-    
-    
-    
-    
-    public static void Cadastro(){
-    
-    }
-    
-    public static void Listar(){
-    
-    }
-    
-    public static void Alterar(){
-    
-    }
-    
+
 }
