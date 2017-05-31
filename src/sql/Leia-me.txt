@@ -1,0 +1,16 @@
+#=======================================#
+#                                       #
+#                                       #
+#                                       #
+#    LUCAS   MEXER NA TABELA            #
+#             LOCACAO                   #
+#  Adiciona um campo boolean isDesconto,  #
+#    E outro Campo Int Decimal          # 
+#           valorDesconto               #
+#                                       #
+#=======================================#
+
+
+
+
+

@@ -48,7 +48,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                   <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="136" max="32767" attributes="0"/>
                   <Component id="jButtonCadastro" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
               </Group>
@@ -82,34 +82,32 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelNomeCateg" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNomeCateg" alignment="0" min="-2" pref="169" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabelMotor" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtMotor" min="-2" pref="169" max="-2" attributes="0"/>
-                              <Component id="jLabelValorDia" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtValorDia" alignment="1" min="-2" pref="169" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabelNomeCateg" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNomeCateg" alignment="0" min="-2" pref="169" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabelMotor" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtMotor" min="-2" pref="169" max="-2" attributes="0"/>
+                                      <Component id="jLabelValorDia" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtValorDia" alignment="1" min="-2" pref="169" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="txtKMExc" alignment="0" min="-2" pref="169" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelVidroEletrico" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jComboBoxVidro" alignment="0" pref="158" max="32767" attributes="0"/>
+                                  <Component id="jComboBoxDirecaoH" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jComboBoxArCond" alignment="0" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBoxDirecaoH" alignment="0" pref="153" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelValorKMExc" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtKMExc" min="-2" pref="169" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBoxArCond" min="-2" pref="153" max="-2" attributes="0"/>
-                          <Component id="jLabelVidroEletrico" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jComboBoxBanco" alignment="0" pref="158" max="32767" attributes="0"/>
-                              <Component id="jComboBoxVidro" alignment="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="jLabelValorKMExc" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="38" max="32767" attributes="0"/>
                   </Group>
@@ -141,27 +139,21 @@
                               <Component id="jComboBoxVidro" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jComboBoxDirecaoH" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBoxBanco" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelValorKMExc" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelValorDia" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtKMExc" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxDirecaoH" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtValorDia" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="20" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jLabelValorKMExc" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="txtKMExc" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -251,24 +243,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtMotor">
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel4">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Banco de Couro"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBoxBanco">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
-                    <StringItem index="0" value="Sim"/>
-                    <StringItem index="1" value="N&#xe3;o"/>
-                  </StringArray>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
