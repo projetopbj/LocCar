@@ -216,8 +216,47 @@ public class Locadora {
                 ", diasAtraso=" + diasAtraso + ", dataRetorno=" + dataRetorno + ", valorFinal=" + valorFinal + 
                 ", clientel=" + clientel + ", veiculo=" + veiculo + '}';
     }
-
- 
+    
+    public double calculoDesconto(){
+        if (isDesconto) {
+            this.valorDesconto = ((this.valorDiaria * (double)this.qtdDias) * ((double)this.desconto *0.01));
+            return this.valorDesconto;
+        }
+        else{
+            this.valorDesconto = 0.0;
+            return this.valorDesconto;
+        }
+        
+    }
+    
+    public double calculoSubTotal(Locadora loc){
+        if (isDesconto) {
+            this.subTotal = (this.valorDiaria * (double)this.qtdDias) - loc.calculoDesconto();
+            return this.subTotal;
+        }
+        else{
+            this.subTotal = (this.valorDiaria * (double)this.qtdDias);
+            return this.subTotal;
+        }
+    }
+    
+    public double calculoValorFinal(Locadora loc){
+        if(this.atrasoLocacao){
+            if (isDesconto) {
+                this.valorFinal = this.subTotal + ((this.diasAtraso * this.valorDiaria) - loc.calculoDesconto());
+                return this.valorFinal;
+            }
+            else{
+                this.valorFinal = this.subTotal + (this.diasAtraso * this.valorDiaria);
+                return this.valorFinal;
+            }
+            
+        }
+        else{
+            this.valorFinal = this.subTotal;
+            return this.valorFinal;
+        }
+    }
  
     
 }
