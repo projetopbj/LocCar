@@ -24,19 +24,27 @@ public class ConnectionFactory {
     
     private static final Properties prop = Propriedade.getProp(".\\src\\com\\pbj\\loccar\\properties\\conn.properties");
     
-    private static final  String DRIVER = prop.getProperty("prop.driver");
-    private static final  String URL = prop.getProperty("prop.url");
-    private static final  String USER = prop.getProperty("prop.user");
-    private static final  String PASS = prop.getProperty("prop.pass");
+    private static final String DRIVER = prop.getProperty("prop.driver");
+    private static final String URL = prop.getProperty("prop.url");
+    private static final String USER = prop.getProperty("prop.user");
+    private static final String PASS = prop.getProperty("prop.pass");
     
-    
-    
+    /**
+     *Construtor Vazio e privado para classe não ser instanciada
+     */
     private ConnectionFactory(){
         
         
     }
     
     //Método para capturar uma conexão com o banco de dados;
+
+    /**
+     *
+     * @return
+     * 
+     * Metodo retorna uma conexão
+     */
     public static Connection getConnection(){
         
         try {
@@ -50,8 +58,7 @@ public class ConnectionFactory {
 
         }
           
-    }
-    
+    }  
     
    
     //Método Statico para fechar a Conexão passando a Connection, Statement, e ResultSet;

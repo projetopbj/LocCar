@@ -41,6 +41,8 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jButtonCancelar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jButtonNew" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jButtonExcluir" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -67,6 +69,7 @@
                       <Component id="jButtonSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonAlterar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonNew" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               </Group>
@@ -92,32 +95,25 @@
                           <Component id="jLabelLogin" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="txtLogin" alignment="0" min="-2" pref="124" max="-2" attributes="0"/>
                           <Component id="jLabelNvAcess" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" alignment="0" min="-2" pref="124" max="-2" attributes="0"/>
+                          <Component id="jComboBoxAcesso" alignment="0" min="-2" pref="124" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jLabelPass" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabelNome" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jPasswordField1" min="-2" pref="124" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  </Group>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jLabelPass" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelNome" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabelrepetirPass" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jPasswordField2" min="-2" pref="124" max="-2" attributes="0"/>
-                              </Group>
+                              <EmptySpace min="-2" pref="254" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txtNome" alignment="1" min="-2" pref="263" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="txtNome" alignment="1" min="-2" pref="207" max="-2" attributes="0"/>
+                                  <Component id="jPasswordField" min="-2" pref="210" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -137,14 +133,12 @@
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelPass" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelrepetirPass" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelNvAcess" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jPasswordField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jPasswordField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jPasswordField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxAcesso" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="14" max="32767" attributes="0"/>
                   </Group>
@@ -162,32 +156,24 @@
                 <Property name="text" type="java.lang.String" value="Senha"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelrepetirPass">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Repedir Senha"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="txtLogin">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtLoginActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="jPasswordField1">
-            </Component>
-            <Component class="javax.swing.JPasswordField" name="jPasswordField2">
+            <Component class="javax.swing.JPasswordField" name="jPasswordField">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelNvAcess">
               <Properties>
                 <Property name="text" type="java.lang.String" value="N&#xed;vel de Acesso"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox1">
+            <Component class="javax.swing.JComboBox" name="jComboBoxAcesso">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
+                  <StringArray count="2">
                     <StringItem index="0" value="Parceiro"/>
-                    <StringItem index="1" value="Adminstrador"/>
-                    <StringItem index="2" value=" "/>
+                    <StringItem index="1" value="Admin"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -214,35 +200,19 @@
             <Component class="javax.swing.JTable" name="jTableUser">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="3" rowCount="0">
-                    <Column editable="false" title="#" type="java.lang.Object"/>
-                    <Column editable="false" title="Login" type="java.lang.Object"/>
-                    <Column editable="false" title="N&#xed;vel de Acesso" type="java.lang.Object"/>
-                  </Table>
+                  <Table columnCount="0" rowCount="0"/>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                  <TableColumnModel selectionModel="0">
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                  </TableColumnModel>
+                  <TableColumnModel selectionModel="0"/>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableUserMouseClicked"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTableUserKeyReleased"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -258,16 +228,33 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Salvar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSalvarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonAlterar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Alterar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAlterarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonExcluir">
           <Properties>
             <Property name="text" type="java.lang.String" value="Excluir"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExcluirActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonNew">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Novo"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonNewActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

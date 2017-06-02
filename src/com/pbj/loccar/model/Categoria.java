@@ -35,18 +35,16 @@ public class Categoria {
     
     public Categoria(){
            
-           Iterador.iterar(iterador,id);
+        iterador++;
+        id = iterador;
+        
     }
 
-    public Categoria(String nome){
-        
-        Iterador.iterar(iterador,id);
-        this.nome = nome;
-        
-    }
+
      
     public Categoria(String nome,boolean ar,boolean vidro,boolean direcao,double valorDia,double valorKm ){
-        Iterador.iterar(iterador,id);
+        iterador++;
+        id = iterador;
         this.nome = nome;
         this.ar = ar;
         this.vidro = vidro;
@@ -58,6 +56,10 @@ public class Categoria {
     
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 

@@ -42,21 +42,15 @@ public class Cliente {
     
     //Construtor Vazio 
     public Cliente(){
-        Iterador.iterar(iterador, id);
+        iterador++;
+        id = iterador;
     
     }
-    
-    
-    //Construtor recebendo apenas o nome
-    public Cliente(String nomeCliente){
-        Iterador.iterar(iterador, id);
-        this.nomeCliente = nomeCliente;
-    
-    }
-    
+        
     //Construtor recebendo nome, cpf  e rg
     public Cliente(String nomeCliente,String rgCliente,String cpfCliente){
-        Iterador.iterar(iterador, id);
+        iterador++;
+        id = iterador;
         this.nomeCliente = nomeCliente;
         this.rgCliente = rgCliente;
         this.cpfCliente = cpfCliente;
@@ -64,6 +58,10 @@ public class Cliente {
     }
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNomeCliente() {

@@ -20,12 +20,14 @@ public class Usuario {
     private String loginUser;
     private String senhaUser;
     private String nomeUser;
-    private NivelAcesso acessoUser;
+    private String acessoUser;
 
     
     public Usuario(){ 
         
-      Iterador.iterar(iterador,id);
+        iterador++;
+        id = iterador;
+
 
     }
 
@@ -35,9 +37,10 @@ public class Usuario {
      * @param nome
      * @param acesso
      */
-    public Usuario(String login, String nome, NivelAcesso acesso){
+    public Usuario(String login, String nome, String acesso){
         
-        Iterador.iterar(iterador, id);
+        iterador++;
+        id = iterador;
 
         this.loginUser = login;
         this.nomeUser = nome;
@@ -50,6 +53,10 @@ public class Usuario {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getLoginUser() {
         return loginUser;
     }
@@ -74,11 +81,11 @@ public class Usuario {
         this.nomeUser = nomeUser;
     }
 
-    public NivelAcesso getAcessoUser() {
+    public String getAcessoUser() {
         return acessoUser;
     }
 
-    public void setAcessoUser(NivelAcesso acessoUser) {
+    public void setAcessoUser(String acessoUser) {
         this.acessoUser = acessoUser;
     }
 
@@ -109,7 +116,7 @@ public class Usuario {
         if (!Objects.equals(this.loginUser, other.loginUser)) {
             return false;
         }
-        return this.acessoUser == other.acessoUser;
+        return this.acessoUser.equals(other.acessoUser);
     }
     
     

@@ -5,6 +5,10 @@
  */
 package com.pbj.loccar.view;
 
+import com.pbj.loccar.control.UsuarioControl;
+import com.pbj.loccar.view.tables.UsuarioTable;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Akr-Taku
@@ -14,8 +18,38 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
     /**
      * Creates new form JFrameCadastroUsuario
      */
+    UsuarioTable tableModel;
+    
+        
     public JFrameCadastroUsuario() {
         initComponents();
+        
+       
+       jButtonExcluir.setEnabled(false);
+       jButtonAlterar.setEnabled(false);
+        
+       tableModel = new UsuarioTable();
+        
+       tableModel.addLista(UsuarioControl.lerUsuario());
+        
+        
+       jTableUser.setModel(tableModel);   
+        
+    }
+    
+    private String pegarTexto(int i){
+        //Recebe o Indice do da String E retorna de Acordo com o UsuarioTable
+       
+        String user[] = tableModel.getUsuario(jTableUser.getSelectedRow());
+        
+        return user[i];
+    }
+    
+    private void limparTexto(){
+        
+        txtLogin.setText("");
+        txtNome.setText("");
+        jPasswordField.setText("");
     }
 
     /**
@@ -31,12 +65,10 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
         jPanelCadastroUser = new javax.swing.JPanel();
         jLabelLogin = new javax.swing.JLabel();
         jLabelPass = new javax.swing.JLabel();
-        jLabelrepetirPass = new javax.swing.JLabel();
         txtLogin = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        jPasswordField = new javax.swing.JPasswordField();
         jLabelNvAcess = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxAcesso = new javax.swing.JComboBox<>();
         jLabelNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -45,6 +77,7 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
         jButtonSalvar = new javax.swing.JButton();
         jButtonAlterar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
+        jButtonNew = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
@@ -55,8 +88,6 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
 
         jLabelPass.setText("Senha");
 
-        jLabelrepetirPass.setText("Repedir Senha");
-
         txtLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtLoginActionPerformed(evt);
@@ -65,7 +96,7 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
 
         jLabelNvAcess.setText("Nível de Acesso");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Parceiro", "Adminstrador", " " }));
+        jComboBoxAcesso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Parceiro", "Admin" }));
 
         jLabelNome.setText("Nome");
 
@@ -79,24 +110,19 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
                     .addComponent(jLabelLogin)
                     .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelNvAcess)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxAcesso, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelCadastroUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCadastroUserLayout.createSequentialGroup()
-                        .addGroup(jPanelCadastroUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCadastroUserLayout.createSequentialGroup()
-                                .addGroup(jPanelCadastroUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelPass)
-                                    .addComponent(jLabelNome))
-                                .addGap(112, 112, 112))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCadastroUserLayout.createSequentialGroup()
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)))
-                        .addGroup(jPanelCadastroUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelrepetirPass)
-                            .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18))
+                        .addGroup(jPanelCadastroUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelPass)
+                            .addComponent(jLabelNome))
+                        .addGap(254, 254, 254))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCadastroUserLayout.createSequentialGroup()
+                        .addGroup(jPanelCadastroUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(74, 74, 74))))
         );
         jPanelCadastroUserLayout.setVerticalGroup(
             jPanelCadastroUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,13 +138,11 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addGroup(jPanelCadastroUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPass)
-                    .addComponent(jLabelrepetirPass)
                     .addComponent(jLabelNvAcess))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCadastroUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxAcesso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -127,15 +151,17 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
 
             },
             new String [] {
-                "#", "Login", "Nível de Acesso"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+            }
+        ));
+        jTableUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableUserMouseClicked(evt);
+            }
+        });
+        jTableUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTableUserKeyReleased(evt);
             }
         });
         jScrollPane1.setViewportView(jTableUser);
@@ -148,10 +174,32 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
         });
 
         jButtonSalvar.setText("Salvar");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarActionPerformed(evt);
+            }
+        });
 
         jButtonAlterar.setText("Alterar");
+        jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlterarActionPerformed(evt);
+            }
+        });
 
         jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
+
+        jButtonNew.setText("Novo");
+        jButtonNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNewActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelBotoesUserLayout = new javax.swing.GroupLayout(jPanelBotoesUser);
         jPanelBotoesUser.setLayout(jPanelBotoesUserLayout);
@@ -166,6 +214,8 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
                         .addGap(0, 12, Short.MAX_VALUE))
                     .addGroup(jPanelBotoesUserLayout.createSequentialGroup()
                         .addComponent(jButtonCancelar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonNew)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonExcluir)
                         .addGap(18, 18, 18)
@@ -187,7 +237,8 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
                     .addComponent(jButtonCancelar)
                     .addComponent(jButtonSalvar)
                     .addComponent(jButtonAlterar)
-                    .addComponent(jButtonExcluir))
+                    .addComponent(jButtonExcluir)
+                    .addComponent(jButtonNew))
                 .addGap(45, 45, 45))
         );
 
@@ -204,9 +255,100 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
         
-        this.dispose();
+        this.dispose();//Fecha o JFIELD Atual
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+     //Botão de salvar Usuario ao Clicar o Usuario é Salvo no Banco de dados.
+       
+     //Verifica se algum Campo é vazio
+       if("".equals(txtLogin.getText()) || "".equals(txtNome.getText()) || jPasswordField.getPassword().length == 0 ){
+           
+           JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
+       }
+       else{  //salva Caso não existam Campos Vazios
+           
+       UsuarioControl.salvarUsuario(txtLogin.getText(), txtNome.getText(), new String(jPasswordField.getPassword()), (String) jComboBoxAcesso.getSelectedItem());
+       tableModel.removeAll(); // Remova para não haver Duplicação
+       tableModel.addLista(UsuarioControl.lerUsuario()); // Recarrega a Tabela
+       limparTexto(); //LImpa os campos após o salvamento dos coisas
+       
+       }
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
+        // TODO add your handling code here:
+        if(jTableUser.getSelectedRow() != -1 )
+        {
+            UsuarioControl.atualizarUsuario(Integer.parseInt(pegarTexto(0)),txtLogin.getText(), txtNome.getText(), new String(jPasswordField.getPassword()), (String) jComboBoxAcesso.getSelectedItem());
+            tableModel.removeAll(); // Remova para não haver Duplicação
+            tableModel.addLista(UsuarioControl.lerUsuario()); // Recarrega a Tabela
+            limparTexto(); //LImpa os campos após o salvamento dos coisas
+//            jButtonExcluir.setEnabled(false);
+            jButtonAlterar.setEnabled(false);
+        
+        }
+               
+       
+               
+    }//GEN-LAST:event_jButtonAlterarActionPerformed
+
+    private void jTableUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUserMouseClicked
+        // Faz com que a os campos de texto mostrem o que está na tabela apartir do click do mouse
+        jButtonSalvar.setEnabled(false);
+        jButtonExcluir.setEnabled(true);
+        jButtonAlterar.setEnabled(true);
+        txtLogin.setText(pegarTexto(1));
+        txtNome.setText(pegarTexto(2));
+        jPasswordField.setText(pegarTexto(4)); 
+        jComboBoxAcesso.setSelectedItem(pegarTexto(3));
+        
+        
+    }//GEN-LAST:event_jTableUserMouseClicked
+
+    private void jTableUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableUserKeyReleased
+        // Faz com que a os campos de texto mostrem o que está na tabela apartir das setinhas
+        jButtonSalvar.setEnabled(false);
+        jButtonExcluir.setEnabled(true);
+        jButtonAlterar.setEnabled(true);
+        txtLogin.setText(pegarTexto(1));
+        txtNome.setText(pegarTexto(2));
+        jPasswordField.setText(pegarTexto(4));
+        jComboBoxAcesso.setSelectedItem(pegarTexto(3));
+    }//GEN-LAST:event_jTableUserKeyReleased
+
+    private void jButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewActionPerformed
+        // Botão habilita a criação de novo Usuario:
+        
+        jButtonSalvar.setEnabled(true);
+        jButtonExcluir.setEnabled(false);
+        jButtonAlterar.setEnabled(false);
+        
+        
+        limparTexto();
+        
+    }//GEN-LAST:event_jButtonNewActionPerformed
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        // TODO add your handling code here:
+        
+        int resp =  JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Exluir?");
+        
+        if (resp == 0){
+            
+            UsuarioControl.apagarUsuario(Integer.parseInt(pegarTexto(0)));
+        }
+        tableModel.removeAll(); // Remova para não haver Duplicação
+        tableModel.addLista(UsuarioControl.lerUsuario()); // Recarrega a Tabela
+        limparTexto(); //LImpa os campos após o salvamento dos coisas
+        jButtonExcluir.setEnabled(false);
+        jButtonAlterar.setEnabled(false);
+        
+        
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
+
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -246,17 +388,16 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonExcluir;
+    private javax.swing.JButton jButtonNew;
     private javax.swing.JButton jButtonSalvar;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBoxAcesso;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelNvAcess;
     private javax.swing.JLabel jLabelPass;
-    private javax.swing.JLabel jLabelrepetirPass;
     private javax.swing.JPanel jPanelBotoesUser;
     private javax.swing.JPanel jPanelCadastroUser;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableUser;
     private javax.swing.JTextField txtLogin;
