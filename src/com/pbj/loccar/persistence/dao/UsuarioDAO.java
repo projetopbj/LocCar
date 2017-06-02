@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.pbj.loccar.persistence;
+package com.pbj.loccar.persistence.dao;
 
 import com.pbj.loccar.model.Usuario;
+import com.pbj.loccar.persistence.ConnectionFactory;
+import com.pbj.loccar.persistence.UsuarioPersistence;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,12 +22,13 @@ import javax.swing.JOptionPane;
  *
  * @author Akr-Taku
  */
-public class UsuarioDAO {
+public class UsuarioDAO implements UsuarioPersistence {
     
     
    /*
         Recebe objeto Usuario e salva no banco de dados;
     */
+    @Override
     public void createUsuario(Usuario user){
         
         Connection conn = ConnectionFactory.getConnection();
@@ -58,6 +61,7 @@ public class UsuarioDAO {
         
     }
     //Retorna os dados do usuario que vieram diretamete do banco de dados;
+    @Override
     public List<Usuario> readUsuario(){
         
         List<Usuario> users = new ArrayList<>();
@@ -102,6 +106,7 @@ public class UsuarioDAO {
         return users;
     }
     
+    @Override
     public Usuario loginUsuario(String login,String senha){
         
          Usuario user = new Usuario();
@@ -138,7 +143,8 @@ public class UsuarioDAO {
     }
     
     
-    
+    @Override
+    //Recebe um Usuario e atualiza ele no BAnco de dados
     public void updateUsuario(Usuario user){
         
         Connection conn = ConnectionFactory.getConnection();
@@ -171,7 +177,8 @@ public class UsuarioDAO {
         
     }
     //Recebe o Usuario e Apaga o registro no banco
-      public void deleteUsuario(Usuario user){
+    @Override
+    public void deleteUsuario(Usuario user){
         
         Connection conn = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;

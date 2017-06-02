@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.pbj.loccar.persistence;
 
 import com.pbj.loccar.util.Propriedade;
@@ -19,11 +15,15 @@ import java.util.logging.Logger;
 /**
  *
  * @author Akr-Taku
+ * 
+ * 
+ * Classe que faz a Connexão Com o Banco de Dados
  */
 public class ConnectionFactory {
     
-    private static final Properties prop = Propriedade.getProp(".\\src\\com\\pbj\\loccar\\properties\\conn.properties");
     
+    //Constantes Capturadas diretamente do Arquivo de Propriedades
+    private static final Properties prop = Propriedade.getProp(".\\src\\com\\pbj\\loccar\\properties\\conn.properties");
     private static final String DRIVER = prop.getProperty("prop.driver");
     private static final String URL = prop.getProperty("prop.url");
     private static final String USER = prop.getProperty("prop.user");
@@ -33,16 +33,13 @@ public class ConnectionFactory {
      *Construtor Vazio e privado para classe não ser instanciada
      */
     private ConnectionFactory(){
-        
-        
+       //Não tem Nada aqui! 
     }
     
-    //Método para capturar uma conexão com o banco de dados;
-
+    
     /**
-     *
-     * @return
-     * 
+     * @return 
+     * Método para capturar uma conexão com o banco de dados;
      * Metodo retorna uma conexão
      */
     public static Connection getConnection(){

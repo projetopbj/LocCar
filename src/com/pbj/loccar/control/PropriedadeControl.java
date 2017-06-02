@@ -12,24 +12,26 @@ import java.util.Properties;
 /**
  *
  * @author Akr-Taku
+ * 
+ *  Classe de Controle que tem acesso ao Model, View e DAO - Das Properties do Banco de Dados
  */
 public class PropriedadeControl {
     
+    
+    //Salva as Propriedades Recebendo Varios Dados como Parâmetro //Retorna Verdadeiro se Não der Errado
     public static boolean salvarProp(String urlIp,String urlPorta,String urlBd, String user, String pass){
         boolean bool;
         
+        //Chamando o método da Utíl para Setar as informações no arquivo
         Propriedade.setPropConn(".\\src\\com\\pbj\\loccar\\properties\\conn.properties",urlIp,urlPorta,urlBd,user,pass);
-        
-        
         
         return true;
     }
-    
+    //Retorna a Lista De parâmetros diretamente do arquivo
     public static ArrayList<String> retornarProp(){
         
         ArrayList<String> props;
-        
-        
+    
         props = new ArrayList<>();
         
         Properties prop = Propriedade.getProp(".\\src\\com\\pbj\\loccar\\properties\\conn.properties");

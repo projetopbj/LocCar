@@ -12,15 +12,13 @@ import javax.swing.JOptionPane;
  *
  * @author Aleff
  * 
- * 
- * 
- * Classe util que mexe com o navegador
+ * Classe util que Possui funções com o navegador
  */
 public class Navegador {  
     
    /* 
    
-   Método que recebe um endereço de web ou arquivo que possa ser aberto no 
+    Método que recebe um endereço de web ou arquivo que possa ser aberto no 
     navegador e abre navegador em qualquer OS
    */
     public static void openURL(String url)

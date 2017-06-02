@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.pbj.loccar.view;
-
 import com.pbj.loccar.control.UsuarioControl;
 import com.pbj.loccar.view.tables.UsuarioTable;
 import javax.swing.JOptionPane;
@@ -12,39 +6,37 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author Akr-Taku
+ * 
+ * JFrame que faz O CRUD do Usuário Pode Não ser Visivel alguns Usuarios
  */
 public class JFrameCadastroUsuario extends javax.swing.JFrame {
 
-    /**
-     * Creates new form JFrameCadastroUsuario
-     */
-    UsuarioTable tableModel;
     
-        
+    UsuarioTable tableModel; //Cria uma Table
+  
     public JFrameCadastroUsuario() {
         initComponents();
         
-       
+       //Inicia os botões Excluir e Alterar Como não editaveis
        jButtonExcluir.setEnabled(false);
        jButtonAlterar.setEnabled(false);
-        
+       //Instancia a Tabela
        tableModel = new UsuarioTable();
-        
+       //Popula a tabela a partir de uma List recebida do bd
        tableModel.addLista(UsuarioControl.lerUsuario());
-        
-        
+       //Seta o modelo da tabela na tabela do Frame
        jTableUser.setModel(tableModel);   
         
     }
     
+    //Recebe o Indice do da String e retorna de Acordo com o UsuarioTable
     private String pegarTexto(int i){
-        //Recebe o Indice do da String E retorna de Acordo com o UsuarioTable
-       
+              
         String user[] = tableModel.getUsuario(jTableUser.getSelectedRow());
-        
+     
         return user[i];
     }
-    
+    //Metodo interno que Limpa todos os textFields
     private void limparTexto(){
         
         txtLogin.setText("");
@@ -254,12 +246,12 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
-        
-        this.dispose();//Fecha o JFIELD Atual
+        //Ao Clicar no botão a Janela é fechada.
+        this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-     //Botão de salvar Usuario ao Clicar o Usuario é Salvo no Banco de dados.
+     //Botão de salvar Usuario ao. Clicar o Usuario é Salvo no Banco de dados.
        
      //Verifica se algum Campo é vazio
        if("".equals(txtLogin.getText()) || "".equals(txtNome.getText()) || jPasswordField.getPassword().length == 0 ){
@@ -271,21 +263,23 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
        UsuarioControl.salvarUsuario(txtLogin.getText(), txtNome.getText(), new String(jPasswordField.getPassword()), (String) jComboBoxAcesso.getSelectedItem());
        tableModel.removeAll(); // Remova para não haver Duplicação
        tableModel.addLista(UsuarioControl.lerUsuario()); // Recarrega a Tabela
-       limparTexto(); //LImpa os campos após o salvamento dos coisas
+       limparTexto(); //Limpa os campos após o salvamento dos coisas
        
        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        // TODO add your handling code here:
+        // Ao Clicar neste Botão é Atualizado um Registro no Banco de dados
+        // Botão somente é clickavel caso uma linha da tabela esteja selecionada
         if(jTableUser.getSelectedRow() != -1 )
         {
+            //Altera chamando metodo do Control
             UsuarioControl.atualizarUsuario(Integer.parseInt(pegarTexto(0)),txtLogin.getText(), txtNome.getText(), new String(jPasswordField.getPassword()), (String) jComboBoxAcesso.getSelectedItem());
-            tableModel.removeAll(); // Remova para não haver Duplicação
-            tableModel.addLista(UsuarioControl.lerUsuario()); // Recarrega a Tabela
-            limparTexto(); //LImpa os campos após o salvamento dos coisas
-//            jButtonExcluir.setEnabled(false);
-            jButtonAlterar.setEnabled(false);
+            tableModel.removeAll();//Remova para não haver Duplicação
+            tableModel.addLista(UsuarioControl.lerUsuario());//Recarrega a Tabela
+            limparTexto(); //Limpa os campos após o salvamento dos coisas
+            jButtonExcluir.setEnabled(false);//Seta como não editavel para não haver erros
+            jButtonAlterar.setEnabled(false);//Seta como não editavel para não haver erros
         
         }
                
@@ -295,9 +289,10 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
 
     private void jTableUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUserMouseClicked
         // Faz com que a os campos de texto mostrem o que está na tabela apartir do click do mouse
-        jButtonSalvar.setEnabled(false);
-        jButtonExcluir.setEnabled(true);
+        jButtonSalvar.setEnabled(false);//Seta o Salvar como não editavel para não duplicar nada no banco
+        jButtonExcluir.setEnabled(true);//Seta como editavel botões de excluir e alterar
         jButtonAlterar.setEnabled(true);
+        //Pega os dados e seta em seus textFields
         txtLogin.setText(pegarTexto(1));
         txtNome.setText(pegarTexto(2));
         jPasswordField.setText(pegarTexto(4)); 
@@ -307,7 +302,8 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableUserMouseClicked
 
     private void jTableUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableUserKeyReleased
-        // Faz com que a os campos de texto mostrem o que está na tabela apartir das setinhas
+        //Faz com que a os campos de texto mostrem o que está na tabela apartir das setinhas
+        //Faz a mesma coisa que o evento do mouse Click
         jButtonSalvar.setEnabled(false);
         jButtonExcluir.setEnabled(true);
         jButtonAlterar.setEnabled(true);
@@ -323,32 +319,28 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
         jButtonSalvar.setEnabled(true);
         jButtonExcluir.setEnabled(false);
         jButtonAlterar.setEnabled(false);
-        
-        
         limparTexto();
         
     }//GEN-LAST:event_jButtonNewActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-        // TODO add your handling code here:
+        //Ação de Excluir do Registro
         
         int resp =  JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Exluir?");
         
-        if (resp == 0){
+        if (resp == 0){//Somente apaga caso o verificador seja Sim
             
             UsuarioControl.apagarUsuario(Integer.parseInt(pegarTexto(0)));
         }
         tableModel.removeAll(); // Remova para não haver Duplicação
         tableModel.addLista(UsuarioControl.lerUsuario()); // Recarrega a Tabela
-        limparTexto(); //LImpa os campos após o salvamento dos coisas
-        jButtonExcluir.setEnabled(false);
+        limparTexto(); //Limpa os campos após o salvamento dos coisas
+        jButtonExcluir.setEnabled(false);//Seta botões e excluir a alterar como não editaveis
         jButtonAlterar.setEnabled(false);
         
         
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
-    
-    
     /**
      * @param args the command line arguments
      */

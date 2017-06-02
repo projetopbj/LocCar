@@ -5,7 +5,6 @@
  */
 package com.pbj.loccar.view;
 
-import java.awt.GridBagLayout;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,6 +12,7 @@ import javax.swing.JOptionPane;
  * @author Akr-Taku
  */
 public final class JFrameConsultaClientes extends javax.swing.JFrame {
+
 
     /**
      * Creates new form JFrameConsultaClientes
@@ -31,7 +31,6 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroupFiltro = new javax.swing.ButtonGroup();
-        entityManager1 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory(null).createEntityManager();
         jPanelCC = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableClientes = new javax.swing.JTable();

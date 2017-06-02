@@ -6,18 +6,20 @@
 package com.pbj.loccar.control;
 
 import com.pbj.loccar.model.Usuario;
-import com.pbj.loccar.persistence.UsuarioDAO;
+import com.pbj.loccar.persistence.UsuarioPersistence;
+import com.pbj.loccar.persistence.dao.UsuarioDAO;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author Akr-Taku
+ * 
+ *  Classe de Controle que tem acesso ao Model, View e DAO - Do Usuario
  */
 public class UsuarioControl {
     
-    
-    
+    //Salva a Categoria no Banco de dados
     public static void salvarUsuario(String login,String nome, String senha, String acesso){
         Usuario user = new Usuario();
         user.setLoginUser(login);
@@ -25,21 +27,18 @@ public class UsuarioControl {
         user.setSenhaUser(senha);
         user.setAcessoUser(acesso);
         
-        UsuarioDAO userDao= new UsuarioDAO();
-        
+        UsuarioPersistence userDao= new UsuarioDAO();  
         userDao.createUsuario(user);
         
         
     }
     /*
-    //Converte o retorno Lista de OBJETO do DAO e Converte em Vetor de 
-    
+    Converte o retorno Lista de OBJETO do DAO e Converte em Vetor de 
     0 = ID
     1 = login
     2 = nome
     3 = Acesso
     4 = Senha
-    
     */
     public static List<String[]> lerUsuario(){
         
@@ -64,7 +63,7 @@ public class UsuarioControl {
         return users;        
     }
     
-    
+    //Metodo para Logar Verificando se o Usuario possui acesso ao Sistema
     public static String[] logarUsuario(String login, String senha){
         
         Usuario user = new UsuarioDAO().loginUsuario(login, senha);
@@ -76,14 +75,12 @@ public class UsuarioControl {
             userTemp[2] = user.getNomeUser();    
             userTemp[3] = user.getAcessoUser();
             userTemp[4] = user.getSenhaUser();
-        
-        
+
         return userTemp;
     }
     
-    
+    //Atualiza o Banco de dados a partir da Linha editada da Tabela
     public static void atualizarUsuario(int id,String login,String nome, String senha, String acesso){
-        
         
         Usuario user = new Usuario();
         user.setId(id);
@@ -92,19 +89,18 @@ public class UsuarioControl {
         user.setSenhaUser(senha);
         user.setAcessoUser(acesso);
         
-        UsuarioDAO userDao = new UsuarioDAO();
+        UsuarioPersistence userDao = new UsuarioDAO();
         
         userDao.updateUsuario(user);
     }
-    //Recebe o ID da interface e Acessa a persistencia e apaga o registro
+    //Recebe o ID da view e Acessa a persistencia e apaga o registro
     public static void apagarUsuario(int id){
         
         Usuario user = new Usuario();
         user.setId(id);
-        UsuarioDAO userDao = new UsuarioDAO();
+        UsuarioPersistence userDao = new UsuarioDAO();
         userDao.deleteUsuario(user);
-        
-        
+  
     }
     
     

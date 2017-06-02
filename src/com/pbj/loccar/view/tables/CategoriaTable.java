@@ -13,19 +13,18 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Akr-Taku
  */
-public class UsuarioTable  extends AbstractTableModel {
+public class CategoriaTable  extends AbstractTableModel {
     
     private final List<String[]> linhas;
     //Declara o nome das Colunas da Tabela
-    private final String[] colunas = {" # ","Login","Nome","Acesso","Senha"};
+    private final String[] colunas = {" # ","Nome","Valor Dia","Valor Km","Ar","Vidro","Direção"};
     
     //Contrutor vazio que Instancia a List
-    public UsuarioTable(){   
+    public CategoriaTable(){  
         linhas = new ArrayList<>();
     }
-   //Contrutor que já recebe a List Instanciada
-    public UsuarioTable(List<String[]> lista){
-        
+    //Contrutor que já recebe a List Instanciada
+    public CategoriaTable(List<String[]> lista){       
         linhas = new ArrayList<>(lista);
     }
 
@@ -42,6 +41,8 @@ public class UsuarioTable  extends AbstractTableModel {
     public int getColumnCount() {
        return colunas.length;
     }
+    
+    
 
     @Override//Metodo Interno para atualizar a Table
     public Object getValueAt(int linha, int coluna) { 
@@ -52,22 +53,25 @@ public class UsuarioTable  extends AbstractTableModel {
             case 0:
                 return temp[0];//Retorna o ID
             case 1:
-                return temp[1];//Retorna o Login
+                return temp[1];//Retorna o Nome
             case 2:
-                return temp[2];//Retorna o Nome
+                return temp[2];//Retorna o ValorDIA
             case 3:
-                return temp[3];//Retorna Acesso
+                return temp[3];//Retorna o ValorKM
             case 4:
-                return temp[4];// Retorna a Senha
+                return temp[4];//Retorna o AR
+            case 5:
+                return temp[5];//Retorna o Vidro
+            case 6:
+                return temp[6];//Retorna o Direção
         }
         return null;
     }
-    
     //Metodo Interno que pega o valor de cada Celula
     public void setValueAt(Object aValue, int linha, int coluna ){
         
-        String temp[] = linhas.get(linha);
-        
+        String temp[] = linhas.get(linha); //Carrega O Item da Linha a ser Mexido
+ 
         switch(coluna){
             
             case 0:
@@ -85,59 +89,67 @@ public class UsuarioTable  extends AbstractTableModel {
             case 4:
                 temp[4] = aValue.toString();
                 break;
+            case 5:
+                temp[5] = aValue.toString();
+                break;
+            case 6:
+                temp[6] = aValue.toString();
+                break;
+                
             default:
-                //Nunca Acontecerá
-                
-                
+                //Nunca Acontecerá       
         }
-        fireTableCellUpdated(linha, coluna);  
+        fireTableCellUpdated(linha, coluna);   
     }
+    
     //Metodo interno que seta os valores na Table
     public void setValueAt(String aValue[], int linha){
       String temp[] = linhas.get(linha);
       
       temp[0] = aValue[0];//ID
-      temp[1] = aValue[1];//login
-      temp[2] = aValue[2];//Nome
-      temp[3] = aValue[3];//acesso
-      temp[4] = aValue[4];//Senha 
+      temp[1] = aValue[1];//Nome
+      temp[2] = aValue[2];//valorDia
+      temp[3] = aValue[3];//valorKM
+      temp[4] = aValue[4];//ar
+      temp[5] = aValue[5];//vidro
+      temp[6] = aValue[6];//Direcao
       
     fireTableCellUpdated(linha, 0);
     fireTableCellUpdated(linha, 1);
         
     }
     //Retorna um boolean caso true a linha é editavel
-    public boolean isCellEditable(int linha, int coluna){    
+    public boolean isCellEditable(int linha, int coluna){
         return false;//Sempre será falso pois não quero que a linha seja editavel
     }
     
     //Retornar um vetor de String recebendo sua linha como Parametro
-    public String[] getUsuario(int linha){
-        
-        return linhas.get(linha);
+    public String[] getUsuario(int linha){     
+        return linhas.get(linha);    
     }
     
-    //Adicona uma nova Linha recebendo um vetor de String como Parâmetro
+    
+    //Adicona uma nova Linha recebendo um vetor de String como Parâmetro 
     public void addRow(String user[]){
-        this.linhas.add(user);    
+        this.linhas.add(user);
+        
         int ultimaLinha = getRowCount() -1;
         this.fireTableRowsInserted(ultimaLinha,ultimaLinha);
     }
-    
-    //Remove a linha passada por Parâmetro           
+    //Remove a linha passada por Parâmetro    
     public void removeRow(int linha){
         this.linhas.remove(linha);
         this.fireTableRowsDeleted(linha, linha);
     }
     
     //Popula a tabela a partir de uma lista
-    public void addLista(List<String[]> user){
+    public void addLista(List<String[]> categ){
         
         int tamanhoAntigo = getRowCount();
         
-        linhas.addAll(user);
+        linhas.addAll(categ);
         
-        fireTableRowsInserted(tamanhoAntigo, getRowCount() -1);   
+        fireTableRowsInserted(tamanhoAntigo, getRowCount() -1);                 
     }
     //Limpa toda a Tabela
     public void removeAll(){
