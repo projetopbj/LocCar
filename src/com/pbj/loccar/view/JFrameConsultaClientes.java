@@ -284,7 +284,6 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupFiltro;
-    private javax.persistence.EntityManager entityManager1;
     private javax.swing.JButton jButtonBusca;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonDetalhers;

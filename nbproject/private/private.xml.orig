@@ -1,19 +1,23 @@
-<<<<<<< HEAD
-<?xml version="1.0" encoding="UTF-8"?>
-<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
-    </open-files>
-</project-private>
-=======
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/K:/Programming/Java/workspace/LocCar/src/com/pbj/loccar/view/JFrameConsultaDevolucao.java</file>
+<<<<<<< HEAD
+            <file>file:/home/lucas/Documentos/sala%20de%20aula%20python/quarto%20periodo/exercicios/java%20avançado/projeto_final/LocCar/src/com/pbj/loccar/model/Cliente.java</file>
+            <file>file:/home/lucas/Documentos/sala%20de%20aula%20python/quarto%20periodo/exercicios/java%20avançado/projeto_final/LocCar/src/com/pbj/loccar/util/Propriedade.java</file>
+            <file>file:/home/lucas/Documentos/sala%20de%20aula%20python/quarto%20periodo/exercicios/java%20avançado/projeto_final/LocCar/src/com/pbj/loccar/model/Categoria.java</file>
+            <file>file:/home/lucas/Documentos/sala%20de%20aula%20python/quarto%20periodo/exercicios/java%20avançado/projeto_final/LocCar/src/com/pbj/loccar/model/Usuario.java</file>
+            <file>file:/home/lucas/Documentos/sala%20de%20aula%20python/quarto%20periodo/exercicios/java%20avançado/projeto_final/LocCar/src/sql/locadora_final.sql</file>
+            <file>file:/home/lucas/Documentos/sala%20de%20aula%20python/quarto%20periodo/exercicios/java%20avançado/projeto_final/LocCar/src/com/pbj/loccar/view/JFrameConsultaClientes.java</file>
+            <file>file:/home/lucas/Documentos/sala%20de%20aula%20python/quarto%20periodo/exercicios/java%20avançado/projeto_final/LocCar/src/com/pbj/loccar/model/Locadora.java</file>
+            <file>file:/home/lucas/Documentos/sala%20de%20aula%20python/quarto%20periodo/exercicios/java%20avançado/projeto_final/LocCar/src/com/pbj/loccar/view/JFrameMain.java</file>
+            <file>file:/home/lucas/Documentos/sala%20de%20aula%20python/quarto%20periodo/exercicios/java%20avançado/projeto_final/LocCar/src/com/pbj/loccar/model/Veiculo.java</file>
+=======
+            <file>file:/K:/Programming/Java/workspace/LocCar/src/com/pbj/loccar/model/Locadora.java</file>
+            <file>file:/K:/Programming/Java/workspace/LocCar/src/sql/Leia-me.txt</file>
+            <file>file:/K:/Programming/Java/workspace/LocCar/src/sql/locadora_final.sql</file>
+>>>>>>> 82d935d084e6487d1753cc66d4ae1d0c6cfdf691
         </group>
     </open-files>
 </project-private>
->>>>>>> fd9fa596e72f1209847553fa623f4e48b00d9c7f
