@@ -30,30 +30,13 @@ public class Categoria {
     * Varias SobreCargas de Construtores
     * Cada um recebe algo diferente.
     */
-    
-    
-    
+ 
     public Categoria(){
            
-        iterador++;
-        id = iterador;
+      id = iterador++;
         
     }
 
-
-     
-    public Categoria(String nome,boolean ar,boolean vidro,boolean direcao,double valorDia,double valorKm ){
-        iterador++;
-        id = iterador;
-        this.nome = nome;
-        this.ar = ar;
-        this.vidro = vidro;
-        this.direcao = direcao;
-        this.valorDia = valorDia;
-        this.valorKm = valorKm;
-        
-    }
-    
     public int getId() {
         return id;
     }
@@ -72,7 +55,13 @@ public class Categoria {
     }
 
     public boolean isAr() {
-        return ar;
+       return this.ar;
+    }
+    public String getAr() {
+        if (this.ar == true)
+            return "Sim";
+        else
+            return "Não";
     }
 
     public void setAr(boolean ar) {
@@ -82,6 +71,12 @@ public class Categoria {
     public boolean isVidro() {
         return vidro;
     }
+    public String getVidro() {
+        if (this.vidro == true)
+            return "Sim";
+        else
+            return "Não";
+    }
 
     public void setVidro(boolean vidro) {
         this.vidro = vidro;
@@ -89,6 +84,12 @@ public class Categoria {
 
     public boolean isDirecao() {
         return direcao;
+    }
+    public String getDirecao() {
+        if (this.direcao == true)
+            return "Sim";
+        else
+            return "Não";
     }
 
     public void setDirecao(boolean direcao) {

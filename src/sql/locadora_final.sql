@@ -1,4 +1,4 @@
---CREATE DATABASE  locadora; /*DEFAULT CHARACTER SET utf8 */;
+
 
 CREATE TABLE `Cliente` (
     id int NOT NULL,
@@ -23,8 +23,8 @@ CREATE TABLE `Cliente` (
 CREATE TABLE `Categoria` (
     id int not null,
     nome varchar(25),
-    valorDia decimal(6,4) not null,
-    valorKm decimal(6,4) not null,
+    valorDia double not null,
+    valorKm double not null,
     ar boolean,
     vidro boolean,
     direcao boolean,
@@ -52,14 +52,14 @@ CREATE TABLE `Locacao`(
     qtdDias int not null,
     dataDoAluquel date not null,
     dataDaDevolucao date not null,
-    valorDiaria decimal(6,4) not null,
-    subTotal decimal(6,4)  not null,
+    valorDiaria double not null,
+    subTotal double not null,
     atrasoLocacao boolean,
     diasAtraso int,
     dataRetorno date,
-    valorFinal decimal(6,4),
+    valorFinal double,
     isDesconto boolean,
-    valorDesconto decimal(6,4),
+    valorDesconto double,
     idCliente int not null, -- chave estrangeira para o cliente
     idVeiculo int not null, -- chave estrangeira para o veículo
     PRIMARY KEY(id),

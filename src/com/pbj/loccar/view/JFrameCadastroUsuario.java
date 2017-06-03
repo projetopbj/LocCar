@@ -331,9 +331,11 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
         if (resp == 0){//Somente apaga caso o verificador seja Sim
             
             UsuarioControl.apagarUsuario(Integer.parseInt(pegarTexto(0)));
+            
+            tableModel.removeAll(); // Remova para não haver Duplicação
+            tableModel.addLista(UsuarioControl.lerUsuario()); // Recarrega a Tabela
         }
-        tableModel.removeAll(); // Remova para não haver Duplicação
-        tableModel.addLista(UsuarioControl.lerUsuario()); // Recarrega a Tabela
+        
         limparTexto(); //Limpa os campos após o salvamento dos coisas
         jButtonExcluir.setEnabled(false);//Seta botões e excluir a alterar como não editaveis
         jButtonAlterar.setEnabled(false);

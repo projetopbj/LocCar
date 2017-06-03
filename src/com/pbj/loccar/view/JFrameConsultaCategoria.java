@@ -5,17 +5,46 @@
  */
 package com.pbj.loccar.view;
 
+import com.pbj.loccar.control.CategoriaControl;
+import com.pbj.loccar.view.tables.CategoriaTable;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Akr-Taku
+ * 
+ * Frame que consulta as categorias cadastradas no sistema
+ * 
  */
 public class JFrameConsultaCategoria extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameConsultaCategoria
      */
+    CategoriaTable tableModel;
+    
     public JFrameConsultaCategoria() {
         initComponents();
+        //Carrega a lista de Categorias Diretamente do Banco de Dados
+        tableModel = new CategoriaTable(CategoriaControl.lerCategoria());
+        jTableCateg.setModel(tableModel);//Seta o modelo na tabela do Frame
+        
+        //Inicia os Botões como Não clicaveis;
+        jButtonExcluir.setEnabled(false);
+        jButtonAlterar.setEnabled(false);
+        
+        
+    }
+    
+    private String[] pegarCategoria(){
+        if(jTableCateg.getSelectedRow() != -1 ){      
+            String categ[] = tableModel.getCategoria(jTableCateg.getSelectedRow());
+     
+        return categ;
+        }else{
+            return null;
+        }
+        
     }
 
     /**
@@ -31,10 +60,10 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
         jPanelConsultaCateg = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableCateg = new javax.swing.JTable();
+        jButtonAtualizeTable = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButtonExcluir = new javax.swing.JButton();
         jButtonAlterar = new javax.swing.JButton();
+        jButtonExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -57,7 +86,19 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableCateg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableCategMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableCateg);
+
+        jButtonAtualizeTable.setText("Atualizar Tabela");
+        jButtonAtualizeTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtualizeTableActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelConsultaCategLayout = new javax.swing.GroupLayout(jPanelConsultaCateg);
         jPanelConsultaCateg.setLayout(jPanelConsultaCategLayout);
@@ -65,13 +106,18 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
             jPanelConsultaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelConsultaCategLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
+                .addGroup(jPanelConsultaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConsultaCategLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonAtualizeTable)))
                 .addContainerGap())
         );
         jPanelConsultaCategLayout.setVerticalGroup(
             jPanelConsultaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelConsultaCategLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addComponent(jButtonAtualizeTable)
+                .addGap(3, 3, 3)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -83,14 +129,17 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Detalhes");
-
-        jButtonExcluir.setText("Excluir");
-
         jButtonAlterar.setText("Alterar");
         jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAlterarActionPerformed(evt);
+            }
+        });
+
+        jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
             }
         });
 
@@ -103,15 +152,13 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
                 .addComponent(jPanelConsultaCateg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanelConsultaBotoesLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(46, 46, 46)
                 .addComponent(jButtonCancel)
-                .addGap(33, 33, 33)
-                .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addComponent(jButtonAlterar)
+                .addGap(38, 38, 38)
                 .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addGap(45, 45, 45))
         );
         jPanelConsultaBotoesLayout.setVerticalGroup(
             jPanelConsultaBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,9 +167,8 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
                 .addComponent(jPanelConsultaCateg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelConsultaBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButtonCancel)
                     .addComponent(jButtonAlterar)
+                    .addComponent(jButtonCancel)
                     .addComponent(jButtonExcluir))
                 .addGap(0, 61, Short.MAX_VALUE))
         );
@@ -138,13 +184,58 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
         
         this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
-
+    
+    
+    
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
         // TODO add your handling code here:
+        
+      if(jTableCateg.getSelectedRow() != -1 ){ 
+        new JFrameCadastroCategoria(pegarCategoria()).setVisible(true);
+      }else{
+         JOptionPane.showMessageDialog(null, "Não há registro selecionado na tabela!","",JOptionPane.WARNING_MESSAGE);
+      }
     }//GEN-LAST:event_jButtonAlterarActionPerformed
+
+    private void jButtonAtualizeTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizeTableActionPerformed
+        // TODO add your handling code here:
+        tableModel.removeAll();
+        tableModel.addLista(CategoriaControl.lerCategoria());
+    }//GEN-LAST:event_jButtonAtualizeTableActionPerformed
+
+    private void jTableCategMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCategMouseClicked
+        // TODO add your handling code here:
+        //Assim que for clicado qualquer linha do cadastro será habilitado os botões
+        jButtonExcluir.setEnabled(true);
+        jButtonAlterar.setEnabled(true);
+    }//GEN-LAST:event_jTableCategMouseClicked
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        // TODO add your handling code here:
+        
+        if(jTableCateg.getSelectedRow() != -1 ){
+            //Confirmação se deseja realmente excluir
+            int resp =  JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Exluir?");  
+            
+            if (resp == 0){//Somente apaga caso o verificador seja Sim
+             
+                //Pega o objeto da linha selecionada e retorna um array
+                String categRemov[] = pegarCategoria();
+                //Pega a primeira posição do array que é iD e remove do banco
+                CategoriaControl.apagarCategoria(Integer.parseInt(categRemov[0]));
+                //Atualiza Tabela do Banco de dados
+                tableModel.removeAll();
+                tableModel.addLista(CategoriaControl.lerCategoria());
+            }
+        }else{
+            //Mensagem de aviso que não há registro selecionado
+            JOptionPane.showMessageDialog(null, "Não há registro selecionado na tabela!","",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     /**
      * @param args the command line arguments
+     * 
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -179,8 +270,8 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAlterar;
+    private javax.swing.JButton jButtonAtualizeTable;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JPanel jPanelConsultaBotoes;

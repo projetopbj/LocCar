@@ -81,11 +81,11 @@ public class CategoriaDAO implements CategoriaPersistence {
                 
                 categoria.setId(rs.getInt("id"));
                 categoria.setNome(rs.getString("nome"));
-                categoria.setValorDia(Double.parseDouble(rs.getString("valorDia")));
-                categoria.setValorKm(Double.parseDouble(rs.getString("valorKm")));
-                categoria.setAr(Boolean.getBoolean((rs.getString("ar"))));
-                categoria.setVidro(Boolean.getBoolean(rs.getString("vidro")));
-                categoria.setDirecao(Boolean.getBoolean(rs.getString("direcao")));
+                categoria.setValorDia(rs.getDouble("valorDia"));
+                categoria.setValorKm(rs.getDouble("valorKm"));
+                categoria.setAr(rs.getBoolean("ar"));
+                categoria.setVidro(rs.getBoolean("vidro"));
+                categoria.setDirecao(rs.getBoolean("direcao"));
                 
                 
                 listCategoria.add(categoria);
@@ -164,11 +164,11 @@ public class CategoriaDAO implements CategoriaPersistence {
 
                 categoria.setId(rs.getInt("id"));
                 categoria.setNome(rs.getString("nome"));
-                categoria.setValorDia(Double.parseDouble(rs.getString("valorDia")));
-                categoria.setValorKm(Double.parseDouble(rs.getString("valorKm")));
-                categoria.setAr(Boolean.getBoolean((rs.getString("ar"))));
-                categoria.setVidro(Boolean.getBoolean(rs.getString("vidro")));
-                categoria.setDirecao(Boolean.getBoolean(rs.getString("direcao")));
+                categoria.setValorDia(rs.getDouble("valorDia"));
+                categoria.setValorKm(rs.getDouble("valorKm"));
+                categoria.setAr(rs.getBoolean("ar"));
+                categoria.setVidro(rs.getBoolean("vidro"));
+                categoria.setDirecao(rs.getBoolean("direcao"));
                 
          
         }  
