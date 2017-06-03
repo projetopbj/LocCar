@@ -5,29 +5,34 @@
  */
 package com.pbj.loccar.view;
 
+import com.pbj.loccar.control.UsuarioControl;
 import com.pbj.loccar.util.DataHora;
+import javax.swing.JOptionPane;
 
 
 
 /**
  *
  * @author Akr-Taku
+ * 
+ * JFrame Principal do Sistema que chama os demais dependendo do Nível de acesso
+ * do usuário Logado
  */
 public final class JFrameMain extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameMain
-     */
+     */ 
     
-    
+    String user[];
+
     public JFrameMain() {      
         initComponents();
+        //Inicia todo acesso ao usuario como não visivel
         jMenuBarBarraPrincipal.setVisible(false);
-                jPanelDataHora.setVisible(false);
-
-        
+        jPanelDataHora.setVisible(false);
+        jLabelUser.setVisible(false);
     }
-         
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,6 +52,7 @@ public final class JFrameMain extends javax.swing.JFrame {
         jPanelDataHora = new javax.swing.JPanel();
         jLabelData = new javax.swing.JLabel();
         jLabelHora = new javax.swing.JLabel();
+        jLabelUser = new javax.swing.JLabel();
         jMenuBarBarraPrincipal = new javax.swing.JMenuBar();
         jMenuLogin = new javax.swing.JMenu();
         jMenuDeslogar = new javax.swing.JMenuItem();
@@ -56,7 +62,7 @@ public final class JFrameMain extends javax.swing.JFrame {
         jMenuItemCadasVeiculo = new javax.swing.JMenuItem();
         jMenuCadastroCategoria = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItemCadastroUser = new javax.swing.JMenuItem();
         jMenuConsultas = new javax.swing.JMenu();
         jMenuConsClientes = new javax.swing.JMenuItem();
         jMenuConsVeiculos = new javax.swing.JMenuItem();
@@ -174,6 +180,8 @@ public final class JFrameMain extends javax.swing.JFrame {
                 .addComponent(jLabelData, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jLabelUser.setText("Bem Vindo!");
+
         jMenuBarBarraPrincipal.setBackground(new java.awt.Color(255, 255, 255));
 
         jMenuLogin.setBorder(null);
@@ -225,13 +233,13 @@ public final class JFrameMain extends javax.swing.JFrame {
         jMenuCadastros.add(jMenuCadastroCategoria);
         jMenuCadastros.add(jSeparator1);
 
-        jMenuItem1.setText("Cadastrar Usuário");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemCadastroUser.setText("Cadastrar Usuário");
+        jMenuItemCadastroUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemCadastroUserActionPerformed(evt);
             }
         });
-        jMenuCadastros.add(jMenuItem1);
+        jMenuCadastros.add(jMenuItemCadastroUser);
 
         jMenuBarBarraPrincipal.add(jMenuCadastros);
 
@@ -318,11 +326,16 @@ public final class JFrameMain extends javax.swing.JFrame {
                 .addGap(132, 132, 132)
                 .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(141, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelUser, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addComponent(jLabelUser)
+                .addGap(38, 38, 38)
                 .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addComponent(jPanelDataHora, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -343,10 +356,39 @@ public final class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSenhaActionPerformed
 
     private void jButtonLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogarActionPerformed
-
-        jPanelLogin.setVisible(false);
-        jPanelDataHora.setVisible(true);
-        jMenuBarBarraPrincipal.setVisible(true);
+       // Botão que faz a verificação de login
+        
+        //Chama o Usuario do Banco de dados
+        user = UsuarioControl.logarUsuario(txtLogin.getText(), new String(txtSenha.getPassword()));
+        
+        //Verifica se o usuario tem o nivel de acesso para acessar o sistema
+        if("Admin".equals(user[3]))
+        { //Caso seja acesso admin Libera Tudo do Sistema
+            jPanelLogin.setVisible(false);
+            jPanelDataHora.setVisible(true);
+            jMenuBarBarraPrincipal.setVisible(true);
+            jLabelUser.setText("Bem Vindo! "+ user[2]);
+            jLabelUser.setVisible(true);
+        
+        
+        }else if("Parceiro".equals(user[3])){
+            //Caso seja Parceiro é inibido alguns menus de controle
+            jPanelLogin.setVisible(false);
+            jPanelDataHora.setVisible(true);
+            jMenuBarBarraPrincipal.setVisible(true);
+            jLabelUser.setText("Bem Vindo! "+ user[2]);
+            jLabelUser.setVisible(true);
+            jMenuItemCadastroUser.setVisible(false);
+            jMenuItemCadasVeiculo.setVisible(false);
+            jMenuCadastroCategoria.setVisible(false);
+            jMenuConfigBD.setVisible(false);
+        }else{
+            //Caso não tenha acesso ou usuario e senha errado mostra mensagem no sistema
+            JOptionPane.showMessageDialog(null, "Login ou Senha Incorreta!"); 
+        }
+        //Limpa os campos de login e senha;
+        txtLogin.setText("");
+        txtSenha.setText("");
         
     }//GEN-LAST:event_jButtonLogarActionPerformed
 
@@ -366,14 +408,12 @@ public final class JFrameMain extends javax.swing.JFrame {
 
     private void jMenuConsClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsClientesActionPerformed
         // TODO add your handling code here:
-        
         new JFrameConsultaClientes().setVisible(true);
     }//GEN-LAST:event_jMenuConsClientesActionPerformed
 
     private void jMenuItemDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDevolverActionPerformed
         // TODO add your handling code here:
         new JFrameConsultaDevolucao().setVisible(true);
-        
     }//GEN-LAST:event_jMenuItemDevolverActionPerformed
 
     private void jMenuItemLocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLocarActionPerformed
@@ -388,43 +428,40 @@ public final class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuFatLocActionPerformed
 
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-       
-
-         
+        
+        System.exit(0);//Sai do programa! 
     }//GEN-LAST:event_jMenuSairActionPerformed
 
     private void jMenuDeslogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuDeslogarActionPerformed
         // TODO add your handling code here:
+        //Desfaz todo o processo de login feito
+        //Abre novamente o panel de login
         jPanelLogin.setVisible(true);
-
+        jLabelUser.setVisible(false);
         jMenuBarBarraPrincipal.setVisible(false);
         jPanelDataHora.setVisible(false);
     }//GEN-LAST:event_jMenuDeslogarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-        //this.setExtendedState(MAXIMIZED_BOTH);
-
-       jLabelData.setText(DataHora.getData());
+       //Ao abrir a Janela é setado a Data e a Hora do Sistema
+       //Iniciado Thread de mostrar Hora
        
+       jLabelData.setText(DataHora.getData());//èga a data e joga no Label
        
        new Thread(){
            public void run(){
                while(true){
+                    //Inicia a thread e atualiza o rélogio em tempo real
                     jLabelHora.setText(DataHora.getHora());
                }
            }
-       }.start();
-       
+       }.start();   
     }//GEN-LAST:event_formWindowOpened
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        
+    private void jMenuItemCadastroUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroUserActionPerformed
+        //Chama a Janela para Cadastro e Controle de Usuário 
         new JFrameCadastroUsuario().setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItemCadastroUserActionPerformed
 
     private void jMenuCadastroCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroCategoriaActionPerformed
         // TODO add your handling code here:
@@ -439,7 +476,7 @@ public final class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuConsultaCategoriasActionPerformed
 
     private void jMenuConfigBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConfigBDActionPerformed
-        // TODO add your handling code here
+        //Chama a Janela com as configurações do Banco de dados.
         new JFrameConfigBD().setVisible(true);
     }//GEN-LAST:event_jMenuConfigBDActionPerformed
 
@@ -484,6 +521,7 @@ public final class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelHora;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelSenha;
+    private javax.swing.JLabel jLabelUser;
     private javax.swing.JMenu jMenuAjuda;
     private javax.swing.JMenuBar jMenuBarBarraPrincipal;
     private javax.swing.JMenuItem jMenuCadastroCategoria;
@@ -495,9 +533,9 @@ public final class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuConsultas;
     private javax.swing.JMenuItem jMenuDeslogar;
     private javax.swing.JMenuItem jMenuFatLoc;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemCadasCliente;
     private javax.swing.JMenuItem jMenuItemCadasVeiculo;
+    private javax.swing.JMenuItem jMenuItemCadastroUser;
     private javax.swing.JMenuItem jMenuItemDevolver;
     private javax.swing.JMenuItem jMenuItemLocar;
     private javax.swing.JMenu jMenuLocacao;

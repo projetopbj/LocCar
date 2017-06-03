@@ -5,7 +5,6 @@
  */
 package com.pbj.loccar.view;
 
-import java.awt.GridBagLayout;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,6 +12,7 @@ import javax.swing.JOptionPane;
  * @author Akr-Taku
  */
 public final class JFrameConsultaClientes extends javax.swing.JFrame {
+
 
     /**
      * Creates new form JFrameConsultaClientes
@@ -40,7 +40,6 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
         jPanelFilt = new javax.swing.JPanel();
         jRadioButtonNome = new javax.swing.JRadioButton();
         jRadioButtonCPF = new javax.swing.JRadioButton();
-        jButtonCadasNovo = new javax.swing.JButton();
         jButtonDetalhers = new javax.swing.JButton();
         jButtonEditarCadas = new javax.swing.JButton();
         jButtonExcluirCadas = new javax.swing.JButton();
@@ -141,13 +140,6 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButtonCadasNovo.setText("Cadastrar Novo");
-        jButtonCadasNovo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCadasNovoActionPerformed(evt);
-            }
-        });
-
         jButtonDetalhers.setText("+ Detalhes");
 
         jButtonEditarCadas.setText("Editar");
@@ -183,10 +175,8 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
                         .addComponent(jButtonCancel)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonDetalhers, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonCadasNovo)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonEditarCadas, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(127, 127, 127)
+                        .addComponent(jButtonEditarCadas, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonExcluirCadas, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11))
@@ -203,7 +193,6 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelCCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCadasNovo)
                     .addComponent(jButtonDetalhers)
                     .addComponent(jButtonExcluirCadas)
                     .addComponent(jButtonEditarCadas)
@@ -229,12 +218,6 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonCadasNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadasNovoActionPerformed
-        // TODO add your handling code here:
-        new JFrameCadastroCliente().setVisible(true);
-
-    }//GEN-LAST:event_jButtonCadasNovoActionPerformed
 
     private void jButtonExcluirCadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirCadasActionPerformed
         // TODO add your handling code here:
@@ -301,7 +284,6 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupFiltro;
     private javax.swing.JButton jButtonBusca;
-    private javax.swing.JButton jButtonCadasNovo;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonDetalhers;
     private javax.swing.JButton jButtonEditarCadas;

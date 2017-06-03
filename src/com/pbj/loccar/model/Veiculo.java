@@ -30,13 +30,15 @@ public class Veiculo {
     
     public Veiculo(){
         
-        Iterador.iterar(iterador, id);
+        iterador++;
+        id = iterador;
        
     }
     
     public Veiculo(String placa, String modelo, String marca, String chassi, int ano, int nPortas, String cor) {
         
-        Iterador.iterar(iterador, id);
+        iterador++;
+        id = iterador;
         this.placa = placa;
         this.modelo = modelo;
         this.marca = marca;
@@ -51,6 +53,11 @@ public class Veiculo {
     public int getId() {
         return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
 
     public int getAno() {
         return ano;

@@ -69,12 +69,12 @@
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCadastroUser">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar Usu&#xe1;rio"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemCadastroUserActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -199,12 +199,18 @@
               <Component id="jPanelLogin" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="141" max="32767" attributes="0"/>
           </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jLabelUser" min="-2" pref="180" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+              <Component id="jLabelUser" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Component id="jPanelLogin" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="96" max="32767" attributes="0"/>
               <Component id="jPanelDataHora" min="-2" pref="90" max="-2" attributes="0"/>
@@ -370,5 +376,10 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="jLabelUser">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Bem Vindo!"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

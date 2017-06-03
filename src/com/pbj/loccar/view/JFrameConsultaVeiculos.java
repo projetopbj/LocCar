@@ -36,7 +36,6 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableVeiculos = new javax.swing.JTable();
         jPanelConsVeic = new javax.swing.JPanel();
-        jButtonCadasNovo = new javax.swing.JButton();
         jButtonEditarCadas = new javax.swing.JButton();
         jButtonExcluirCadas = new javax.swing.JButton();
         jButtonDetalhers = new javax.swing.JButton();
@@ -72,13 +71,6 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableVeiculos);
 
-        jButtonCadasNovo.setText("Cadastrar Novo");
-        jButtonCadasNovo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCadasNovoActionPerformed(evt);
-            }
-        });
-
         jButtonEditarCadas.setText("Editar");
 
         jButtonExcluirCadas.setText("Excluir");
@@ -106,12 +98,10 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
                 .addComponent(jButtonCancel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonDetalhers)
-                .addGap(69, 69, 69)
-                .addComponent(jButtonEditarCadas)
+                .addGap(147, 147, 147)
+                .addComponent(jButtonEditarCadas, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonCadasNovo)
-                .addGap(19, 19, 19)
-                .addComponent(jButtonExcluirCadas)
+                .addComponent(jButtonExcluirCadas, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
         jPanelConsVeicLayout.setVerticalGroup(
@@ -119,7 +109,6 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
             .addGroup(jPanelConsVeicLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelConsVeicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCadasNovo)
                     .addComponent(jButtonEditarCadas)
                     .addComponent(jButtonExcluirCadas)
                     .addComponent(jButtonDetalhers)
@@ -266,12 +255,6 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonModeloActionPerformed
 
-    private void jButtonCadasNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadasNovoActionPerformed
-        // TODO add your handling code here:
-        new JFrameCadastroVeiculo().setVisible(true);
-        
-    }//GEN-LAST:event_jButtonCadasNovoActionPerformed
-
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
         
@@ -316,7 +299,6 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupFiltra;
     private javax.swing.JButton jButtonBusca;
-    private javax.swing.JButton jButtonCadasNovo;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonDetalhers;
     private javax.swing.JButton jButtonEditarCadas;
