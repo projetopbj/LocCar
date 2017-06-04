@@ -5,6 +5,10 @@
  */
 package com.pbj.loccar.view;
 
+import com.pbj.loccar.control.CategoriaControl;
+import java.text.NumberFormat;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Akr-Taku
@@ -12,12 +16,47 @@ package com.pbj.loccar.view;
 public class JFrameCadastroCategoria extends javax.swing.JFrame {
 
     /**
-     * Creates new form JFrameCadastroCategoria
+     * Creates new form JFrameCadastroCategoria 
      */
-    public JFrameCadastroCategoria() {
+  
+    private int id;
+    
+    public JFrameCadastroCategoria() {        
         initComponents();
+        jButtonAtualizar.setVisible(false);
     }
+    public JFrameCadastroCategoria(String[] categ) {        
+        initComponents();
+        jButtonCadastro.setVisible(false);
+        SetCampos(categ);
 
+                
+    }
+    
+    private void SetCampos(String[] categ){
+        
+        id = Integer.parseInt(categ[0]);
+        txtNomeCateg.setText(categ[1]);
+        txtValorDia.setText(categ[2]);
+        txtKM.setText(categ[3]);
+        jComboBoxAr.setSelectedItem((String) categ[4]);
+        jComboBoxVidro.setSelectedItem((String) categ[5]);
+        jComboBoxDirecaoH.setSelectedItem((String) categ[6]);
+        
+        
+    }
+    
+    //Metodo serve para limpar os txt fields
+    private void limpaCampos(){
+        
+        txtNomeCateg.setText("");
+        txtValorDia.setText("");
+        txtKM.setText("");
+        jComboBoxAr.setSelectedIndex(0);
+        jComboBoxVidro.setSelectedIndex(0);
+        jComboBoxDirecaoH.setSelectedIndex(0);
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,19 +73,18 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
         jLabelNomeCateg = new javax.swing.JLabel();
         jLabelValorDia = new javax.swing.JLabel();
         txtNomeCateg = new javax.swing.JTextField();
-        txtValorDia = new javax.swing.JTextField();
         jLabelValorKMExc = new javax.swing.JLabel();
-        txtKMExc = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jComboBoxArCond = new javax.swing.JComboBox<>();
+        jComboBoxAr = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jComboBoxDirecaoH = new javax.swing.JComboBox<>();
         jLabelVidroEletrico = new javax.swing.JLabel();
         jComboBoxVidro = new javax.swing.JComboBox<>();
-        jLabelMotor = new javax.swing.JLabel();
-        txtMotor = new javax.swing.JTextField();
+        txtValorDia = new javax.swing.JFormattedTextField();
+        txtKM = new javax.swing.JFormattedTextField();
         jButtonCancel = new javax.swing.JButton();
         jButtonCadastro = new javax.swing.JButton();
+        jButtonAtualizar = new javax.swing.JButton();
 
         jLabel3.setText("jLabel3");
 
@@ -69,7 +107,7 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
 
         jLabel5.setText("Ar Condicionado");
 
-        jComboBoxArCond.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
+        jComboBoxAr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
 
         jLabel6.setText("Direção Hidráulica");
 
@@ -79,7 +117,14 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
 
         jComboBoxVidro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sim", "Não" }));
 
-        jLabelMotor.setText("Motor");
+        txtValorDia.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        txtKM.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtKM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtKMActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelCadastroCategLayout = new javax.swing.GroupLayout(jPanelCadastroCateg);
         jPanelCadastroCateg.setLayout(jPanelCadastroCategLayout);
@@ -88,61 +133,52 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
             .addGroup(jPanelCadastroCategLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCadastroCategLayout.createSequentialGroup()
-                        .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelNomeCateg)
-                            .addComponent(txtNomeCateg, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabelMotor)
-                                .addComponent(txtMotor, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabelValorDia)
-                                .addComponent(txtValorDia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtKMExc, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabelVidroEletrico)
-                            .addComponent(jComboBoxVidro, 0, 158, Short.MAX_VALUE)
-                            .addComponent(jComboBoxDirecaoH, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBoxArCond, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jLabelValorKMExc))
+                    .addComponent(jLabelNomeCateg)
+                    .addComponent(txtNomeCateg, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelValorDia)
+                    .addComponent(jLabelValorKMExc)
+                    .addComponent(txtKM, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtValorDia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabelVidroEletrico)
+                    .addComponent(jComboBoxVidro, 0, 158, Short.MAX_VALUE)
+                    .addComponent(jComboBoxDirecaoH, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxAr, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanelCadastroCategLayout.setVerticalGroup(
             jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCadastroCategLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelNomeCateg)
+                    .addComponent(jLabel5))
+                .addGap(3, 3, 3)
+                .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNomeCateg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxAr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelCadastroCategLayout.createSequentialGroup()
-                        .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelNomeCateg)
-                            .addComponent(jLabel5))
-                        .addGap(3, 3, 3)
-                        .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNomeCateg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxArCond, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelMotor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMotor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelCadastroCategLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelCadastroCategLayout.createSequentialGroup()
                         .addComponent(jLabelVidroEletrico)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxVidro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(17, 17, 17)
-                .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabelValorDia))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelCadastroCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxDirecaoH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtValorDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelValorKMExc)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtKMExc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                        .addComponent(jComboBoxVidro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBoxDirecaoH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelCadastroCategLayout.createSequentialGroup()
+                        .addComponent(jLabelValorDia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtValorDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelValorKMExc)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtKM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButtonCancel.setText("Cancelar");
@@ -153,6 +189,18 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
         });
 
         jButtonCadastro.setText("Cadastrar");
+        jButtonCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadastroActionPerformed(evt);
+            }
+        });
+
+        jButtonAtualizar.setText("Atualizar");
+        jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelCampoBotoesLayout = new javax.swing.GroupLayout(jPanelCampoBotoes);
         jPanelCampoBotoes.setLayout(jPanelCampoBotoesLayout);
@@ -163,21 +211,24 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
                 .addComponent(jPanelCadastroCateg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanelCampoBotoesLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(24, 24, 24)
                 .addComponent(jButtonCancel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonAtualizar)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonCadastro)
-                .addGap(71, 71, 71))
+                .addGap(26, 26, 26))
         );
         jPanelCampoBotoesLayout.setVerticalGroup(
             jPanelCampoBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCampoBotoesLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(22, 22, 22)
                 .addComponent(jPanelCadastroCateg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(41, 41, 41)
                 .addGroup(jPanelCampoBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancel)
-                    .addComponent(jButtonCadastro))
+                    .addComponent(jButtonCadastro)
+                    .addComponent(jButtonAtualizar))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -198,10 +249,76 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeCategActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
-        // TODO add your handling code here:
+        // Botão que fecha a teka Atual
         
         this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
+    //Verifica o objeto passado com "SIM" e caso posivito ele retorna true;
+   private boolean verifiX(Object obj){
+       
+       boolean bool = false;
+       
+       if("Sim".equals(obj))
+         {  
+             bool = true; 
+         
+         }
+       
+       
+       return bool;
+   }
+    
+    
+    private void jButtonCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroActionPerformed
+        // Botão que salva o Usuário no Banco de dados.
+        if ("".equals(txtNomeCateg.getText()) || "".equals(txtValorDia.getText()) || "".equals(txtKM.getText()))
+        {
+           JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
+        }else{ 
+            
+            //Verifica se o valor da variavel é sim ou não e retorna true ou false;
+            boolean ar = verifiX((String) jComboBoxAr.getSelectedItem());
+            boolean vidro = verifiX((String) jComboBoxVidro.getSelectedItem());
+            boolean direcao = verifiX((String) jComboBoxDirecaoH.getSelectedItem());
+
+            String dia = txtValorDia.getText().replace(",", ".");
+            String km = txtKM.getText().replace(",",".");
+            CategoriaControl.salvarUsuario(txtNomeCateg.getText(), Double.parseDouble(dia), Double.parseDouble(km), ar, vidro, direcao);
+            
+            //Pergunta se deseja cadastrar outra categoria
+            int resp = JOptionPane.showConfirmDialog(null, "Deseja cadastrar Nova Categoria?");
+            //Se responder Não a Janela fecha
+            if (resp == 1 ||resp == 2 ){  this.dispose(); }
+            
+            limpaCampos();
+            
+        }
+    }//GEN-LAST:event_jButtonCadastroActionPerformed
+
+    private void txtKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtKMActionPerformed
+
+    private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
+        // Atualiza a Categoria Recebendo ela diretamente da aba de consulta
+                   
+        //Verifica se o valor da variavel é sim ou não e retorna true ou false;
+        if ("".equals(txtNomeCateg.getText()) || "".equals(txtValorDia.getText()) || "".equals(txtKM.getText()))
+        {
+           JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
+        }else{ 
+            boolean ar = verifiX((String) jComboBoxAr.getSelectedItem());
+            boolean vidro = verifiX((String) jComboBoxVidro.getSelectedItem());
+            boolean direcao = verifiX((String) jComboBoxDirecaoH.getSelectedItem());
+            //Troca o padrão numerico brasileiro para Estrangeiro e salva no banco
+            String dia = txtValorDia.getText().replace(",", ".");
+            String km = txtKM.getText().replace(",",".");
+            //Chama metodo para atualizar o banco
+         CategoriaControl.atualizarCategoria(id,txtNomeCateg.getText(), Double.parseDouble(dia), Double.parseDouble(km),  ar, vidro, direcao);
+        }
+        this.dispose();
+        
+    }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,24 +356,23 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAtualizar;
     private javax.swing.JButton jButtonCadastro;
     private javax.swing.JButton jButtonCancel;
-    private javax.swing.JComboBox<String> jComboBoxArCond;
+    private javax.swing.JComboBox<String> jComboBoxAr;
     private javax.swing.JComboBox<String> jComboBoxDirecaoH;
     private javax.swing.JComboBox<String> jComboBoxVidro;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabelMotor;
     private javax.swing.JLabel jLabelNomeCateg;
     private javax.swing.JLabel jLabelValorDia;
     private javax.swing.JLabel jLabelValorKMExc;
     private javax.swing.JLabel jLabelVidroEletrico;
     private javax.swing.JPanel jPanelCadastroCateg;
     private javax.swing.JPanel jPanelCampoBotoes;
-    private javax.swing.JTextField txtKMExc;
-    private javax.swing.JTextField txtMotor;
+    private javax.swing.JFormattedTextField txtKM;
     private javax.swing.JTextField txtNomeCateg;
-    private javax.swing.JTextField txtValorDia;
+    private javax.swing.JFormattedTextField txtValorDia;
     // End of variables declaration//GEN-END:variables
 }

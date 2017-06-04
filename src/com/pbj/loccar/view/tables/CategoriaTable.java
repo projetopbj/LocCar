@@ -124,7 +124,7 @@ public class CategoriaTable  extends AbstractTableModel {
     }
     
     //Retornar um vetor de String recebendo sua linha como Parametro
-    public String[] getUsuario(int linha){     
+    public String[] getCategoria(int linha){     
         return linhas.get(linha);    
     }
     

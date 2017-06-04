@@ -9,8 +9,6 @@ import com.pbj.loccar.control.UsuarioControl;
 import com.pbj.loccar.util.DataHora;
 import javax.swing.JOptionPane;
 
-
-
 /**
  *
  * @author Akr-Taku
@@ -32,6 +30,7 @@ public final class JFrameMain extends javax.swing.JFrame {
         jMenuBarBarraPrincipal.setVisible(false);
         jPanelDataHora.setVisible(false);
         jLabelUser.setVisible(false);
+        getRootPane().setDefaultButton(jButtonLogar);
     }
 
     /**

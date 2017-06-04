@@ -69,9 +69,9 @@ public class CategoriaControl {
             categTemp[1] = categList.get(i).getNome();
             categTemp[2] = Double.toString(categList.get(i).getValorDia());
             categTemp[3] = Double.toString(categList.get(i).getValorKm());
-            categTemp[4] = Boolean.toString(categList.get(i).isAr());
-            categTemp[5] = Boolean.toString(categList.get(i).isVidro());
-            categTemp[6] = Boolean.toString(categList.get(i).isDirecao());
+            categTemp[4] = categList.get(i).getAr();
+            categTemp[5] = categList.get(i).getVidro();
+            categTemp[6] = categList.get(i).getDirecao();
             
             categorias.add(categTemp);   
         }   
