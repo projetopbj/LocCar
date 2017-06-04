@@ -40,16 +40,16 @@ public class Locadora {
     //Construtor Vazio que apenas inicializa o ID
     public Locadora(){
         
-        iterador++;
-        id = iterador;
+      
+        id = iterador++;
         
         
     }
     //Construtor que Inicializa o ID e Já recebe os Clientes e Veiculo
     public Locadora(Cliente cliente, Veiculo veiculo){
         
-        iterador++;
-        id = iterador;
+        
+        id = iterador++;
         
         this.veiculo = veiculo;
         this.clientel = cliente;

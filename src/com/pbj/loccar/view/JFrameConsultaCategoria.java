@@ -117,7 +117,7 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
             jPanelConsultaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelConsultaCategLayout.createSequentialGroup()
                 .addComponent(jButtonAtualizeTable)
-                .addGap(3, 3, 3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -182,7 +182,7 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
         
-        this.dispose();
+        this.dispose();//Fecha a Janela Atual
     }//GEN-LAST:event_jButtonCancelActionPerformed
     
     
@@ -215,7 +215,7 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
         
         if(jTableCateg.getSelectedRow() != -1 ){
             //Confirmação se deseja realmente excluir
-            int resp =  JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Exluir?");  
+            int resp =  JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Excluir?");  
             
             if (resp == 0){//Somente apaga caso o verificador seja Sim
              

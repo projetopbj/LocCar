@@ -5,7 +5,9 @@
  */
 package com.pbj.loccar.view;
 
-import java.awt.GridBagLayout;
+import com.pbj.loccar.control.CategoriaControl;
+import com.pbj.loccar.control.VeiculoControl;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,10 +18,64 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameCadastroVeiculos
+     * @param veic
      */
+    public JFrameCadastroVeiculo(String[] veic ) {
+        initComponents();
+        
+        //Popula o Combobox Vindo das categorias
+        popularComboBoxCateg(); 
+        //Set os valores recebidos como parametro nos campos
+        setCampos(veic);
+        //COloca o salvar como invisel e o atualizar como vizivel
+        jButtonSalvarVeiculo.setVisible(false);
+       
+    }
+    
     public JFrameCadastroVeiculo() {
         initComponents();
+        //Coloca o atualizar como invizivel e o salvar como vizivel.
+        jButtonAtualizar.setVisible(false);
+        popularComboBoxCateg();
     }
+    
+    private int id;
+    
+    //Seta os Campos editaveis de acordo com o que vem da tabela.
+    private void setCampos(String[] veic){
+        
+        id = Integer.parseInt(veic[0]);
+        txtFPlaca.setText(veic[1]);
+        txtModelo.setText(veic[2]);
+        txtChassi.setText(veic[3]);
+        txtAno.setText(veic[4]);
+        txtMarca.setText(veic[5]);
+        txtNPortas.setText(veic[6]);
+        txtCor.setText(veic[7]);
+        //O 8 é o status de alugado que não se modifica por aqui.
+        jComboBoxCategoria.setSelectedItem(veic[9]);
+    }
+    
+    
+    
+    private void popularComboBoxCateg(){
+         
+        List<String> categorias = CategoriaControl.returnNamesCategoria();
+        
+        categorias.forEach(jComboBoxCategoria::addItem);  
+    }
+    private void limparCampos(){
+        
+        txtModelo.setText("");
+        txtFPlaca.setText("");
+        txtMarca.setText("");
+        txtNPortas.setText("");
+        txtAno.setText("");
+        txtChassi.setText("");
+        
+    }
+        
+        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,9 +104,9 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
         jLabelNportas = new javax.swing.JLabel();
         txtNPortas = new javax.swing.JTextField();
         jLabelCor = new javax.swing.JLabel();
-        jComboBoxCor = new javax.swing.JComboBox<>();
+        txtCor = new javax.swing.JTextField();
         jButtonSalvarVeiculo = new javax.swing.JButton();
-        jButtonLimpar = new javax.swing.JButton();
+        jButtonAtualizar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -106,13 +162,6 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ecômico", "Compacto", "Standard", "Utilitário", "SUV", "Minivan", "Luxo" }));
-        jComboBoxCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxCategoriaActionPerformed(evt);
-            }
-        });
-
         jLabelNportas.setText("Nº Portas");
 
         txtNPortas.addActionListener(new java.awt.event.ActionListener() {
@@ -122,8 +171,6 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
         });
 
         jLabelCor.setText("Cor");
-
-        jComboBoxCor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Azul", "Branco", "Cinza", "Prata", "Preto", "Verde", "Vermelho" }));
 
         javax.swing.GroupLayout jPanelDadosVeiculoLayout = new javax.swing.GroupLayout(jPanelDadosVeiculo);
         jPanelDadosVeiculo.setLayout(jPanelDadosVeiculoLayout);
@@ -144,32 +191,30 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanelDadosVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelDadosVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelDadosVeiculoLayout.createSequentialGroup()
-                        .addComponent(jLabelCor)
-                        .addGap(120, 120, 120))
-                    .addGroup(jPanelDadosVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosVeiculoLayout.createSequentialGroup()
-                            .addGroup(jPanelDadosVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtChassi, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabelChassi)
-                                .addComponent(jLabelMarca))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanelDadosVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanelDadosVeiculoLayout.createSequentialGroup()
-                                    .addGap(0, 0, Short.MAX_VALUE)
-                                    .addComponent(jLabelNportas)
-                                    .addGap(126, 126, 126))
-                                .addGroup(jPanelDadosVeiculoLayout.createSequentialGroup()
-                                    .addGroup(jPanelDadosVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtNPortas, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabelAno))
-                                    .addGap(0, 0, Short.MAX_VALUE))))
-                        .addGroup(jPanelDadosVeiculoLayout.createSequentialGroup()
-                            .addComponent(jComboBoxCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap()))))
+                        .addGroup(jPanelDadosVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtChassi, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                            .addComponent(txtMarca, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                            .addComponent(jLabelChassi, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelMarca, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelDadosVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelDadosVeiculoLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabelNportas)
+                                .addGap(126, 126, 126))
+                            .addGroup(jPanelDadosVeiculoLayout.createSequentialGroup()
+                                .addGroup(jPanelDadosVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNPortas, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelAno))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosVeiculoLayout.createSequentialGroup()
+                        .addGroup(jPanelDadosVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelCor)
+                            .addComponent(txtCor, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(100, 100, 100))))
         );
         jPanelDadosVeiculoLayout.setVerticalGroup(
             jPanelDadosVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,13 +244,13 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
                         .addComponent(txtChassi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelDadosVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelDadosVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCategoria)
                     .addComponent(jLabelCor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDadosVeiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
 
@@ -216,10 +261,10 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
             }
         });
 
-        jButtonLimpar.setText("Limpar");
-        jButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAtualizar.setText("Atualizar");
+        jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLimparActionPerformed(evt);
+                jButtonAtualizarActionPerformed(evt);
             }
         });
 
@@ -237,9 +282,9 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
             .addGroup(jPanelCadastroVeiculosLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
-                .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonSalvarVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44))
             .addGroup(jPanelCadastroVeiculosLayout.createSequentialGroup()
@@ -255,7 +300,7 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
                 .addGap(59, 59, 59)
                 .addGroup(jPanelCadastroVeiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar)
-                    .addComponent(jButtonLimpar)
+                    .addComponent(jButtonAtualizar)
                     .addComponent(jButtonSalvarVeiculo))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
@@ -295,31 +340,55 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNPortasActionPerformed
 
-    private void jComboBoxCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCategoriaActionPerformed
-        // TODO add your handling code here
-        
-        
-    }//GEN-LAST:event_jComboBoxCategoriaActionPerformed
-
     private void jButtonSalvarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarVeiculoActionPerformed
-        // TODO add your handling code here:
+        //Salva no banco de dados o Veiculo;
         
-        JOptionPane.showMessageDialog(this, "Salvo Com Sucesso!");
+        //Verificando os campos Vazios
+        if ("".equals(txtModelo.getText()) || "".equals(txtMarca.getText()) || "".equals(txtChassi.getText())
+           || "".equals(txtCor.getText()) || "".equals(txtAno.getText()) || "".equals(txtNPortas.getText())
+                || "".equals(txtFPlaca.getText()))
+        {
+            //Mensagem informando caso exista algum campo vazio;
+           JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
+        }else
+        {
+            VeiculoControl.salvarVeiculo(txtFPlaca.getText(), txtModelo.getText(), txtChassi.getText(), Integer.parseInt(txtAno.getText()),
+                    txtMarca.getText(), Integer.parseInt(txtNPortas.getText()), txtCor.getText(), (String) jComboBoxCategoria.getSelectedItem());
+            
+            //Pergunta se deseja cadastrar outra categoria
+            int resp = JOptionPane.showConfirmDialog(null, "Deseja cadastrar Nova Categoria?");
+            //Se responder Não a Janela fecha
+            if (resp == 1 ||resp == 2 ){  this.dispose(); }
+            
+           limparCampos(); 
+            
+        }
+        
+        
     }//GEN-LAST:event_jButtonSalvarVeiculoActionPerformed
 
-    private void jButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimparActionPerformed
-        // TODO add your handling code here:
-        txtModelo.setText("");
-        txtFPlaca.setText("");
-        txtMarca.setText("");
-        txtNPortas.setText("");
-        txtAno.setText("");
-        txtChassi.setText("");
-    }//GEN-LAST:event_jButtonLimparActionPerformed
+    private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
+        // Botão para atualizar o veiculo
+         //Verificando os campos Vazios
+        if ("".equals(txtModelo.getText()) || "".equals(txtMarca.getText()) || "".equals(txtChassi.getText())
+           || "".equals(txtCor.getText()) || "".equals(txtAno.getText()) || "".equals(txtNPortas.getText())
+                || "".equals(txtFPlaca.getText()))
+        {
+            //Mensagem informando caso exista algum campo vazio;
+           JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
+        }else
+        {
+                VeiculoControl.atualizarVeiculo(id, txtFPlaca.getText(), txtModelo.getText(), txtChassi.getText(),
+                Integer.parseInt(txtAno.getText()), txtMarca.getText(), Integer.parseInt(txtNPortas.getText()),
+                txtCor.getText(), (String) jComboBoxCategoria.getSelectedItem());
+            
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
-         this.dispose();
+         this.dispose();//Fecha a aba atual;
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
@@ -359,11 +428,10 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAtualizar;
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JButton jButtonLimpar;
     private javax.swing.JButton jButtonSalvarVeiculo;
     private javax.swing.JComboBox<String> jComboBoxCategoria;
-    private javax.swing.JComboBox<String> jComboBoxCor;
     private javax.swing.JLabel jLabelAno;
     private javax.swing.JLabel jLabelCategoria;
     private javax.swing.JLabel jLabelChassi;
@@ -376,6 +444,7 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelDadosVeiculo;
     private javax.swing.JTextField txtAno;
     private javax.swing.JTextField txtChassi;
+    private javax.swing.JTextField txtCor;
     private javax.swing.JFormattedTextField txtFPlaca;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtModelo;
