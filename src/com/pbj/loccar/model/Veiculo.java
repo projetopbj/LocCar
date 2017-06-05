@@ -30,26 +30,10 @@ public class Veiculo {
     
     public Veiculo(){
         
-        iterador++;
-        id = iterador;
+        id = iterador++;
        
     }
     
-    public Veiculo(String placa, String modelo, String marca, String chassi, int ano, int nPortas, String cor) {
-        
-        iterador++;
-        id = iterador;
-        this.placa = placa;
-        this.modelo = modelo;
-        this.marca = marca;
-        this.chassi = chassi;
-        this.ano = ano;
-        this.nPortas = nPortas;
-        this.cor = cor;
-    }
-
-
-
     public int getId() {
         return id;
     }
@@ -126,7 +110,13 @@ public class Veiculo {
     public boolean isAlugado() {
         return alugado;
     }
-
+    public String getAlugado() {
+       if(this.alugado == true){
+           return "Alugado";
+       }else{
+           return "Disponivel";
+       }
+    }
     public void setAlugado(boolean alugado) {
         this.alugado = alugado;
     }
@@ -171,5 +161,7 @@ public class Veiculo {
     public String toString() {
         return "Veiculo{" + "id=" + id + ", placa=" + placa + ", modelo=" + modelo + ", marca=" + marca + ", chassi=" + chassi + ", ano=" + ano + ", nPortas=" + nPortas + ", cor=" + cor + ", alugado=" + alugado + '}';
     }
+
+ 
     
 }

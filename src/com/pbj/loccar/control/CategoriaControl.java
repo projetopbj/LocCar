@@ -30,7 +30,7 @@ public class CategoriaControl {
      * @param vidro
      * @param direcao
      */
-    public static void salvarUsuario(String nome,double valorDia, double valorKm, boolean ar, boolean vidro, boolean direcao){
+    public static void salvarCategoria(String nome,double valorDia, double valorKm, boolean ar, boolean vidro, boolean direcao){
         Categoria categoria = new Categoria();
         
         categoria.setNome(nome);
@@ -78,6 +78,22 @@ public class CategoriaControl {
         return categorias;        
     }
     
+    
+    //Retorna apenas os nomes das Categorias.
+    public static List<String> returnNamesCategoria(){
+        
+        List<String> categNames = new ArrayList<>();
+                
+        List<Categoria> categList = new CategoriaDAO().readCategoria();
+        
+        for(int i = 0 ; i < categList.size(); i++){
+            
+            String categTemp = categList.get(i).getNome();
+             
+            categNames.add(categTemp);   
+        }   
+        return categNames;        
+    }
    
     //Atualiza a categoria recebendo os dados da tabela na view
     public static void atualizarCategoria(int id, String nome,double valorDia, double valorKm, boolean ar, boolean vidro, boolean direcao){

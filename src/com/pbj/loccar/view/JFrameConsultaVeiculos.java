@@ -5,22 +5,48 @@
  */
 package com.pbj.loccar.view;
 
-import java.awt.GridBagLayout;
+import com.pbj.loccar.control.VeiculoControl;
+import com.pbj.loccar.view.tables.VeiculoTable;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Akr-Taku
+ * 
+ * JFrame de COnsulta de Veiculos
  */
 public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameConsultaVeiculos
+     * 
+     * 
      */
+    VeiculoTable tableModel;
+    
     public JFrameConsultaVeiculos() {
         initComponents();
+        
+        
+        tableModel = new VeiculoTable(VeiculoControl.lerVeiculo());
+        jTableVeiculos.setModel(tableModel);
+        
+        //Inicia os Botões como Não clicaveis;
+        jButtonExcluir.setEnabled(false);
+        jButtonEditar.setEnabled(false);
+        //Seta o Rádio Button do modelo como selecionado por padrão
+        jRadioButtonModelo.setSelected(true);
     }
-
+    private String[] pegarVeiculo(){
+        if(jTableVeiculos.getSelectedRow() != -1 ){      
+            String veic[] = tableModel.getVeiculo(jTableVeiculos.getSelectedRow());
+     
+        return veic;
+        }else{
+            return null;
+        }
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,9 +62,8 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableVeiculos = new javax.swing.JTable();
         jPanelConsVeic = new javax.swing.JPanel();
-        jButtonEditarCadas = new javax.swing.JButton();
-        jButtonExcluirCadas = new javax.swing.JButton();
-        jButtonDetalhers = new javax.swing.JButton();
+        jButtonEditar = new javax.swing.JButton();
+        jButtonExcluir = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
         jPanelPesq = new javax.swing.JPanel();
         txtConsulta = new javax.swing.JTextField();
@@ -48,6 +73,7 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
         jRadioButtonModelo = new javax.swing.JRadioButton();
         jPanelList = new javax.swing.JPanel();
         jComboBoxListar = new javax.swing.JComboBox<>();
+        jButtonAtualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta Veículos");
@@ -69,18 +95,26 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableVeiculos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableVeiculosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableVeiculos);
 
-        jButtonEditarCadas.setText("Editar");
-
-        jButtonExcluirCadas.setText("Excluir");
-        jButtonExcluirCadas.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEditar.setText("Editar");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExcluirCadasActionPerformed(evt);
+                jButtonEditarActionPerformed(evt);
             }
         });
 
-        jButtonDetalhers.setText("+ Detalhes");
+        jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
 
         jButtonCancel.setText("Cancelar");
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -97,11 +131,9 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jButtonCancel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonDetalhers)
-                .addGap(147, 147, 147)
-                .addComponent(jButtonEditarCadas, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonExcluirCadas, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
         jPanelConsVeicLayout.setVerticalGroup(
@@ -109,9 +141,8 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
             .addGroup(jPanelConsVeicLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelConsVeicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonEditarCadas)
-                    .addComponent(jButtonExcluirCadas)
-                    .addComponent(jButtonDetalhers)
+                    .addComponent(jButtonEditar)
+                    .addComponent(jButtonExcluir)
                     .addComponent(jButtonCancel))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
@@ -119,6 +150,11 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
         jPanelPesq.setBorder(javax.swing.BorderFactory.createTitledBorder("Consultar Veículos"));
 
         jButtonBusca.setText("Buscar");
+        jButtonBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscaActionPerformed(evt);
+            }
+        });
 
         jPanelFilt.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtrar Por"));
 
@@ -157,6 +193,11 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
         jPanelList.setBorder(javax.swing.BorderFactory.createTitledBorder("Listar"));
 
         jComboBoxListar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Disponíveis" }));
+        jComboBoxListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxListarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelListLayout = new javax.swing.GroupLayout(jPanelList);
         jPanelList.setLayout(jPanelListLayout);
@@ -205,24 +246,36 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jButtonAtualizar.setText("Atualizar Tabela");
+        jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCVLayout = new javax.swing.GroupLayout(jPanelCV);
         jPanelCV.setLayout(jPanelCVLayout);
         jPanelCVLayout.setHorizontalGroup(
             jPanelCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCVLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonAtualizar)
+                .addGap(20, 20, 20))
             .addGroup(jPanelCVLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelConsVeic, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
                     .addComponent(jPanelPesq, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanelCVLayout.setVerticalGroup(
             jPanelCVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCVLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanelPesq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonAtualizar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanelConsVeic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,16 +293,27 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonExcluirCadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirCadasActionPerformed
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         // TODO add your handling code here:
-        
-      int resp =  JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Exluir?");
+        if(jTableVeiculos.getSelectedRow() != -1 ){ 
+            int resp =  JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Excluir?");
+            if (resp == 0){//Somente apaga caso o verificador seja Sim
+             
+                //Pega o objeto da linha selecionada e retorna um array
+                String veicRemove[] = pegarVeiculo();
+                //Pega a primeira posição do array que é iD e remove do banco
+                VeiculoControl.apagarVeiculo(Integer.parseInt(veicRemove[0]));
+                //Atualiza Tabela do Banco de dados
+                tableModel.removeAll();
+                tableModel.addLista(VeiculoControl.lerVeiculo());
+            }else{
+            //Mensagem de aviso que não há registro selecionado
+            JOptionPane.showMessageDialog(null, "Não há registro selecionado na tabela!","",JOptionPane.WARNING_MESSAGE);
+            }
+        }
+  
       
-      if(resp == 0){
-         
-      }
-      
-    }//GEN-LAST:event_jButtonExcluirCadasActionPerformed
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jRadioButtonModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonModeloActionPerformed
         // TODO add your handling code here:
@@ -260,6 +324,74 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
         
          this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
+
+    private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
+        // TODO add your handling code here:
+        tableModel.removeAll();
+        tableModel.addLista(VeiculoControl.lerVeiculo());
+        txtConsulta.setText("");
+        
+    }//GEN-LAST:event_jButtonAtualizarActionPerformed
+
+    private void jTableVeiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVeiculosMouseClicked
+        // Habilita os botões de editar e excluir ao clicar com o mouse;        
+        jButtonExcluir.setEnabled(true);
+        jButtonEditar.setEnabled(true);
+    }//GEN-LAST:event_jTableVeiculosMouseClicked
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        // TODO add your handling code here:
+        if(jTableVeiculos.getSelectedRow() != -1 ){ 
+             
+                //Pega o objeto da linha selecionada e retorna um array
+                new JFrameCadastroVeiculo(pegarVeiculo()).setVisible(true);
+
+        }else{
+            //Mensagem de aviso que não há registro selecionado
+            JOptionPane.showMessageDialog(null, "Não há registro selecionado na tabela!","",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonEditarActionPerformed
+
+    private void jComboBoxListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxListarActionPerformed
+
+    private void jButtonBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscaActionPerformed
+        // TODO add your handling code here:
+        // Cai se a seleção estiver em disponiveis o radio tiver em Ano
+        if("Disponíveis".equals(jComboBoxListar.getSelectedItem()) && jRadioButtonAno.isSelected()){
+            
+            tableModel.removeAll();
+            tableModel.addLista(VeiculoControl.lerVeiculo(Integer.parseInt(txtConsulta.getText()), false));
+            txtConsulta.setText("");
+            //Cai se tiver em todos e o radio no Ano
+        }else if(jRadioButtonAno.isSelected() && !"".equals(txtConsulta.getText())){
+            
+            tableModel.removeAll();
+            tableModel.addLista(VeiculoControl.lerVeiculo(Integer.parseInt(txtConsulta.getText())));
+            txtConsulta.setText("");
+            //Cai nos disponiveis e se tiver no Modelo
+        }else if("Disponíveis".equals(jComboBoxListar.getSelectedItem()) && jRadioButtonModelo.isSelected() ){
+            tableModel.removeAll();
+            tableModel.addLista(VeiculoControl.lerVeiculo(txtConsulta.getText(), false));   
+            txtConsulta.setText("");
+            //Cai no todos e se tiver no Modelo
+        }else if(jRadioButtonModelo.isSelected() && !"".equals(txtConsulta.getText())){
+            tableModel.removeAll();
+            tableModel.addLista(VeiculoControl.lerVeiculo(txtConsulta.getText())); 
+            txtConsulta.setText("");
+           // Cai quando Somente o campo disponiveis está selecionado
+        }else if ("Disponíveis".equals(jComboBoxListar.getSelectedItem())){
+            tableModel.removeAll();
+            tableModel.addLista(VeiculoControl.lerVeiculo(false));
+            txtConsulta.setText("");
+        }else{
+            tableModel.removeAll();
+            tableModel.addLista(VeiculoControl.lerVeiculo());
+            txtConsulta.setText("");
+        }
+            
+    }//GEN-LAST:event_jButtonBuscaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,11 +430,11 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupFiltra;
+    private javax.swing.JButton jButtonAtualizar;
     private javax.swing.JButton jButtonBusca;
     private javax.swing.JButton jButtonCancel;
-    private javax.swing.JButton jButtonDetalhers;
-    private javax.swing.JButton jButtonEditarCadas;
-    private javax.swing.JButton jButtonExcluirCadas;
+    private javax.swing.JButton jButtonEditar;
+    private javax.swing.JButton jButtonExcluir;
     private javax.swing.JComboBox<String> jComboBoxListar;
     private javax.swing.JPanel jPanelCV;
     private javax.swing.JPanel jPanelConsVeic;

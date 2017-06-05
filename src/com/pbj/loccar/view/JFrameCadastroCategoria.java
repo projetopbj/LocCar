@@ -283,7 +283,7 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
 
             String dia = txtValorDia.getText().replace(",", ".");
             String km = txtKM.getText().replace(",",".");
-            CategoriaControl.salvarUsuario(txtNomeCateg.getText(), Double.parseDouble(dia), Double.parseDouble(km), ar, vidro, direcao);
+            CategoriaControl.salvarCategoria(txtNomeCateg.getText(), Double.parseDouble(dia), Double.parseDouble(km), ar, vidro, direcao);
             
             //Pergunta se deseja cadastrar outra categoria
             int resp = JOptionPane.showConfirmDialog(null, "Deseja cadastrar Nova Categoria?");
@@ -314,9 +314,12 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
             String dia = txtValorDia.getText().replace(",", ".");
             String km = txtKM.getText().replace(",",".");
             //Chama metodo para atualizar o banco
-         CategoriaControl.atualizarCategoria(id,txtNomeCateg.getText(), Double.parseDouble(dia), Double.parseDouble(km),  ar, vidro, direcao);
+            CategoriaControl.atualizarCategoria(id,txtNomeCateg.getText(), Double.parseDouble(dia), 
+                    Double.parseDouble(km),  ar, vidro, direcao);
+        
+            this.dispose();
         }
-        this.dispose();
+        
         
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
