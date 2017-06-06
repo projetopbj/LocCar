@@ -1,7 +1,7 @@
 
 
 CREATE TABLE `Cliente` (
-    id int NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
     nomeCliente varchar(64) NOT NULL,
     rgCliente varchar(16) NOT NULL,
     cpfCliente varchar(12) NOT NULL UNIQUE,
@@ -12,7 +12,7 @@ CREATE TABLE `Cliente` (
     telefoneCliente int(12) NOT NULL,
     celularCliente int(12) NOT NULL UNIQUE,
     ruaCliente varchar(64),
-    cepCliente int(8) DEFAULT NULL,
+    cepCliente varchar(16) DEFAULT NULL,
     complementoCliente varchar(32) NOT NULL,
     bairroCliente varchar(64) DEFAULT NULL,
     cidadeCliente varchar(32) DEFAULT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE `Cliente` (
 ) ;
 
 CREATE TABLE `Categoria` (
-    id int not null,
+    id int not null AUTO_INCREMENT,
     nome varchar(25),
     valorDia double not null,
     valorKm double not null,
@@ -32,7 +32,7 @@ CREATE TABLE `Categoria` (
 );
 
 CREATE TABLE `Veiculo` (
-    id int NOT NULL,
+    id int NOT NULL AUTO_INCREMENT,
     placa varchar(8) NOT NULL UNIQUE,
     modelo varchar(16) NOT NULL, -- modelo do veículo Gol, Siena, Palio, etc.
     chassi varchar(24) NOT NULL UNIQUE,
@@ -47,7 +47,7 @@ CREATE TABLE `Veiculo` (
 ) ;
 
 CREATE TABLE `Locacao`(
-    id int not null,
+    id int not null AUTO_INCREMENT,
     descricao varchar(64) not null,
     qtdDias int not null,
     dataDoAluquel date not null,
@@ -69,7 +69,7 @@ CREATE TABLE `Locacao`(
 
 
 CREATE TABLE `Usuario`(
-    id int not null,
+    id int not null AUTO_INCREMENT,
     loginUser varchar(8) not null,
     senhaUser varchar(12) not null,
     nomeUser varchar(64) not null,
