@@ -5,7 +5,7 @@
  */
 package com.pbj.loccar.model;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -27,12 +27,12 @@ public class Cliente {
     private String cpfCliente;
     private EstadoCivil estadoCivilCliente; //S (solteiro), C (casado), V (viúvo), UE (União Estável), D (divorciado) 
     private Sexo sexoCliente; // M (masculino),  F (feminino)
-    private Calendar dataNascCliente;
+    private Date dataNascCliente;
     private String emailCliente;
     private String telefoneCliente;
     private String celularCliente;
     private String ruaCliente;
-    private int cepCliente;
+    private String cepCliente;
     private String complementoCliente;
     private String bairroCliente;
     private String cidadeCliente;
@@ -88,11 +88,11 @@ public class Cliente {
         this.cpfCliente = cpfCliente;
     }
 
-    public Calendar getDataNascCliente() {
+    public Date getDataNascCliente() {
         return dataNascCliente;
     }
 
-    public void setDataNascCliente(Calendar dataNascCliente) {
+    public void setDataNascCliente(Date dataNascCliente) {
         this.dataNascCliente = dataNascCliente;
     }
 
@@ -145,11 +145,11 @@ public class Cliente {
         this.ruaCliente = ruaCliente;
     }
 
-    public int getCepCliente() {
+    public String getCepCliente() {
         return cepCliente;
     }
 
-    public void setCepCliente(int cepCliente) {
+    public void setCepCliente(String cepCliente) {
         this.cepCliente = cepCliente;
     }
 

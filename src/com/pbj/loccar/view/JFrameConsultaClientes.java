@@ -5,6 +5,8 @@
  */
 package com.pbj.loccar.view;
 
+import com.pbj.loccar.control.ClienteControl;
+import com.pbj.loccar.view.tables.ClienteTable;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,8 +19,27 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
     /**
      * Creates new form JFrameConsultaClientes
      */
+    ClienteTable tableModel;
     public JFrameConsultaClientes() {
         initComponents();
+        
+        tableModel = new ClienteTable(ClienteControl.lerCliente());
+        //Inicia os Botões como Não clicaveis; 
+        jTableClientes.setModel(tableModel);
+        jButtonExcluir.setEnabled(false);
+        jButtonEditar.setEnabled(false);
+        jRadioButtonNome.setSelected(true);
+        
+    }
+    private String[] pegarCliente(){
+        if(jTableClientes.getSelectedRow() != -1 ){      
+            String client[] = tableModel.getCliente(jTableClientes.getSelectedRow());
+     
+        return client;
+        }else{
+            return null;
+        }
+        
     }
 
     /**
@@ -40,10 +61,10 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
         jPanelFilt = new javax.swing.JPanel();
         jRadioButtonNome = new javax.swing.JRadioButton();
         jRadioButtonCPF = new javax.swing.JRadioButton();
-        jButtonDetalhers = new javax.swing.JButton();
-        jButtonEditarCadas = new javax.swing.JButton();
-        jButtonExcluirCadas = new javax.swing.JButton();
+        jButtonEditar = new javax.swing.JButton();
+        jButtonExcluir = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
+        jButtonAtualizarTable = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta Clientes");
@@ -62,6 +83,11 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTableClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableClientesMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTableClientes);
@@ -131,7 +157,7 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
             jPanelConsulClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelConsulClientesLayout.createSequentialGroup()
                 .addComponent(jPanelFilt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 19, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
             .addGroup(jPanelConsulClientesLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jPanelConsulClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -140,19 +166,17 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButtonDetalhers.setText("+ Detalhes");
-
-        jButtonEditarCadas.setText("Editar");
-        jButtonEditarCadas.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEditar.setText("Editar");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarCadasActionPerformed(evt);
+                jButtonEditarActionPerformed(evt);
             }
         });
 
-        jButtonExcluirCadas.setText("Excluir");
-        jButtonExcluirCadas.addActionListener(new java.awt.event.ActionListener() {
+        jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExcluirCadasActionPerformed(evt);
+                jButtonExcluirActionPerformed(evt);
             }
         });
 
@@ -163,39 +187,49 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
             }
         });
 
+        jButtonAtualizarTable.setText("Atualizar Tabela");
+        jButtonAtualizarTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtualizarTableActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelCCLayout = new javax.swing.GroupLayout(jPanelCC);
         jPanelCC.setLayout(jPanelCCLayout);
         jPanelCCLayout.setHorizontalGroup(
             jPanelCCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelCCLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCCLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelCCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCCLayout.createSequentialGroup()
-                        .addGap(0, 21, Short.MAX_VALUE)
+                .addGroup(jPanelCCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelCCLayout.createSequentialGroup()
+                        .addGap(0, 39, Short.MAX_VALUE)
                         .addComponent(jButtonCancel)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonDetalhers, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(127, 127, 127)
-                        .addComponent(jButtonEditarCadas, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(245, 245, 245)
+                        .addComponent(jButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonExcluirCadas, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11))
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanelConsulClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanelConsulClientes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addComponent(jScrollPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCCLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonAtualizarTable)
+                .addGap(21, 21, 21))
         );
         jPanelCCLayout.setVerticalGroup(
             jPanelCCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCCLayout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addComponent(jPanelConsulClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonAtualizarTable)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelCCLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonDetalhers)
-                    .addComponent(jButtonExcluirCadas)
-                    .addComponent(jButtonEditarCadas)
+                    .addComponent(jButtonExcluir)
+                    .addComponent(jButtonEditar)
                     .addComponent(jButtonCancel))
                 .addGap(41, 41, 41))
         );
@@ -205,8 +239,8 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jPanelCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanelCC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,15 +253,39 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonExcluirCadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirCadasActionPerformed
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         // TODO add your handling code here:
+            if(jTableClientes.getSelectedRow() != -1 ){ 
+                int resp =  JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Excluir?");
+                if (resp == 0){//Somente apaga caso o verificador seja Sim
+             
+                    //Pega o objeto da linha selecionada e retorna um array
+                    String clientRemove[] = pegarCliente();
+                    //Pega a primeira posição do array que é iD e remove do banco
+                    ClienteControl.apagarCliente(Integer.parseInt(clientRemove[0]));
+                    //Atualiza Tabela do Banco de dados
+                    tableModel.removeAll();
+                    tableModel.addLista(ClienteControl.lerCliente());
+                }else{
+                    //Mensagem de aviso que não há registro selecionado
+                    JOptionPane.showMessageDialog(null, "Não há registro selecionado na tabela!","",JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
 
-        JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Exluir?");
-    }//GEN-LAST:event_jButtonExcluirCadasActionPerformed
-
-    private void jButtonEditarCadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarCadasActionPerformed
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonEditarCadasActionPerformed
+                if(jTableClientes.getSelectedRow() != -1 ){ 
+             
+                //Pega o objeto da linha selecionada e retorna um array
+                new JFrameCadastroCliente(pegarCliente()).setVisible(true);
+
+        }else{
+            //Mensagem de aviso que não há registro selecionado
+            JOptionPane.showMessageDialog(null, "Não há registro selecionado na tabela!","",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jRadioButtonCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonCPFActionPerformed
         // TODO add your handling code here:
@@ -239,12 +297,39 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
 
     private void jButtonBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscaActionPerformed
         // TODO add your handling code here:
+        if(!"".equals(txtConsulta.getText())&& jRadioButtonNome.isSelected()){
+            tableModel.removeAll();
+            tableModel.addLista(ClienteControl.lerCliente(txtConsulta.getText()));
+            txtConsulta.setText("");
+        }else if(!"".equals(txtConsulta.getText())&& jRadioButtonCPF.isSelected()){
+            tableModel.removeAll();
+            tableModel.addLista(ClienteControl.lerCliente(txtConsulta.getText(),true));
+            txtConsulta.setText("");
+        }else{
+            tableModel.removeAll();
+            tableModel.addLista(ClienteControl.lerCliente());
+        }
+        
     }//GEN-LAST:event_jButtonBuscaActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
          this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
+
+    private void jButtonAtualizarTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarTableActionPerformed
+        // TODO add your handling code here:
+        
+        tableModel.removeAll();
+        tableModel.addLista(ClienteControl.lerCliente());
+        txtConsulta.setText("");
+    }//GEN-LAST:event_jButtonAtualizarTableActionPerformed
+
+    private void jTableClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableClientesMouseClicked
+        // TODO add your handling code here:
+        jButtonExcluir.setEnabled(true);
+        jButtonEditar.setEnabled(true);
+    }//GEN-LAST:event_jTableClientesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -283,11 +368,11 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupFiltro;
+    private javax.swing.JButton jButtonAtualizarTable;
     private javax.swing.JButton jButtonBusca;
     private javax.swing.JButton jButtonCancel;
-    private javax.swing.JButton jButtonDetalhers;
-    private javax.swing.JButton jButtonEditarCadas;
-    private javax.swing.JButton jButtonExcluirCadas;
+    private javax.swing.JButton jButtonEditar;
+    private javax.swing.JButton jButtonExcluir;
     private javax.swing.JPanel jPanelCC;
     private javax.swing.JPanel jPanelConsulClientes;
     private javax.swing.JPanel jPanelFilt;

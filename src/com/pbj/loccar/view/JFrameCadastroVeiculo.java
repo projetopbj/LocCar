@@ -355,8 +355,8 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
             VeiculoControl.salvarVeiculo(txtFPlaca.getText(), txtModelo.getText(), txtChassi.getText(), Integer.parseInt(txtAno.getText()),
                     txtMarca.getText(), Integer.parseInt(txtNPortas.getText()), txtCor.getText(), (String) jComboBoxCategoria.getSelectedItem());
             
-            //Pergunta se deseja cadastrar outra categoria
-            int resp = JOptionPane.showConfirmDialog(null, "Deseja cadastrar Nova Categoria?");
+            //Pergunta se deseja cadastrar outro veiculo
+            int resp = JOptionPane.showConfirmDialog(null, "Deseja cadastrar Novo Veiculo?");
             //Se responder Não a Janela fecha
             if (resp == 1 ||resp == 2 ){  this.dispose(); }
             

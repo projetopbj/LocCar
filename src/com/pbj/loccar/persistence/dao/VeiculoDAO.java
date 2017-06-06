@@ -49,7 +49,7 @@ public class VeiculoDAO implements VeiculoPersistence {
             
             stmt.executeUpdate();
             
-        JOptionPane.showMessageDialog(null, "Categoria Salva no Banco de Dados");
+        JOptionPane.showMessageDialog(null, "Veiculo Salva no Banco de Dados");
 
             
         } catch (SQLException ex) {
@@ -362,7 +362,7 @@ public class VeiculoDAO implements VeiculoPersistence {
         ResultSet rs = null;
      
         try {
-            stmt = conn.prepareStatement("SELECT * FROM veiculo WHERE nome = ?");
+            stmt = conn.prepareStatement("SELECT * FROM veiculo WHERE placa = ?");
             
             stmt.setString(1, placa);
 
@@ -469,7 +469,7 @@ public class VeiculoDAO implements VeiculoPersistence {
          
             stmt.executeUpdate();
             
-        JOptionPane.showMessageDialog(null, "Categoria Atualizada no Banco de Dados");
+        JOptionPane.showMessageDialog(null, "Veiculo Atualizada no Banco de Dados");
 
             
         } catch (SQLException ex) {
