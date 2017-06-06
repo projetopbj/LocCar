@@ -12,7 +12,7 @@ CREATE TABLE `Cliente` (
     telefoneCliente int(12) NOT NULL,
     celularCliente int(12) NOT NULL UNIQUE,
     ruaCliente varchar(64),
-    cepCliente int(8) DEFAULT NULL,
+    cepCliente varchar(16) DEFAULT NULL,
     complementoCliente varchar(32) NOT NULL,
     bairroCliente varchar(64) DEFAULT NULL,
     cidadeCliente varchar(32) DEFAULT NULL,
