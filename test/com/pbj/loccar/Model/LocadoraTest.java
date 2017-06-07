@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.pbj.loccar.teste;
+package com.pbj.loccar.Model;
 import com.pbj.loccar.model.Locadora;
 import junit.framework.TestCase;
 
@@ -11,7 +11,7 @@ import junit.framework.TestCase;
  *
  * @author lucas
  */
-public class testeLocadora extends TestCase{
+public class LocadoraTest extends TestCase{
     
     Locadora locadora;
     Locadora locadora1;
@@ -31,7 +31,7 @@ public class testeLocadora extends TestCase{
         locadora2 = null;
     }
     
-    public void TestcalculoDesconto(){
+    public void testCalculoDesconto(){
         locadora.setDesconto(10);
         locadora.setIsDesconto(true);
         locadora.setValorDiaria(10.0);
@@ -48,7 +48,7 @@ public class testeLocadora extends TestCase{
         
     }
     
-    public void TestcalculoSubTotal(){
+    public void testCalculoSubTotal(){
         
         locadora.setDesconto(10);
         locadora.setIsDesconto(true);
@@ -66,7 +66,7 @@ public class testeLocadora extends TestCase{
         assertEquals(subtotalteste1, 20.0);
     }
     
-    public void TestcalculoValorFinal(){
+    public void testCalculoValorFinal(){
         locadora.setIsDesconto(true);
         locadora.setAtrasoLocacao(true);
         locadora.setValorDiaria(10.0);
