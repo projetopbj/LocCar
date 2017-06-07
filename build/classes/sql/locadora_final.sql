@@ -73,7 +73,7 @@ CREATE TABLE `Usuario`(
     loginUser varchar(8) not null,
     senhaUser varchar(12) not null,
     nomeUser varchar(64) not null,
-    acessoUser varchar(10),
+    acessoUser varchar(12),
     PRIMARY KEY(id)
 );
 
