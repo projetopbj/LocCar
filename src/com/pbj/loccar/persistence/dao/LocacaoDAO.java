@@ -34,28 +34,27 @@ public class LocacaoDAO{
         PreparedStatement stmt = null;
         
         try {
-            stmt = conn.prepareStatement("INSERT INTO locadora(id,descricao,dataDoAluguel,qtdDias,dataDevolucao,"
-                    + "idCliente,idVeiculo,isDesconto,valorDesconto,subTotal,"
-                    + "VALUES(?,?,?,?,?,?,?,?,?,?)");
+            stmt = conn.prepareStatement("INSERT INTO locadora(descricao,dataDoAluquel,qtdDias,dataDaDevolucao,"
+                    + "idCliente,idVeiculo,isDesconto,valorDesconto,subTotal)"
+                    + "VALUES(?,?,?,?,?,?,?,?,?)");
             
             
             java.sql.Timestamp timeIda = new java.sql.Timestamp(locacao.getDataDoAluquel().getTime());
             java.sql.Timestamp timeVolta = new java.sql.Timestamp(locacao.getDataDaDevolucao().getTime());
             
-            stmt.setInt(1, locacao.getId());
-            stmt.setString(2, locacao.getDescricao());
+            stmt.setString(1, locacao.getDescricao());
             
-            stmt.setTimestamp(3, timeIda);
-            stmt.setInt(4, locacao.getQtdDias());
-            stmt.setTimestamp(5, timeVolta);
+            stmt.setTimestamp(2, timeIda);
+            stmt.setInt(3, locacao.getQtdDias());
+            stmt.setTimestamp(4, timeVolta);
             
-            stmt.setInt(6, locacao.getClientel().getId());
-            stmt.setInt(7, locacao.getVeiculo().getId());
+            stmt.setInt(5, locacao.getClientel().getId());
+            stmt.setInt(6, locacao.getVeiculo().getId());
             
-            stmt.setBoolean(8, locacao.isIsDesconto());
-            stmt.setDouble(9, locacao.getValorDesconto());
-            stmt.setDouble(10, locacao.getSubTotal());
-           
+            stmt.setBoolean(7, locacao.isIsDesconto());
+            stmt.setDouble(8, locacao.getValorDesconto());
+            stmt.setDouble(9, locacao.getSubTotal());
+          
             
             stmt.executeUpdate();
             
@@ -64,7 +63,7 @@ public class LocacaoDAO{
             
         } catch (SQLException ex) {
             
-            JOptionPane.showMessageDialog(null, "Não foi Salvo no Banco de Dados!" + ex, "Erro ao Salvar",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro ao Salvar: " + ex, "Erro ao Salvar",JOptionPane.ERROR_MESSAGE);
             
         }finally{
             
@@ -155,7 +154,7 @@ public class LocacaoDAO{
                 locacao.setId(rs.getInt("id"));
                 locacao.setDescricao(rs.getString("descricao"));
                 locacao.setQtdDias(rs.getInt("qtdDias"));
-                locacao.setDataDoAluquel(rs.getDate("dataDoAluguel"));
+                locacao.setDataDoAluquel(rs.getDate("dataDoAluquel"));
                 locacao.setDataDaDevolucao(rs.getDate("dataDaDevolucao"));
                 locacao.setSubTotal(rs.getDouble("subTotal"));
                 locacao.setAtrasoLocacao(rs.getBoolean("atrasoLocacao"));
@@ -189,7 +188,7 @@ public class LocacaoDAO{
         PreparedStatement stmt = null;
         
         try {
-            stmt = conn.prepareStatement("update locacao SET descricao = ?,dataDoAluguel = ?,qtdDias = ?,dataDaDevolucao = ?,"
+            stmt = conn.prepareStatement("update locacao SET descricao = ?,dataDoAluquel = ?,qtdDias = ?,dataDaDevolucao = ?,"
                     + "idCliente = ?,idVeiculo = ?,isDesconto = ?,valorDesconto = ?,subTotal = ? WHERE id = ?");
                     
             java.sql.Timestamp timeIda = new java.sql.Timestamp(locacao.getDataDoAluquel().getTime());

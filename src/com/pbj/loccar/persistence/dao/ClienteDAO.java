@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import java.sql.Date;
 
 /**
  *
@@ -37,30 +36,30 @@ public class ClienteDAO implements ClientePersistence{
         PreparedStatement stmt = null;
         
         try {
-            stmt = conn.prepareStatement("INSERT INTO cliente(id,nomeCliente,rgCliente,cpfCliente,estadoCivilCliente,"
+            stmt = conn.prepareStatement("INSERT INTO cliente(nomeCliente,rgCliente,cpfCliente,estadoCivilCliente,"
                     + "sexoCliente,data_nascimentoCliente,emailCliente,telefoneCliente,celularCliente,ruaCliente,"
                     + "cepCliente,complementoCliente,bairroCliente,cidadeCliente,ufCliente)"
-                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             
             
             java.sql.Timestamp timestamp = new java.sql.Timestamp(cliente.getDataNascCliente().getTime());
             
-            stmt.setInt(1, cliente.getId());
-            stmt.setString(2, cliente.getNomeCliente());
-            stmt.setString(3, cliente.getRgCliente());
-            stmt.setString(4, cliente.getCpfCliente());
-            stmt.setString(5, cliente.getEstadoCivilCliente().toString());
-            stmt.setString(6, cliente.getSexoCliente().toString());
-            stmt.setTimestamp(7, timestamp);
-            stmt.setString(8, cliente.getEmailCliente());
-            stmt.setString(9, cliente.getTelefoneCliente());
-            stmt.setString(10, cliente.getCelularCliente());
-            stmt.setString(11, cliente.getRuaCliente());
-            stmt.setString(12, cliente.getCepCliente());
-            stmt.setString(13, cliente.getComplementoCliente());
-            stmt.setString(14, cliente.getBairroCliente());       
-            stmt.setString(15, cliente.getCidadeCliente());
-            stmt.setString(16, cliente.getUfCliente());
+            
+            stmt.setString(1, cliente.getNomeCliente());
+            stmt.setString(2, cliente.getRgCliente());
+            stmt.setString(3, cliente.getCpfCliente());
+            stmt.setString(4, cliente.getEstadoCivilCliente().toString());
+            stmt.setString(5, cliente.getSexoCliente().toString());
+            stmt.setTimestamp(6, timestamp);
+            stmt.setString(7, cliente.getEmailCliente());
+            stmt.setString(8, cliente.getTelefoneCliente());
+            stmt.setString(9, cliente.getCelularCliente());
+            stmt.setString(10, cliente.getRuaCliente());
+            stmt.setString(11, cliente.getCepCliente());
+            stmt.setString(12, cliente.getComplementoCliente());
+            stmt.setString(13, cliente.getBairroCliente());       
+            stmt.setString(14, cliente.getCidadeCliente());
+            stmt.setString(15, cliente.getUfCliente());
             
             stmt.executeUpdate();
             

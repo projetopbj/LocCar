@@ -32,15 +32,15 @@ public class CategoriaDAO implements CategoriaPersistence {
         PreparedStatement stmt = null;
         
         try {
-            stmt = conn.prepareStatement("INSERT INTO categoria(id,nome,valorDia,valorKm,ar,vidro,direcao)VALUES(?,?,?,?,?,?,?)");
+            stmt = conn.prepareStatement("INSERT INTO categoria(nome,valorDia,valorKm,ar,vidro,direcao)VALUES(?,?,?,?,?,?)");
             
-            stmt.setInt(1, categoria.getId());
-            stmt.setString(2, categoria.getNome());
-            stmt.setDouble(3, categoria.getValorDia());
-            stmt.setDouble(4, categoria.getValorKm());
-            stmt.setBoolean(5, categoria.isAr());
-            stmt.setBoolean(6, categoria.isVidro());
-            stmt.setBoolean(7, categoria.isDirecao());
+            
+            stmt.setString(1, categoria.getNome());
+            stmt.setDouble(2, categoria.getValorDia());
+            stmt.setDouble(3, categoria.getValorKm());
+            stmt.setBoolean(4, categoria.isAr());
+            stmt.setBoolean(5, categoria.isVidro());
+            stmt.setBoolean(6, categoria.isDirecao());
             
             stmt.executeUpdate();
             

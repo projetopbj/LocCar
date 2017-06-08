@@ -55,6 +55,7 @@ public class Locacao {
     //Construtor que Inicializa o ID e Já recebe os Clientes e Veiculo
     public Locacao(Cliente cliente, Veiculo veiculo){
         
+        id = ++iterador;
         
         this.veiculo = veiculo;
         this.cliente = cliente;
@@ -237,7 +238,7 @@ public class Locacao {
         if (desconto > 0){
             this.isDesconto = true;
             //Pega o valor da diaria da categoria do veiculo e calcula com os dias e zas
-            this.valorDesconto = (veiculo.getCategoria().getValorDia() * ((double)this.qtdDias) * ((double)desconto *0.1));
+            this.valorDesconto =(veiculo.getCategoria().getValorDia() * ((double)this.qtdDias) * ((double)desconto *0.01));
         }
         else{
             this.valorDesconto = 0.0;
