@@ -115,7 +115,7 @@ public class ClienteDAO implements ClientePersistence{
                 cliente.setCepCliente(rs.getString("cepCliente"));
                 cliente.setComplementoCliente(rs.getString("complementoCliente"));
                 cliente.setBairroCliente(rs.getString("bairroCliente"));
-                cliente.setCidadeCliente(rs.getString("BairroCliente"));
+                cliente.setCidadeCliente(rs.getString("cidadeCliente"));
                 cliente.setUfCliente(rs.getString("ufCliente"));
         
              
@@ -169,7 +169,7 @@ public class ClienteDAO implements ClientePersistence{
                 cliente.setCepCliente(rs.getString("cepCliente"));
                 cliente.setComplementoCliente(rs.getString("complementoCliente"));
                 cliente.setBairroCliente(rs.getString("bairroCliente"));
-                cliente.setCidadeCliente(rs.getString("BairroCliente"));
+                cliente.setCidadeCliente(rs.getString("cidadeCliente"));
                 cliente.setUfCliente(rs.getString("ufCliente"));             
                 
                 
@@ -221,7 +221,7 @@ public class ClienteDAO implements ClientePersistence{
                 cliente.setCepCliente(rs.getString("cepCliente"));
                 cliente.setComplementoCliente(rs.getString("complementoCliente"));
                 cliente.setBairroCliente(rs.getString("bairroCliente"));
-                cliente.setCidadeCliente(rs.getString("BairroCliente"));
+                cliente.setCidadeCliente(rs.getString("cidadeCliente"));
                 cliente.setUfCliente(rs.getString("ufCliente"));             
                 
                 
@@ -270,7 +270,7 @@ public class ClienteDAO implements ClientePersistence{
                 cliente.setCepCliente(rs.getString("cepCliente"));
                 cliente.setComplementoCliente(rs.getString("complementoCliente"));
                 cliente.setBairroCliente(rs.getString("bairroCliente"));
-                cliente.setCidadeCliente(rs.getString("BairroCliente"));
+                cliente.setCidadeCliente(rs.getString("cidadeCliente"));
                 cliente.setUfCliente(rs.getString("ufCliente"));
                 
          
@@ -322,7 +322,7 @@ public class ClienteDAO implements ClientePersistence{
                 cliente.setCepCliente(rs.getString("cepCliente"));
                 cliente.setComplementoCliente(rs.getString("complementoCliente"));
                 cliente.setBairroCliente(rs.getString("bairroCliente"));
-                cliente.setCidadeCliente(rs.getString("BairroCliente"));
+                cliente.setCidadeCliente(rs.getString("cidadeCliente"));
                 cliente.setUfCliente(rs.getString("ufCliente"));
 
         }  

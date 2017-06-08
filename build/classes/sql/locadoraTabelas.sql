@@ -52,7 +52,6 @@ CREATE TABLE `Locadora`(
     qtdDias int not null,
     dataDoAluquel date not null,
     dataDaDevolucao date not null,
-    valorDiaria double not null,
     subTotal double  not null,
     atrasoLocacao boolean,
     diasAtraso int,
@@ -76,10 +75,3 @@ CREATE TABLE `Usuario`(
     acessoUser varchar(12),
     PRIMARY KEY(id)
 );
-
-
-insert into Usuario(id,loginUser,senhaUser,nomeUser,acessoUser)values(0,'','','administrador','Admin');
-insert into Cliente(id,nomeCliente,rgCliente,cpfCliente,estadoCivilCliente,sexoCliente,data_nascimentoCliente,emailCliente,telefoneCliente,celularCliente,ruaCliente,cepCliente,complementoCliente,bairroCliente,cidadeCliente,ufCliente)values(0,'pop','0000000000000009','0000000000000009','S','M','','pop@gmail.com','1234567890123456','1234567890123456','Av. pop muito massa','123456789012','no predio santa maria','mangabeira','osaka','PO')
-insert into Veiculo(id,placa,modelo,chassi,ano,marca,numPortas,cor,alugado,idCategoria)values(0,'pop-6060','Fiat','123456789012345678901234',96,'Fiat',2,'red',false,0)
-insert into Categoria(id,nome,valorDia,valorKm,ar,vidro,direcao)values(0,'Fiat',0.0,0.0,false,false,false)
-insert into Locadora(id,descricao,qtdDias,dataDoAluquel,dataDaDevolucao,valorDiaria,subTotal,atrasoLocacao,diasAtraso,dataRetorno,valorFinal,isDesconto,valorDesconto,idCliente,idVeiculo)values(0,'foi locado por um senhor de cabelo verde',2,'','',10.0,0.0,false,2,'',0.0,false,0,0)	

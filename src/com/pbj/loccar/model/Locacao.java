@@ -5,7 +5,8 @@
  */
 package com.pbj.loccar.model;
 
-import java.util.Calendar;
+import com.pbj.loccar.util.DataHora;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Objects;
  * 
  * Classe que realiza a locação no banco de dados faz papel de relacionamento
  */
-public class Locadora {
+public class Locacao {
     
     private static int iterador; //Variavel statica para iterar;
 
@@ -22,37 +23,47 @@ public class Locadora {
     private int id;
     private String descricao;
     private int qtdDias;
-    private Calendar dataDoAluquel;
-    private Calendar dataDaDevolucao;
-    private double valorDiaria;
+    private Date dataDoAluquel;
+    private Date dataDaDevolucao;
     private boolean isDesconto; // Bolean que guarda se existe desconto;
     private int desconto;    // Valor em Porcentagem que não será guardado no Banco de dados
     private double valorDesconto; // Valor final calculado do desconto que será guardado no banco
     private double subTotal;
     private boolean atrasoLocacao;
     private int diasAtraso;
-    private Calendar dataRetorno;
+    private Date dataRetorno;
     private double valorFinal;
-    private Cliente clientel; // chave estrangeira para o cliente
+    private Cliente cliente; // chave estrangeira para o cliente
     private Veiculo veiculo; // chave estrangeira para o veículo
     
     
     //Construtor Vazio que apenas inicializa o ID
-    public Locadora(){
+    public Locacao(){
         
+      this.cliente = new Cliente();
+      this.veiculo = new Veiculo();
       
-        id = iterador++;
+      
+      this.atrasoLocacao = false;
+      this.diasAtraso = 0;
+      valorFinal = 0.0;      
+      this.dataRetorno = null;
+        
         
         
     }
     //Construtor que Inicializa o ID e Já recebe os Clientes e Veiculo
-    public Locadora(Cliente cliente, Veiculo veiculo){
+    public Locacao(Cliente cliente, Veiculo veiculo){
         
-        
-        id = iterador++;
         
         this.veiculo = veiculo;
-        this.clientel = cliente;
+        this.cliente = cliente;
+        this.atrasoLocacao = false;
+        this.diasAtraso = 0;
+        valorFinal = 0.0;      
+        this.dataRetorno = null;
+        
+        
     }
 
     public boolean isIsDesconto() {
@@ -111,30 +122,21 @@ public class Locadora {
         this.qtdDias = qtdDias;
     }
 
-    public Calendar getDataDoAluquel() {
+    public Date getDataDoAluquel() {
         return dataDoAluquel;
     }
 
-    public void setDataDoAluquel(Calendar dataDoAluquel) {
+    public void setDataDoAluquel(Date dataDoAluquel) {
         this.dataDoAluquel = dataDoAluquel;
     }
 
-    public Calendar getDataDaDevolucao() {
+    public Date getDataDaDevolucao() {
         return dataDaDevolucao;
     }
 
-    public void setDataDaDevolucao(Calendar dataDaDevolucao) {
+    public void setDataDaDevolucao(Date dataDaDevolucao) {
         this.dataDaDevolucao = dataDaDevolucao;
     }
-
-    public double getValorDiaria() {
-        return valorDiaria;
-    }
-
-    public void setValorDiaria(double valorDiaria) {
-        this.valorDiaria = valorDiaria;
-    }
-
     public double getSubTotal() {
         return subTotal;
     }
@@ -159,11 +161,11 @@ public class Locadora {
         this.diasAtraso = diasAtraso;
     }
 
-    public Calendar getDataRetorno() {
+    public Date getDataRetorno() {
         return dataRetorno;
     }
 
-    public void setDataRetorno(Calendar dataRetorno) {
+    public void setDataRetorno(Date dataRetorno) {
         this.dataRetorno = dataRetorno;
     }
 
@@ -176,18 +178,18 @@ public class Locadora {
     }
 
     public Cliente getClientel() {
-        return clientel;
+        return cliente;
     }
 
     public void setClientel(Cliente idClientel) {
-        this.clientel = idClientel;
+        this.cliente = idClientel;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 17 * hash + this.id;
-        hash = 17 * hash + Objects.hashCode(this.clientel);
+        hash = 17 * hash + Objects.hashCode(this.cliente);
         hash = 17 * hash + Objects.hashCode(this.veiculo);
         return hash;
     }
@@ -203,66 +205,80 @@ public class Locadora {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Locadora other = (Locadora) obj;
+        final Locacao other = (Locacao) obj;
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.clientel, other.clientel)) {
+        if (!Objects.equals(this.cliente, other.cliente)) {
             return false;
         }
         return Objects.equals(this.veiculo, other.veiculo);
     }   
 
+    
+    
+    
+    public void alugar(int desconto){
+        
+        this.dataDaDevolucao = DataHora.somaDias(dataDoAluquel, qtdDias);
+        calculoDesconto(desconto);
+        calculoSubTotal();
+
+    }
+    public void devolver(){
+        calculoValorFinal();
+        this.dataRetorno = DataHora.somaDias(this.dataDaDevolucao, diasAtraso); 
+    }
+
+    //Calcula Desconto
+    private void calculoDesconto(int desconto){
+        
+        //Se o desconto recebebido for maior que zero
+        if (desconto > 0){
+            this.isDesconto = true;
+            //Pega o valor da diaria da categoria do veiculo e calcula com os dias e zas
+            this.valorDesconto = (veiculo.getCategoria().getValorDia() * ((double)this.qtdDias) * ((double)desconto *0.1));
+        }
+        else{
+            this.valorDesconto = 0.0;
+           
+        }
+        
+    }
+    //Calcula SubTotal
+    private void calculoSubTotal(){
+        if (this.valorDesconto > 0.0) {
+            this.subTotal = ( ( this.veiculo.getCategoria().getValorDia() * ((double)this.qtdDias) ) - this.valorDesconto);
+           
+        }
+        else{
+            this.subTotal = ( veiculo.getCategoria().getValorDia() * ((double)this.qtdDias) );
+            
+        }
+    }
+    //Calcula valor Final
+    private void calculoValorFinal(){
+        if(this.atrasoLocacao)
+        {
+            if(this.diasAtraso == 1){
+                valorFinal = this.subTotal + veiculo.getCategoria().getValorKm();
+            }else if(this.diasAtraso > 1){
+                valorFinal = this.subTotal + (veiculo.getCategoria().getValorKm() * this.diasAtraso);
+            }      
+        }
+        else{
+            valorFinal = this.subTotal;
+            
+        }
+    }
+ 
     @Override
     public String toString() {
         return "Locadora{" + "id=" + id + ", descricao=" + descricao + ", qtdDias=" + qtdDias + 
                 ", dataDoAluquel=" + dataDoAluquel + ", dataDaDevolucao=" + dataDaDevolucao + 
-                ", valorDiaria=" + valorDiaria + ", isDesconto=" + isDesconto + ", desconto=" + desconto + 
+                ", isDesconto=" + isDesconto + ", desconto=" + desconto + 
                 ", valorDesconto=" + valorDesconto + ", subTotal=" + subTotal + ", atrasoLocacao=" + atrasoLocacao + 
                 ", diasAtraso=" + diasAtraso + ", dataRetorno=" + dataRetorno + ", valorFinal=" + valorFinal + 
-                ", clientel=" + clientel + ", veiculo=" + veiculo + '}';
+                ", clientel=" + cliente + ", veiculo=" + veiculo + '}';
     }
-    
-    public double calculoDesconto(){
-        if (isDesconto) {
-            this.valorDesconto = ((this.valorDiaria * (double)this.qtdDias) * ((double)this.desconto *0.01));
-            return this.valorDesconto;
-        }
-        else{
-            this.valorDesconto = 0.0;
-            return this.valorDesconto;
-        }
-        
-    }
-    
-    public double calculoSubTotal(Locadora loc){
-        if (isDesconto) {
-            this.subTotal = (this.valorDiaria * (double)this.qtdDias) - loc.calculoDesconto();
-            return this.subTotal;
-        }
-        else{
-            this.subTotal = (this.valorDiaria * (double)this.qtdDias);
-            return this.subTotal;
-        }
-    }
-    
-    public double calculoValorFinal(Locadora loc){
-        if(this.atrasoLocacao){
-            if (isDesconto) {
-                this.valorFinal = this.subTotal + ((this.diasAtraso * this.valorDiaria) - loc.calculoDesconto());
-                return this.valorFinal;
-            }
-            else{
-                this.valorFinal = this.subTotal + (this.diasAtraso * this.valorDiaria);
-                return this.valorFinal;
-            }
-            
-        }
-        else{
-            this.valorFinal = this.subTotal;
-            return this.valorFinal;
-        }
-    }
- 
-    
 }

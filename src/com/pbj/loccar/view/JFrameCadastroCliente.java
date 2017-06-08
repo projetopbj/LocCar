@@ -6,13 +6,10 @@
 package com.pbj.loccar.view;
 
 import com.pbj.loccar.control.ClienteControl;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import com.pbj.loccar.util.DataHora;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static com.pbj.loccar.util.DataHora.dataToString;
 
 /**
  *
@@ -52,17 +49,7 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
        txtBairro.setText("");
        txtCidade.setText("");
     }
-    private Date convertData(String data){
-           DateFormat formatter = new SimpleDateFormat("MM/dd/yy");
-            try {
-                Date dataNasc = (Date)formatter.parse(data);
-                
-                return dataNasc;
-            } catch (ParseException ex) {
-                Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        return null;    
-    }
+
     
     
     private void setCampos(String[] client){
@@ -73,7 +60,7 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
         txtFCpf.setText(client[3]);
         jComboBoxEstadoC.setSelectedItem(client[4]);
         jComboBoxSexo.setSelectedItem(client[5]);
-        txtFNascimento.setText(client[6]);
+        txtFNascimento.setText(DataHora.stringToData(DataHora.convertData(client[6])));
         txtEmail.setText(client[7]);
         txtFTelefone.setText(client[8]);
         txtFCelular.setText(client[9]);
@@ -95,6 +82,7 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanelCadastroBotoes = new javax.swing.JPanel();
         jPanelCadastroCliente = new javax.swing.JPanel();
@@ -134,6 +122,7 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro Clientes");
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanelCadastroCliente.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));
 
@@ -457,16 +446,13 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
                 .addContainerGap(63, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelCadastroBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelCadastroBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 17;
+        gridBagConstraints.ipady = 52;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(jPanelCadastroBotoes, gridBagConstraints);
 
         pack();
         setLocationRelativeTo(null);
@@ -508,7 +494,7 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
         }else                 
         {
-            Date dataNasc = convertData(txtFNascimento.getText());
+            Date dataNasc = DataHora.dataToString(txtFNascimento.getText());
             
             ClienteControl.atualizarCliente(id,txtNome.getText(), txtRG.getText(), txtFCpf.getText(), (String) jComboBoxEstadoC.getSelectedItem(),
             (String) jComboBoxSexo.getSelectedItem(), dataNasc,txtEmail.getText(), txtFTelefone.getText(),
@@ -536,7 +522,7 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
         }else                 
         {
-            Date dataNasc = convertData(txtFNascimento.getText());
+            Date dataNasc = dataToString(txtFNascimento.getText());
             
             ClienteControl.salvarCliente(txtNome.getText(), txtRG.getText(), txtFCpf.getText(), (String) jComboBoxEstadoC.getSelectedItem(),
             (String) jComboBoxSexo.getSelectedItem(), dataNasc,txtEmail.getText(), txtFTelefone.getText(),
