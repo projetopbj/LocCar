@@ -33,19 +33,18 @@ public class VeiculoDAO implements VeiculoPersistence {
         PreparedStatement stmt = null;
         
         try {
-            stmt = conn.prepareStatement("INSERT INTO veiculo(id,placa,modelo,chassi,marca,cor,ano,numPortas,idCategoria,alugado)"
-                    + "VALUES(?,?,?,?,?,?,?,?,?,?)");
+            stmt = conn.prepareStatement("INSERT INTO veiculo(placa,modelo,chassi,marca,cor,ano,numPortas,idCategoria,alugado)"
+                    + "VALUES(?,?,?,?,?,?,?,?,?)");
             
-            stmt.setInt(1, veiculo.getId());
-            stmt.setString(2, veiculo.getPlaca());
-            stmt.setString(3, veiculo.getModelo());
-            stmt.setString(4, veiculo.getChassi());
-            stmt.setString(5, veiculo.getMarca());
-            stmt.setString(6, veiculo.getCor());
-            stmt.setInt(7, veiculo.getAno());
-            stmt.setInt(8, veiculo.getnPortas());
-            stmt.setInt(9, veiculo.getCategoria().getId());
-            stmt.setBoolean(10, false);
+            stmt.setString(1, veiculo.getPlaca());
+            stmt.setString(2, veiculo.getModelo());
+            stmt.setString(3, veiculo.getChassi());
+            stmt.setString(4, veiculo.getMarca());
+            stmt.setString(5, veiculo.getCor());
+            stmt.setInt(6, veiculo.getAno());
+            stmt.setInt(7, veiculo.getnPortas());
+            stmt.setInt(8, veiculo.getCategoria().getId());
+            stmt.setBoolean(9, false);
             
             stmt.executeUpdate();
             

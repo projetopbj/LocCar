@@ -52,7 +52,6 @@ CREATE TABLE `Locadora`(
     qtdDias int not null,
     dataDoAluquel date not null,
     dataDaDevolucao date not null,
-    valorDiaria double not null,
     subTotal double  not null,
     atrasoLocacao boolean,
     diasAtraso int,

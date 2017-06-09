@@ -35,13 +35,13 @@ public class UsuarioDAO implements UsuarioPersistence {
         PreparedStatement stmt = null;
         
         try {
-            stmt = conn.prepareStatement("INSERT INTO usuario(id,loginUser,nomeUser,senhaUser,acessoUser)VALUES(?,?,?,?,?)");
+            stmt = conn.prepareStatement("INSERT INTO usuario(loginUser,nomeUser,senhaUser,acessoUser)VALUES(?,?,?,?)");
             
-            stmt.setInt(1, user.getId());
-            stmt.setString(2, user.getLoginUser());
-            stmt.setString(3, user.getNomeUser());
-            stmt.setString(4, user.getSenhaUser());
-            stmt.setString(5, user.getAcessoUser());
+            
+            stmt.setString(1, user.getLoginUser());
+            stmt.setString(2, user.getNomeUser());
+            stmt.setString(3, user.getSenhaUser());
+            stmt.setString(4, user.getAcessoUser());
             
             stmt.executeUpdate();
             
