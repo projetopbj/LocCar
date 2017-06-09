@@ -5,6 +5,7 @@
  */
 package com.pbj.loccar.view;
 
+import com.pbj.loccar.control.ClienteControl;
 import com.pbj.loccar.control.VeiculoControl;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -24,14 +25,20 @@ public final class JFrameLocar extends javax.swing.JFrame {
     
         initComponents();
         popularComboBoxVeiculos();
+        popularComboBoxClientes();
         jPanelCheck.setVisible(false);
         
         
      
     }
-     
-       
-            
+    private void popularComboBoxClientes(){
+        List<String> clientes = ClienteControl.returnClienteID();
+        
+        for (String temp : clientes) {
+            jComboBoxEscClient.addItem(temp);
+        }  
+        
+    }       
     
     private void popularComboBoxVeiculos(){
         List<String> veiculos = VeiculoControl.returnVeiculoID();
@@ -236,6 +243,12 @@ public final class JFrameLocar extends javax.swing.JFrame {
         );
 
         jPanelInfoLoc2.setBorder(javax.swing.BorderFactory.createTitledBorder("Locação"));
+
+        jComboBoxEscClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxEscClientActionPerformed(evt);
+            }
+        });
 
         jLabelEscCLient.setText("ID Cliente");
 
@@ -494,7 +507,7 @@ public final class JFrameLocar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDiasActionPerformed
 
     private void jComboBoxEscVeicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEscVeicActionPerformed
-        // TODO add your handling code here:
+        // Sempre que um Id é setado as informações do veiculo aparecem.
        String veic[] = new String[11];
         
        int index;
@@ -515,6 +528,21 @@ public final class JFrameLocar extends javax.swing.JFrame {
     private void txtGetNameClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGetNameClientActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGetNameClientActionPerformed
+
+    private void jComboBoxEscClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEscClientActionPerformed
+        // Seta as informações do cliente assim que ele é selecionado.
+       String client[] = new String[16];
+        
+       int index;
+       index = Integer.parseInt((String) jComboBoxEscClient.getSelectedItem());
+       
+       client = ClienteControl.pegarCliente(index);
+       
+       txtGetNameClient.setText(client[1]);
+       txtGetCPF.setText(client[3]);
+        
+        
+    }//GEN-LAST:event_jComboBoxEscClientActionPerformed
 
     /**
      * @param args the command line arguments

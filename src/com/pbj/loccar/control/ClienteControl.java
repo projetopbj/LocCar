@@ -152,6 +152,36 @@ public class ClienteControl {
         return clientes;        
     }
 
+    public static String[] pegarCliente(int id){
+        
+        
+                
+        Cliente client = new ClienteDAO().retornaCliente(id);
+        
+        
+            
+            String clienTemp[] = new String[16];
+            
+            clienTemp[0] = Integer.toString(client.getId());
+            clienTemp[1] = client.getNomeCliente();
+            clienTemp[2] = client.getRgCliente();
+            clienTemp[3] = client.getCpfCliente();
+            clienTemp[4] = client.getEstadoCivilCliente().toString();
+            clienTemp[5] = client.getSexoCliente().toString();
+            clienTemp[6] = client.getDataNascCliente().toString();
+            clienTemp[7] = client.getEmailCliente();
+            clienTemp[8] = client.getTelefoneCliente();
+            clienTemp[9] = client.getCelularCliente();
+            clienTemp[10] = client.getRuaCliente();
+            clienTemp[11] = client.getCepCliente();
+            clienTemp[12] = client.getComplementoCliente();
+            clienTemp[13] = client.getBairroCliente();
+            clienTemp[14] = client.getCidadeCliente();
+            clienTemp[15] = client.getUfCliente();
+
+        return clienTemp;        
+    }
+    
     public static List<String[]> lerCliente(){
         
         List<String[]> clientes = new ArrayList<>();
@@ -180,6 +210,22 @@ public class ClienteControl {
             clienTemp[15] = clienList.get(i).getUfCliente();
             
             clientes.add(clienTemp);   
+        }   
+        return clientes;        
+    }
+
+    public static List<String> returnClienteID(){
+        
+        List<String> clientes = new ArrayList<>();
+                
+        List<Cliente> clientList = new ClienteDAO().readCliente();
+        
+        for(int i = 0 ; i < clientList.size(); i++){
+            String clientNames;
+            
+            clientNames = Integer.toString(clientList.get(i).getId());
+
+            clientes.add(clientNames);   
         }   
         return clientes;        
     }

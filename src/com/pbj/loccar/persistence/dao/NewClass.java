@@ -5,11 +5,14 @@
  */
 package com.pbj.loccar.persistence.dao;
 
+import com.pbj.loccar.control.ClienteControl;
 import com.pbj.loccar.control.LocacaoControl;
 import com.pbj.loccar.model.Cliente;
 import com.pbj.loccar.model.Locacao;
 import com.pbj.loccar.model.Veiculo;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -35,6 +38,15 @@ public class NewClass {
         
         LocacaoControl.salvarLocacao("Locacao Teste", dataHoje, 7, 1, 1, true, 25);
         
+         List<String> clientes = new ArrayList<>();
+         
+         clientes = ClienteControl.returnClienteID();
+        
+        for(int i = 0  ; i < clientes.size() ; i++ ){
+            
+            System.out.println(clientes.get(i));
+            
+        }
         
  
         

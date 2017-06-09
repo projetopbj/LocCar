@@ -116,9 +116,6 @@ public class ClienteDAO implements ClientePersistence{
                 cliente.setBairroCliente(rs.getString("bairroCliente"));
                 cliente.setCidadeCliente(rs.getString("cidadeCliente"));
                 cliente.setUfCliente(rs.getString("ufCliente"));
-        
-             
-                
                 
                 listClientes.add(cliente);
         }  
