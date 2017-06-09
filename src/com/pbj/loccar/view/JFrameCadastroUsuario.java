@@ -1,5 +1,6 @@
 package com.pbj.loccar.view;
 import com.pbj.loccar.control.UsuarioControl;
+import com.pbj.loccar.util.StringCampos;
 import com.pbj.loccar.view.tables.UsuarioTable;
 import javax.swing.JOptionPane;
 
@@ -37,12 +38,22 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
         return user[i];
     }
     //Metodo interno que Limpa todos os textFields
-    private void limparTexto(){
+    private void limparCampos(){
         
         txtLogin.setText("");
         txtNome.setText("");
         jPasswordField.setText("");
     }
+    private boolean comparaCampos(){
+        
+      boolean nam =  StringCampos.vazio(txtNome.getText());
+      boolean log =  StringCampos.vazio(txtLogin.getText());
+      boolean pas =  jPasswordField.getPassword().length == 0;
+        
+        return !(nam  ||log  || pas);
+        
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -254,7 +265,7 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
      //Botão de salvar Usuario ao. Clicar o Usuario é Salvo no Banco de dados.
        
      //Verifica se algum Campo é vazio
-       if("".equals(txtLogin.getText()) || "".equals(txtNome.getText()) || jPasswordField.getPassword().length == 0 ){
+       if(comparaCampos()){
            
            JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
        }
@@ -263,7 +274,7 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
        UsuarioControl.salvarUsuario(txtLogin.getText(), txtNome.getText(), new String(jPasswordField.getPassword()), (String) jComboBoxAcesso.getSelectedItem());
        tableModel.removeAll(); // Remova para não haver Duplicação
        tableModel.addLista(UsuarioControl.lerUsuario()); // Recarrega a Tabela
-       limparTexto(); //Limpa os campos após o salvamento dos coisas
+       limparCampos(); //Limpa os campos após o salvamento dos coisas
        
        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
@@ -277,7 +288,7 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
             UsuarioControl.atualizarUsuario(Integer.parseInt(pegarTexto(0)),txtLogin.getText(), txtNome.getText(), new String(jPasswordField.getPassword()), (String) jComboBoxAcesso.getSelectedItem());
             tableModel.removeAll();//Remova para não haver Duplicação
             tableModel.addLista(UsuarioControl.lerUsuario());//Recarrega a Tabela
-            limparTexto(); //Limpa os campos após o salvamento dos coisas
+            limparCampos(); //Limpa os campos após o salvamento dos coisas
             jButtonExcluir.setEnabled(false);//Seta como não editavel para não haver erros
             jButtonAlterar.setEnabled(false);//Seta como não editavel para não haver erros
         
@@ -319,7 +330,7 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
         jButtonSalvar.setEnabled(true);
         jButtonExcluir.setEnabled(false);
         jButtonAlterar.setEnabled(false);
-        limparTexto();
+        limparCampos();
         
     }//GEN-LAST:event_jButtonNewActionPerformed
 
@@ -336,7 +347,7 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
             tableModel.addLista(UsuarioControl.lerUsuario()); // Recarrega a Tabela
         }
         
-        limparTexto(); //Limpa os campos após o salvamento dos coisas
+        limparCampos(); //Limpa os campos após o salvamento dos coisas
         jButtonExcluir.setEnabled(false);//Seta botões e excluir a alterar como não editaveis
         jButtonAlterar.setEnabled(false);
         

@@ -26,9 +26,9 @@ public class NewClass {
         Locacao loc = new Locacao(cliente,veiculo);
         
         loc.setDescricao("Teste");
-        loc.setDataDoAluquel(dataHoje);
+        loc.setDataDoAluguel(dataHoje);
         loc.setQtdDias(7);
-        loc.setIsDesconto(true);
+        loc.setDesconto(true);
         loc.alugar(25);
         
         System.out.println(loc);

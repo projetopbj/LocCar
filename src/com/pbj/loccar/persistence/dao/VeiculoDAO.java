@@ -353,7 +353,7 @@ public class VeiculoDAO implements VeiculoPersistence {
     
     //Retorna apenas uma categoria recebendo o nome como parametro.
     @Override
-    public Veiculo retornaVeiculo(String placa){
+    public Veiculo retornaVeiculo(String modelo){
         Veiculo veic = new Veiculo();
         
         Connection conn = ConnectionFactory.getConnection();
@@ -361,9 +361,9 @@ public class VeiculoDAO implements VeiculoPersistence {
         ResultSet rs = null;
      
         try {
-            stmt = conn.prepareStatement("SELECT * FROM veiculo WHERE placa = ?");
+            stmt = conn.prepareStatement("SELECT * FROM veiculo WHERE modelo = ?");
             
-            stmt.setString(1, placa);
+            stmt.setString(1, modelo);
 
             rs = stmt.executeQuery();
             
@@ -410,6 +410,7 @@ public class VeiculoDAO implements VeiculoPersistence {
             stmt = conn.prepareStatement("SELECT * FROM veiculo WHERE id = ?");
             
              stmt.setInt(1, id);
+             
             
             rs = stmt.executeQuery();
             

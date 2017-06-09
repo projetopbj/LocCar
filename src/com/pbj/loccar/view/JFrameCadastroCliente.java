@@ -10,6 +10,7 @@ import com.pbj.loccar.util.DataHora;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import static com.pbj.loccar.util.DataHora.dataToString;
+import com.pbj.loccar.util.StringCampos;
 
 /**
  *
@@ -35,6 +36,7 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
         jButtonAtualizar.setVisible(false);
 
     }
+    //Seta campos como vazio
     private void limpaCampos(){
        txtNome.setText("");
        txtRG.setText("");
@@ -49,9 +51,26 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
        txtBairro.setText("");
        txtCidade.setText("");
     }
-
-    
-    
+    //Verifica Campos Vazios
+    private boolean comparaCampos(){
+        
+      boolean nam =  StringCampos.vazio(txtNome.getText());
+      boolean rg =  StringCampos.vazio(txtRG.getText());
+      boolean cpf =  StringCampos.vazio(txtFCpf.getText());
+      boolean nas = StringCampos.vazio(txtFNascimento.getText());
+      boolean cel = StringCampos.vazio(txtFCelular.getText());
+      boolean tel = StringCampos.vazio(txtFTelefone.getText());
+      boolean em = StringCampos.vazio(txtEmail.getText());
+      boolean rua = StringCampos.vazio(txtRua.getText());
+      boolean com = StringCampos.vazio(txtComplemento.getText());
+      boolean cep = StringCampos.vazio(txtFCep.getText());
+      boolean bai = StringCampos.vazio(txtBairro.getText());
+      boolean cid = StringCampos.vazio(txtCidade.getText());
+        
+        return !(nam  ||rg  || cpf|| nas|| cel|| tel|| em|| rua|| com|| cep|| bai|| cid);
+        
+    }
+    //Popula Campos
     private void setCampos(String[] client){
         
         id = Integer.parseInt(client[0]);
@@ -485,10 +504,7 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
         // TODO add your handling code here
                         //Verificando os campos Vazios
-        if ("".equals(txtNome.getText()) || "".equals(txtFCpf.getText()) || "".equals(txtRG.getText())
-           || "".equals(txtFNascimento.getText()) || "".equals(txtEmail.getText()) || "".equals(txtFTelefone.getText())
-                || "".equals(txtFCelular.getText()) || "".equals(txtRua.getText())|| "".equals(txtComplemento.getText())
-                || "".equals(txtFCep.getText())|| "".equals(txtBairro.getText())|| "".equals(txtCidade.getText()))
+        if (comparaCampos())
         {
             //Mensagem informando caso exista algum campo vazio;
            JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
@@ -513,10 +529,7 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
                 //Verificando os campos Vazios
-        if ("".equals(txtNome.getText()) || "".equals(txtFCpf.getText()) || "".equals(txtRG.getText())
-           || "".equals(txtFNascimento.getText()) || "".equals(txtEmail.getText()) || "".equals(txtFTelefone.getText())
-                || "".equals(txtFCelular.getText()) || "".equals(txtRua.getText())|| "".equals(txtComplemento.getText())
-                || "".equals(txtFCep.getText())|| "".equals(txtBairro.getText())|| "".equals(txtCidade.getText()))
+        if (comparaCampos())
         {
             //Mensagem informando caso exista algum campo vazio;
            JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);

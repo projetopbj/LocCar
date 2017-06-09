@@ -46,19 +46,20 @@ CREATE TABLE `Veiculo` (
     foreign key(idCategoria) references `Categoria`(id)
 ) ;
 
-CREATE TABLE `Locadora`(
+CREATE TABLE `Locacao`(
     id int not null AUTO_INCREMENT,
     descricao varchar(64) not null,
     qtdDias int not null,
-    dataDoAluquel date not null,
+    dataDoAluguel date not null,
     dataDaDevolucao date not null,
     subTotal double  not null,
     atrasoLocacao boolean,
     diasAtraso int,
     dataRetorno date,
     valorFinal double,
-    isDesconto boolean,
+    desconto boolean,
     valorDesconto double,
+    statusLocacao boolean,
     idCliente int not null, -- chave estrangeira para o cliente
     idVeiculo int not null, -- chave estrangeira para o veículo
     PRIMARY KEY(id),

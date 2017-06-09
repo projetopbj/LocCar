@@ -27,20 +27,20 @@ import java.util.List;
  */
 public class LocacaoControl {
     
-    //Salva o Cliente no Banco de dadod
+    //Salva a Locacao no Banco de dados
     public static void salvarLocacao(String descricao, Date dataDoAluguel,int qtdDias,
                     int idCliente, int idVeiculo,boolean isDesconto, int desconto){
         
         
-        Cliente cliente = new ClienteDAO().retornaCliente(idCliente);
+        Cliente locate = new ClienteDAO().retornaCliente(idCliente);
         Veiculo veiculo = new VeiculoDAO().retornaVeiculo(idVeiculo);
-        Locacao locacao = new Locacao(cliente, veiculo);
+        Locacao locacao = new Locacao(locate, veiculo);
         
         
         locacao.setDescricao(descricao);
-        locacao.setDataDoAluquel(dataDoAluguel);
+        locacao.setDataDoAluguel(dataDoAluguel);
         locacao.setQtdDias(qtdDias);
-        locacao.setIsDesconto(isDesconto);
+        locacao.setDesconto(isDesconto);
         locacao.alugar(desconto);
         
         
@@ -49,159 +49,80 @@ public class LocacaoControl {
         
     }
     /*
-    Converte o retorno Lista de Clientes do DAO e Converte em Vetor de String 
+    Converte o retorno Lista de Locacao do DAO e Converte em Vetor de String 
     0 = id      
-    1 = nome    
-    2 = rg 
-    3 = cpf 
-    4 = estado civil      
-    5 = sexo   
-    6 = data nascimento
-    7 = email
-    8 = telefone
-    9 = celular
-    10 = rua
-    11 = cep
-    12 = complemento
-    13 = bairro
-    14 = cidade
-    15 = UF
+    1 = descricao    
+    2 = qtdDias 
+    3 = Data do aluguel 
+    4 = Data da Devolução   
+    5 = Sub Total   
+    6 = Atraso Locacao
+    7 = Dias De Atraso
+    8 = Data Retorno
+    9 = Valor Final
+    10 = Desconto
+    11 = Valor Desconto
+    12 = Status
+    13 = Cliente 
+    14 = Veiculo
     */
-    public static List<String[]> lerCliente(String cpf,boolean gambiarra){
+    public static List<String[]> lerLocacao(){
         
-        List<String[]> clientes = new ArrayList<>();
+        List<String[]> locacao = new ArrayList<>();
                 
-        List<Cliente> clienList = new ClienteDAO().readCliente(cpf, gambiarra);
+        List<Locacao> locaList = new LocacaoDAO().readLocacao();
         
-        for(int i = 0 ; i < clienList.size(); i++){
+        for(int i = 0 ; i < locaList.size(); i++){
             
-            String clienTemp[] = new String[16];
+            String locaTemp[] = new String[15];
             
-            clienTemp[0] = Integer.toString(clienList.get(i).getId());
-            clienTemp[1] = clienList.get(i).getNomeCliente();
-            clienTemp[2] = clienList.get(i).getRgCliente();
-            clienTemp[3] = clienList.get(i).getCpfCliente();
-            clienTemp[4] = clienList.get(i).getEstadoCivilCliente().toString();
-            clienTemp[5] = clienList.get(i).getSexoCliente().toString();
-            clienTemp[6] = clienList.get(i).getDataNascCliente().toString();
-            clienTemp[7] = clienList.get(i).getEmailCliente();
-            clienTemp[8] = clienList.get(i).getTelefoneCliente();
-            clienTemp[9] = clienList.get(i).getCelularCliente();
-            clienTemp[10] = clienList.get(i).getRuaCliente();
-            clienTemp[11] = clienList.get(i).getCepCliente();
-            clienTemp[12] = clienList.get(i).getComplementoCliente();
-            clienTemp[13] = clienList.get(i).getBairroCliente();
-            clienTemp[14] = clienList.get(i).getCidadeCliente();
-            clienTemp[15] = clienList.get(i).getUfCliente();
-                            
-            clientes.add(clienTemp);   
+            locaTemp[0] = Integer.toString(locaList.get(i).getId());
+            locaTemp[1] = locaList.get(i).getDescricao();
+            locaTemp[2] = Integer.toString(locaList.get(i).getQtdDias());
+            locaTemp[3] = locaList.get(i).getDataDoAluguel().toString();
+            locaTemp[4] = locaList.get(i).getDataDaDevolucao().toString();
+            locaTemp[5] = Double.toString(locaList.get(i).getSubTotal());
+            locaTemp[6] = locaList.get(i).getAtrasoLocacao();
+            locaTemp[7] = Integer.toString(locaList.get(i).getDiasAtraso());
+            locaTemp[8] = locaList.get(i).getDataRetorno().toString();
+            locaTemp[9] = Double.toString(locaList.get(i).getValorFinal());
+            locaTemp[10] = locaList.get(i).getDesconto();
+            locaTemp[11] = Double.toString(locaList.get(i).getValorDesconto());
+            locaTemp[12] = locaList.get(i).getAtrasoLocacao();
+            locaTemp[13] = locaList.get(i).getCliente().getNomeCliente();
+            locaTemp[14] = locaList.get(i).getVeiculo().getModelo();
+            
+            locacao.add(locaTemp);   
         }   
-        return clientes;        
-    }
-    
-    public static List<String[]> lerCliente(String nome){
-        
-        List<String[]> clientes = new ArrayList<>();
-                
-        List<Cliente> clienList = new ClienteDAO().readCliente(nome);
-        
-        for(int i = 0 ; i < clienList.size(); i++){
-            
-            String clienTemp[] = new String[16];
-            
-            clienTemp[0] = Integer.toString(clienList.get(i).getId());
-            clienTemp[1] = clienList.get(i).getNomeCliente();
-            clienTemp[2] = clienList.get(i).getRgCliente();
-            clienTemp[3] = clienList.get(i).getCpfCliente();
-            clienTemp[4] = clienList.get(i).getEstadoCivilCliente().toString();
-            clienTemp[5] = clienList.get(i).getSexoCliente().toString();
-            clienTemp[6] = clienList.get(i).getDataNascCliente().toString();
-            clienTemp[7] = clienList.get(i).getEmailCliente();
-            clienTemp[8] = clienList.get(i).getTelefoneCliente();
-            clienTemp[9] = clienList.get(i).getCelularCliente();
-            clienTemp[10] = clienList.get(i).getRuaCliente();
-            clienTemp[11] = clienList.get(i).getCepCliente();
-            clienTemp[12] = clienList.get(i).getComplementoCliente();
-            clienTemp[13] = clienList.get(i).getBairroCliente();
-            clienTemp[14] = clienList.get(i).getCidadeCliente();
-            clienTemp[15] = clienList.get(i).getUfCliente();
-            
-            clientes.add(clienTemp);   
-        }   
-        return clientes;        
-    }
-
-    public static List<String[]> lerCliente(){
-        
-        List<String[]> clientes = new ArrayList<>();
-                
-        List<Cliente> clienList = new ClienteDAO().readCliente();
-        
-        for(int i = 0 ; i < clienList.size(); i++){
-            
-            String clienTemp[] = new String[16];
-            
-            clienTemp[0] = Integer.toString(clienList.get(i).getId());
-            clienTemp[1] = clienList.get(i).getNomeCliente();
-            clienTemp[2] = clienList.get(i).getRgCliente();
-            clienTemp[3] = clienList.get(i).getCpfCliente();
-            clienTemp[4] = clienList.get(i).getEstadoCivilCliente().toString();
-            clienTemp[5] = clienList.get(i).getSexoCliente().toString();
-            clienTemp[6] = clienList.get(i).getDataNascCliente().toString();
-            clienTemp[7] = clienList.get(i).getEmailCliente();
-            clienTemp[8] = clienList.get(i).getTelefoneCliente();
-            clienTemp[9] = clienList.get(i).getCelularCliente();
-            clienTemp[10] = clienList.get(i).getRuaCliente();
-            clienTemp[11] = clienList.get(i).getCepCliente();
-            clienTemp[12] = clienList.get(i).getComplementoCliente();
-            clienTemp[13] = clienList.get(i).getBairroCliente();
-            clienTemp[14] = clienList.get(i).getCidadeCliente();
-            clienTemp[15] = clienList.get(i).getUfCliente();
-            
-            clientes.add(clienTemp);   
-        }   
-        return clientes;        
+        return locacao;        
     }
    
-    //Atualiza o Cliente recebendo os dados da tabela na view
-    public static void atualizarCliente(int id,String nome,String rg, String cpf,String estadoCivil, String sexo, 
-            Date dataNasc, String email,String telefone, String celular, String rua, String cep, 
-            String complemento,String bairro, String cidade, String uf){
-                
-        Cliente cliente = new Cliente();
+    //Atualiza A Locacao não finalizada recebendo os dados da tabela na view
+    public static void atualizarLocacao(int id,String descricao, Date dataDoAluguel,int qtdDias,
+                    int idCliente, int idVeiculo,boolean isDesconto, int desconto){
+                  
+        Cliente locate = new ClienteDAO().retornaCliente(idCliente);
+        Veiculo veiculo = new VeiculoDAO().retornaVeiculo(idVeiculo);
+        Locacao locacao = new Locacao(locate, veiculo);
         
-        cliente.setId(id);
-        cliente.setNomeCliente(nome);
-        cliente.setRgCliente(rg);
-        cliente.setCpfCliente(cpf);
-        cliente.setEstadoCivilCliente(EstadoCivil.valueOf(estadoCivil));
-        cliente.setSexoCliente(Sexo.valueOf(sexo));
-        cliente.setDataNascCliente(dataNasc);
-        cliente.setEmailCliente(email);
-        cliente.setTelefoneCliente(telefone);
-        cliente.setCelularCliente(celular);
-        cliente.setRuaCliente(rua);
-        cliente.setCepCliente(cep);
-        cliente.setComplementoCliente(complemento);
-        cliente.setBairroCliente(bairro);
-        cliente.setCidadeCliente(cidade);
-        cliente.setUfCliente(uf);
-      
-
+        locacao.setId(id);
+        locacao.setDescricao(descricao);
+        locacao.setDataDoAluguel(dataDoAluguel);
+        locacao.setQtdDias(qtdDias);
+        locacao.setDesconto(isDesconto);
+        locacao.alugar(desconto);
         
-        ClientePersistence dao = new ClienteDAO();
         
-        dao.updateCliente(cliente);
+       new LocacaoDAO().createLocacao(locacao);
+          
     }
     //Recebe o ID da interface e Acessa a persistencia e apaga o registro
-    public static void apagarCliente(int id){
+    public static void apagarLocacao(int id){
         
-        Cliente clien = new Cliente();
-        clien.setId(id);
-        ClientePersistence dao = new ClienteDAO();
-        dao.deleteCliente(clien);
-        
-        
+        Locacao loc = new Locacao();
+        loc.setId(id);
+        LocacaoDAO dao = new LocacaoDAO();
+        dao.deleteLocacao(loc);
     }
     
     

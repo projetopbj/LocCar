@@ -221,6 +221,51 @@ public class VeiculoControl {
         }   
         return veiculos;        
     }
+    
+    
+    public static List<String> returnVeiculoID(){
+        
+        List<String> veiculos = new ArrayList<>();
+                
+        List<Veiculo> veicList = new VeiculoDAO().readVeiculo(false);
+        
+        for(int i = 0 ; i < veicList.size(); i++){
+            String veicNames;
+            
+            
+            veicNames = Integer.toString(veicList.get(i).getId());
+
+            veiculos.add(veicNames);   
+        }   
+        return veiculos;        
+    }
+    
+    
+    //Retorna Veiculo pegando apenas o ID
+    public static String[] pegaVeiculo(int id){
+          
+        Veiculo veicList = new VeiculoDAO().retornaVeiculo(id);
+   
+            String veicTemp[] = new String[11];
+          
+            veicTemp[0] = Integer.toString(veicList.getId());
+            veicTemp[1] = veicList.getPlaca();
+            veicTemp[2] = veicList.getModelo();
+            veicTemp[3] = veicList.getChassi();
+            veicTemp[4] = Integer.toString(veicList.getAno());
+            veicTemp[5] = veicList.getMarca();
+            veicTemp[6] = Integer.toString(veicList.getnPortas());
+            veicTemp[7] = veicList.getCor();
+            veicTemp[8] = veicList.getAlugado();
+            veicTemp[9] = veicList.getCategoria().getNome();
+            veicTemp[10] = Double.toString(veicList.getCategoria().getValorDia());
+
+        return veicTemp;
+        
+        
+    }
+     
+
    
     //Atualiza o Veiculo recebendo os dados da tabela na view
     public static void atualizarVeiculo(int id,String placa,String modelo, String chassi,int ano,String marca, int numPortas, String cor, String Categoria){
