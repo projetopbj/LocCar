@@ -64,7 +64,7 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
       boolean d =  StringCampos.vazio(txtValorDia.getText());
       boolean r =  StringCampos.vazio(txtKM.getText());
         
-        return !(n  || d  || r);
+        return (n  || d  || r);
         
     }
     /**

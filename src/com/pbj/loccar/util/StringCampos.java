@@ -13,7 +13,7 @@ public class StringCampos {
     
     
     public static boolean vazio(String campo){
-        return !"".equals(campo) ||  !campo.isEmpty();
+        return "".equals(campo);
     }
     
 }

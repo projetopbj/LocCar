@@ -6,7 +6,11 @@
 package com.pbj.loccar.view;
 
 import com.pbj.loccar.control.ClienteControl;
+import com.pbj.loccar.control.LocacaoControl;
 import com.pbj.loccar.control.VeiculoControl;
+import com.pbj.loccar.util.DataHora;
+import com.pbj.loccar.util.StringCampos;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -31,20 +35,41 @@ public final class JFrameLocar extends javax.swing.JFrame {
         
      
     }
+    //Método para popular os campos do combo box 
     private void popularComboBoxClientes(){
         List<String> clientes = ClienteControl.returnClienteID();
-        
+
         for (String temp : clientes) {
             jComboBoxEscClient.addItem(temp);
         }  
         
     }       
-    
+    //Método para popular os campos do combo box 
     private void popularComboBoxVeiculos(){
         List<String> veiculos = VeiculoControl.returnVeiculoID();
         for (String temp : veiculos) {
             jComboBoxEscVeic.addItem(temp);
         }  
+    }
+    //Metpdo para limpar os campos
+    private void limpaCampos(){
+        txtDesc.setText("");
+        txtFDataLoc.setText("");
+        txtDias.setText("");
+        txtDesconto.setText("");
+        txtDataDevol.setText("");
+        txtFSubTotal.setText("");
+
+
+    }
+    private boolean verificaCampos(){
+        boolean desc = StringCampos.vazio(txtDesc.getText());
+        boolean data = StringCampos.vazio(txtFDataLoc.getText());
+        boolean dias = StringCampos.vazio(txtDias.getText());
+        boolean car = StringCampos.vazio((String) jComboBoxEscVeic.getSelectedItem());
+        boolean client = StringCampos.vazio((String) jComboBoxEscClient.getSelectedItem());
+        return ( desc || data  || dias );
+                
     }
     
     
@@ -72,7 +97,7 @@ public final class JFrameLocar extends javax.swing.JFrame {
         jLabelDescricao = new javax.swing.JLabel();
         txtDesc = new javax.swing.JTextField();
         jPanelCheck = new javax.swing.JPanel();
-        txtDesconto = new javax.swing.JTextField();
+        txtDesconto = new javax.swing.JFormattedTextField();
         jPanelInfoLoc2 = new javax.swing.JPanel();
         jComboBoxEscClient = new javax.swing.JComboBox<>();
         jLabelEscCLient = new javax.swing.JLabel();
@@ -149,16 +174,11 @@ public final class JFrameLocar extends javax.swing.JFrame {
 
         jLabelDescricao.setText("Descrição");
 
-        txtDesconto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtDescontoMouseClicked(evt);
-            }
-        });
-        txtDesconto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescontoActionPerformed(evt);
-            }
-        });
+        try {
+            txtDesconto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout jPanelCheckLayout = new javax.swing.GroupLayout(jPanelCheck);
         jPanelCheck.setLayout(jPanelCheckLayout);
@@ -166,7 +186,7 @@ public final class JFrameLocar extends javax.swing.JFrame {
             jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCheckLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanelCheckLayout.setVerticalGroup(
@@ -202,13 +222,10 @@ public final class JFrameLocar extends javax.swing.JFrame {
                         .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(txtFSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
                         .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelOtherLayout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(jCheckBoxDesconto))
-                            .addGroup(jPanelOtherLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanelCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jCheckBoxDesconto)
+                            .addComponent(jPanelCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanelOtherLayout.setVerticalGroup(
@@ -458,32 +475,43 @@ public final class JFrameLocar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtGetFabricanteActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
-        // TODO add your handling code here:
          this.dispose();
+         
+         
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonLocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLocarActionPerformed
         // TODO add your handling code here:
-        boolean bool;
-        bool = jCheckBoxDesconto.isSelected();
-        if(bool == true){
-            
-            JOptionPane.showMessageDialog(null, "Selecionado");
+        if(verificaCampos()){
+           //Mensagem informando caso exista algum campo vazio;
+           JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
             
         }else{
-           JOptionPane.showMessageDialog(null, "Não Selecionado");
-  
+            boolean bool = jCheckBoxDesconto.isSelected();
+            if(bool == true && !"".equals(txtDesconto.getText())){
+                
+                 
+
+                 LocacaoControl.salvarLocacao(txtDesc.getText(), DataHora.dataToString(txtFDataLoc.getText()), Integer.parseInt(txtDias.getText()) ,
+                    Integer.parseInt((String)jComboBoxEscClient.getSelectedItem()),
+                    Integer.parseInt((String) jComboBoxEscVeic.getSelectedItem()), true, 
+                    Integer.parseInt(txtDesconto.getText()));
+                VeiculoControl.atualizarVeiculo(Integer.parseInt((String)jComboBoxEscVeic.getSelectedItem()), true);
+            }else{
+                
+                LocacaoControl.salvarLocacao(txtDesc.getText(), DataHora.dataToString(txtFDataLoc.getText()), Integer.parseInt(txtDias.getText()) ,
+                    Integer.parseInt((String)jComboBoxEscClient.getSelectedItem()),
+                    Integer.parseInt((String) jComboBoxEscVeic.getSelectedItem()), false, 0);
+                VeiculoControl.atualizarVeiculo(Integer.parseInt((String)jComboBoxEscVeic.getSelectedItem()), true);
+            }
+            
+            this.dispose();
+
         }
-        
+       limpaCampos();
+       
+
     }//GEN-LAST:event_jButtonLocarActionPerformed
-
-    private void txtDescontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescontoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescontoActionPerformed
-
-    private void txtDescontoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDescontoMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescontoMouseClicked
 
     private void jCheckBoxDescontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxDescontoActionPerformed
         // TODO add your handling code here:
@@ -606,7 +634,7 @@ public final class JFrameLocar extends javax.swing.JFrame {
     private javax.swing.JTextField txtCor;
     private javax.swing.JFormattedTextField txtDataDevol;
     private javax.swing.JTextField txtDesc;
-    private javax.swing.JTextField txtDesconto;
+    private javax.swing.JFormattedTextField txtDesconto;
     private javax.swing.JTextField txtDias;
     private javax.swing.JFormattedTextField txtFDataLoc;
     private javax.swing.JFormattedTextField txtFSubTotal;

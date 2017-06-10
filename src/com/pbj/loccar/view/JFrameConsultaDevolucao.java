@@ -5,6 +5,8 @@
  */
 package com.pbj.loccar.view;
 
+import com.pbj.loccar.control.LocacaoControl;
+import com.pbj.loccar.view.tables.LocacaoTable;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,11 +15,17 @@ import javax.swing.JOptionPane;
  */
 public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
 
+    LocacaoTable tableModel;
     /**
      * Creates new form JFrameDevolverVeiculo
      */
     public JFrameConsultaDevolucao() {
         initComponents();
+        
+        tableModel = new LocacaoTable(LocacaoControl.lerLocacao());
+        jTableLoc.setModel(tableModel);
+        
+        
      
     }
 
@@ -34,7 +42,7 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
         buttonGroup = new javax.swing.ButtonGroup();
         jPanelBuscaLoc = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableLoc = new javax.swing.JTable();
         jPanelBusca = new javax.swing.JPanel();
         txtBusca = new javax.swing.JTextField();
         jButtonBuscar = new javax.swing.JButton();
@@ -51,7 +59,7 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(600, 450));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableLoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -59,7 +67,7 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
                 "Código", "Cliente", "CPF", "Carro", "Placa", "Categoria", "Data da Locação", "Data da Devolução", "Dias", "Valor Parcial"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableLoc);
 
         jPanelBusca.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar Locação"));
 
@@ -166,10 +174,9 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
                         .addComponent(jButtonChamaDevol, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(77, 77, 77))
                     .addGroup(jPanelBuscaLocLayout.createSequentialGroup()
-                        .addGroup(jPanelBuscaLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanelBusca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE))
+                        .addComponent(jPanelBusca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
+            .addComponent(jScrollPane1)
         );
         jPanelBuscaLocLayout.setVerticalGroup(
             jPanelBuscaLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,7 +284,7 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButtonCliente;
     private javax.swing.JRadioButton jRadioButtonPlaca;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableLoc;
     private javax.swing.JTextField txtBusca;
     // End of variables declaration//GEN-END:variables
 }

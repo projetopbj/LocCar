@@ -287,6 +287,21 @@ public class VeiculoControl {
         
         dao.updateVeiculo(veiculo);
     }
+     public static void atualizarVeiculo(int id,boolean alugado){
+                
+        Veiculo veiculo = new Veiculo();
+        
+      
+        veiculo.setId(id);
+        veiculo.setAlugado(alugado);
+
+        
+        VeiculoPersistence dao = new VeiculoDAO();
+        
+        dao.updateVeiculo(veiculo,alugado);
+    }
+    
+    
     //Recebe o ID da interface e Acessa a persistencia e apaga o registro
     public static void apagarVeiculo(int id){
         

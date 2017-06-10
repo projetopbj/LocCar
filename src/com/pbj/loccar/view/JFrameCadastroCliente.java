@@ -67,7 +67,7 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
       boolean bai = StringCampos.vazio(txtBairro.getText());
       boolean cid = StringCampos.vazio(txtCidade.getText());
         
-        return !(nam  ||rg  || cpf|| nas|| cel|| tel|| em|| rua|| com|| cep|| bai|| cid);
+        return (nam  ||rg  || cpf|| nas|| cel|| tel|| em|| rua|| com|| cep|| bai|| cid);
         
     }
     //Popula Campos

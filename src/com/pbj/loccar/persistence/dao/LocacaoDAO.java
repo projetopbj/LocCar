@@ -109,7 +109,7 @@ public class LocacaoDAO{
                 locacao.setDiasAtraso(rs.getInt("diasAtraso"));
                 locacao.setDataRetorno(rs.getDate("dataRetorno"));
                 locacao.setValorFinal(rs.getDouble("valorFinal"));
-                locacao.setDesconto(rs.getBoolean("deconto"));
+                locacao.setDesconto(rs.getBoolean("desconto"));
                 locacao.setValorDesconto(rs.getDouble("valorDesconto"));
                 locacao.setStatusLocacao(rs.getBoolean("statusLocacao"));
                 locacao.setCliente(cliente);

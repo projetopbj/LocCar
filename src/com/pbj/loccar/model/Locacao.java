@@ -46,7 +46,7 @@ public class Locacao {
       this.atrasoLocacao = false;
       this.diasAtraso = 0;
       valorFinal = 0.0;      
-      this.dataRetorno = null;
+      this.dataRetorno = DataHora.dataToString("00/00/00");
         
         
         
@@ -186,6 +186,9 @@ public class Locacao {
     }
 
     public Date getDataRetorno() {
+        if(dataRetorno == null){
+            return dataDaDevolucao;
+        }
         return dataRetorno;
     }
 

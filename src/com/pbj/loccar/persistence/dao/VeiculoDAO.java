@@ -483,6 +483,37 @@ public class VeiculoDAO implements VeiculoPersistence {
         
     }
     
+    
+    public void updateVeiculo(Veiculo veiculo, boolean alugado){
+        
+        Connection conn = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = conn.prepareStatement("UPDATE veiculo SET alugado = ? WHERE id = ?");
+            
+            
+            stmt.setBoolean(1, veiculo.isAlugado());
+           
+            stmt.setInt(2, veiculo.getId());
+         
+            stmt.executeUpdate();
+            
+        JOptionPane.showMessageDialog(null, "Veiculo Atualizada no Banco de Dados");
+
+            
+        } catch (SQLException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Não foi Atualizar no Banco de Dados!" + ex, "Erro ao Salvar",JOptionPane.ERROR_MESSAGE);
+            
+        }finally{
+            
+            ConnectionFactory.fecharConnection(conn, stmt);
+        }
+        
+    }
+
+    
     //Deleta o Veiculo Informada do Banco de Dados
     @Override
     public void deleteVeiculo(Veiculo veiculo){

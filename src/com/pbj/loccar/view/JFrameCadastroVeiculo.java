@@ -79,7 +79,7 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
       boolean cor = StringCampos.vazio(txtCor.getText());
  
         
-        return !(pla  ||mod  || mar|| cha|| ano|| mod|| por|| cor);
+        return (pla  ||mod  || mar|| cha|| ano|| mod|| por|| cor);
         
     }
     

@@ -6,11 +6,8 @@
 package com.pbj.loccar.control;
 
 import com.pbj.loccar.model.Cliente;
-import com.pbj.loccar.model.EstadoCivil;
 import com.pbj.loccar.model.Locacao;
-import com.pbj.loccar.model.Sexo;
 import com.pbj.loccar.model.Veiculo;
-import com.pbj.loccar.persistence.ClientePersistence;
 import com.pbj.loccar.persistence.dao.ClienteDAO;
 import com.pbj.loccar.persistence.dao.LocacaoDAO;
 import com.pbj.loccar.persistence.dao.VeiculoDAO;
@@ -50,21 +47,22 @@ public class LocacaoControl {
     }
     /*
     Converte o retorno Lista de Locacao do DAO e Converte em Vetor de String 
-    0 = id      
-    1 = descricao    
-    2 = qtdDias 
-    3 = Data do aluguel 
-    4 = Data da Devolução   
-    5 = Sub Total   
-    6 = Atraso Locacao
-    7 = Dias De Atraso
-    8 = Data Retorno
-    9 = Valor Final
-    10 = Desconto
-    11 = Valor Desconto
-    12 = Status
-    13 = Cliente 
-    14 = Veiculo
+    " # ",
+    "Descrição",
+    "Cliente",
+    "Veiculo",
+    "Placa",
+    "Data Ida",
+    "Dias",
+    "Data Esperada",
+    "Data Volta",
+    "Desconto",
+    "Valor do Desconto",
+    "SubTotal",
+    "Atraso",
+    "Dias de Atraso"
+    "Valor Final",
+    "Status"
     */
     public static List<String[]> lerLocacao(){
         
@@ -74,23 +72,30 @@ public class LocacaoControl {
         
         for(int i = 0 ; i < locaList.size(); i++){
             
-            String locaTemp[] = new String[15];
+            String locaTemp[] = new String[16];
             
             locaTemp[0] = Integer.toString(locaList.get(i).getId());
             locaTemp[1] = locaList.get(i).getDescricao();
-            locaTemp[2] = Integer.toString(locaList.get(i).getQtdDias());
-            locaTemp[3] = locaList.get(i).getDataDoAluguel().toString();
-            locaTemp[4] = locaList.get(i).getDataDaDevolucao().toString();
-            locaTemp[5] = Double.toString(locaList.get(i).getSubTotal());
-            locaTemp[6] = locaList.get(i).getAtrasoLocacao();
-            locaTemp[7] = Integer.toString(locaList.get(i).getDiasAtraso());
+            locaTemp[2] = locaList.get(i).getCliente().getNomeCliente();
+            locaTemp[3] = locaList.get(i).getVeiculo().getModelo();
+            locaTemp[4] = locaList.get(i).getVeiculo().getPlaca();
+            locaTemp[5] = locaList.get(i).getDataDoAluguel().toString();
+            locaTemp[6] = Integer.toString(locaList.get(i).getQtdDias());
+            locaTemp[7] = locaList.get(i).getDataDaDevolucao().toString();
+            
             locaTemp[8] = locaList.get(i).getDataRetorno().toString();
-            locaTemp[9] = Double.toString(locaList.get(i).getValorFinal());
-            locaTemp[10] = locaList.get(i).getDesconto();
-            locaTemp[11] = Double.toString(locaList.get(i).getValorDesconto());
+            
+            locaTemp[9] = locaList.get(i).getDesconto();
+            
+            locaTemp[10] = Double.toString(locaList.get(i).getValorDesconto());
+            
+            locaTemp[11] = Double.toString(locaList.get(i).getSubTotal());
+            
             locaTemp[12] = locaList.get(i).getAtrasoLocacao();
-            locaTemp[13] = locaList.get(i).getCliente().getNomeCliente();
-            locaTemp[14] = locaList.get(i).getVeiculo().getModelo();
+            locaTemp[13] = Integer.toString(locaList.get(i).getDiasAtraso());
+            locaTemp[14] = Double.toString(locaList.get(i).getValorFinal());
+            locaTemp[15] = locaList.get(i).getStatusLocacao();
+            
             
             locacao.add(locaTemp);   
         }   

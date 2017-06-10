@@ -65,8 +65,9 @@ public class DataHora{
                 return dataRetorno;
             } catch (ParseException ex) {
                 Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                return null;    
+
             }
-        return null;    
     }
    
       //Recebe uma data e converte para String no formato dd/MM/yyyy

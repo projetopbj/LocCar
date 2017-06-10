@@ -42,5 +42,7 @@ public interface VeiculoPersistence {
 
     //Recebe o Veiculo e retorna e atualiza ele no Banco de dados
     void updateVeiculo(Veiculo veiculo);
+    //Recebe o veiculo e um boolean e atualiza veiculo como alugado ou não;
+    void updateVeiculo(Veiculo veiculo, boolean alugado);
     
 }
