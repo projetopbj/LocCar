@@ -32,9 +32,9 @@ public final class JFrameLocar extends javax.swing.JFrame {
         popularComboBoxClientes();
         jPanelCheck.setVisible(false);
         
-        
+        txtFDataLoc.setText(DataHora.getData());
      
-    }
+    }   
     //Método para popular os campos do combo box 
     private void popularComboBoxClientes(){
         List<String> clientes = ClienteControl.returnClienteID();
@@ -72,7 +72,26 @@ public final class JFrameLocar extends javax.swing.JFrame {
                 
     }
     
-    
+    private String getSubT(){
+             
+       double valor = Double.parseDouble(txtGetValorDiaria.getText());
+       double dias = Double.parseDouble(txtDias.getText());
+
+        return Double.toString(valor * dias);
+    }
+    private String getSubT(String valor){
+             
+        try{
+        double desc = Double.parseDouble(txtDesconto.getText())* 0.01;
+        desc = desc * Double.parseDouble(valor);
+        Double subt = Double.parseDouble(valor) - desc;
+        return Double.toString(subt);
+        
+        }catch(NumberFormatException e){
+            
+            return getSubT();
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -87,7 +106,6 @@ public final class JFrameLocar extends javax.swing.JFrame {
         jPanelOther = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtDias = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtFDataLoc = new javax.swing.JFormattedTextField();
         txtFSubTotal = new javax.swing.JFormattedTextField();
@@ -98,6 +116,7 @@ public final class JFrameLocar extends javax.swing.JFrame {
         txtDesc = new javax.swing.JTextField();
         jPanelCheck = new javax.swing.JPanel();
         txtDesconto = new javax.swing.JFormattedTextField();
+        txtDias = new javax.swing.JFormattedTextField();
         jPanelInfoLoc2 = new javax.swing.JPanel();
         jComboBoxEscClient = new javax.swing.JComboBox<>();
         jLabelEscCLient = new javax.swing.JLabel();
@@ -129,12 +148,6 @@ public final class JFrameLocar extends javax.swing.JFrame {
         jLabel1.setText("Data do Aluguel");
 
         jLabel2.setText("Dias");
-
-        txtDias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDiasActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("SubTotal");
 
@@ -179,15 +192,25 @@ public final class JFrameLocar extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        txtDesconto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDescontoFocusLost(evt);
+            }
+        });
+        txtDesconto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescontoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelCheckLayout = new javax.swing.GroupLayout(jPanelCheck);
         jPanelCheck.setLayout(jPanelCheckLayout);
         jPanelCheckLayout.setHorizontalGroup(
             jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCheckLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(jPanelCheckLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelCheckLayout.setVerticalGroup(
             jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,6 +219,13 @@ public final class JFrameLocar extends javax.swing.JFrame {
                 .addComponent(txtDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        txtDias.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtDias.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDiasFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelOtherLayout = new javax.swing.GroupLayout(jPanelOther);
         jPanelOther.setLayout(jPanelOtherLayout);
@@ -217,16 +247,16 @@ public final class JFrameLocar extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanelOtherLayout.createSequentialGroup()
                         .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(txtFSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41)
+                        .addGap(50, 50, 50)
                         .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBoxDesconto)
-                            .addComponent(jPanelCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jPanelCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBoxDesconto))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelOtherLayout.setVerticalGroup(
             jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,11 +270,11 @@ public final class JFrameLocar extends javax.swing.JFrame {
                         .addGap(5, 5, 5)
                         .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFDataLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtFDataLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanelOtherLayout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(26, 26, 26)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -530,10 +560,6 @@ public final class JFrameLocar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFSubTotalActionPerformed
 
-    private void txtDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDiasActionPerformed
-
     private void jComboBoxEscVeicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEscVeicActionPerformed
         // Sempre que um Id é setado as informações do veiculo aparecem.
        String veic[] = new String[11];
@@ -571,6 +597,27 @@ public final class JFrameLocar extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jComboBoxEscClientActionPerformed
+
+    private void txtDiasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiasFocusLost
+        // TODO add your handling code here:
+        if(!"".equals(txtFDataLoc.getText()) && !"".equals(txtDias.getText())){
+            
+            txtDataDevol.setText(DataHora.somaDias(txtFDataLoc.getText(), txtDias.getText()));
+            txtFSubTotal.setText(getSubT());
+        }
+    }//GEN-LAST:event_txtDiasFocusLost
+
+    private void txtDescontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescontoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescontoActionPerformed
+
+    private void txtDescontoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescontoFocusLost
+        // TODO add your handling code here:
+        if(!"".equals(txtFDataLoc.getText()) && !"".equals(txtDias.getText())&& !"".equals(txtDesconto.getText())){
+            
+            txtFSubTotal.setText(getSubT(getSubT()));
+        }
+    }//GEN-LAST:event_txtDescontoFocusLost
 
     /**
      * @param args the command line arguments
@@ -635,7 +682,7 @@ public final class JFrameLocar extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtDataDevol;
     private javax.swing.JTextField txtDesc;
     private javax.swing.JFormattedTextField txtDesconto;
-    private javax.swing.JTextField txtDias;
+    private javax.swing.JFormattedTextField txtDias;
     private javax.swing.JFormattedTextField txtFDataLoc;
     private javax.swing.JFormattedTextField txtFSubTotal;
     private javax.swing.JFormattedTextField txtGetCPF;

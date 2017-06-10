@@ -56,6 +56,15 @@ public class DataHora{
 	cal.add(Calendar.DAY_OF_MONTH, dias);
 	return cal.getTime();
     }
+    
+    public static String somaDias(String data, String dias) {
+        
+        Date date = dataToString(data);
+	Calendar cal = new GregorianCalendar();
+	cal.setTime(date);
+	cal.add(Calendar.DAY_OF_MONTH, Integer.parseInt(dias));
+	return stringToData(cal.getTime());
+    }
         //Recebe uma String dd/MM/yyyy e converte para String
     public static  Date dataToString(String data){
            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
