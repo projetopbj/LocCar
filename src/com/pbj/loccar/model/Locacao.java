@@ -250,8 +250,8 @@ public class Locacao {
             this.dataDaDevolucao = DataHora.somaDias(this.dataDoAluguel, this.qtdDias);
             calculoDesconto(desconto);
             calculoSubTotal();
+            this.statusLocacao = false;
         }catch (Exception e) {
-            System.out.println(e);
             return false;
         }
         return true;
@@ -261,9 +261,9 @@ public class Locacao {
         try {
             calculoValorFinal();
             this.dataRetorno = DataHora.somaDias(this.dataDaDevolucao, this.diasAtraso); 
+            this.statusLocacao = false;
         
         } catch (Exception e) {
-            System.out.println(e);
             return false;
         }
         return true;
@@ -314,7 +314,7 @@ public class Locacao {
     @Override
     public String toString() {
         return "Locadora{" + "id=" + id + ", descricao=" + descricao + ", qtdDias=" + qtdDias + 
-                ", dataDoAluguel=" + dataDoAluguel + ", dataDaDevolucao=" + dataDaDevolucao + 
+                ", dataDoAluquel=" + dataDoAluguel + ", dataDaDevolucao=" + dataDaDevolucao + 
                 ", isDesconto=" + desconto + ", desconto=" + desconto + 
                 ", valorDesconto=" + valorDesconto + ", subTotal=" + subTotal + ", atrasoLocacao=" + atrasoLocacao + 
                 ", diasAtraso=" + diasAtraso + ", dataRetorno=" + dataRetorno + ", valorFinal=" + valorFinal + 

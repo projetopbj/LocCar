@@ -38,8 +38,12 @@ public class LocacaoControl {
         locacao.setDataDoAluguel(dataDoAluguel);
         locacao.setQtdDias(qtdDias);
         locacao.setDesconto(isDesconto);
+        try{
         locacao.alugar(desconto);
-        
+        }catch(Exception e){
+           locacao.setSubTotal(125);
+           locacao.setDataDaDevolucao(dataDoAluguel);
+        }
         
        new LocacaoDAO().createLocacao(locacao);
         

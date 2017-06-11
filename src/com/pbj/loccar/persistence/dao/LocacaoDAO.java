@@ -10,6 +10,7 @@ import com.pbj.loccar.model.Locacao;
 import com.pbj.loccar.model.Veiculo;
 import com.pbj.loccar.persistence.ConnectionFactory;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,7 +47,7 @@ public class LocacaoDAO{
             
             stmt.setTimestamp(2, timeIda);
             stmt.setInt(3, locacao.getQtdDias());
-            stmt.setTimestamp(4, timeVolta);
+            stmt.setTimestamp(4, timeVolta );
             
             stmt.setInt(5, locacao.getCliente().getId());
             stmt.setInt(6, locacao.getVeiculo().getId());

@@ -63,13 +63,14 @@ public final class JFrameLocar extends javax.swing.JFrame {
 
     }
     private boolean verificaCampos(){
+           
         boolean desc = StringCampos.vazio(txtDesc.getText());
         boolean data = StringCampos.vazio(txtFDataLoc.getText());
         boolean dias = StringCampos.vazio(txtDias.getText());
         boolean car = StringCampos.vazio((String) jComboBoxEscVeic.getSelectedItem());
         boolean client = StringCampos.vazio((String) jComboBoxEscClient.getSelectedItem());
         return ( desc || data  || dias );
-                
+           
     }
     
     private String getSubT(){
@@ -93,10 +94,14 @@ public final class JFrameLocar extends javax.swing.JFrame {
         }
     }
     private void setaCompleta(){    
+        
         if(!"".equals(txtFDataLoc.getText()) && !"".equals(txtDias.getText())){
-            
+            try{
             txtDataDevol.setText(DataHora.somaDias(txtFDataLoc.getText(), txtDias.getText()));
             txtFSubTotal.setText(getSubT());
+            }catch(Exception e){
+                txtDias.setText("");
+            }
         }
     }
 
