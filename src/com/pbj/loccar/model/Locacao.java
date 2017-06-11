@@ -212,6 +212,14 @@ public class Locacao {
     public void setCliente(Cliente idCliente) {
         this.cliente = idCliente;
     }
+    
+    public Date getDataDoAluquel() {
+        return dataDoAluquel;
+    }
+
+    public void setDataDoAluquel(Date dataDoAluquel) {
+        this.dataDoAluquel = dataDoAluquel;
+    }
 
     @Override
     public int hashCode() {
@@ -311,15 +319,7 @@ public class Locacao {
             
         }
     }
-
-    public Date getDataDoAluquel() {
-        return dataDoAluquel;
-    }
-
-    public void setDataDoAluquel(Date dataDoAluquel) {
-        this.dataDoAluquel = dataDoAluquel;
-    }
- 
+    
     @Override
     public String toString() {
         return "Locadora{" + "id=" + id + ", descricao=" + descricao + ", qtdDias=" + qtdDias + 
