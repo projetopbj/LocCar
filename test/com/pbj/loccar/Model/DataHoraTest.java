@@ -6,12 +6,14 @@
 package com.pbj.loccar.Model;
 
 import com.pbj.loccar.util.DataHora;
+import java.util.Date;
+import junit.framework.TestCase;
 
 /**
  *
  * @author lucas
  */
-public class DataHoraTest {
+public class DataHoraTest extends TestCase{
     
     // declaro as variaveis usadas
     DataHora datahora;
@@ -28,33 +30,42 @@ public class DataHoraTest {
     }
 
     // testo o metodo
-    public void getHoraTest(){
-
-    }
-
-    // testo o metodo
-    public void getDataTest(){
-        
-    }
-
-    // testo o metodo
     public void somaDiasTest(){
+        Date somaDiasRetorno;
+        somaDiasRetorno = DataHora.somaDias(DataHora.convertData("02/06/2017"), 2);
     
+        assertEquals(0, 0);
     }
 
     // testo o metodo
     public void dataToStringTest(){
+        Date dataToStringRetorno;
+        dataToStringRetorno = DataHora.dataToString("02/06/2017");
     
+        assertEquals(0, 0);
     }
 
     // testo o metodo
     public void stringToDataTest(){
+        String stringToDataRetorno;
+        stringToDataRetorno = DataHora.stringToData(DataHora.dataToString("02/06/2017"));
     
+        assertEquals(0, 0);
     }
     
     // testo o metodo
     public void convertDataTest(){
+        Date convertDataRetorno;
+        convertDataRetorno = DataHora.convertData("02/06/2017");
+        
+        assertEquals(0, 0);
+    }
     
+    public void subDiasTest(){
+        long subDiasRetorno;
+        subDiasRetorno = DataHora.subDias("04/06/2017", "02/06/2017");
+        
+        assertEquals(0, 0);
     }
     
 }
