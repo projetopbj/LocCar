@@ -219,16 +219,28 @@ public class Locacao {
     
     
     
-    public void alugar(int desconto){
-        
-        this.dataDaDevolucao = DataHora.somaDias(dataDoAluquel, qtdDias);
-        calculoDesconto(desconto);
-        calculoSubTotal();
+    public boolean alugar(int desconto){
+        try {
+            this.dataDaDevolucao = DataHora.somaDias(this.dataDoAluquel, this.qtdDias);
+            calculoDesconto(desconto);
+            calculoSubTotal();
+        }catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+        return true;
 
     }
-    public void devolver(){
-        calculoValorFinal();
-        this.dataRetorno = DataHora.somaDias(this.dataDaDevolucao, diasAtraso); 
+    public boolean devolver(){
+        try {
+            calculoValorFinal();
+            this.dataRetorno = DataHora.somaDias(this.dataDaDevolucao, this.diasAtraso); 
+        
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+        return true;
     }
 
     //Calcula Desconto
@@ -238,7 +250,7 @@ public class Locacao {
         if (desconto > 0){
             this.isDesconto = true;
             //Pega o valor da diaria da categoria do veiculo e calcula com os dias e zas
-            this.valorDesconto =(veiculo.getCategoria().getValorDia() * ((double)this.qtdDias) * ((double)desconto *0.01));
+            this.valorDesconto =(this.veiculo.getCategoria().getValorDia() * ((double)this.qtdDias) * ((double)desconto *0.01));
         }
         else{
             this.valorDesconto = 0.0;
@@ -253,7 +265,7 @@ public class Locacao {
            
         }
         else{
-            this.subTotal = ( veiculo.getCategoria().getValorDia() * ((double)this.qtdDias) );
+            this.subTotal = ( this.veiculo.getCategoria().getValorDia() * ((double)this.qtdDias) );
             
         }
     }
@@ -262,10 +274,10 @@ public class Locacao {
         if(this.atrasoLocacao)
         {
             if(this.diasAtraso == 1){
-                valorFinal = this.subTotal + veiculo.getCategoria().getValorKm();
+                valorFinal = this.subTotal + this.veiculo.getCategoria().getValorKm();
             }else if(this.diasAtraso > 1){
-                valorFinal = this.subTotal + (veiculo.getCategoria().getValorKm() * this.diasAtraso);
-            }      
+                valorFinal = this.subTotal + (this.veiculo.getCategoria().getValorKm() * this.diasAtraso);
+            }
         }
         else{
             valorFinal = this.subTotal;

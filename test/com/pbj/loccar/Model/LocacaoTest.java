@@ -5,47 +5,74 @@
  */
 package com.pbj.loccar.Model;
 
+import com.pbj.loccar.model.Categoria;
 import com.pbj.loccar.model.Locacao;
 import com.pbj.loccar.model.Veiculo;
+import com.pbj.loccar.util.DataHora;
 import junit.framework.TestCase;
 
 /**
  *
  * @author lucas
+ * 
+ * classe de teste para a classe locacao
  */
 public class LocacaoTest extends TestCase{
+    // declaro as variaveis usadas
     Locacao locacao;
     Veiculo veiculo;
+    Categoria categoria;
     
+    // inicio as variaveis
     @Override
     public void setUp(){
         veiculo = new Veiculo();
         locacao = new Locacao();
+        categoria = new Categoria();
     }
 
+    // fecho as variaveis
     @Override
     public void tearDown(){
         veiculo = null;
         locacao = null;
+        categoria = null;
     }
-    
-    public void calculoDescontoTest(){
-    
-    }
-    
-    public void calculoSubTotalTest(){
-    
-    }
-    
-    public void calculoValorFinalTest(){
-    
-    }
-    
+
+    // testo o metodo alugar
     public void alugarTest(){
-    
+        locacao.setDataDoAluquel(DataHora.dataToString("12/06/17"));
+        
+        veiculo.setCategoria(categoria);
+        veiculo.getCategoria().setValorDia(20);
+        locacao.setQtdDias(2);
+        veiculo.getCategoria().setValorKm(2);
+        locacao.setAtrasoLocacao(true);
+        locacao.setDiasAtraso(1);
+        
+        locacao.setVeiculo(veiculo);
+        
+        boolean testAlugarCarro;
+        testAlugarCarro = locacao.alugar(10);
+        
+        assertEquals(true, testAlugarCarro);
+        
     }
     
+// testo o metodo devolver
     public void devolverTest(){
-    
+        
+        veiculo.setCategoria(categoria);
+        veiculo.getCategoria().setValorDia(20);
+        locacao.setQtdDias(2);
+        veiculo.getCategoria().setValorKm(2);
+        locacao.setAtrasoLocacao(true);
+        locacao.setDiasAtraso(1);
+        locacao.setVeiculo(veiculo);
+        
+        boolean testDevolverCarro;
+        testDevolverCarro = locacao.devolver();
+        
+        assertEquals(true, testDevolverCarro);
     }
 }
