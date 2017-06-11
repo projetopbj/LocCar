@@ -261,7 +261,7 @@ public class Locacao {
         try {
             calculoValorFinal();
             this.dataRetorno = DataHora.somaDias(this.dataDaDevolucao, this.diasAtraso); 
-            this.statusLocacao = false;
+            this.statusLocacao = true;
         
         } catch (Exception e) {
             return false;
