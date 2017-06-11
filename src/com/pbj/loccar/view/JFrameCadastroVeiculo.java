@@ -7,6 +7,7 @@ package com.pbj.loccar.view;
 
 import com.pbj.loccar.control.CategoriaControl;
 import com.pbj.loccar.control.VeiculoControl;
+import com.pbj.loccar.util.StringCampos;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -55,16 +56,8 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
         //O 8 é o status de alugado que não se modifica por aqui.
         jComboBoxCategoria.setSelectedItem(veic[9]);
     }
-    
-    
-    
-    private void popularComboBoxCateg(){
-         
-        List<String> categorias = CategoriaControl.returnNamesCategoria();
-        
-        categorias.forEach(jComboBoxCategoria::addItem);  
-    }
-    private void limparCampos(){
+    //Limpa os campos e seta ""
+     private void limparCampos(){
         
         txtModelo.setText("");
         txtFPlaca.setText("");
@@ -74,6 +67,30 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
         txtChassi.setText("");
         
     }
+     //Verifica se os campos são vazios
+     private boolean comparaCampos(){
+        
+      boolean pla =  StringCampos.vazio(txtFPlaca.getText());
+      boolean mod =  StringCampos.vazio(txtModelo.getText());
+      boolean mar =  StringCampos.vazio(txtMarca.getText());
+      boolean cha = StringCampos.vazio(txtChassi.getText());
+      boolean ano = StringCampos.vazio(txtAno.getText());
+      boolean por = StringCampos.vazio(txtNPortas.getText());
+      boolean cor = StringCampos.vazio(txtCor.getText());
+ 
+        
+        return (pla  ||mod  || mar|| cha|| ano|| mod|| por|| cor);
+        
+    }
+    
+    
+    private void popularComboBoxCateg(){
+         
+        List<String> categorias = CategoriaControl.returnNamesCategoria();
+        
+        categorias.forEach(jComboBoxCategoria::addItem);  
+    }
+ 
         
         
 
@@ -344,9 +361,7 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
         //Salva no banco de dados o Veiculo;
         
         //Verificando os campos Vazios
-        if ("".equals(txtModelo.getText()) || "".equals(txtMarca.getText()) || "".equals(txtChassi.getText())
-           || "".equals(txtCor.getText()) || "".equals(txtAno.getText()) || "".equals(txtNPortas.getText())
-                || "".equals(txtFPlaca.getText()))
+        if (comparaCampos())
         {
             //Mensagem informando caso exista algum campo vazio;
            JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
@@ -370,9 +385,7 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
         // Botão para atualizar o veiculo
          //Verificando os campos Vazios
-        if ("".equals(txtModelo.getText()) || "".equals(txtMarca.getText()) || "".equals(txtChassi.getText())
-           || "".equals(txtCor.getText()) || "".equals(txtAno.getText()) || "".equals(txtNPortas.getText())
-                || "".equals(txtFPlaca.getText()))
+        if (comparaCampos())
         {
             //Mensagem informando caso exista algum campo vazio;
            JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);

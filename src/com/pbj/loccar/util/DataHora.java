@@ -56,6 +56,35 @@ public class DataHora{
 	cal.add(Calendar.DAY_OF_MONTH, dias);
 	return cal.getTime();
     }
+    
+    public static String somaDias(String data, String diaS) {
+        
+        Date date = dataToString(data);
+	Calendar cal = new GregorianCalendar();
+	cal.setTime(date);
+        
+        int dias = Integer.parseInt(diaS);
+        
+        if(dias < 0){
+            return data;
+        }
+	cal.add(Calendar.DAY_OF_MONTH, dias);
+	return stringToData(cal.getTime());
+    }
+    
+    public static long subDias(String dataDev, String dataHoje) {
+        
+        Date dateD = dataToString(dataDev);
+        Date dateH = dataToString(dataHoje);
+        
+	long dias = (dateH.getTime() - dateD.getTime()) + 3600000;
+        
+        dias = dias  / 86400000L;
+
+	return dias;
+    }
+    
+    
         //Recebe uma String dd/MM/yyyy e converte para String
     public static  Date dataToString(String data){
            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -65,8 +94,9 @@ public class DataHora{
                 return dataRetorno;
             } catch (ParseException ex) {
                 Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                return null;    
+
             }
-        return null;    
     }
    
       //Recebe uma data e converte para String no formato dd/MM/yyyy
@@ -88,7 +118,18 @@ public class DataHora{
             }
         return null;    
     }
-   
+    //Recebe a data em String americana e retorna no padrão brasil
+    public static  String convertData2(String data){
+           DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date dataRetorno = (Date)formatter.parse(data);
+                
+                return stringToData(dataRetorno);
+            } catch (ParseException ex) {
+                Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        return null;    
+    }
 
 }
 

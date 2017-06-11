@@ -30,6 +30,8 @@ public class CategoriaControl {
      * @param vidro
      * @param direcao
      */
+  
+    
     public static void salvarCategoria(String nome,double valorDia, double valorKm, boolean ar, boolean vidro, boolean direcao){
         Categoria categoria = new Categoria();
         

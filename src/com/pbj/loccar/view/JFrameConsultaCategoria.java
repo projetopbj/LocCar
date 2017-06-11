@@ -66,7 +66,7 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
         jButtonExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridBagLayout());
+        getContentPane().setLayout(new java.awt.GridLayout());
 
         jPanelConsultaCateg.setBorder(javax.swing.BorderFactory.createTitledBorder("Consulta Categorias"));
 
@@ -107,7 +107,7 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
             .addGroup(jPanelConsultaCategLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelConsultaCategLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConsultaCategLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonAtualizeTable)))
@@ -170,10 +170,10 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
                     .addComponent(jButtonAlterar)
                     .addComponent(jButtonCancel)
                     .addComponent(jButtonExcluir))
-                .addGap(0, 61, Short.MAX_VALUE))
+                .addGap(0, 69, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanelConsultaBotoes, new java.awt.GridBagConstraints());
+        getContentPane().add(jPanelConsultaBotoes);
 
         pack();
         setLocationRelativeTo(null);

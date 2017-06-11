@@ -16,25 +16,25 @@ import java.util.Objects;
  * Classe que realiza a locação no banco de dados faz papel de relacionamento
  */
 public class Locacao {
-    
-    private static int iterador; //Variavel statica para iterar;
-
-    
+       
     private int id;
     private String descricao;
     private int qtdDias;
-    private Date dataDoAluquel;
+    private Date dataDoAluguel;
     private Date dataDaDevolucao;
-    private boolean isDesconto; // Bolean que guarda se existe desconto;
-    private int desconto;    // Valor em Porcentagem que não será guardado no Banco de dados
+    private boolean desconto; // Bolean que guarda se existe desconto;
     private double valorDesconto; // Valor final calculado do desconto que será guardado no banco
     private double subTotal;
     private boolean atrasoLocacao;
     private int diasAtraso;
     private Date dataRetorno;
     private double valorFinal;
+    private boolean statusLocacao;
+
+
     private Cliente cliente; // chave estrangeira para o cliente
     private Veiculo veiculo; // chave estrangeira para o veículo
+    private Date dataDoAluquel;
     
     
     //Construtor Vazio que apenas inicializa o ID
@@ -47,7 +47,7 @@ public class Locacao {
       this.atrasoLocacao = false;
       this.diasAtraso = 0;
       valorFinal = 0.0;      
-      this.dataRetorno = null;
+      this.dataRetorno = DataHora.dataToString("00/00/00");
         
         
         
@@ -55,7 +55,6 @@ public class Locacao {
     //Construtor que Inicializa o ID e Já recebe os Clientes e Veiculo
     public Locacao(Cliente cliente, Veiculo veiculo){
         
-        id = ++iterador;
         
         this.veiculo = veiculo;
         this.cliente = cliente;
@@ -66,23 +65,39 @@ public class Locacao {
         
         
     }
-
-    public boolean isIsDesconto() {
-        return isDesconto;
+    
+    public boolean isStatusLocacao() {
+        return statusLocacao;
+    }
+    
+    public String getStatusLocacao() {
+         if(this.statusLocacao){
+             return "Finalizado";
+         }else{
+            return "Aberto";
+         }
     }
 
-    public void setIsDesconto(boolean isDesconto) {
-        this.isDesconto = isDesconto;
+    public void setStatusLocacao(boolean statusLocacao) {
+        this.statusLocacao = statusLocacao;
     }
-
-    public int getDesconto() {
+    
+    public boolean isDesconto() {
         return desconto;
     }
-
-    public void setDesconto(int desconto) {
-        this.desconto = desconto;
+    
+     public String getDesconto() {
+         if(this.desconto){
+             return "Sim";
+         }else{
+            return "Não";
+         }
     }
 
+    public void setDesconto(boolean desconto) {
+        this.desconto = desconto;
+    }
+    
     public double getValorDesconto() {
         return valorDesconto;
     }
@@ -123,12 +138,12 @@ public class Locacao {
         this.qtdDias = qtdDias;
     }
 
-    public Date getDataDoAluquel() {
-        return dataDoAluquel;
+    public Date getDataDoAluguel() {
+        return dataDoAluguel;
     }
 
-    public void setDataDoAluquel(Date dataDoAluquel) {
-        this.dataDoAluquel = dataDoAluquel;
+    public void setDataDoAluguel(Date dataDoAluguel) {
+        this.dataDoAluguel = dataDoAluguel;
     }
 
     public Date getDataDaDevolucao() {
@@ -138,6 +153,7 @@ public class Locacao {
     public void setDataDaDevolucao(Date dataDaDevolucao) {
         this.dataDaDevolucao = dataDaDevolucao;
     }
+    
     public double getSubTotal() {
         return subTotal;
     }
@@ -149,7 +165,15 @@ public class Locacao {
     public boolean isAtrasoLocacao() {
         return atrasoLocacao;
     }
-
+    
+    public String getAtrasoLocacao() {
+         if(this.atrasoLocacao){
+             return "Sim";
+         }else{
+            return "Não";
+         }
+    }
+    
     public void setAtrasoLocacao(boolean atrasoLocacao) {
         this.atrasoLocacao = atrasoLocacao;
     }
@@ -163,6 +187,9 @@ public class Locacao {
     }
 
     public Date getDataRetorno() {
+        if(dataRetorno == null){
+            return dataDaDevolucao;
+        }
         return dataRetorno;
     }
 
@@ -178,12 +205,12 @@ public class Locacao {
         this.valorFinal = valorFinal;
     }
 
-    public Cliente getClientel() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setClientel(Cliente idClientel) {
-        this.cliente = idClientel;
+    public void setCliente(Cliente idCliente) {
+        this.cliente = idCliente;
     }
 
     @Override
@@ -248,7 +275,7 @@ public class Locacao {
         
         //Se o desconto recebebido for maior que zero
         if (desconto > 0){
-            this.isDesconto = true;
+            this.desconto = true;
             //Pega o valor da diaria da categoria do veiculo e calcula com os dias e zas
             this.valorDesconto =(this.veiculo.getCategoria().getValorDia() * ((double)this.qtdDias) * ((double)desconto *0.01));
         }
@@ -274,22 +301,30 @@ public class Locacao {
         if(this.atrasoLocacao)
         {
             if(this.diasAtraso == 1){
-                valorFinal = this.subTotal + this.veiculo.getCategoria().getValorKm();
+                this.valorFinal = this.subTotal + this.veiculo.getCategoria().getValorKm();
             }else if(this.diasAtraso > 1){
-                valorFinal = this.subTotal + (this.veiculo.getCategoria().getValorKm() * this.diasAtraso);
+                this.valorFinal = this.subTotal + (this.veiculo.getCategoria().getValorKm() * this.diasAtraso);
             }
         }
         else{
-            valorFinal = this.subTotal;
+            this.valorFinal = this.subTotal;
             
         }
+    }
+
+    public Date getDataDoAluquel() {
+        return dataDoAluquel;
+    }
+
+    public void setDataDoAluquel(Date dataDoAluquel) {
+        this.dataDoAluquel = dataDoAluquel;
     }
  
     @Override
     public String toString() {
         return "Locadora{" + "id=" + id + ", descricao=" + descricao + ", qtdDias=" + qtdDias + 
-                ", dataDoAluquel=" + dataDoAluquel + ", dataDaDevolucao=" + dataDaDevolucao + 
-                ", isDesconto=" + isDesconto + ", desconto=" + desconto + 
+                ", dataDoAluquel=" + dataDoAluguel + ", dataDaDevolucao=" + dataDaDevolucao + 
+                ", isDesconto=" + desconto + ", desconto=" + desconto + 
                 ", valorDesconto=" + valorDesconto + ", subTotal=" + subTotal + ", atrasoLocacao=" + atrasoLocacao + 
                 ", diasAtraso=" + diasAtraso + ", dataRetorno=" + dataRetorno + ", valorFinal=" + valorFinal + 
                 ", clientel=" + cliente + ", veiculo=" + veiculo + '}';

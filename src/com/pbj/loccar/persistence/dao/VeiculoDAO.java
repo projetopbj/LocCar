@@ -353,7 +353,7 @@ public class VeiculoDAO implements VeiculoPersistence {
     
     //Retorna apenas uma categoria recebendo o nome como parametro.
     @Override
-    public Veiculo retornaVeiculo(String placa){
+    public Veiculo retornaVeiculo(String modelo){
         Veiculo veic = new Veiculo();
         
         Connection conn = ConnectionFactory.getConnection();
@@ -361,9 +361,9 @@ public class VeiculoDAO implements VeiculoPersistence {
         ResultSet rs = null;
      
         try {
-            stmt = conn.prepareStatement("SELECT * FROM veiculo WHERE placa = ?");
+            stmt = conn.prepareStatement("SELECT * FROM veiculo WHERE modelo = ?");
             
-            stmt.setString(1, placa);
+            stmt.setString(1, modelo);
 
             rs = stmt.executeQuery();
             
@@ -410,6 +410,7 @@ public class VeiculoDAO implements VeiculoPersistence {
             stmt = conn.prepareStatement("SELECT * FROM veiculo WHERE id = ?");
             
              stmt.setInt(1, id);
+             
             
             rs = stmt.executeQuery();
             
@@ -481,6 +482,37 @@ public class VeiculoDAO implements VeiculoPersistence {
         }
         
     }
+    
+    
+    public void updateVeiculo(Veiculo veiculo, boolean alugado){
+        
+        Connection conn = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = conn.prepareStatement("UPDATE veiculo SET alugado = ? WHERE id = ?");
+            
+            
+            stmt.setBoolean(1, alugado);
+           
+            stmt.setInt(2, veiculo.getId());
+         
+            stmt.executeUpdate();
+            
+        JOptionPane.showMessageDialog(null, "Veiculo Atualizada no Banco de Dados");
+
+            
+        } catch (SQLException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Não foi Atualizar no Banco de Dados!" + ex, "Erro ao Salvar",JOptionPane.ERROR_MESSAGE);
+            
+        }finally{
+            
+            ConnectionFactory.fecharConnection(conn, stmt);
+        }
+        
+    }
+
     
     //Deleta o Veiculo Informada do Banco de Dados
     @Override

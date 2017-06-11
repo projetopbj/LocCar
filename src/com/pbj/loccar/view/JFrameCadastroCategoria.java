@@ -6,7 +6,7 @@
 package com.pbj.loccar.view;
 
 import com.pbj.loccar.control.CategoriaControl;
-import java.text.NumberFormat;
+import com.pbj.loccar.util.StringCampos;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,7 +32,7 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
 
                 
     }
-    
+    //Seta valores nos campos
     private void SetCampos(String[] categ){
         
         id = Integer.parseInt(categ[0]);
@@ -46,7 +46,7 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
         
     }
     
-    //Metodo serve para limpar os txt fields
+    //Metodo serve para limpar os campos
     private void limpaCampos(){
         
         txtNomeCateg.setText("");
@@ -55,6 +55,16 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
         jComboBoxAr.setSelectedIndex(0);
         jComboBoxVidro.setSelectedIndex(0);
         jComboBoxDirecaoH.setSelectedIndex(0);
+        
+    }
+    //Verifica se os campos são vazios
+    private boolean comparaCampos(){
+        
+      boolean n =  StringCampos.vazio(txtNomeCateg.getText());
+      boolean d =  StringCampos.vazio(txtValorDia.getText());
+      boolean r =  StringCampos.vazio(txtKM.getText());
+        
+        return (n  || d  || r);
         
     }
     /**
@@ -103,7 +113,7 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
             }
         });
 
-        jLabelValorKMExc.setText("Valor Quilometro Execedido");
+        jLabelValorKMExc.setText("Valor Dia Execedido");
 
         jLabel5.setText("Ar Condicionado");
 
@@ -261,17 +271,15 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
        if("Sim".equals(obj))
          {  
              bool = true; 
-         
          }
-       
-       
+         
        return bool;
    }
     
     
     private void jButtonCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroActionPerformed
         // Botão que salva o Usuário no Banco de dados.
-        if ("".equals(txtNomeCateg.getText()) || "".equals(txtValorDia.getText()) || "".equals(txtKM.getText()))
+        if (comparaCampos())
         {
            JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
         }else{ 
@@ -303,7 +311,7 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
         // Atualiza a Categoria Recebendo ela diretamente da aba de consulta
                    
         //Verifica se o valor da variavel é sim ou não e retorna true ou false;
-        if ("".equals(txtNomeCateg.getText()) || "".equals(txtValorDia.getText()) || "".equals(txtKM.getText()))
+        if (comparaCampos())
         {
            JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
         }else{ 

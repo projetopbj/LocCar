@@ -5,6 +5,8 @@
  */
 package com.pbj.loccar.view;
 
+import com.pbj.loccar.control.LocacaoControl;
+import com.pbj.loccar.view.tables.LocacaoTable;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,12 +15,27 @@ import javax.swing.JOptionPane;
  */
 public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
 
+    LocacaoTable tableModel;
     /**
      * Creates new form JFrameDevolverVeiculo
      */
     public JFrameConsultaDevolucao() {
         initComponents();
+        
+        tableModel = new LocacaoTable(LocacaoControl.lerLocacao(false));
+        jTableLoc.setModel(tableModel);
+        
+        
      
+    }
+    private String[] pegarLoc(){
+        if(jTableLoc.getSelectedRow() != -1 ){      
+            String loc[] = tableModel.getLinha(jTableLoc.getSelectedRow());
+     
+        return loc;
+        }else{
+            return null;
+        }
     }
 
     /**
@@ -29,29 +46,25 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
-        buttonGroup = new javax.swing.ButtonGroup();
         jPanelBuscaLoc = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableLoc = new javax.swing.JTable();
         jPanelBusca = new javax.swing.JPanel();
         txtBusca = new javax.swing.JTextField();
         jButtonBuscar = new javax.swing.JButton();
         jPanelFiltro = new javax.swing.JPanel();
-        jRadioButtonCliente = new javax.swing.JRadioButton();
-        jRadioButtonCPF = new javax.swing.JRadioButton();
-        jRadioButtonPlaca = new javax.swing.JRadioButton();
-        jRadioButtonCarro = new javax.swing.JRadioButton();
+        jComboBoxStatus = new javax.swing.JComboBox<>();
         jButtonChamaDevol = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
+        jButtonAtualizarT = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Locações");
         setPreferredSize(new java.awt.Dimension(600, 450));
-        getContentPane().setLayout(new java.awt.GridBagLayout());
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableLoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -59,30 +72,25 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
                 "Código", "Cliente", "CPF", "Carro", "Placa", "Categoria", "Data da Locação", "Data da Devolução", "Dias", "Valor Parcial"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableLoc);
 
         jPanelBusca.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar Locação"));
 
         jButtonBuscar.setText("Buscar");
-
-        jPanelFiltro.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtrar"));
-
-        buttonGroup.add(jRadioButtonCliente);
-        jRadioButtonCliente.setText("Cliente");
-        jRadioButtonCliente.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonClienteActionPerformed(evt);
+                jButtonBuscarActionPerformed(evt);
             }
         });
 
-        buttonGroup.add(jRadioButtonCPF);
-        jRadioButtonCPF.setText("CPF");
+        jPanelFiltro.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtrar"));
 
-        buttonGroup.add(jRadioButtonPlaca);
-        jRadioButtonPlaca.setText("Placa");
-
-        buttonGroup.add(jRadioButtonCarro);
-        jRadioButtonCarro.setText("Carro");
+        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Abertos", "Finalizados" }));
+        jComboBoxStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxStatusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelFiltroLayout = new javax.swing.GroupLayout(jPanelFiltro);
         jPanelFiltro.setLayout(jPanelFiltroLayout);
@@ -90,25 +98,15 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
             jPanelFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFiltroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButtonCliente)
-                    .addComponent(jRadioButtonCarro))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButtonPlaca)
-                    .addComponent(jRadioButtonCPF))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jComboBoxStatus, 0, 121, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanelFiltroLayout.setVerticalGroup(
             jPanelFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFiltroLayout.createSequentialGroup()
-                .addGroup(jPanelFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButtonCliente)
-                    .addComponent(jRadioButtonCPF))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelFiltroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButtonCarro)
-                    .addComponent(jRadioButtonPlaca)))
+                .addGap(19, 19, 19)
+                .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelBuscaLayout = new javax.swing.GroupLayout(jPanelBusca);
@@ -116,13 +114,13 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
         jPanelBuscaLayout.setHorizontalGroup(
             jPanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBuscaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtBusca, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
+                .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonBuscar)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addContainerGap())
         );
         jPanelBuscaLayout.setVerticalGroup(
             jPanelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,10 +130,9 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
                     .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBuscar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBuscaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanelBuscaLayout.createSequentialGroup()
                 .addComponent(jPanelFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         jButtonChamaDevol.setText("Devolver");
@@ -149,6 +146,13 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelActionPerformed(evt);
+            }
+        });
+
+        jButtonAtualizarT.setText("Atualizar Tabela");
+        jButtonAtualizarT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtualizarTActionPerformed(evt);
             }
         });
 
@@ -166,18 +170,23 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
                         .addComponent(jButtonChamaDevol, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(77, 77, 77))
                     .addGroup(jPanelBuscaLocLayout.createSequentialGroup()
-                        .addGroup(jPanelBuscaLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanelBusca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE))
+                        .addComponent(jPanelBusca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBuscaLocLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonAtualizarT)
+                .addGap(30, 30, 30))
         );
         jPanelBuscaLocLayout.setVerticalGroup(
             jPanelBuscaLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBuscaLocLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                .addComponent(jPanelBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(jButtonAtualizarT)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
                 .addGap(49, 49, 49)
                 .addGroup(jPanelBuscaLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonChamaDevol)
@@ -185,33 +194,28 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
                 .addGap(31, 31, 31))
         );
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 226;
-        gridBagConstraints.ipady = 149;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        getContentPane().add(jPanelBuscaLoc, gridBagConstraints);
+        getContentPane().add(jPanelBuscaLoc);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonClienteActionPerformed
-
     private void jButtonChamaDevolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChamaDevolActionPerformed
         // TODO add your handling code here:
+        
+        if(jTableLoc.getSelectedRow() != -1){
+
          int resp;
         resp = JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Devolver?","Devolver Veículo", JOptionPane.YES_OPTION, JOptionPane.QUESTION_MESSAGE);
         
         if (resp == 0){
             
-             new JFrameDevolucao().setVisible(true);
+            String getLoc[] = pegarLoc();
+            
+             new JFrameDevolucao(Integer.parseInt(getLoc[0])).setVisible(true);
         }
             
-         
+    }
          
          
         
@@ -221,6 +225,54 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
         // TODO add your handling code here:
          this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
+
+    private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
+        // TODO add your handling code here:
+        if("Abertos".equals(jComboBoxStatus.getSelectedItem())){
+            
+            tableModel.removeAll();
+            tableModel.addLista(LocacaoControl.lerLocacao(false));
+            jButtonChamaDevol.setEnabled(true);
+
+            
+        }else if("Finalizados".equals(jComboBoxStatus.getSelectedItem())){
+            tableModel.removeAll();
+            tableModel.addLista(LocacaoControl.lerLocacao(true));
+            jButtonChamaDevol.setEnabled(false);
+            
+        }else{
+            tableModel.removeAll();
+            tableModel.addLista(LocacaoControl.lerLocacao());
+            jButtonChamaDevol.setEnabled(false);
+        }
+    }//GEN-LAST:event_jComboBoxStatusActionPerformed
+
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+        // TODO add your handling code here:
+        if("Abertos".equals(jComboBoxStatus.getSelectedItem())){
+            
+            tableModel.removeAll();
+            tableModel.addLista(LocacaoControl.lerLocacao(false,txtBusca.getText()));
+
+            
+        }else if("Finalizados".equals(jComboBoxStatus.getSelectedItem())){
+            tableModel.removeAll();
+            tableModel.addLista(LocacaoControl.lerLocacao(true,txtBusca.getText()));
+            
+        }else{
+            tableModel.removeAll();
+            tableModel.addLista(LocacaoControl.lerLocacao(txtBusca.getText()));
+        }
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    private void jButtonAtualizarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarTActionPerformed
+        // TODO add your handling code here:
+        tableModel.removeAll();
+        tableModel.addLista(LocacaoControl.lerLocacao(false));
+        jButtonChamaDevol.setEnabled(true);
+        jComboBoxStatus.setSelectedIndex(0);
+        txtBusca.setText("");
+    }//GEN-LAST:event_jButtonAtualizarTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,19 +317,16 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup;
+    private javax.swing.JButton jButtonAtualizarT;
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonChamaDevol;
+    private javax.swing.JComboBox<String> jComboBoxStatus;
     private javax.swing.JPanel jPanelBusca;
     private javax.swing.JPanel jPanelBuscaLoc;
     private javax.swing.JPanel jPanelFiltro;
-    private javax.swing.JRadioButton jRadioButtonCPF;
-    private javax.swing.JRadioButton jRadioButtonCarro;
-    private javax.swing.JRadioButton jRadioButtonCliente;
-    private javax.swing.JRadioButton jRadioButtonPlaca;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableLoc;
     private javax.swing.JTextField txtBusca;
     // End of variables declaration//GEN-END:variables
 }

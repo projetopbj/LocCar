@@ -6,11 +6,8 @@
 package com.pbj.loccar.control;
 
 import com.pbj.loccar.model.Cliente;
-import com.pbj.loccar.model.EstadoCivil;
 import com.pbj.loccar.model.Locacao;
-import com.pbj.loccar.model.Sexo;
 import com.pbj.loccar.model.Veiculo;
-import com.pbj.loccar.persistence.ClientePersistence;
 import com.pbj.loccar.persistence.dao.ClienteDAO;
 import com.pbj.loccar.persistence.dao.LocacaoDAO;
 import com.pbj.loccar.persistence.dao.VeiculoDAO;
@@ -27,20 +24,20 @@ import java.util.List;
  */
 public class LocacaoControl {
     
-    //Salva o Cliente no Banco de dadod
+    //Salva a Locacao no Banco de dados
     public static void salvarLocacao(String descricao, Date dataDoAluguel,int qtdDias,
                     int idCliente, int idVeiculo,boolean isDesconto, int desconto){
         
         
-        Cliente cliente = new ClienteDAO().retornaCliente(idCliente);
+        Cliente locate = new ClienteDAO().retornaCliente(idCliente);
         Veiculo veiculo = new VeiculoDAO().retornaVeiculo(idVeiculo);
-        Locacao locacao = new Locacao(cliente, veiculo);
+        Locacao locacao = new Locacao(locate, veiculo);
         
         
         locacao.setDescricao(descricao);
-        locacao.setDataDoAluquel(dataDoAluguel);
+        locacao.setDataDoAluguel(dataDoAluguel);
         locacao.setQtdDias(qtdDias);
-        locacao.setIsDesconto(isDesconto);
+        locacao.setDesconto(isDesconto);
         locacao.alugar(desconto);
         
         
@@ -49,159 +46,256 @@ public class LocacaoControl {
         
     }
     /*
-    Converte o retorno Lista de Clientes do DAO e Converte em Vetor de String 
-    0 = id      
-    1 = nome    
-    2 = rg 
-    3 = cpf 
-    4 = estado civil      
-    5 = sexo   
-    6 = data nascimento
-    7 = email
-    8 = telefone
-    9 = celular
-    10 = rua
-    11 = cep
-    12 = complemento
-    13 = bairro
-    14 = cidade
-    15 = UF
+    Converte o retorno Lista de Locacao do DAO e Converte em Vetor de String 
+    " # ",
+    "Descrição",
+    "Cliente",
+    "Veiculo",
+    "Placa",
+    "Data Ida",
+    "Dias",
+    "Data Esperada",
+    "Data Volta",
+    "Desconto",
+    "Valor do Desconto",
+    "SubTotal",
+    "Atraso",
+    "Dias de Atraso"
+    "Valor Final",
+    "Status"
     */
-    public static List<String[]> lerCliente(String cpf,boolean gambiarra){
+    public static List<String[]> lerLocacao(){
         
-        List<String[]> clientes = new ArrayList<>();
+        List<String[]> locacao = new ArrayList<>();
                 
-        List<Cliente> clienList = new ClienteDAO().readCliente(cpf, gambiarra);
+        List<Locacao> locaList = new LocacaoDAO().readLocacao();
         
-        for(int i = 0 ; i < clienList.size(); i++){
+        for(int i = 0 ; i < locaList.size(); i++){
             
-            String clienTemp[] = new String[16];
+            String locaTemp[] = new String[16];
             
-            clienTemp[0] = Integer.toString(clienList.get(i).getId());
-            clienTemp[1] = clienList.get(i).getNomeCliente();
-            clienTemp[2] = clienList.get(i).getRgCliente();
-            clienTemp[3] = clienList.get(i).getCpfCliente();
-            clienTemp[4] = clienList.get(i).getEstadoCivilCliente().toString();
-            clienTemp[5] = clienList.get(i).getSexoCliente().toString();
-            clienTemp[6] = clienList.get(i).getDataNascCliente().toString();
-            clienTemp[7] = clienList.get(i).getEmailCliente();
-            clienTemp[8] = clienList.get(i).getTelefoneCliente();
-            clienTemp[9] = clienList.get(i).getCelularCliente();
-            clienTemp[10] = clienList.get(i).getRuaCliente();
-            clienTemp[11] = clienList.get(i).getCepCliente();
-            clienTemp[12] = clienList.get(i).getComplementoCliente();
-            clienTemp[13] = clienList.get(i).getBairroCliente();
-            clienTemp[14] = clienList.get(i).getCidadeCliente();
-            clienTemp[15] = clienList.get(i).getUfCliente();
-                            
-            clientes.add(clienTemp);   
+            locaTemp[0] = Integer.toString(locaList.get(i).getId());
+            locaTemp[1] = locaList.get(i).getDescricao();
+            locaTemp[2] = locaList.get(i).getCliente().getNomeCliente();
+            locaTemp[3] = locaList.get(i).getVeiculo().getModelo();
+            locaTemp[4] = locaList.get(i).getVeiculo().getPlaca();
+            locaTemp[5] = locaList.get(i).getDataDoAluguel().toString();
+            locaTemp[6] = Integer.toString(locaList.get(i).getQtdDias());
+            locaTemp[7] = locaList.get(i).getDataDaDevolucao().toString();
+            
+            locaTemp[8] = locaList.get(i).getDataRetorno().toString();
+            
+            locaTemp[9] = locaList.get(i).getDesconto();
+            
+            locaTemp[10] = Double.toString(locaList.get(i).getValorDesconto());
+            
+            locaTemp[11] = Double.toString(locaList.get(i).getSubTotal());
+            
+            locaTemp[12] = locaList.get(i).getAtrasoLocacao();
+            locaTemp[13] = Integer.toString(locaList.get(i).getDiasAtraso());
+            locaTemp[14] = Double.toString(locaList.get(i).getValorFinal());
+            locaTemp[15] = locaList.get(i).getStatusLocacao();
+            
+            
+            locacao.add(locaTemp);   
         }   
-        return clientes;        
+        return locacao;        
+    }
+    public static List<String[]> lerLocacao(boolean status){
+        
+        List<String[]> locacao = new ArrayList<>();
+                
+        List<Locacao> locaList = new LocacaoDAO().readLocacao(status);
+        
+        for(int i = 0 ; i < locaList.size(); i++){
+            
+            String locaTemp[] = new String[16];
+            
+            locaTemp[0] = Integer.toString(locaList.get(i).getId());
+            locaTemp[1] = locaList.get(i).getDescricao();
+            locaTemp[2] = locaList.get(i).getCliente().getNomeCliente();
+            locaTemp[3] = locaList.get(i).getVeiculo().getModelo();
+            locaTemp[4] = locaList.get(i).getVeiculo().getPlaca();
+            locaTemp[5] = locaList.get(i).getDataDoAluguel().toString();
+            locaTemp[6] = Integer.toString(locaList.get(i).getQtdDias());
+            locaTemp[7] = locaList.get(i).getDataDaDevolucao().toString();
+            
+            locaTemp[8] = locaList.get(i).getDataRetorno().toString();
+            
+            locaTemp[9] = locaList.get(i).getDesconto();
+            
+            locaTemp[10] = Double.toString(locaList.get(i).getValorDesconto());
+            
+            locaTemp[11] = Double.toString(locaList.get(i).getSubTotal());
+            
+            locaTemp[12] = locaList.get(i).getAtrasoLocacao();
+            locaTemp[13] = Integer.toString(locaList.get(i).getDiasAtraso());
+            locaTemp[14] = Double.toString(locaList.get(i).getValorFinal());
+            locaTemp[15] = locaList.get(i).getStatusLocacao();
+            
+            
+            locacao.add(locaTemp);   
+        }   
+        return locacao;        
     }
     
-    public static List<String[]> lerCliente(String nome){
+    public static List<String[]> lerLocacao(boolean status, String param){
         
-        List<String[]> clientes = new ArrayList<>();
+        List<String[]> locacao = new ArrayList<>();
                 
-        List<Cliente> clienList = new ClienteDAO().readCliente(nome);
+        List<Locacao> locaList = new LocacaoDAO().readLocacao(status, param);
         
-        for(int i = 0 ; i < clienList.size(); i++){
+        for(int i = 0 ; i < locaList.size(); i++){
             
-            String clienTemp[] = new String[16];
+            String locaTemp[] = new String[16];
             
-            clienTemp[0] = Integer.toString(clienList.get(i).getId());
-            clienTemp[1] = clienList.get(i).getNomeCliente();
-            clienTemp[2] = clienList.get(i).getRgCliente();
-            clienTemp[3] = clienList.get(i).getCpfCliente();
-            clienTemp[4] = clienList.get(i).getEstadoCivilCliente().toString();
-            clienTemp[5] = clienList.get(i).getSexoCliente().toString();
-            clienTemp[6] = clienList.get(i).getDataNascCliente().toString();
-            clienTemp[7] = clienList.get(i).getEmailCliente();
-            clienTemp[8] = clienList.get(i).getTelefoneCliente();
-            clienTemp[9] = clienList.get(i).getCelularCliente();
-            clienTemp[10] = clienList.get(i).getRuaCliente();
-            clienTemp[11] = clienList.get(i).getCepCliente();
-            clienTemp[12] = clienList.get(i).getComplementoCliente();
-            clienTemp[13] = clienList.get(i).getBairroCliente();
-            clienTemp[14] = clienList.get(i).getCidadeCliente();
-            clienTemp[15] = clienList.get(i).getUfCliente();
+            locaTemp[0] = Integer.toString(locaList.get(i).getId());
+            locaTemp[1] = locaList.get(i).getDescricao();
+            locaTemp[2] = locaList.get(i).getCliente().getNomeCliente();
+            locaTemp[3] = locaList.get(i).getVeiculo().getModelo();
+            locaTemp[4] = locaList.get(i).getVeiculo().getPlaca();
+            locaTemp[5] = locaList.get(i).getDataDoAluguel().toString();
+            locaTemp[6] = Integer.toString(locaList.get(i).getQtdDias());
+            locaTemp[7] = locaList.get(i).getDataDaDevolucao().toString();
             
-            clientes.add(clienTemp);   
+            locaTemp[8] = locaList.get(i).getDataRetorno().toString();
+            
+            locaTemp[9] = locaList.get(i).getDesconto();
+            
+            locaTemp[10] = Double.toString(locaList.get(i).getValorDesconto());
+            
+            locaTemp[11] = Double.toString(locaList.get(i).getSubTotal());
+            
+            locaTemp[12] = locaList.get(i).getAtrasoLocacao();
+            locaTemp[13] = Integer.toString(locaList.get(i).getDiasAtraso());
+            locaTemp[14] = Double.toString(locaList.get(i).getValorFinal());
+            locaTemp[15] = locaList.get(i).getStatusLocacao();
+            
+            
+            locacao.add(locaTemp);   
         }   
-        return clientes;        
+        return locacao;        
     }
-
-    public static List<String[]> lerCliente(){
+    
+    public static List<String[]> lerLocacao(String param){
         
-        List<String[]> clientes = new ArrayList<>();
+        List<String[]> locacao = new ArrayList<>();
                 
-        List<Cliente> clienList = new ClienteDAO().readCliente();
+        List<Locacao> locaList = new LocacaoDAO().readLocacao(param);
         
-        for(int i = 0 ; i < clienList.size(); i++){
+        for(int i = 0 ; i < locaList.size(); i++){
             
-            String clienTemp[] = new String[16];
+            String locaTemp[] = new String[16];
             
-            clienTemp[0] = Integer.toString(clienList.get(i).getId());
-            clienTemp[1] = clienList.get(i).getNomeCliente();
-            clienTemp[2] = clienList.get(i).getRgCliente();
-            clienTemp[3] = clienList.get(i).getCpfCliente();
-            clienTemp[4] = clienList.get(i).getEstadoCivilCliente().toString();
-            clienTemp[5] = clienList.get(i).getSexoCliente().toString();
-            clienTemp[6] = clienList.get(i).getDataNascCliente().toString();
-            clienTemp[7] = clienList.get(i).getEmailCliente();
-            clienTemp[8] = clienList.get(i).getTelefoneCliente();
-            clienTemp[9] = clienList.get(i).getCelularCliente();
-            clienTemp[10] = clienList.get(i).getRuaCliente();
-            clienTemp[11] = clienList.get(i).getCepCliente();
-            clienTemp[12] = clienList.get(i).getComplementoCliente();
-            clienTemp[13] = clienList.get(i).getBairroCliente();
-            clienTemp[14] = clienList.get(i).getCidadeCliente();
-            clienTemp[15] = clienList.get(i).getUfCliente();
+            locaTemp[0] = Integer.toString(locaList.get(i).getId());
+            locaTemp[1] = locaList.get(i).getDescricao();
+            locaTemp[2] = locaList.get(i).getCliente().getNomeCliente();
+            locaTemp[3] = locaList.get(i).getVeiculo().getModelo();
+            locaTemp[4] = locaList.get(i).getVeiculo().getPlaca();
+            locaTemp[5] = locaList.get(i).getDataDoAluguel().toString();
+            locaTemp[6] = Integer.toString(locaList.get(i).getQtdDias());
+            locaTemp[7] = locaList.get(i).getDataDaDevolucao().toString();
             
-            clientes.add(clienTemp);   
+            locaTemp[8] = locaList.get(i).getDataRetorno().toString();
+            
+            locaTemp[9] = locaList.get(i).getDesconto();
+            
+            locaTemp[10] = Double.toString(locaList.get(i).getValorDesconto());
+            
+            locaTemp[11] = Double.toString(locaList.get(i).getSubTotal());
+            
+            locaTemp[12] = locaList.get(i).getAtrasoLocacao();
+            locaTemp[13] = Integer.toString(locaList.get(i).getDiasAtraso());
+            locaTemp[14] = Double.toString(locaList.get(i).getValorFinal());
+            locaTemp[15] = locaList.get(i).getStatusLocacao();
+            
+            
+            locacao.add(locaTemp);   
         }   
-        return clientes;        
+        return locacao;        
+    }
+    
+    public static String[] pegaLocacao(int id){
+        
+                
+        Locacao locaList = new LocacaoDAO().retornaLocacao(id);
+        
+            
+            String locaTemp[] = new String[14];
+            
+            locaTemp[0] = Integer.toString(locaList.getId());
+            locaTemp[1] = locaList.getDescricao();
+            
+            locaTemp[2] = locaList.getCliente().getNomeCliente();
+            locaTemp[3] = locaList.getCliente().getCpfCliente();
+            
+            locaTemp[4] = locaList.getVeiculo().getModelo();
+            locaTemp[5] = locaList.getVeiculo().getPlaca();
+            locaTemp[6] = locaList.getVeiculo().getCategoria().getNome();
+            locaTemp[7] = Double.toString(locaList.getVeiculo().getCategoria().getValorDia());
+            locaTemp[8] = Double.toString(locaList.getVeiculo().getCategoria().getValorKm());
+                    
+            locaTemp[9] = locaList.getDataDoAluguel().toString();
+            locaTemp[10] = Integer.toString(locaList.getQtdDias());
+            locaTemp[11] = locaList.getDataDaDevolucao().toString();
+            locaTemp[12] = Double.toString(locaList.getValorDesconto());
+            locaTemp[13] = Double.toString(locaList.getSubTotal());
+            
+                        
+            
+            return locaTemp;   
+               
     }
    
-    //Atualiza o Cliente recebendo os dados da tabela na view
-    public static void atualizarCliente(int id,String nome,String rg, String cpf,String estadoCivil, String sexo, 
-            Date dataNasc, String email,String telefone, String celular, String rua, String cep, 
-            String complemento,String bairro, String cidade, String uf){
-                
-        Cliente cliente = new Cliente();
+    //Atualiza A Locacao não finalizada recebendo os dados da tabela na view
+    public static void atualizarLocacao(int id,String descricao, Date dataDoAluguel,int qtdDias,
+                    int idCliente, int idVeiculo,boolean isDesconto, int desconto){
+                  
+        Cliente locate = new ClienteDAO().retornaCliente(idCliente);
+        Veiculo veiculo = new VeiculoDAO().retornaVeiculo(idVeiculo);
+        Locacao locacao = new Locacao(locate, veiculo);
         
-        cliente.setId(id);
-        cliente.setNomeCliente(nome);
-        cliente.setRgCliente(rg);
-        cliente.setCpfCliente(cpf);
-        cliente.setEstadoCivilCliente(EstadoCivil.valueOf(estadoCivil));
-        cliente.setSexoCliente(Sexo.valueOf(sexo));
-        cliente.setDataNascCliente(dataNasc);
-        cliente.setEmailCliente(email);
-        cliente.setTelefoneCliente(telefone);
-        cliente.setCelularCliente(celular);
-        cliente.setRuaCliente(rua);
-        cliente.setCepCliente(cep);
-        cliente.setComplementoCliente(complemento);
-        cliente.setBairroCliente(bairro);
-        cliente.setCidadeCliente(cidade);
-        cliente.setUfCliente(uf);
-      
-
+        locacao.setId(id);
+        locacao.setDescricao(descricao);
+        locacao.setDataDoAluguel(dataDoAluguel);
+        locacao.setQtdDias(qtdDias);
+        locacao.setDesconto(isDesconto);
+        locacao.alugar(desconto);
         
-        ClientePersistence dao = new ClienteDAO();
         
-        dao.updateCliente(cliente);
+       new LocacaoDAO().createLocacao(locacao);
+          
     }
+    
+    public static void encerraLocacao(int id,int diasAtraso){
+                  
+        Locacao locacao = new LocacaoDAO().retornaLocacao(id);
+        
+        if (diasAtraso > 0){
+            locacao.setAtrasoLocacao(true);
+            locacao.setDiasAtraso(diasAtraso); 
+        }else{
+            locacao.setAtrasoLocacao(false);
+            locacao.setDiasAtraso(0); 
+        }
+        
+        
+        locacao.devolver();
+        
+       
+        
+        
+       new LocacaoDAO().closeLocacao(locacao);
+          
+    }
+    
     //Recebe o ID da interface e Acessa a persistencia e apaga o registro
-    public static void apagarCliente(int id){
+    public static void apagarLocacao(int id){
         
-        Cliente clien = new Cliente();
-        clien.setId(id);
-        ClientePersistence dao = new ClienteDAO();
-        dao.deleteCliente(clien);
-        
-        
+        Locacao loc = new Locacao();
+        loc.setId(id);
+        LocacaoDAO dao = new LocacaoDAO();
+        dao.deleteLocacao(loc);
     }
     
     

@@ -34,12 +34,12 @@ public class LocacaoDAO{
         PreparedStatement stmt = null;
         
         try {
-            stmt = conn.prepareStatement("INSERT INTO locadora(descricao,dataDoAluquel,qtdDias,dataDaDevolucao,"
-                    + "idCliente,idVeiculo,isDesconto,valorDesconto,subTotal)"
-                    + "VALUES(?,?,?,?,?,?,?,?,?)");
+            stmt = conn.prepareStatement("INSERT INTO locacao(descricao,dataDoAluguel,qtdDias,dataDaDevolucao,"
+                    + "idCliente,idVeiculo,desconto,valorDesconto,subTotal,statusLocacao)"
+                    + "VALUES(?,?,?,?,?,?,?,?,?,?)");
             
             
-            java.sql.Timestamp timeIda = new java.sql.Timestamp(locacao.getDataDoAluquel().getTime());
+            java.sql.Timestamp timeIda = new java.sql.Timestamp(locacao.getDataDoAluguel().getTime());
             java.sql.Timestamp timeVolta = new java.sql.Timestamp(locacao.getDataDaDevolucao().getTime());
             
             stmt.setString(1, locacao.getDescricao());
@@ -48,12 +48,13 @@ public class LocacaoDAO{
             stmt.setInt(3, locacao.getQtdDias());
             stmt.setTimestamp(4, timeVolta);
             
-            stmt.setInt(5, locacao.getClientel().getId());
+            stmt.setInt(5, locacao.getCliente().getId());
             stmt.setInt(6, locacao.getVeiculo().getId());
             
-            stmt.setBoolean(7, locacao.isIsDesconto());
+            stmt.setBoolean(7, locacao.isDesconto());
             stmt.setDouble(8, locacao.getValorDesconto());
             stmt.setDouble(9, locacao.getSubTotal());
+            stmt.setBoolean(10, false);
           
             
             stmt.executeUpdate();
@@ -101,16 +102,17 @@ public class LocacaoDAO{
                 locacao.setId(rs.getInt("id"));
                 locacao.setDescricao(rs.getString("descricao"));
                 locacao.setQtdDias(rs.getInt("qtdDias"));
-                locacao.setDataDoAluquel(rs.getDate("dataDoAluguel"));
+                locacao.setDataDoAluguel(rs.getDate("dataDoAluguel"));
                 locacao.setDataDaDevolucao(rs.getDate("dataDaDevolucao"));
                 locacao.setSubTotal(rs.getDouble("subTotal"));
                 locacao.setAtrasoLocacao(rs.getBoolean("atrasoLocacao"));
                 locacao.setDiasAtraso(rs.getInt("diasAtraso"));
                 locacao.setDataRetorno(rs.getDate("dataRetorno"));
                 locacao.setValorFinal(rs.getDouble("valorFinal"));
-               // locacao.setIsDesconto(rs.getBoolean("isDeconto"));
+                locacao.setDesconto(rs.getBoolean("desconto"));
                 locacao.setValorDesconto(rs.getDouble("valorDesconto"));
-                locacao.setClientel(cliente);
+                locacao.setStatusLocacao(rs.getBoolean("statusLocacao"));
+                locacao.setCliente(cliente);
                 locacao.setVeiculo(veiculo);
 
                 listLocacaos.add(locacao);
@@ -125,7 +127,172 @@ public class LocacaoDAO{
     }     
         return listLocacaos;
     }
+    
+    public List<Locacao> readLocacao(boolean bool){
+        
+        List<Locacao> listLocacaos = new ArrayList<>();
+        
+        Connection conn = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+     
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM locacao WHERE statusLocacao = ?");
+            
+            stmt.setBoolean(1, bool);    
+            
+            rs = stmt.executeQuery();
+            
+            
+            while(rs.next()){
+                Locacao locacao = new Locacao();
+                //Seta o Veiculo pegando o ID
+                Veiculo veiculo = new VeiculoDAO().retornaVeiculo(rs.getInt("idVeiculo"));
+                //Seta o Clietne Pegando o ID
+                Cliente cliente = new ClienteDAO().retornaCliente(rs.getInt("idCliente"));
+                
+                
+                //
+                locacao.setId(rs.getInt("id"));
+                locacao.setDescricao(rs.getString("descricao"));
+                locacao.setQtdDias(rs.getInt("qtdDias"));
+                locacao.setDataDoAluguel(rs.getDate("dataDoAluguel"));
+                locacao.setDataDaDevolucao(rs.getDate("dataDaDevolucao"));
+                locacao.setSubTotal(rs.getDouble("subTotal"));
+                locacao.setAtrasoLocacao(rs.getBoolean("atrasoLocacao"));
+                locacao.setDiasAtraso(rs.getInt("diasAtraso"));
+                locacao.setDataRetorno(rs.getDate("dataRetorno"));
+                locacao.setValorFinal(rs.getDouble("valorFinal"));
+                locacao.setDesconto(rs.getBoolean("desconto"));
+                locacao.setValorDesconto(rs.getDouble("valorDesconto"));
+                locacao.setStatusLocacao(rs.getBoolean("statusLocacao"));
+                locacao.setCliente(cliente);
+                locacao.setVeiculo(veiculo);
 
+                listLocacaos.add(locacao);
+        }  
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } finally{
+            ConnectionFactory.fecharConnection(conn, stmt, rs);
+        
+    }     
+        return listLocacaos;
+    }
+    
+    public List<Locacao> readLocacao(boolean bool, String param){
+        
+        List<Locacao> listLocacaos = new ArrayList<>();
+        
+        Connection conn = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+     
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM locacao WHERE statusLocacao = ? AND descricao Like ? OR dataDoAluguel Like ?");
+    
+            stmt.setBoolean(1, bool);
+            stmt.setString(2, "%" + param + "%");
+            stmt.setString(3, "%" + param + "%");
+            
+            rs = stmt.executeQuery();
+            
+            
+            while(rs.next()){
+                Locacao locacao = new Locacao();
+                //Seta o Veiculo pegando o ID
+                Veiculo veiculo = new VeiculoDAO().retornaVeiculo(rs.getInt("idVeiculo"));
+                //Seta o Clietne Pegando o ID
+                Cliente cliente = new ClienteDAO().retornaCliente(rs.getInt("idCliente"));
+                
+                
+                //
+                locacao.setId(rs.getInt("id"));
+                locacao.setDescricao(rs.getString("descricao"));
+                locacao.setQtdDias(rs.getInt("qtdDias"));
+                locacao.setDataDoAluguel(rs.getDate("dataDoAluguel"));
+                locacao.setDataDaDevolucao(rs.getDate("dataDaDevolucao"));
+                locacao.setSubTotal(rs.getDouble("subTotal"));
+                locacao.setAtrasoLocacao(rs.getBoolean("atrasoLocacao"));
+                locacao.setDiasAtraso(rs.getInt("diasAtraso"));
+                locacao.setDataRetorno(rs.getDate("dataRetorno"));
+                locacao.setValorFinal(rs.getDouble("valorFinal"));
+                locacao.setDesconto(rs.getBoolean("desconto"));
+                locacao.setValorDesconto(rs.getDouble("valorDesconto"));
+                locacao.setStatusLocacao(rs.getBoolean("statusLocacao"));
+                locacao.setCliente(cliente);
+                locacao.setVeiculo(veiculo);
+
+                listLocacaos.add(locacao);
+        }  
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } finally{
+            ConnectionFactory.fecharConnection(conn, stmt, rs);
+        
+    }     
+        return listLocacaos;
+    }
+    
+    public List<Locacao> readLocacao(String param){
+        
+        List<Locacao> listLocacaos = new ArrayList<>();
+        
+        Connection conn = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+     
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM locacao WHERE descricao Like ? OR dataDoAluguel Like ?");
+    
+            
+            stmt.setString(1, "%" + param + "%");
+            stmt.setString(2, "%" + param + "%");
+            
+            rs = stmt.executeQuery();
+            
+            
+            while(rs.next()){
+                Locacao locacao = new Locacao();
+                //Seta o Veiculo pegando o ID
+                Veiculo veiculo = new VeiculoDAO().retornaVeiculo(rs.getInt("idVeiculo"));
+                //Seta o Clietne Pegando o ID
+                Cliente cliente = new ClienteDAO().retornaCliente(rs.getInt("idCliente"));
+                
+                
+                //
+                locacao.setId(rs.getInt("id"));
+                locacao.setDescricao(rs.getString("descricao"));
+                locacao.setQtdDias(rs.getInt("qtdDias"));
+                locacao.setDataDoAluguel(rs.getDate("dataDoAluguel"));
+                locacao.setDataDaDevolucao(rs.getDate("dataDaDevolucao"));
+                locacao.setSubTotal(rs.getDouble("subTotal"));
+                locacao.setAtrasoLocacao(rs.getBoolean("atrasoLocacao"));
+                locacao.setDiasAtraso(rs.getInt("diasAtraso"));
+                locacao.setDataRetorno(rs.getDate("dataRetorno"));
+                locacao.setValorFinal(rs.getDouble("valorFinal"));
+                locacao.setDesconto(rs.getBoolean("desconto"));
+                locacao.setValorDesconto(rs.getDouble("valorDesconto"));
+                locacao.setStatusLocacao(rs.getBoolean("statusLocacao"));
+                locacao.setCliente(cliente);
+                locacao.setVeiculo(veiculo);
+
+                listLocacaos.add(locacao);
+        }  
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } finally{
+            ConnectionFactory.fecharConnection(conn, stmt, rs);
+        
+    }     
+        return listLocacaos;
+    }
    
     //Retorna do Banco de dados um Locacao recebendo apenas o id
     public Locacao retornaLocacao(int id){
@@ -154,16 +321,17 @@ public class LocacaoDAO{
                 locacao.setId(rs.getInt("id"));
                 locacao.setDescricao(rs.getString("descricao"));
                 locacao.setQtdDias(rs.getInt("qtdDias"));
-                locacao.setDataDoAluquel(rs.getDate("dataDoAluquel"));
+                locacao.setDataDoAluguel(rs.getDate("dataDoAluguel"));
                 locacao.setDataDaDevolucao(rs.getDate("dataDaDevolucao"));
                 locacao.setSubTotal(rs.getDouble("subTotal"));
                 locacao.setAtrasoLocacao(rs.getBoolean("atrasoLocacao"));
                 locacao.setDiasAtraso(rs.getInt("diasAtraso"));
                 locacao.setDataRetorno(rs.getDate("dataRetorno"));
                 locacao.setValorFinal(rs.getDouble("valorFinal"));
-                locacao.setIsDesconto(rs.getBoolean("isDeconto"));
-                locacao.setDesconto((int) rs.getDouble("valorDesconto"));
-                locacao.setClientel(cliente);
+                locacao.setDesconto(rs.getBoolean("desconto"));
+                locacao.setValorDesconto(rs.getDouble("valorDesconto"));
+                locacao.setStatusLocacao(rs.getBoolean("statusLocacao"));
+                locacao.setCliente(cliente);
                 locacao.setVeiculo(veiculo);
 
         }  
@@ -188,10 +356,10 @@ public class LocacaoDAO{
         PreparedStatement stmt = null;
         
         try {
-            stmt = conn.prepareStatement("update locacao SET descricao = ?,dataDoAluquel = ?,qtdDias = ?,dataDaDevolucao = ?,"
-                    + "idCliente = ?,idVeiculo = ?,isDesconto = ?,valorDesconto = ?,subTotal = ? WHERE id = ?");
+            stmt = conn.prepareStatement("update locacao SET descricao = ?,dataDoAluguel = ?,qtdDias = ?,dataDaDevolucao = ?,"
+                    + "idCliente = ?,idVeiculo = ?,desconto = ?,valorDesconto = ?,subTotal = ? WHERE id = ?");
                     
-            java.sql.Timestamp timeIda = new java.sql.Timestamp(locacao.getDataDoAluquel().getTime());
+            java.sql.Timestamp timeIda = new java.sql.Timestamp(locacao.getDataDoAluguel().getTime());
             java.sql.Timestamp timeVolta = new java.sql.Timestamp(locacao.getDataDaDevolucao().getTime());
             
             
@@ -201,10 +369,10 @@ public class LocacaoDAO{
             stmt.setInt(3, locacao.getQtdDias());
             stmt.setTimestamp(4, timeVolta);
             
-            stmt.setInt(5, locacao.getClientel().getId());
+            stmt.setInt(5, locacao.getCliente().getId());
             stmt.setInt(6, locacao.getVeiculo().getId());
             
-            stmt.setBoolean(7, locacao.isIsDesconto());
+            stmt.setBoolean(7, locacao.isDesconto());
             stmt.setDouble(8, locacao.getValorDesconto());
             stmt.setDouble(9, locacao.getSubTotal());
             
@@ -218,6 +386,49 @@ public class LocacaoDAO{
         } catch (SQLException ex) {
             
             JOptionPane.showMessageDialog(null, "Não foi Atualizar no Banco de Dados!" + ex, "Erro ao Salvar",JOptionPane.ERROR_MESSAGE);
+            
+        }finally{
+            
+            ConnectionFactory.fecharConnection(conn, stmt);
+        }
+        
+    }
+    
+    public void closeLocacao(Locacao locacao){
+        
+        Connection conn = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = conn.prepareStatement("update locacao SET atrasoLocacao = ?,diasAtraso = ?,dataRetorno = ?,valorFinal = ?,"
+                    + "statusLocacao = ? WHERE id = ?");
+                    
+            
+            
+            java.sql.Timestamp timeVolta = new java.sql.Timestamp(locacao.getDataRetorno().getTime());
+            
+            new VeiculoDAO().updateVeiculo(locacao.getVeiculo(), false);
+            
+            stmt.setBoolean(1, locacao.isAtrasoLocacao());
+            
+            stmt.setInt(2, locacao.getDiasAtraso());
+            
+            stmt.setTimestamp(3, timeVolta);
+            
+            stmt.setDouble(4, locacao.getValorFinal());
+            
+            stmt.setBoolean(5, locacao.isStatusLocacao());          
+            
+            stmt.setInt(6, locacao.getId());
+         
+            stmt.executeUpdate();
+            
+        JOptionPane.showMessageDialog(null, "Locacao Finalizada no Banco de Dados");
+
+            
+        } catch (SQLException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Não foi Finalizado!" + ex, "Erro ao Salvar",JOptionPane.ERROR_MESSAGE);
             
         }finally{
             
