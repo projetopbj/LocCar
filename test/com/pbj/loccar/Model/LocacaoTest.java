@@ -41,7 +41,7 @@ public class LocacaoTest extends TestCase{
 
     // testo o metodo alugar
     public void alugarTest(){
-        locacao.setDataDoAluquel(DataHora.dataToString("12/06/17"));
+        locacao.setDataDoAluguel(DataHora.dataToString("12/06/17"));
         
         veiculo.setCategoria(categoria);
         veiculo.getCategoria().setValorDia(20);

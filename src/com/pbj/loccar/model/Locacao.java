@@ -34,7 +34,6 @@ public class Locacao {
 
     private Cliente cliente; // chave estrangeira para o cliente
     private Veiculo veiculo; // chave estrangeira para o veículo
-    private Date dataDoAluquel;
     
     
     //Construtor Vazio que apenas inicializa o ID
@@ -212,14 +211,6 @@ public class Locacao {
     public void setCliente(Cliente idCliente) {
         this.cliente = idCliente;
     }
-    
-    public Date getDataDoAluquel() {
-        return dataDoAluquel;
-    }
-
-    public void setDataDoAluquel(Date dataDoAluquel) {
-        this.dataDoAluquel = dataDoAluquel;
-    }
 
     @Override
     public int hashCode() {
@@ -256,7 +247,7 @@ public class Locacao {
     
     public boolean alugar(int desconto){
         try {
-            this.dataDaDevolucao = DataHora.somaDias(this.dataDoAluquel, this.qtdDias);
+            this.dataDaDevolucao = DataHora.somaDias(this.dataDoAluguel, this.qtdDias);
             calculoDesconto(desconto);
             calculoSubTotal();
         }catch (Exception e) {
@@ -323,7 +314,7 @@ public class Locacao {
     @Override
     public String toString() {
         return "Locadora{" + "id=" + id + ", descricao=" + descricao + ", qtdDias=" + qtdDias + 
-                ", dataDoAluquel=" + dataDoAluguel + ", dataDaDevolucao=" + dataDaDevolucao + 
+                ", dataDoAluguel=" + dataDoAluguel + ", dataDaDevolucao=" + dataDaDevolucao + 
                 ", isDesconto=" + desconto + ", desconto=" + desconto + 
                 ", valorDesconto=" + valorDesconto + ", subTotal=" + subTotal + ", atrasoLocacao=" + atrasoLocacao + 
                 ", diasAtraso=" + diasAtraso + ", dataRetorno=" + dataRetorno + ", valorFinal=" + valorFinal + 
