@@ -493,7 +493,7 @@ public class VeiculoDAO implements VeiculoPersistence {
             stmt = conn.prepareStatement("UPDATE veiculo SET alugado = ? WHERE id = ?");
             
             
-            stmt.setBoolean(1, veiculo.isAlugado());
+            stmt.setBoolean(1, alugado);
            
             stmt.setInt(2, veiculo.getId());
          

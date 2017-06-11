@@ -165,7 +165,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelValorKMExc">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Valor Quilometro Execedido"/>
+                <Property name="text" type="java.lang.String" value="Valor Dia Execedido"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">

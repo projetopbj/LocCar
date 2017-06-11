@@ -17,7 +17,7 @@ public class CategoriaTable  extends AbstractTableModel {
     
     private final List<String[]> linhas;
     //Declara o nome das Colunas da Tabela
-    private final String[] colunas = {" # ","Nome","Valor Dia","Valor Km","Ar","Vidro","Direção"};
+    private final String[] colunas = {" # ","Nome","Valor Dia","Valor Dia Excente","Ar","Vidro","Direção"};
     
     //Contrutor vazio que Instancia a List
     public CategoriaTable(){  

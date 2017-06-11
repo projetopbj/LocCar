@@ -55,7 +55,6 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroupFiltra = new javax.swing.ButtonGroup();
         jPanelCV = new javax.swing.JPanel();
@@ -77,7 +76,7 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta Veículos");
-        getContentPane().setLayout(new java.awt.GridBagLayout());
+        getContentPane().setLayout(new java.awt.GridLayout());
 
         jTableVeiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -276,18 +275,13 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonAtualizar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanelConsVeic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipady = 204;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        getContentPane().add(jPanelCV, gridBagConstraints);
+        getContentPane().add(jPanelCV);
 
         pack();
         setLocationRelativeTo(null);

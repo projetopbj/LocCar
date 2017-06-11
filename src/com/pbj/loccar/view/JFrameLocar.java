@@ -39,17 +39,17 @@ public final class JFrameLocar extends javax.swing.JFrame {
     private void popularComboBoxClientes(){
         List<String> clientes = ClienteControl.returnClienteID();
 
-        for (String temp : clientes) {
+        clientes.forEach((temp) -> {
             jComboBoxEscClient.addItem(temp);
-        }  
+        });  
         
     }       
     //Método para popular os campos do combo box 
     private void popularComboBoxVeiculos(){
         List<String> veiculos = VeiculoControl.returnVeiculoID();
-        for (String temp : veiculos) {
+        veiculos.forEach((temp) -> {
             jComboBoxEscVeic.addItem(temp);
-        }  
+        });  
     }
     //Metpdo para limpar os campos
     private void limpaCampos(){
@@ -90,6 +90,13 @@ public final class JFrameLocar extends javax.swing.JFrame {
         }catch(NumberFormatException e){
             
             return getSubT();
+        }
+    }
+    private void setaCompleta(){    
+        if(!"".equals(txtFDataLoc.getText()) && !"".equals(txtDias.getText())){
+            
+            txtDataDevol.setText(DataHora.somaDias(txtFDataLoc.getText(), txtDias.getText()));
+            txtFSubTotal.setText(getSubT());
         }
     }
 
@@ -156,11 +163,6 @@ public final class JFrameLocar extends javax.swing.JFrame {
         txtFSubTotal.setEditable(false);
         txtFSubTotal.setBackground(new java.awt.Color(204, 204, 204));
         txtFSubTotal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
-        txtFSubTotal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFSubTotalActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Data de Devolução");
 
@@ -226,6 +228,11 @@ public final class JFrameLocar extends javax.swing.JFrame {
                 txtDiasFocusLost(evt);
             }
         });
+        txtDias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtDiasMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelOtherLayout = new javax.swing.GroupLayout(jPanelOther);
         jPanelOther.setLayout(jPanelOtherLayout);
@@ -275,7 +282,6 @@ public final class JFrameLocar extends javax.swing.JFrame {
                     .addGroup(jPanelOtherLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(26, 26, 26)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3)
@@ -556,10 +562,6 @@ public final class JFrameLocar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataDevolActionPerformed
 
-    private void txtFSubTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFSubTotalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFSubTotalActionPerformed
-
     private void jComboBoxEscVeicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEscVeicActionPerformed
         // Sempre que um Id é setado as informações do veiculo aparecem.
        String veic[] = new String[11];
@@ -600,11 +602,7 @@ public final class JFrameLocar extends javax.swing.JFrame {
 
     private void txtDiasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiasFocusLost
         // TODO add your handling code here:
-        if(!"".equals(txtFDataLoc.getText()) && !"".equals(txtDias.getText())){
-            
-            txtDataDevol.setText(DataHora.somaDias(txtFDataLoc.getText(), txtDias.getText()));
-            txtFSubTotal.setText(getSubT());
-        }
+        setaCompleta();
     }//GEN-LAST:event_txtDiasFocusLost
 
     private void txtDescontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescontoActionPerformed
@@ -618,6 +616,11 @@ public final class JFrameLocar extends javax.swing.JFrame {
             txtFSubTotal.setText(getSubT(getSubT()));
         }
     }//GEN-LAST:event_txtDescontoFocusLost
+
+    private void txtDiasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDiasMouseExited
+        // TODO add your handling code here:
+        setaCompleta();
+    }//GEN-LAST:event_txtDiasMouseExited
 
     /**
      * @param args the command line arguments

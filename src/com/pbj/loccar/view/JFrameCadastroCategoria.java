@@ -113,7 +113,7 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
             }
         });
 
-        jLabelValorKMExc.setText("Valor Quilometro Execedido");
+        jLabelValorKMExc.setText("Valor Dia Execedido");
 
         jLabel5.setText("Ar Condicionado");
 
