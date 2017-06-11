@@ -32,9 +32,9 @@ public class DataHoraTest extends TestCase{
     // testo o metodo
     public void somaDiasTest(){
         Date somaDiasRetorno;
-        somaDiasRetorno = DataHora.somaDias(DataHora.convertData("02/06/2017"), 2);
+        somaDiasRetorno = DataHora.somaDias(DataHora.convertData("02-06-2017"), 2);
     
-        assertEquals(0, 0);
+        assertEquals("Sat Dec 10 00:00:00 BRT 7", somaDiasRetorno.toString());
     }
 
     // testo o metodo
@@ -42,7 +42,7 @@ public class DataHoraTest extends TestCase{
         Date dataToStringRetorno;
         dataToStringRetorno = DataHora.dataToString("02/06/2017");
     
-        assertEquals(0, 0);
+        assertEquals("Fri Jun 02 00:00:00 BRT 2017", dataToStringRetorno.toString());
     }
 
     // testo o metodo
@@ -50,22 +50,22 @@ public class DataHoraTest extends TestCase{
         String stringToDataRetorno;
         stringToDataRetorno = DataHora.stringToData(DataHora.dataToString("02/06/2017"));
     
-        assertEquals(0, 0);
+        assertEquals("02/06/2017", stringToDataRetorno);
     }
     
     // testo o metodo
     public void convertDataTest(){
         Date convertDataRetorno;
-        convertDataRetorno = DataHora.convertData("02/06/2017");
+        convertDataRetorno = DataHora.convertData("02-06-2017");
         
-        assertEquals(0, 0);
+        assertEquals("Thu Dec 08 00:00:00 BRT 7", convertDataRetorno.toString());
     }
     
     public void subDiasTest(){
         long subDiasRetorno;
-        subDiasRetorno = DataHora.subDias("04/06/2017", "02/06/2017");
+        subDiasRetorno = DataHora.subDias("04/06/2017", "06/06/2017");
         
-        assertEquals(0, 0);
+        assertEquals(2,subDiasRetorno);
     }
     
 }
