@@ -114,7 +114,6 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
         jLabelTotal = new javax.swing.JLabel();
         txtGetDataEsp = new javax.swing.JFormattedTextField();
         jLabel10 = new javax.swing.JLabel();
-        jButtonFatLoca = new javax.swing.JButton();
         jButtonDevolver = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
 
@@ -433,13 +432,6 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
                 .addGap(28, 28, 28))
         );
 
-        jButtonFatLoca.setText("Gerar Fatura de Locação");
-        jButtonFatLoca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFatLocaActionPerformed(evt);
-            }
-        });
-
         jButtonDevolver.setText("Devolver");
         jButtonDevolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -462,8 +454,6 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addComponent(jButtonCancel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonFatLoca)
-                .addGap(64, 64, 64)
                 .addComponent(jButtonDevolver)
                 .addGap(75, 75, 75))
             .addGroup(jPanelLocDevLayout.createSequentialGroup()
@@ -479,7 +469,6 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(jPanelLocDevLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonDevolver)
-                    .addComponent(jButtonFatLoca)
                     .addComponent(jButtonCancel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -521,10 +510,6 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButtonDevolverActionPerformed
-
-    private void jButtonFatLocaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFatLocaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonFatLocaActionPerformed
 
     private void txtGetDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGetDiasActionPerformed
         // TODO add your handling code here:
@@ -607,7 +592,6 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonDevolver;
-    private javax.swing.JButton jButtonFatLoca;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel9;
