@@ -34,7 +34,7 @@ public class Navegador {
                 openURL.invoke(null, new Object[] {url});
             }
             else if (osName.startsWith("Windows"))
-                Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + url);
+                Runtime.getRuntime().exec("cmd.exe /C start " + url);
             else
             { //assume Unix or Linux
                 String[] browsers = {

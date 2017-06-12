@@ -53,7 +53,6 @@ public final class JFrameFaturaLoc extends javax.swing.JFrame {
         jLabelDatF = new javax.swing.JLabel();
         txtGetGataI = new javax.swing.JFormattedTextField();
         txtGetDataF = new javax.swing.JFormattedTextField();
-        jButtonGerarFatLoc = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -217,13 +216,6 @@ public final class JFrameFaturaLoc extends javax.swing.JFrame {
                 .addContainerGap(129, Short.MAX_VALUE))
         );
 
-        jButtonGerarFatLoc.setText("Gerar Fatura de Locação");
-        jButtonGerarFatLoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonGerarFatLocActionPerformed(evt);
-            }
-        });
-
         jButtonCancel.setText("Cancelar");
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,9 +234,7 @@ public final class JFrameFaturaLoc extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFatBotoesLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonGerarFatLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addGap(36, 416, Short.MAX_VALUE))
         );
         jPanelFatBotoesLayout.setVerticalGroup(
             jPanelFatBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,9 +242,7 @@ public final class JFrameFaturaLoc extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanelGerarFat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addGroup(jPanelFatBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonGerarFatLoc)
-                    .addComponent(jButtonCancel))
+                .addComponent(jButtonCancel)
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
@@ -295,12 +283,6 @@ public final class JFrameFaturaLoc extends javax.swing.JFrame {
          this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
-    private void jButtonGerarFatLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerarFatLocActionPerformed
-    
-            RelatorioControl rel = new RelatorioControl();
-            rel.relatorio("Locacoes");
-    }//GEN-LAST:event_jButtonGerarFatLocActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -340,7 +322,6 @@ public final class JFrameFaturaLoc extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupFilt;
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonCancel;
-    private javax.swing.JButton jButtonGerarFatLoc;
     private javax.swing.JComboBox<String> jComboBoxGetAlug;
     private javax.swing.JLabel jLabelCliente;
     private javax.swing.JLabel jLabelCodAlug;

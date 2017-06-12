@@ -99,6 +99,7 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
         jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro Categoria");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanelCadastroCateg.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro Categoria"));

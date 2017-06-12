@@ -13,12 +13,12 @@ import java.util.logging.Logger;
  *
  * @author Akr-Taku
  */
-public class JFrameRelatorioLocacao extends javax.swing.JFrame {
+public class JFrameRelatorios extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameRelatorioLocacao
      */
-    public JFrameRelatorioLocacao() {
+    public JFrameRelatorios() {
         initComponents();
         jProgressBar.setVisible(false);
     }
@@ -36,6 +36,7 @@ public class JFrameRelatorioLocacao extends javax.swing.JFrame {
         jPanelGeraRel = new javax.swing.JPanel();
         jButtonGerar = new javax.swing.JButton();
         jProgressBar = new javax.swing.JProgressBar();
+        jComboBoxSelect = new javax.swing.JComboBox<>();
         jButtonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -51,6 +52,8 @@ public class JFrameRelatorioLocacao extends javax.swing.JFrame {
             }
         });
 
+        jComboBoxSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Locações", "Clientes" }));
+
         javax.swing.GroupLayout jPanelGeraRelLayout = new javax.swing.GroupLayout(jPanelGeraRel);
         jPanelGeraRel.setLayout(jPanelGeraRelLayout);
         jPanelGeraRelLayout.setHorizontalGroup(
@@ -58,21 +61,25 @@ public class JFrameRelatorioLocacao extends javax.swing.JFrame {
             .addGroup(jPanelGeraRelLayout.createSequentialGroup()
                 .addGroup(jPanelGeraRelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelGeraRelLayout.createSequentialGroup()
-                        .addGap(165, 165, 165)
+                        .addGap(150, 150, 150)
                         .addComponent(jButtonGerar))
                     .addGroup(jPanelGeraRelLayout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(61, Short.MAX_VALUE))
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanelGeraRelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         jPanelGeraRelLayout.setVerticalGroup(
             jPanelGeraRelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelGeraRelLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addContainerGap()
+                .addComponent(jComboBoxSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addComponent(jButtonGerar)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addComponent(jProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         jButtonCancelar.setText("Cancelar");
@@ -88,21 +95,21 @@ public class JFrameRelatorioLocacao extends javax.swing.JFrame {
             jPanelFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelGeraRel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelGeraRel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanelFrameLayout.createSequentialGroup()
+                        .addComponent(jButtonCancelar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanelFrameLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jButtonCancelar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelFrameLayout.setVerticalGroup(
             jPanelFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFrameLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelGeraRel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jButtonCancelar)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -127,32 +134,68 @@ public class JFrameRelatorioLocacao extends javax.swing.JFrame {
 
     private void jButtonGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerarActionPerformed
         // TODO add your handling code here
-        RelatorioControl rela = new RelatorioControl();
-        Thread barra;
-        barra = new Thread(){
-            public void run(){
-              jProgressBar.setVisible(true);
-              jProgressBar.setIndeterminate(true);
-            }
-        };
-        Thread relatorio = new Thread(){
-           public void run(){
-               
-               jButtonGerar.setEnabled(false);
-               jButtonCancelar.setEnabled(false);
-               rela.relatorio("Locacoes");
-               dispose();
-           } 
-        };
+        if("Clientes".equals(jComboBoxSelect.getSelectedItem())){
         
-        try {
-            barra.start();
-            relatorio.join();
-            relatorio.start();
+            RelatorioControl rela = new RelatorioControl();
+            Thread barra;
+            barra = new Thread(){
+                
+                public void run(){
+                     jProgressBar.setVisible(true);
+                    jProgressBar.setIndeterminate(true);
+                }
+            };
+            Thread relatorio = new Thread(){
+                public void run(){
+               
+                    jButtonGerar.setEnabled(false);
+                    jButtonCancelar.setEnabled(false);
+                    rela.relatorio("LocacaoCliente");
+                    dispose();
+                } 
+            };
+        
+            try {
+                barra.start();
+                relatorio.join();
+                relatorio.start();
             
             
-        } catch (InterruptedException ex) {
-            Logger.getLogger(JFrameRelatorioLocacao.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException ex) {
+            Logger.getLogger(JFrameRelatorios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        }else{
+            RelatorioControl rela = new RelatorioControl();
+            Thread barra;
+            barra = new Thread(){
+                
+                public void run(){
+                     jProgressBar.setVisible(true);
+                    jProgressBar.setIndeterminate(true);
+                }
+            };
+            Thread relatorio = new Thread(){
+                public void run(){
+               
+                    jButtonGerar.setEnabled(false);
+                    jButtonCancelar.setEnabled(false);
+                    rela.relatorio("locacao");
+                    dispose();
+                } 
+            };
+        
+            try {
+                barra.start();
+                relatorio.join();
+                relatorio.start();
+            
+            
+            } catch (InterruptedException ex) {
+            Logger.getLogger(JFrameRelatorios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
         }
         
     }//GEN-LAST:event_jButtonGerarActionPerformed
@@ -174,20 +217,21 @@ public class JFrameRelatorioLocacao extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrameRelatorioLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameRelatorios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrameRelatorioLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameRelatorios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrameRelatorioLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameRelatorios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrameRelatorioLocacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameRelatorios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrameRelatorioLocacao().setVisible(true);
+                new JFrameRelatorios().setVisible(true);
             }
         });
     }
@@ -195,6 +239,7 @@ public class JFrameRelatorioLocacao extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGerar;
+    private javax.swing.JComboBox<String> jComboBoxSelect;
     private javax.swing.JPanel jPanelFrame;
     private javax.swing.JPanel jPanelGeraRel;
     private javax.swing.JProgressBar jProgressBar;
