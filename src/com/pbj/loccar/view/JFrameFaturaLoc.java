@@ -5,7 +5,11 @@
  */
 package com.pbj.loccar.view;
 
-import java.awt.GridBagLayout;
+import com.pbj.loccar.control.RelatorioControl;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -214,6 +218,11 @@ public final class JFrameFaturaLoc extends javax.swing.JFrame {
         );
 
         jButtonGerarFatLoc.setText("Gerar Fatura de Locação");
+        jButtonGerarFatLoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGerarFatLocActionPerformed(evt);
+            }
+        });
 
         jButtonCancel.setText("Cancelar");
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -285,6 +294,17 @@ public final class JFrameFaturaLoc extends javax.swing.JFrame {
         // TODO add your handling code here:
          this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
+
+    private void jButtonGerarFatLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerarFatLocActionPerformed
+    
+            RelatorioControl rel = new RelatorioControl();
+        try{            
+                    
+           rel.relatorio();
+        } catch (JRException | IOException ex) {
+            Logger.getLogger(JFrameFaturaLoc.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonGerarFatLocActionPerformed
 
     /**
      * @param args the command line arguments

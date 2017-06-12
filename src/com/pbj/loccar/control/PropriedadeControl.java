@@ -5,7 +5,7 @@
  */
 package com.pbj.loccar.control;
 
-import com.pbj.loccar.util.Propriedade;
+import com.pbj.loccar.model.Propriedade;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -23,7 +23,7 @@ public class PropriedadeControl {
         boolean bool;
         
         //Chamando o método da Utíl para Setar as informações no arquivo
-        Propriedade.setPropConn(".\\src\\com\\pbj\\loccar\\properties\\conn.properties",urlIp,urlPorta,urlBd,user,pass);
+        Propriedade.setPropConn(".\\properties\\connetion.properties",urlIp,urlPorta,urlBd,user,pass);
         
         return true;
     }
@@ -34,7 +34,7 @@ public class PropriedadeControl {
     
         props = new ArrayList<>();
         
-        Properties prop = Propriedade.getProp(".\\src\\com\\pbj\\loccar\\properties\\conn.properties");
+        Properties prop = Propriedade.getProp(".\\properties\\connection.properties");
         
         String host = prop.getProperty("prop.url.ip");
 

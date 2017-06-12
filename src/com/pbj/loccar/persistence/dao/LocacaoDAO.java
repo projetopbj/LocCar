@@ -5,6 +5,7 @@
  */
 package com.pbj.loccar.persistence.dao;
 
+import com.pbj.loccar.persistence.LocacaoPersistence;
 import com.pbj.loccar.model.Cliente;
 import com.pbj.loccar.model.Locacao;
 import com.pbj.loccar.model.Veiculo;
@@ -26,9 +27,10 @@ import javax.swing.JOptionPane;
  * 
  * Classe que persiste o locacao no sistema
  */
-public class LocacaoDAO{
+public class LocacaoDAO implements LocacaoPersistence{
     
     //Salva Nova Locacao no Banco de Dados        
+    @Override
     public void createLocacao(Locacao locacao){
         
         Connection conn = ConnectionFactory.getConnection();
@@ -77,6 +79,7 @@ public class LocacaoDAO{
     }
         
     //Retorna A lista de todas os locacaos do Banco de dados    
+    @Override
     public List<Locacao> readLocacao(){
         
         List<Locacao> listLocacaos = new ArrayList<>();
@@ -129,6 +132,7 @@ public class LocacaoDAO{
         return listLocacaos;
     }
     
+    @Override
     public List<Locacao> readLocacao(boolean bool){
         
         List<Locacao> listLocacaos = new ArrayList<>();
@@ -183,6 +187,7 @@ public class LocacaoDAO{
         return listLocacaos;
     }
     
+    @Override
     public List<Locacao> readLocacao(boolean bool, String param){
         
         List<Locacao> listLocacaos = new ArrayList<>();
@@ -239,6 +244,7 @@ public class LocacaoDAO{
         return listLocacaos;
     }
     
+    @Override
     public List<Locacao> readLocacao(String param){
         
         List<Locacao> listLocacaos = new ArrayList<>();
@@ -296,6 +302,7 @@ public class LocacaoDAO{
     }
    
     //Retorna do Banco de dados um Locacao recebendo apenas o id
+    @Override
     public Locacao retornaLocacao(int id){
         Locacao locacao = new Locacao();
         
@@ -351,6 +358,7 @@ public class LocacaoDAO{
 
    
     //Recebe o Locacao e retorna e atualiza ele no Banco de dados
+    @Override
     public void updateLocacao(Locacao locacao){
         
         Connection conn = ConnectionFactory.getConnection();
@@ -395,6 +403,7 @@ public class LocacaoDAO{
         
     }
     
+    @Override
     public void closeLocacao(Locacao locacao){
         
         Connection conn = ConnectionFactory.getConnection();
@@ -439,6 +448,7 @@ public class LocacaoDAO{
     }
     
     //Deleta o Locacao Informada do Banco de Dados
+    @Override
     public void deleteLocacao(Locacao locacao){
         
         Connection conn = ConnectionFactory.getConnection();
