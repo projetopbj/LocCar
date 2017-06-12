@@ -140,17 +140,19 @@ public class JFrameRelatorios extends javax.swing.JFrame {
             Thread barra;
             barra = new Thread(){
                 
+                @Override
                 public void run(){
                      jProgressBar.setVisible(true);
                     jProgressBar.setIndeterminate(true);
                 }
             };
             Thread relatorio = new Thread(){
+                @Override
                 public void run(){
                
                     jButtonGerar.setEnabled(false);
                     jButtonCancelar.setEnabled(false);
-                    rela.relatorio("LocacaoCliente");
+                    rela.relatorio("locacaoCliente");
                     dispose();
                 } 
             };
@@ -170,12 +172,14 @@ public class JFrameRelatorios extends javax.swing.JFrame {
             Thread barra;
             barra = new Thread(){
                 
+                @Override
                 public void run(){
                      jProgressBar.setVisible(true);
                     jProgressBar.setIndeterminate(true);
                 }
             };
             Thread relatorio = new Thread(){
+                @Override
                 public void run(){
                
                     jButtonGerar.setEnabled(false);

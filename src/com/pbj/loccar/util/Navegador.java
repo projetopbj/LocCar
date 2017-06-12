@@ -38,7 +38,7 @@ public class Navegador {
             else
             { //assume Unix or Linux
                 String[] browsers = {
-                    "firefox", "opera", "konqueror", "epiphany", "mozilla", "netscape" };
+                    "chrome","firefox", "opera", "konqueror", "epiphany", "mozilla", "netscape" };
                 String browser = null;
                 for (int count = 0; count < browsers.length && browser == null; count++)
                     if (Runtime.getRuntime().exec(

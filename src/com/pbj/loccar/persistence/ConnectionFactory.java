@@ -23,7 +23,7 @@ public class ConnectionFactory {
     
     
     //Constantes Capturadas diretamente do Arquivo de Propriedades
-    private static final Properties prop = Propriedade.getProp("properties\\connection.properties");
+    private static final Properties prop = Propriedade.getProp("properties/connection.properties");
     private static final String DRIVER = prop.getProperty("prop.driver");
     private static final String URL = prop.getProperty("prop.url");
     private static final String USER = prop.getProperty("prop.user");

@@ -545,12 +545,15 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
         long dias = DataHora.subDias(txtGetDataEsp.getText(), txtGetDataHoj.getText());
         
         txtDiasExc.setText(Long.toString(dias));
-        
-       double sub = Double.parseDouble( txtSubTotal.getText() );
+        try {
+            double sub = Double.parseDouble( txtSubTotal.getText() );
        double days =  Double.parseDouble( txtDiasExc.getText() );
        double valorE = Double.parseDouble(  txtGetKmU.getText() );
        double total = sub + (valorE * days); 
         txtGetTotal.setText(Double.toString(total));
+        } catch (Exception e) {
+            
+        }
     }//GEN-LAST:event_txtGetDataHojFocusLost
 
     /**

@@ -95,13 +95,12 @@ public class Propriedade {
 //Recebe o Caminho Relativo da Properties atual e salva a nova properties porém não passa drive, nem os dados de url
     public static void setPropConn(String path, String user, String pass){
         
-        setPropConn(path,"localhost","3306","loccar",user,pass);
+        setPropConn(path,"localhost","3306","aula",user,pass);
     }
     
     //somente recebe os dados de login e senha
     public static void setPropConn(String user, String pass){
-        
-        setPropConn(".\\properties\\connection.properties",user,pass);
+        setPropConn("properties/connection.properties",user,pass);
         
     }
 }

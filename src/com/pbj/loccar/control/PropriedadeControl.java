@@ -23,7 +23,7 @@ public class PropriedadeControl {
         boolean bool;
         
         //Chamando o método da Utíl para Setar as informações no arquivo
-        Propriedade.setPropConn(".\\properties\\connection.properties",urlIp,urlPorta,urlBd,user,pass);
+        Propriedade.setPropConn("properties/connection.properties",urlIp,urlPorta,urlBd,user,pass);
         
         return true;
     }
@@ -34,7 +34,7 @@ public class PropriedadeControl {
     
         props = new ArrayList<>();
         
-        Properties prop = Propriedade.getProp(".\\properties\\connection.properties");
+        Properties prop = Propriedade.getProp("properties/connection.properties");
         
         String host = prop.getProperty("prop.url.ip");
 

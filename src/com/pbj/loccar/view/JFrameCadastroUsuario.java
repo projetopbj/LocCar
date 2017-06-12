@@ -50,7 +50,7 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
       boolean log =  StringCampos.vazio(txtLogin.getText());
       boolean pas =  jPasswordField.getPassword().length == 0;
         
-        return !(nam  ||log  || pas);
+        return (nam  ||log  || pas);
         
     }
 

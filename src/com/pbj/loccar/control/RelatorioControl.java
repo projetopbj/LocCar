@@ -28,7 +28,7 @@ public class RelatorioControl {
     
   public void relatorio(String arq){
 
-    String path = ".\\src\\com\\pbj\\loccar\\ireport\\" + arq +".jasper";
+    String path = "./src/com/pbj/loccar/ireport/" + arq +".jasper";
     
     String file = null;
       try {
