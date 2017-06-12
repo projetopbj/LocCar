@@ -9,6 +9,7 @@ import com.pbj.loccar.persistence.ConnectionFactory;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JRException;
@@ -32,22 +33,23 @@ public class RelatorioControl {
     String file = null;
       try {
           file = new File(path).getCanonicalPath();
+          JasperPrint jasperPrint = null;
+    
+          jasperPrint = JasperFillManager.fillReport(file, null,conn);
+          
+          JasperViewer view = new JasperViewer(jasperPrint,false);
+        
+            view.setVisible(true);
+          
       } catch (IOException ex) {
           Logger.getLogger(RelatorioControl.class.getName()).log(Level.SEVERE, null, ex);
-      }
-    
-    
-        JasperPrint jasperPrint = null;
-    
-      try {
-          jasperPrint = JasperFillManager.fillReport(file, null,conn);
       } catch (JRException ex) {
           Logger.getLogger(RelatorioControl.class.getName()).log(Level.SEVERE, null, ex);
+      } finally{
+           ConnectionFactory.fecharConnection(conn);
       }
-    
-        JasperViewer view = new JasperViewer(jasperPrint,false);
-        
-        view.setVisible(true);
+     
+          
     
     }
 }

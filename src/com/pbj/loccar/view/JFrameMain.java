@@ -423,7 +423,7 @@ public final class JFrameMain extends javax.swing.JFrame {
     private void jMenuFatLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFatLocActionPerformed
         // TODO add your handling code here:
         
-        new JFrameFaturaLoc().setVisible(true);
+        new JFrameRelatorioLocacao().setVisible(true);
     }//GEN-LAST:event_jMenuFatLocActionPerformed
 
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
