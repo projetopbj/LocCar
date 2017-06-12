@@ -58,6 +58,7 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
         jButtonChamaDevol = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
         jButtonAtualizarT = new javax.swing.JButton();
+        jButtonDel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Locações");
@@ -156,6 +157,13 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
             }
         });
 
+        jButtonDel.setText("Apagar Locacao");
+        jButtonDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelBuscaLocLayout = new javax.swing.GroupLayout(jPanelBuscaLoc);
         jPanelBuscaLoc.setLayout(jPanelBuscaLocLayout);
         jPanelBuscaLocLayout.setHorizontalGroup(
@@ -167,6 +175,8 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
                         .addGap(61, 61, 61)
                         .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonDel)
+                        .addGap(34, 34, 34)
                         .addComponent(jButtonChamaDevol, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(77, 77, 77))
                     .addGroup(jPanelBuscaLocLayout.createSequentialGroup()
@@ -190,7 +200,8 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
                 .addGap(49, 49, 49)
                 .addGroup(jPanelBuscaLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonChamaDevol)
-                    .addComponent(jButtonCancel))
+                    .addComponent(jButtonCancel)
+                    .addComponent(jButtonDel))
                 .addGap(31, 31, 31))
         );
 
@@ -239,11 +250,13 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
             tableModel.removeAll();
             tableModel.addLista(LocacaoControl.lerLocacao(true));
             jButtonChamaDevol.setEnabled(false);
+            jButtonDel.setEnabled(false);
             
         }else{
             tableModel.removeAll();
             tableModel.addLista(LocacaoControl.lerLocacao());
             jButtonChamaDevol.setEnabled(false);
+            jButtonDel.setEnabled(false);
         }
     }//GEN-LAST:event_jComboBoxStatusActionPerformed
 
@@ -273,6 +286,26 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
         jComboBoxStatus.setSelectedIndex(0);
         txtBusca.setText("");
     }//GEN-LAST:event_jButtonAtualizarTActionPerformed
+
+    private void jButtonDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDelActionPerformed
+        // TODO add your handling code here:
+                if(jTableLoc.getSelectedRow() != -1){
+
+         int resp;
+        resp = JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Apagar o Registro?","", JOptionPane.YES_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        if (resp == 0){
+            
+            String getLoc[] = pegarLoc();
+            
+             LocacaoControl.apagarLocacao(Integer.parseInt(getLoc[0]));
+        }
+            
+    }
+
+      
+        
+    }//GEN-LAST:event_jButtonDelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,6 +354,7 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonChamaDevol;
+    private javax.swing.JButton jButtonDel;
     private javax.swing.JComboBox<String> jComboBoxStatus;
     private javax.swing.JPanel jPanelBusca;
     private javax.swing.JPanel jPanelBuscaLoc;

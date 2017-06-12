@@ -292,7 +292,7 @@ public final class JFrameMain extends javax.swing.JFrame {
 
         jMenuRelatorios.setText("Relatórios");
 
-        jMenuFatLoc.setText("Faturas de Locação");
+        jMenuFatLoc.setText("Relatório de Locação");
         jMenuFatLoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuFatLocActionPerformed(evt);

@@ -9,6 +9,8 @@ import com.pbj.loccar.persistence.ConnectionFactory;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -21,18 +23,27 @@ import net.sf.jasperreports.view.JasperViewer;
 public class RelatorioControl {
     
     
-    Connection conn = ConnectionFactory.getConnection();
+  Connection conn = ConnectionFactory.getConnection();
     
-  public void relatorio() throws JRException, IOException{
+  public void relatorio(String arq){
+
+    String path = ".\\src\\com\\pbj\\loccar\\ireport\\" + arq +".jasper";
     
-    String path = ".\\src\\com\\pbj\\loccar\\properties\\Locacoes.jasper";
+    String file = null;
+      try {
+          file = new File(path).getCanonicalPath();
+      } catch (IOException ex) {
+          Logger.getLogger(RelatorioControl.class.getName()).log(Level.SEVERE, null, ex);
+      }
     
-    String file = new File(path).getCanonicalPath();
     
+        JasperPrint jasperPrint = null;
     
-        JasperPrint jasperPrint;
-    
-        jasperPrint = JasperFillManager.fillReport(file, null,conn);
+      try {
+          jasperPrint = JasperFillManager.fillReport(file, null,conn);
+      } catch (JRException ex) {
+          Logger.getLogger(RelatorioControl.class.getName()).log(Level.SEVERE, null, ex);
+      }
     
         JasperViewer view = new JasperViewer(jasperPrint,false);
         

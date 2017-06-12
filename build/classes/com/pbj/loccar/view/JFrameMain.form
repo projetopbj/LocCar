@@ -140,7 +140,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuFatLoc">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Faturas de Loca&#xe7;&#xe3;o"/>
+                <Property name="text" type="java.lang.String" value="Relat&#xf3;rio de Loca&#xe7;&#xe3;o"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuFatLocActionPerformed"/>

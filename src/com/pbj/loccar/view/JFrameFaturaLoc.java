@@ -298,12 +298,7 @@ public final class JFrameFaturaLoc extends javax.swing.JFrame {
     private void jButtonGerarFatLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerarFatLocActionPerformed
     
             RelatorioControl rel = new RelatorioControl();
-        try{            
-                    
-           rel.relatorio();
-        } catch (JRException | IOException ex) {
-            Logger.getLogger(JFrameFaturaLoc.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            rel.relatorio("Locacoes");
     }//GEN-LAST:event_jButtonGerarFatLocActionPerformed
 
     /**
