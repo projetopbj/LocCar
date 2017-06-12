@@ -39,6 +39,7 @@ public class JFrameSobre extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sobre");
+        setResizable(false);
 
         jPanelSobre.setBackground(new java.awt.Color(235, 232, 232));
 
@@ -69,32 +70,33 @@ public class JFrameSobre extends javax.swing.JFrame {
             jPanelSobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSobreLayout.createSequentialGroup()
                 .addGroup(jPanelSobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelSobreLayout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanelSobreLayout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addGroup(jPanelSobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addGroup(jPanelSobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelSobreLayout.createSequentialGroup()
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelSobreLayout.createSequentialGroup()
-                                    .addGap(10, 10, 10)
-                                    .addComponent(jLabel5)))))
+                    .addGroup(jPanelSobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelSobreLayout.createSequentialGroup()
+                            .addGap(134, 134, 134)
+                            .addComponent(jLabel5))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSobreLayout.createSequentialGroup()
+                            .addGap(124, 124, 124)
+                            .addComponent(jLabel1)))
                     .addGroup(jPanelSobreLayout.createSequentialGroup()
                         .addGap(147, 147, 147)
                         .addComponent(jButtonFechar))
                     .addGroup(jPanelSobreLayout.createSequentialGroup()
                         .addGap(88, 88, 88)
-                        .addComponent(jLabelLoccar)))
+                        .addComponent(jLabelLoccar))
+                    .addGroup(jPanelSobreLayout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addGroup(jPanelSobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSobreLayout.createSequentialGroup()
                 .addGap(0, 36, Short.MAX_VALUE)
                 .addComponent(jLabelLogo)
                 .addGap(35, 35, 35))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSobreLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelSobreLayout.setVerticalGroup(
             jPanelSobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

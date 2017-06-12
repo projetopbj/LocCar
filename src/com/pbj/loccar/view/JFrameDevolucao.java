@@ -29,6 +29,7 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
         
         
        populaCampos(LocacaoControl.pegaLocacao(id));
+       setaSub();
         
         
     }
@@ -52,6 +53,20 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
         txtGetDesc.setText(loc[12]);
         txtSubTotal.setText(loc[13]);
         txtGetDataHoj.setText(DataHora.getData());
+    }
+    private void setaSub(){
+        long dias = DataHora.subDias(txtGetDataEsp.getText(), txtGetDataHoj.getText());
+        
+        txtDiasExc.setText(Long.toString(dias));
+        try {
+            double sub = Double.parseDouble( txtSubTotal.getText() );
+            double days =  Double.parseDouble( txtDiasExc.getText() );
+            double valorE = Double.parseDouble(  txtGetKmU.getText() );
+            double total = sub + (valorE * days); 
+            txtGetTotal.setText(Double.toString(total));
+        } catch (Exception e) {
+            
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -233,6 +248,11 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
                 txtGetDataHojFocusLost(evt);
             }
         });
+        txtGetDataHoj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGetDataHojActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Data de Hoje");
 
@@ -287,7 +307,7 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
                             .addGroup(jPanelInfoLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtGetTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabelTotal))
-                            .addContainerGap(11, Short.MAX_VALUE))
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(jPanelInfoLocLayout.createSequentialGroup()
                             .addGroup(jPanelInfoLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanelInfoLocLayout.createSequentialGroup()
@@ -346,7 +366,7 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
                             .addGroup(jPanelInfoLocLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(txtGetCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(52, Short.MAX_VALUE))))
+                        .addContainerGap(63, Short.MAX_VALUE))))
         );
         jPanelInfoLocLayout.setVerticalGroup(
             jPanelInfoLocLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -542,19 +562,12 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
 
     private void txtGetDataHojFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGetDataHojFocusLost
         // TODO add your handling code here:
-        long dias = DataHora.subDias(txtGetDataEsp.getText(), txtGetDataHoj.getText());
-        
-        txtDiasExc.setText(Long.toString(dias));
-        try {
-            double sub = Double.parseDouble( txtSubTotal.getText() );
-       double days =  Double.parseDouble( txtDiasExc.getText() );
-       double valorE = Double.parseDouble(  txtGetKmU.getText() );
-       double total = sub + (valorE * days); 
-        txtGetTotal.setText(Double.toString(total));
-        } catch (Exception e) {
-            
-        }
+        setaSub();
     }//GEN-LAST:event_txtGetDataHojFocusLost
+
+    private void txtGetDataHojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGetDataHojActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtGetDataHojActionPerformed
 
     /**
      * @param args the command line arguments
