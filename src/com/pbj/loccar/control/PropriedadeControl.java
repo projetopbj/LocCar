@@ -23,7 +23,7 @@ public class PropriedadeControl {
         boolean bool;
         
         //Chamando o método da Utíl para Setar as informações no arquivo
-        Propriedade.setPropConn(".\\properties\\connetion.properties",urlIp,urlPorta,urlBd,user,pass);
+        Propriedade.setPropConn(".\\properties\\connection.properties",urlIp,urlPorta,urlBd,user,pass);
         
         return true;
     }
