@@ -7,46 +7,59 @@ package com.pbj.loccar.view;
 
 import com.pbj.loccar.control.VeiculoControl;
 import com.pbj.loccar.view.tables.VeiculoTable;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Akr-Taku
- * 
+ *
  * JFrame de COnsulta de Veiculos
  */
 public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameConsultaVeiculos
-     * 
-     * 
+     *
+     *
      */
     VeiculoTable tableModel;
-    
+
     public JFrameConsultaVeiculos() {
         initComponents();
-        
-        
-        tableModel = new VeiculoTable(VeiculoControl.lerVeiculo());
+
+        tableModel = new VeiculoTable();
+        atualizaTabela();
         jTableVeiculos.setModel(tableModel);
-        
         //Inicia os Botões como Não clicaveis;
         jButtonExcluir.setEnabled(false);
         jButtonEditar.setEnabled(false);
         //Seta o Rádio Button do modelo como selecionado por padrão
         jRadioButtonModelo.setSelected(true);
     }
-    private String[] pegarVeiculo(){
-        if(jTableVeiculos.getSelectedRow() != -1 ){      
+
+    private String[] pegarVeiculo() {
+        if (jTableVeiculos.getSelectedRow() != -1) {
             String veic[] = tableModel.getVeiculo(jTableVeiculos.getSelectedRow());
-     
-        return veic;
-        }else{
+
+            return veic;
+        } else {
             return null;
         }
-        
+
     }
+
+    private void atualizaTabela() {
+
+        tableModel.removeAll();
+        try {
+            tableModel.addLista(VeiculoControl.lerVeiculo());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Acessar Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -289,24 +302,29 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         // TODO add your handling code here:
-        if(jTableVeiculos.getSelectedRow() != -1 ){ 
-            int resp =  JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Excluir?");
-            if (resp == 0){//Somente apaga caso o verificador seja Sim
-             
+        if (jTableVeiculos.getSelectedRow() != -1) {
+            int resp = JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Excluir?");
+            if (resp == 0) {//Somente apaga caso o verificador seja Sim
+
                 //Pega o objeto da linha selecionada e retorna um array
                 String veicRemove[] = pegarVeiculo();
-                //Pega a primeira posição do array que é iD e remove do banco
-                VeiculoControl.apagarVeiculo(Integer.parseInt(veicRemove[0]));
+                try {
+                    //Pega a primeira posição do array que é iD e remove do banco
+                    VeiculoControl.apagarVeiculo(Integer.parseInt(veicRemove[0]));
+                    JOptionPane.showMessageDialog(null, "Veículo Ecluído com Sucesso!");
+
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao Excluir do Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+                }
                 //Atualiza Tabela do Banco de dados
-                tableModel.removeAll();
-                tableModel.addLista(VeiculoControl.lerVeiculo());
-            }else{
-            //Mensagem de aviso que não há registro selecionado
-            JOptionPane.showMessageDialog(null, "Não há registro selecionado na tabela!","",JOptionPane.WARNING_MESSAGE);
+                atualizaTabela();
+            } else {
+                //Mensagem de aviso que não há registro selecionado
+                JOptionPane.showMessageDialog(null, "Não há registro selecionado na tabela!", "", JOptionPane.WARNING_MESSAGE);
             }
         }
-  
-      
+
+
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jRadioButtonModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonModeloActionPerformed
@@ -315,16 +333,15 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
-        
-         this.dispose();
+
+        this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
         // TODO add your handling code here:
-        tableModel.removeAll();
-        tableModel.addLista(VeiculoControl.lerVeiculo());
+        atualizaTabela();
         txtConsulta.setText("");
-        
+
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     private void jTableVeiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVeiculosMouseClicked
@@ -335,14 +352,14 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         // TODO add your handling code here:
-        if(jTableVeiculos.getSelectedRow() != -1 ){ 
-             
-                //Pega o objeto da linha selecionada e retorna um array
-                new JFrameCadastroVeiculo(pegarVeiculo()).setVisible(true);
+        if (jTableVeiculos.getSelectedRow() != -1) {
 
-        }else{
+            //Pega o objeto da linha selecionada e retorna um array
+            new JFrameCadastroVeiculo(pegarVeiculo()).setVisible(true);
+
+        } else {
             //Mensagem de aviso que não há registro selecionado
-            JOptionPane.showMessageDialog(null, "Não há registro selecionado na tabela!","",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Não há registro selecionado na tabela!", "", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
@@ -353,38 +370,43 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
     private void jButtonBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscaActionPerformed
         // TODO add your handling code here:
         // Cai se a seleção estiver em disponiveis o radio tiver em Ano
-        if("Disponíveis".equals(jComboBoxListar.getSelectedItem()) && jRadioButtonAno.isSelected()){
-            
-            tableModel.removeAll();
-            tableModel.addLista(VeiculoControl.lerVeiculo(Integer.parseInt(txtConsulta.getText()), false));
-            txtConsulta.setText("");
-            //Cai se tiver em todos e o radio no Ano
-        }else if(jRadioButtonAno.isSelected() && !"".equals(txtConsulta.getText())){
-            
-            tableModel.removeAll();
-            tableModel.addLista(VeiculoControl.lerVeiculo(Integer.parseInt(txtConsulta.getText())));
-            txtConsulta.setText("");
-            //Cai nos disponiveis e se tiver no Modelo
-        }else if("Disponíveis".equals(jComboBoxListar.getSelectedItem()) && jRadioButtonModelo.isSelected() ){
-            tableModel.removeAll();
-            tableModel.addLista(VeiculoControl.lerVeiculo(txtConsulta.getText(), false));   
-            txtConsulta.setText("");
-            //Cai no todos e se tiver no Modelo
-        }else if(jRadioButtonModelo.isSelected() && !"".equals(txtConsulta.getText())){
-            tableModel.removeAll();
-            tableModel.addLista(VeiculoControl.lerVeiculo(txtConsulta.getText())); 
-            txtConsulta.setText("");
-           // Cai quando Somente o campo disponiveis está selecionado
-        }else if ("Disponíveis".equals(jComboBoxListar.getSelectedItem())){
-            tableModel.removeAll();
-            tableModel.addLista(VeiculoControl.lerVeiculo(false));
-            txtConsulta.setText("");
-        }else{
-            tableModel.removeAll();
-            tableModel.addLista(VeiculoControl.lerVeiculo());
-            txtConsulta.setText("");
+        try {
+
+            if ("Disponíveis".equals(jComboBoxListar.getSelectedItem()) && jRadioButtonAno.isSelected()) {
+
+                tableModel.removeAll();
+                tableModel.addLista(VeiculoControl.lerVeiculo(Integer.parseInt(txtConsulta.getText()), false));
+                txtConsulta.setText("");
+                //Cai se tiver em todos e o radio no Ano
+            } else if (jRadioButtonAno.isSelected() && !"".equals(txtConsulta.getText())) {
+
+                tableModel.removeAll();
+                tableModel.addLista(VeiculoControl.lerVeiculo(Integer.parseInt(txtConsulta.getText())));
+                txtConsulta.setText("");
+                //Cai nos disponiveis e se tiver no Modelo
+            } else if ("Disponíveis".equals(jComboBoxListar.getSelectedItem()) && jRadioButtonModelo.isSelected()) {
+                tableModel.removeAll();
+                tableModel.addLista(VeiculoControl.lerVeiculo(txtConsulta.getText(), false));
+                txtConsulta.setText("");
+                //Cai no todos e se tiver no Modelo
+            } else if (jRadioButtonModelo.isSelected() && !"".equals(txtConsulta.getText())) {
+                tableModel.removeAll();
+                tableModel.addLista(VeiculoControl.lerVeiculo(txtConsulta.getText()));
+                txtConsulta.setText("");
+                // Cai quando Somente o campo disponiveis está selecionado
+            } else if ("Disponíveis".equals(jComboBoxListar.getSelectedItem())) {
+                tableModel.removeAll();
+                tableModel.addLista(VeiculoControl.lerVeiculo(false));
+                txtConsulta.setText("");
+            } else {
+                tableModel.removeAll();
+                tableModel.addLista(VeiculoControl.lerVeiculo());
+                txtConsulta.setText("");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Acessar Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
         }
-            
+
     }//GEN-LAST:event_jButtonBuscaActionPerformed
 
     /**
@@ -415,10 +437,8 @@ public final class JFrameConsultaVeiculos extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameConsultaVeiculos().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new JFrameConsultaVeiculos().setVisible(true);
         });
     }
 

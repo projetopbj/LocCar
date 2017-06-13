@@ -5,6 +5,8 @@
  */
 package com.pbj.loccar.util;
 
+import com.pbj.loccar.exceptions.DataInvalidaException;
+import com.pbj.loccar.exceptions.ValorInvalidoException;
 import com.pbj.loccar.view.JFrameCadastroCliente;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -57,23 +59,27 @@ public class DataHora{
 	return cal.getTime();
     }
     
-    public static String somaDias(String data, String diaS) {
+    public static String somaDias(String data, String diaS) throws ValorInvalidoException, DataInvalidaException, ParseException {
+        
         
         Date date = dataToString(data);
-	Calendar cal = new GregorianCalendar();
-	cal.setTime(date);
+        Calendar cal = new GregorianCalendar();
+        cal.setTime(date);
         
-        int dias = Integer.parseInt(diaS);
+        int dias = Integer.parseInt(diaS);  
+                
+        
         
         if(dias < 0){
-            return data;
+            throw new ValorInvalidoException("O valor passado é menor que Zero");
         }
 	cal.add(Calendar.DAY_OF_MONTH, dias);
-	return stringToData(cal.getTime());
+           return stringToData(cal.getTime());
+       
     }
     
-    public static long subDias(String dataDev, String dataHoje) {
-        
+    public static long subDias(String dataDev, String dataHoje) throws DataInvalidaException {
+        try{
         Date dateD = dataToString(dataDev);
         Date dateH = dataToString(dataHoje);
         
@@ -82,27 +88,34 @@ public class DataHora{
         dias = dias  / 86400000L;
 
 	return dias;
+        }catch(Exception e){
+            throw new DataInvalidaException("O um dos Valores inseridos não é válido!: ", e);
+        }
     }
     
     
         //Recebe uma String dd/MM/yyyy e converte para String
-    public static  Date dataToString(String data){
+    public static  Date dataToString(String data) throws ParseException{
            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            try {
+           
                 Date dataRetorno = (Date)formatter.parse(data);
                 
                 return dataRetorno;
-            } catch (ParseException ex) {
-                Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-                return null;    
-
-            }
+          
+              
     }
    
       //Recebe uma data e converte para String no formato dd/MM/yyyy
-    public static  String stringToData(Date data){
+    public static  String stringToData(Date data) throws DataInvalidaException{
            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-           String dataRetorno = formatter.format(data);
+           String dataRetorno = null;
+           try{
+              dataRetorno = formatter.format(data);
+           }catch(Exception e){
+             throw new DataInvalidaException("Valor passado não pode ser convertido para String");
+           }
+               
+           
            return dataRetorno;        
     }
    
@@ -124,7 +137,11 @@ public class DataHora{
             try {
                 Date dataRetorno = (Date)formatter.parse(data);
                 
-                return stringToData(dataRetorno);
+               try {
+                   return stringToData(dataRetorno);
+               } catch (DataInvalidaException ex) {
+                   Logger.getLogger(DataHora.class.getName()).log(Level.SEVERE, null, ex);
+               }
             } catch (ParseException ex) {
                 Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
             }

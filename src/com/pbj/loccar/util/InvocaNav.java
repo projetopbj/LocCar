@@ -6,7 +6,6 @@
 package com.pbj.loccar.util;
 
 import java.lang.reflect.Method;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,18 +13,17 @@ import javax.swing.JOptionPane;
  * 
  * Classe util que Possui funções com o navegador
  */
-public class Navegador {  
+public class InvocaNav {  
     
    /* 
    
     Método que recebe um endereço de web ou arquivo que possa ser aberto no 
     navegador e abre navegador em qualquer OS
    */
-    public static void openURL(String url)
+    public static void openURL(String url) throws Exception
     {
         String osName = System.getProperty("os.name");
-        try
-        {
+        
             if (osName.startsWith("Mac OS"))
             {
                 Class fileMgr = Class.forName("com.apple.eio.FileManager");
@@ -50,11 +48,7 @@ public class Navegador {
                     Runtime.getRuntime().exec(new String[] {browser, url});
             }
         }
-        catch (Exception e)
-        {
-            JOptionPane.showMessageDialog(null, "Erro ao tentar abrir o browser" + ":\n" + e.getLocalizedMessage());
-        }
+        
     }
     
     
-}

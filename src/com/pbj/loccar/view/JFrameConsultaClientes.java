@@ -7,6 +7,7 @@ package com.pbj.loccar.view;
 
 import com.pbj.loccar.control.ClienteControl;
 import com.pbj.loccar.view.tables.ClienteTable;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,31 +16,43 @@ import javax.swing.JOptionPane;
  */
 public final class JFrameConsultaClientes extends javax.swing.JFrame {
 
-
     /**
      * Creates new form JFrameConsultaClientes
      */
     ClienteTable tableModel;
+
     public JFrameConsultaClientes() {
         initComponents();
-        
-        tableModel = new ClienteTable(ClienteControl.lerCliente());
+
+        tableModel = new ClienteTable();
+
+        atualizaTabela();
         //Inicia os Botões como Não clicaveis; 
         jTableClientes.setModel(tableModel);
         jButtonExcluir.setEnabled(false);
         jButtonEditar.setEnabled(false);
         jRadioButtonNome.setSelected(true);
-        
+
     }
-    private String[] pegarCliente(){
-        if(jTableClientes.getSelectedRow() != -1 ){      
+
+    private String[] pegarCliente() {
+        if (jTableClientes.getSelectedRow() != -1) {
             String client[] = tableModel.getCliente(jTableClientes.getSelectedRow());
-     
-        return client;
-        }else{
+
+            return client;
+        } else {
             return null;
         }
-        
+
+    }
+
+    private void atualizaTabela() {
+        try {
+            tableModel.removeAll();
+            tableModel.addLista(ClienteControl.lerCliente());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Acessar Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -243,35 +256,41 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         // TODO add your handling code here:
-            if(jTableClientes.getSelectedRow() != -1 ){ 
-                int resp =  JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Excluir?");
-                if (resp == 0){//Somente apaga caso o verificador seja Sim
-             
-                    //Pega o objeto da linha selecionada e retorna um array
-                    String clientRemove[] = pegarCliente();
+        if (jTableClientes.getSelectedRow() != -1) {
+            int resp = JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Excluir?");
+            if (resp == 0) {//Somente apaga caso o verificador seja Sim
+
+                //Pega o objeto da linha selecionada e retorna um array
+                String clientRemove[] = pegarCliente();
+                try {
                     //Pega a primeira posição do array que é iD e remove do banco
                     ClienteControl.apagarCliente(Integer.parseInt(clientRemove[0]));
-                    //Atualiza Tabela do Banco de dados
-                    tableModel.removeAll();
-                    tableModel.addLista(ClienteControl.lerCliente());
-                }else{
-                    //Mensagem de aviso que não há registro selecionado
-                    JOptionPane.showMessageDialog(null, "Não há registro selecionado na tabela!","",JOptionPane.WARNING_MESSAGE);
+
+                    JOptionPane.showMessageDialog(null, "Cliente Excluído Com Sucesso!");
+
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao Excluir Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+                }
+                //Atualiza Tabela do Banco de dados
+                atualizaTabela();
+            } else {
+                //Mensagem de aviso que não há registro selecionado
+                JOptionPane.showMessageDialog(null, "Não há registro selecionado na tabela!", "", JOptionPane.WARNING_MESSAGE);
             }
         }
-        
+
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
         // TODO add your handling code here:
-                if(jTableClientes.getSelectedRow() != -1 ){ 
-             
-                //Pega o objeto da linha selecionada e retorna um array
-                new JFrameCadastroCliente(pegarCliente()).setVisible(true);
+        if (jTableClientes.getSelectedRow() != -1) {
 
-        }else{
+            //Pega o objeto da linha selecionada e retorna um array
+            new JFrameCadastroCliente(pegarCliente()).setVisible(true);
+
+        } else {
             //Mensagem de aviso que não há registro selecionado
-            JOptionPane.showMessageDialog(null, "Não há registro selecionado na tabela!","",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Não há registro selecionado na tabela!", "", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
@@ -285,31 +304,33 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
 
     private void jButtonBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscaActionPerformed
         // TODO add your handling code here:
-        if(!"".equals(txtConsulta.getText())&& jRadioButtonNome.isSelected()){
-            tableModel.removeAll();
-            tableModel.addLista(ClienteControl.lerCliente(txtConsulta.getText()));
-            txtConsulta.setText("");
-        }else if(!"".equals(txtConsulta.getText())&& jRadioButtonCPF.isSelected()){
-            tableModel.removeAll();
-            tableModel.addLista(ClienteControl.lerCliente(txtConsulta.getText(),true));
-            txtConsulta.setText("");
-        }else{
-            tableModel.removeAll();
-            tableModel.addLista(ClienteControl.lerCliente());
+        try {
+            if (!"".equals(txtConsulta.getText()) && jRadioButtonNome.isSelected()) {
+                tableModel.removeAll();
+                tableModel.addLista(ClienteControl.lerCliente(txtConsulta.getText()));
+                txtConsulta.setText("");
+            } else if (!"".equals(txtConsulta.getText()) && jRadioButtonCPF.isSelected()) {
+                tableModel.removeAll();
+                tableModel.addLista(ClienteControl.lerCliente(txtConsulta.getText(), true));
+                txtConsulta.setText("");
+            } else {
+                tableModel.removeAll();
+                tableModel.addLista(ClienteControl.lerCliente());
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Acessar Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
         }
-        
     }//GEN-LAST:event_jButtonBuscaActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
-         this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonAtualizarTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarTableActionPerformed
         // TODO add your handling code here:
-        
-        tableModel.removeAll();
-        tableModel.addLista(ClienteControl.lerCliente());
+
+        atualizaTabela();
         txtConsulta.setText("");
     }//GEN-LAST:event_jButtonAtualizarTableActionPerformed
 
@@ -347,10 +368,8 @@ public final class JFrameConsultaClientes extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameConsultaClientes().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new JFrameConsultaClientes().setVisible(true);
         });
     }
 

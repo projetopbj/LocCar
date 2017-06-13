@@ -10,17 +10,17 @@ package com.pbj.loccar.model;
  * @author Akr-Taku
  */
 public enum EstadoCivil {
-    
-    S ("Solteiro"),
-    C ("Casado"),
-    V ("Viúvo"),
-    UE ("União Estável"),
-    D ("divorciado") ;
-    
+
+    S("Solteiro"),
+    C("Casado"),
+    V("Viúvo"),
+    UE("União Estável"),
+    D("divorciado");
+
     private final String desc;
-    
-    private EstadoCivil(String desc){
+
+    private EstadoCivil(String desc) {
         this.desc = desc;
     }
-    
+
 }

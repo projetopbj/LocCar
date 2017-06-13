@@ -11,16 +11,15 @@ import java.util.Objects;
 /**
  *
  * @author lucas
- * 
- * 
+ *
+ *
  * Classe que define as Informações do Cliente
- * 
+ *
  */
-
 public class Cliente {
-    
+
     private static int iterador;
-    
+
     private int id;
     private String nomeCliente;
     private String rgCliente;
@@ -37,25 +36,24 @@ public class Cliente {
     private String bairroCliente;
     private String cidadeCliente;
     private String ufCliente;
-    
-    
-    
+
     //Construtor Vazio 
-    public Cliente(){
+    public Cliente() {
         iterador++;
         id = iterador;
-    
+
     }
-        
+
     //Construtor recebendo nome, cpf  e rg
-    public Cliente(String nomeCliente,String rgCliente,String cpfCliente){
+    public Cliente(String nomeCliente, String rgCliente, String cpfCliente) {
         iterador++;
         id = iterador;
         this.nomeCliente = nomeCliente;
         this.rgCliente = rgCliente;
         this.cpfCliente = cpfCliente;
-       
+
     }
+
     public int getId() {
         return id;
     }
@@ -111,7 +109,6 @@ public class Cliente {
     public void setSexoCliente(Sexo sexoCliente) {
         this.sexoCliente = sexoCliente;
     }
-
 
     public String getEmailCliente() {
         return emailCliente;
@@ -185,9 +182,7 @@ public class Cliente {
         this.ufCliente = ufCliente;
     }
 
- 
-  
-       @Override
+    @Override
     public int hashCode() {
         int hash = 3;
         hash = 37 * hash + this.id;
@@ -217,20 +212,16 @@ public class Cliente {
         return Objects.equals(this.cpfCliente, other.cpfCliente);
     }
 
- 
-    
-    
     @Override//Metodo toString
     public String toString() {
-        return "Cliente{" + "id=" + id + ", nomeCliente=" + nomeCliente + 
-                ", rgCliente=" + rgCliente + ", cpfCliente=" + cpfCliente +
-                ", estadoCivilCliente=" + estadoCivilCliente + ", sexoCliente=" + sexoCliente +
-                ", dataNascimentoCliente=" + dataNascCliente + ", emailCliente=" + emailCliente +
-                ", telefoneCliente=" + telefoneCliente + ", celularCliente=" + celularCliente +
-                ", ruaCliente=" + ruaCliente + ", cepCliente=" + cepCliente +
-                ", complementoCliente=" + complementoCliente + ", bairroCliente=" + bairroCliente + 
-                ", cidadeCliente=" + cidadeCliente + ", ufCliente=" + ufCliente + '}';
+        return "Cliente{" + "id=" + id + ", nomeCliente=" + nomeCliente
+                + ", rgCliente=" + rgCliente + ", cpfCliente=" + cpfCliente
+                + ", estadoCivilCliente=" + estadoCivilCliente + ", sexoCliente=" + sexoCliente
+                + ", dataNascimentoCliente=" + dataNascCliente + ", emailCliente=" + emailCliente
+                + ", telefoneCliente=" + telefoneCliente + ", celularCliente=" + celularCliente
+                + ", ruaCliente=" + ruaCliente + ", cepCliente=" + cepCliente
+                + ", complementoCliente=" + complementoCliente + ", bairroCliente=" + bairroCliente
+                + ", cidadeCliente=" + cidadeCliente + ", ufCliente=" + ufCliente + '}';
     }
-
 
 }

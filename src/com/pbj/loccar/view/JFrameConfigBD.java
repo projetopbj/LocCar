@@ -7,6 +7,7 @@ package com.pbj.loccar.view;
 
 import com.pbj.loccar.control.PropriedadeControl;
 import java.awt.Color;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -20,38 +21,42 @@ public class JFrameConfigBD extends javax.swing.JFrame {
      * Creates new form JFrameConfigBD
      */
     public JFrameConfigBD() {
-        
+
         initComponents();
-        
-        ArrayList<String> propriedades = PropriedadeControl.retornarProp();
-        
-        //Seta os dados Diretamente dos Properties para o Campo de Config
-        txtHost.setText(propriedades.get(0));
-        txtPorta.setText(propriedades.get(1));
-        txtBancoNome.setText(propriedades.get(2));
-        txtUser.setText(propriedades.get(3));
-        txtPass.setText(propriedades.get(4));  
-        
-        setEditavel(false, Color.GRAY);
-      
+
+        ArrayList<String> propriedades;
+        try {
+            propriedades = PropriedadeControl.retornarProp();
+            //Seta os dados Diretamente dos Properties para o Campo de Config
+            txtHost.setText(propriedades.get(0));
+            txtPorta.setText(propriedades.get(1));
+            txtBancoNome.setText(propriedades.get(2));
+            txtUser.setText(propriedades.get(3));
+            txtPass.setText(propriedades.get(4));
+
+            setEditavel(false, Color.GRAY);
+
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Acessar O arquivo de Propriedades: " + ex, "", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
-    
+
     //Metodo que troca os campos editaveis para não editaveis
-    private void setEditavel(boolean bool,Color cor){
-        
-        txtHost.setEditable(bool) ;
+    private void setEditavel(boolean bool, Color cor) {
+
+        txtHost.setEditable(bool);
         txtPorta.setEditable(bool);
         txtBancoNome.setEditable(bool);
         txtUser.setEditable(bool);
         txtPass.setEditable(bool);
-        
+
         txtHost.setBackground(cor);
         txtPorta.setBackground(cor);
         txtBancoNome.setBackground(cor);
         txtUser.setBackground(cor);
         txtPass.setBackground(cor);
-        
-        
+
     }
 
     /**
@@ -250,13 +255,13 @@ public class JFrameConfigBD extends javax.swing.JFrame {
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
         // TODO add your handling code here:
-        
+
         setEditavel(true, Color.WHITE);
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
-        
+
         this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
@@ -271,14 +276,17 @@ public class JFrameConfigBD extends javax.swing.JFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
         //Salva Os properties pegando os dados a partir dos campos de texto
-       boolean ret =  PropriedadeControl.salvarProp(txtHost.getText(), txtPorta.getText(), txtBancoNome.getText(), txtUser.getText(), txtPass.getText());
-        
-       if (ret == true){
+        try {
+            PropriedadeControl.salvarProp(txtHost.getText(), txtPorta.getText(), txtBancoNome.getText(), txtUser.getText(), txtPass.getText());
             JOptionPane.showMessageDialog(this, "Salvo Com Sucesso!");
-            
+
             setEditavel(false, Color.GRAY);
-            
-       }
+
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Salvar as Propriedades: " + ex, "", JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**
@@ -309,10 +317,8 @@ public class JFrameConfigBD extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameConfigBD().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new JFrameConfigBD().setVisible(true);
         });
     }
 

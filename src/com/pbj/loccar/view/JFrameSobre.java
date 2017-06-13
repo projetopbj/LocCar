@@ -41,7 +41,7 @@ public class JFrameSobre extends javax.swing.JFrame {
         setTitle("Sobre");
         setResizable(false);
 
-        jPanelSobre.setBackground(new java.awt.Color(235, 232, 232));
+        jPanelSobre.setBackground(new java.awt.Color(217, 217, 217));
 
         jButtonFechar.setText("Fechar");
         jButtonFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -50,52 +50,45 @@ public class JFrameSobre extends javax.swing.JFrame {
             }
         });
 
+        jLabelLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/pbj/loccar/others/manual/manualHtml/images/Rentsoft.PNG"))); // NOI18N
 
-        jLabelLoccar.setText(" ©PbJ Software Direitos Reservados");
+        jLabelLoccar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelLoccar.setText(" ©PBJ Software Direitos Reservados");
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText(" projetopbj@gmail.com");
 
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Desenvolvedores:");
 
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Aleff Santos");
+        jLabel3.setToolTipText("");
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Lucas Camargo Sodré");
 
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Alexandre Mota");
 
         javax.swing.GroupLayout jPanelSobreLayout = new javax.swing.GroupLayout(jPanelSobre);
         jPanelSobre.setLayout(jPanelSobreLayout);
         jPanelSobreLayout.setHorizontalGroup(
             jPanelSobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelSobreLayout.createSequentialGroup()
-                .addGroup(jPanelSobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelSobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelSobreLayout.createSequentialGroup()
-                            .addGap(134, 134, 134)
-                            .addComponent(jLabel5))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSobreLayout.createSequentialGroup()
-                            .addGap(124, 124, 124)
-                            .addComponent(jLabel1)))
-                    .addGroup(jPanelSobreLayout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(jButtonFechar))
-                    .addGroup(jPanelSobreLayout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(jLabelLoccar))
-                    .addGroup(jPanelSobreLayout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addGroup(jPanelSobreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSobreLayout.createSequentialGroup()
-                .addGap(0, 36, Short.MAX_VALUE)
+                .addGap(0, 33, Short.MAX_VALUE)
                 .addComponent(jLabelLogo)
                 .addGap(35, 35, 35))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSobreLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelLoccar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanelSobreLayout.createSequentialGroup()
+                .addGap(168, 168, 168)
+                .addComponent(jButtonFechar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelSobreLayout.setVerticalGroup(
@@ -111,11 +104,11 @@ public class JFrameSobre extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
+                .addGap(22, 22, 22)
                 .addComponent(jButtonFechar)
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabelLoccar)
                 .addContainerGap())
         );
@@ -168,10 +161,8 @@ public class JFrameSobre extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameSobre().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new JFrameSobre().setVisible(true);
         });
     }
 

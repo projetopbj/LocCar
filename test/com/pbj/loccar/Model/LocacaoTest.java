@@ -9,6 +9,9 @@ import com.pbj.loccar.model.Categoria;
 import com.pbj.loccar.model.Locacao;
 import com.pbj.loccar.model.Veiculo;
 import com.pbj.loccar.util.DataHora;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import junit.framework.TestCase;
 
 /**
@@ -27,7 +30,11 @@ public class LocacaoTest extends TestCase{
     @Override
     public void setUp(){
         veiculo = new Veiculo();
-        locacao = new Locacao();
+        try {
+            locacao = new Locacao();
+        } catch (ParseException ex) {
+            Logger.getLogger(LocacaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         categoria = new Categoria();
     }
 
@@ -41,21 +48,25 @@ public class LocacaoTest extends TestCase{
 
     // testo o metodo alugar
     public void alugarTest(){
-        locacao.setDataDoAluguel(DataHora.dataToString("12/06/17"));
-        
-        veiculo.setCategoria(categoria);
-        veiculo.getCategoria().setValorDia(20);
-        locacao.setQtdDias(2);
-        veiculo.getCategoria().setValorKm(2);
-        locacao.setAtrasoLocacao(true);
-        locacao.setDiasAtraso(1);
-        
-        locacao.setVeiculo(veiculo);
-        
-        boolean testAlugarCarro;
-        testAlugarCarro = locacao.alugar(10);
-        
-        assertEquals(true, testAlugarCarro);
+        try {
+            locacao.setDataDoAluguel(DataHora.dataToString("12/06/17"));
+            
+            veiculo.setCategoria(categoria);
+            veiculo.getCategoria().setValorDia(20);
+            locacao.setQtdDias(2);
+            veiculo.getCategoria().setValorKm(2);
+            locacao.setAtrasoLocacao(true);
+            locacao.setDiasAtraso(1);
+            
+            locacao.setVeiculo(veiculo);
+            
+            boolean testAlugarCarro;
+            testAlugarCarro = locacao.alugar(10);
+            
+            assertEquals(true, testAlugarCarro);
+        } catch (ParseException ex) {
+            Logger.getLogger(LocacaoTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     

@@ -5,8 +5,12 @@
  */
 package com.pbj.loccar.Model;
 
+import com.pbj.loccar.exceptions.DataInvalidaException;
 import com.pbj.loccar.util.DataHora;
+import java.text.ParseException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import junit.framework.TestCase;
 
 /**
@@ -39,18 +43,28 @@ public class DataHoraTest extends TestCase{
 
     // testo o metodo
     public void dataToStringTest(){
-        Date dataToStringRetorno;
-        dataToStringRetorno = DataHora.dataToString("02/06/2017");
-    
-        assertEquals("", dataToStringRetorno);
+        try {
+            Date dataToStringRetorno;
+            
+            dataToStringRetorno = DataHora.dataToString("02/06/2017");
+            
+            
+            assertEquals("", dataToStringRetorno);
+        } catch (ParseException ex) {
+            Logger.getLogger(DataHoraTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // testo o metodo
     public void stringToDataTest(){
-        String stringToDataRetorno;
-        stringToDataRetorno = DataHora.stringToData(DataHora.dataToString("02/06/2017"));
-    
-        assertEquals("", stringToDataRetorno);
+        try {
+            String stringToDataRetorno;
+            stringToDataRetorno = DataHora.stringToData(DataHora.dataToString("02/06/2017"));
+            
+            assertEquals("", stringToDataRetorno);
+        } catch (ParseException | DataInvalidaException ex) {
+            Logger.getLogger(DataHoraTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     // testo o metodo
@@ -62,10 +76,14 @@ public class DataHoraTest extends TestCase{
     }
     
     public void subDiasTest(){
-        long subDiasRetorno;
-        subDiasRetorno = DataHora.subDias("04/06/2017", "06/06/2017");
-        
-        assertEquals(2, subDiasRetorno);
+        try {
+            long subDiasRetorno;
+            subDiasRetorno = DataHora.subDias("04/06/2017", "02/06/2017");
+            
+            assertEquals(2, subDiasRetorno);
+        } catch (DataInvalidaException ex) {
+            Logger.getLogger(DataHoraTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

@@ -7,6 +7,7 @@ package com.pbj.loccar.view;
 
 import com.pbj.loccar.control.CategoriaControl;
 import com.pbj.loccar.util.StringCampos;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,25 +17,25 @@ import javax.swing.JOptionPane;
 public class JFrameCadastroCategoria extends javax.swing.JFrame {
 
     /**
-     * Creates new form JFrameCadastroCategoria 
+     * Creates new form JFrameCadastroCategoria
      */
-  
     private int id;
-    
-    public JFrameCadastroCategoria() {        
+
+    public JFrameCadastroCategoria() {
         initComponents();
         jButtonAtualizar.setVisible(false);
     }
-    public JFrameCadastroCategoria(String[] categ) {        
+
+    public JFrameCadastroCategoria(String[] categ) {
         initComponents();
         jButtonCadastro.setVisible(false);
         SetCampos(categ);
 
-                
     }
+
     //Seta valores nos campos
-    private void SetCampos(String[] categ){
-        
+    private void SetCampos(String[] categ) {
+
         id = Integer.parseInt(categ[0]);
         txtNomeCateg.setText(categ[1]);
         txtValorDia.setText(categ[2]);
@@ -42,31 +43,32 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
         jComboBoxAr.setSelectedItem((String) categ[4]);
         jComboBoxVidro.setSelectedItem((String) categ[5]);
         jComboBoxDirecaoH.setSelectedItem((String) categ[6]);
-        
-        
+
     }
-    
+
     //Metodo serve para limpar os campos
-    private void limpaCampos(){
-        
+    private void limpaCampos() {
+
         txtNomeCateg.setText("");
         txtValorDia.setText("");
         txtKM.setText("");
         jComboBoxAr.setSelectedIndex(0);
         jComboBoxVidro.setSelectedIndex(0);
         jComboBoxDirecaoH.setSelectedIndex(0);
-        
+
     }
+
     //Verifica se os campos são vazios
-    private boolean comparaCampos(){
-        
-      boolean n =  StringCampos.vazio(txtNomeCateg.getText());
-      boolean d =  StringCampos.vazio(txtValorDia.getText());
-      boolean r =  StringCampos.vazio(txtKM.getText());
-        
-        return (n  || d  || r);
-        
+    private boolean comparaCampos() {
+
+        boolean n = StringCampos.vazio(txtNomeCateg.getText());
+        boolean d = StringCampos.vazio(txtValorDia.getText());
+        boolean r = StringCampos.vazio(txtKM.getText());
+
+        return (n || d || r);
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -261,46 +263,41 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // Botão que fecha a teka Atual
-        
+
         this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
-    //Verifica o objeto passado com "SIM" e caso posivito ele retorna true;
-   private boolean verifiX(Object obj){
-       
-       boolean bool = false;
-       
-       if("Sim".equals(obj))
-         {  
-             bool = true; 
-         }
-         
-       return bool;
-   }
-    
-    
+
     private void jButtonCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroActionPerformed
         // Botão que salva o Usuário no Banco de dados.
-        if (comparaCampos())
-        {
-           JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
-        }else{ 
-            
+        if (comparaCampos()) {
+            JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios", "", JOptionPane.ERROR_MESSAGE);
+        } else {
+
             //Verifica se o valor da variavel é sim ou não e retorna true ou false;
-            boolean ar = verifiX((String) jComboBoxAr.getSelectedItem());
-            boolean vidro = verifiX((String) jComboBoxVidro.getSelectedItem());
-            boolean direcao = verifiX((String) jComboBoxDirecaoH.getSelectedItem());
+            boolean ar = "Sim".equals((String) jComboBoxAr.getSelectedItem());
+            boolean vidro = "Sim".equals((String) jComboBoxVidro.getSelectedItem());
+            boolean direcao = "Sim".equals((String) jComboBoxDirecaoH.getSelectedItem());
 
             String dia = txtValorDia.getText().replace(",", ".");
-            String km = txtKM.getText().replace(",",".");
-            CategoriaControl.salvarCategoria(txtNomeCateg.getText(), Double.parseDouble(dia), Double.parseDouble(km), ar, vidro, direcao);
-            
+            String km = txtKM.getText().replace(",", ".");
+            try {
+                CategoriaControl.salvarCategoria(txtNomeCateg.getText(), Double.parseDouble(dia), Double.parseDouble(km), ar, vidro, direcao);
+
+                JOptionPane.showMessageDialog(null, "Categoria Salva Com sucesso!");
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao Salvar No Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+            }
+
             //Pergunta se deseja cadastrar outra categoria
             int resp = JOptionPane.showConfirmDialog(null, "Deseja cadastrar Nova Categoria?");
             //Se responder Não a Janela fecha
-            if (resp == 1 ||resp == 2 ){  this.dispose(); }
-            
+            if (resp == 1 || resp == 2) {
+                this.dispose();
+            }
+
             limpaCampos();
-            
+
         }
     }//GEN-LAST:event_jButtonCadastroActionPerformed
 
@@ -310,26 +307,30 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
         // Atualiza a Categoria Recebendo ela diretamente da aba de consulta
-                   
+
         //Verifica se o valor da variavel é sim ou não e retorna true ou false;
-        if (comparaCampos())
-        {
-           JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
-        }else{ 
-            boolean ar = verifiX((String) jComboBoxAr.getSelectedItem());
-            boolean vidro = verifiX((String) jComboBoxVidro.getSelectedItem());
-            boolean direcao = verifiX((String) jComboBoxDirecaoH.getSelectedItem());
+        if (comparaCampos()) {
+            JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios", "", JOptionPane.ERROR_MESSAGE);
+        } else {
+            boolean ar = "Sim".equals((String) jComboBoxAr.getSelectedItem());
+            boolean vidro = "Sim".equals((String) jComboBoxVidro.getSelectedItem());
+            boolean direcao = "Sim".equals((String) jComboBoxDirecaoH.getSelectedItem());
             //Troca o padrão numerico brasileiro para Estrangeiro e salva no banco
             String dia = txtValorDia.getText().replace(",", ".");
-            String km = txtKM.getText().replace(",",".");
-            //Chama metodo para atualizar o banco
-            CategoriaControl.atualizarCategoria(id,txtNomeCateg.getText(), Double.parseDouble(dia), 
-                    Double.parseDouble(km),  ar, vidro, direcao);
-        
+            String km = txtKM.getText().replace(",", ".");
+            try {
+                //Chama metodo para atualizar o banco
+                CategoriaControl.atualizarCategoria(id, txtNomeCateg.getText(), Double.parseDouble(dia),
+                        Double.parseDouble(km), ar, vidro, direcao);
+                JOptionPane.showMessageDialog(null, "Atualizado com Sucesso No Banco de Dados!");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao Atualizar No Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+            }
+
             this.dispose();
         }
-        
-        
+
+
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     /**
@@ -360,10 +361,8 @@ public class JFrameCadastroCategoria extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameCadastroCategoria().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new JFrameCadastroCategoria().setVisible(true);
         });
     }
 

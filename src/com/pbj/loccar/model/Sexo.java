@@ -8,22 +8,20 @@ package com.pbj.loccar.model;
 /**
  *
  * @author Akr-Taku
- * 
+ *
  * Enum que define o Sexo usado no cliente
  */
 public enum Sexo {
-    
-    M ("Masculino"),
-    F ("Feminino");
-  
-   private final String desc;
-    
-   private Sexo(String desc){
-       
-       this.desc = desc;
 
+    M("Masculino"),
+    F("Feminino");
 
-  }
-    
-    
+    private final String desc;
+
+    private Sexo(String desc) {
+
+        this.desc = desc;
+
+    }
+
 }

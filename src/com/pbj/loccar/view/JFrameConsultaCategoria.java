@@ -7,14 +7,15 @@ package com.pbj.loccar.view;
 
 import com.pbj.loccar.control.CategoriaControl;
 import com.pbj.loccar.view.tables.CategoriaTable;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Akr-Taku
- * 
+ *
  * Frame que consulta as categorias cadastradas no sistema
- * 
+ *
  */
 public class JFrameConsultaCategoria extends javax.swing.JFrame {
 
@@ -22,29 +23,39 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
      * Creates new form JFrameConsultaCategoria
      */
     CategoriaTable tableModel;
-    
+
     public JFrameConsultaCategoria() {
         initComponents();
         //Carrega a lista de Categorias Diretamente do Banco de Dados
-        tableModel = new CategoriaTable(CategoriaControl.lerCategoria());
+        tableModel = new CategoriaTable();
+        atualizaTabela();
+
         jTableCateg.setModel(tableModel);//Seta o modelo na tabela do Frame
-        
+
         //Inicia os Botões como Não clicaveis;
         jButtonExcluir.setEnabled(false);
         jButtonAlterar.setEnabled(false);
-        
-        
+
     }
-    
-    private String[] pegarCategoria(){
-        if(jTableCateg.getSelectedRow() != -1 ){      
+
+    private String[] pegarCategoria() {
+        if (jTableCateg.getSelectedRow() != -1) {
             String categ[] = tableModel.getCategoria(jTableCateg.getSelectedRow());
-     
-        return categ;
-        }else{
+
+            return categ;
+        } else {
             return null;
         }
-        
+
+    }
+
+    private void atualizaTabela() {
+        try {
+            tableModel.removeAll();
+            tableModel.addLista(CategoriaControl.lerCategoria());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Acessar Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -181,26 +192,25 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
-        
+
         this.dispose();//Fecha a Janela Atual
     }//GEN-LAST:event_jButtonCancelActionPerformed
-    
-    
-    
+
+
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
         // TODO add your handling code here:
-        
-      if(jTableCateg.getSelectedRow() != -1 ){ 
-        new JFrameCadastroCategoria(pegarCategoria()).setVisible(true);
-      }else{
-         JOptionPane.showMessageDialog(null, "Não há registro selecionado na tabela!","",JOptionPane.WARNING_MESSAGE);
-      }
+
+        if (jTableCateg.getSelectedRow() != -1) {
+            new JFrameCadastroCategoria(pegarCategoria()).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Não há registro selecionado na tabela!", "", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonAtualizeTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizeTableActionPerformed
         // TODO add your handling code here:
-        tableModel.removeAll();
-        tableModel.addLista(CategoriaControl.lerCategoria());
+        atualizaTabela();
+
     }//GEN-LAST:event_jButtonAtualizeTableActionPerformed
 
     private void jTableCategMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCategMouseClicked
@@ -212,30 +222,37 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         // TODO add your handling code here:
-        
-        if(jTableCateg.getSelectedRow() != -1 ){
+
+        if (jTableCateg.getSelectedRow() != -1) {
             //Confirmação se deseja realmente excluir
-            int resp =  JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Excluir?");  
-            
-            if (resp == 0){//Somente apaga caso o verificador seja Sim
-             
+            int resp = JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Excluir?");
+
+            if (resp == 0) {//Somente apaga caso o verificador seja Sim
+
                 //Pega o objeto da linha selecionada e retorna um array
                 String categRemov[] = pegarCategoria();
-                //Pega a primeira posição do array que é iD e remove do banco
-                CategoriaControl.apagarCategoria(Integer.parseInt(categRemov[0]));
+                try {
+                    //Pega a primeira posição do array que é iD e remove do banco
+                    CategoriaControl.apagarCategoria(Integer.parseInt(categRemov[0]));
+
+                    JOptionPane.showMessageDialog(null, "Registro Excluído Com Sucesso!");
+
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao Excluir do Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+
+                }
                 //Atualiza Tabela do Banco de dados
-                tableModel.removeAll();
-                tableModel.addLista(CategoriaControl.lerCategoria());
+                atualizaTabela();
             }
-        }else{
+        } else {
             //Mensagem de aviso que não há registro selecionado
-            JOptionPane.showMessageDialog(null, "Não há registro selecionado na tabela!","",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Não há registro selecionado na tabela!", "", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     /**
      * @param args the command line arguments
-     * 
+     *
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -262,10 +279,8 @@ public class JFrameConsultaCategoria extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameConsultaCategoria().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new JFrameConsultaCategoria().setVisible(true);
         });
     }
 

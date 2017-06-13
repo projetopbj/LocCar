@@ -1,59 +1,87 @@
 package com.pbj.loccar.view;
+
 import com.pbj.loccar.control.UsuarioControl;
 import com.pbj.loccar.util.StringCampos;
 import com.pbj.loccar.view.tables.UsuarioTable;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Akr-Taku
- * 
+ *
  * JFrame que faz O CRUD do Usuário Pode Não ser Visivel alguns Usuarios
  */
 public class JFrameCadastroUsuario extends javax.swing.JFrame {
 
-    
     UsuarioTable tableModel; //Cria uma Table
-  
+
     public JFrameCadastroUsuario() {
         initComponents();
-        
-       //Inicia os botões Excluir e Alterar Como não editaveis
-       jButtonExcluir.setEnabled(false);
-       jButtonAlterar.setEnabled(false);
-       //Instancia a Tabela
-       tableModel = new UsuarioTable();
-       //Popula a tabela a partir de uma List recebida do bd
-       tableModel.addLista(UsuarioControl.lerUsuario());
-       //Seta o modelo da tabela na tabela do Frame
-       jTableUser.setModel(tableModel);   
-        
+
+        //Inicia os botões Excluir e Alterar Como não editaveis
+        jButtonExcluir.setEnabled(false);
+        jButtonAlterar.setEnabled(false);
+        //Instancia a Tabela
+        tableModel = new UsuarioTable();
+        try {
+            //Popula a tabela a partir de uma List recebida do bd
+            tableModel.addLista(UsuarioControl.lerUsuario());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Acessar Banco de Dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+        }
+        //Seta o modelo da tabela na tabela do Frame
+        jTableUser.setModel(tableModel);
+
     }
-    
+
     //Recebe o Indice do da String e retorna de Acordo com o UsuarioTable
-    private String pegarTexto(int i){
-              
+    private String pegarTexto(int i) {
+
         String user[] = tableModel.getUsuario(jTableUser.getSelectedRow());
-     
+
         return user[i];
     }
+
     //Metodo interno que Limpa todos os textFields
-    private void limparCampos(){
-        
+    private void limparCampos() {
+
         txtLogin.setText("");
         txtNome.setText("");
         jPasswordField.setText("");
     }
-    private boolean comparaCampos(){
-        
-      boolean nam =  StringCampos.vazio(txtNome.getText());
-      boolean log =  StringCampos.vazio(txtLogin.getText());
-      boolean pas =  jPasswordField.getPassword().length == 0;
-        
-        return (nam  ||log  || pas);
-        
+
+    private boolean comparaCampos() {
+
+        boolean nam = StringCampos.vazio(txtNome.getText());
+        boolean log = StringCampos.vazio(txtLogin.getText());
+        boolean pas = jPasswordField.getPassword().length == 0;
+
+        return (nam || log || pas);
+
     }
 
+    private void resetaTabela() {
+        try {
+            tableModel.removeAll(); // Remova para não haver Duplicação
+            tableModel.addLista(UsuarioControl.lerUsuario()); // Recarrega a Tabela
+            limparCampos(); //Limpa os campos após o salvamento dos coisas
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Acessar Banco de Dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    private void retornaCampos() {
+        jButtonSalvar.setEnabled(false);//Seta o Salvar como não editavel para não duplicar nada no banco
+        jButtonExcluir.setEnabled(true);//Seta como editavel botões de excluir e alterar
+        jButtonAlterar.setEnabled(true);
+        //Pega os dados e seta em seus textFields
+        txtLogin.setText(pegarTexto(1));
+        txtNome.setText(pegarTexto(2));
+        jPasswordField.setText(pegarTexto(4));
+        jComboBoxAcesso.setSelectedItem(pegarTexto(3));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -262,96 +290,104 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-     //Botão de salvar Usuario ao. Clicar o Usuario é Salvo no Banco de dados.
-       
-     //Verifica se algum Campo é vazio
-       if(comparaCampos()){
-           
-           JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
-       }
-       else{  //salva Caso não existam Campos Vazios
-           
-       UsuarioControl.salvarUsuario(txtLogin.getText(), txtNome.getText(), new String(jPasswordField.getPassword()), (String) jComboBoxAcesso.getSelectedItem());
-       tableModel.removeAll(); // Remova para não haver Duplicação
-       tableModel.addLista(UsuarioControl.lerUsuario()); // Recarrega a Tabela
-       limparCampos(); //Limpa os campos após o salvamento dos coisas
-       
-       }
+        //Botão de salvar Usuario ao. Clicar o Usuario é Salvo no Banco de dados.
+
+        //Verifica se algum Campo é vazio
+        if (comparaCampos()) {
+
+            JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios", "", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                //salva Caso não existam Campos Vazios
+
+                UsuarioControl.salvarUsuario(txtLogin.getText(), txtNome.getText(), new String(jPasswordField.getPassword()), (String) jComboBoxAcesso.getSelectedItem());
+
+                JOptionPane.showMessageDialog(null, "Usuário Salvo no Banco de dados!");
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao Salvar No Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+            }
+            resetaTabela();
+
+        }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
         // Ao Clicar neste Botão é Atualizado um Registro no Banco de dados
         // Botão somente é clickavel caso uma linha da tabela esteja selecionada
-        if(jTableUser.getSelectedRow() != -1 )
-        {
-            //Altera chamando metodo do Control
-            UsuarioControl.atualizarUsuario(Integer.parseInt(pegarTexto(0)),txtLogin.getText(), txtNome.getText(), new String(jPasswordField.getPassword()), (String) jComboBoxAcesso.getSelectedItem());
-            tableModel.removeAll();//Remova para não haver Duplicação
-            tableModel.addLista(UsuarioControl.lerUsuario());//Recarrega a Tabela
-            limparCampos(); //Limpa os campos após o salvamento dos coisas
+        if (jTableUser.getSelectedRow() != -1) {
+            try {
+                //Altera chamando metodo do Control
+                UsuarioControl.atualizarUsuario(Integer.parseInt(pegarTexto(0)), txtLogin.getText(),
+                        txtNome.getText(), new String(jPasswordField.getPassword()), (String) jComboBoxAcesso.getSelectedItem());
+
+                JOptionPane.showMessageDialog(null, "Usuário Atualizado no Banco de dados!");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao Salvar No Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+            }
+
+            resetaTabela();
             jButtonExcluir.setEnabled(false);//Seta como não editavel para não haver erros
             jButtonAlterar.setEnabled(false);//Seta como não editavel para não haver erros
-        
+
         }
-               
-       
-               
+
+
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jTableUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUserMouseClicked
         // Faz com que a os campos de texto mostrem o que está na tabela apartir do click do mouse
-        jButtonSalvar.setEnabled(false);//Seta o Salvar como não editavel para não duplicar nada no banco
-        jButtonExcluir.setEnabled(true);//Seta como editavel botões de excluir e alterar
-        jButtonAlterar.setEnabled(true);
-        //Pega os dados e seta em seus textFields
-        txtLogin.setText(pegarTexto(1));
-        txtNome.setText(pegarTexto(2));
-        jPasswordField.setText(pegarTexto(4)); 
-        jComboBoxAcesso.setSelectedItem(pegarTexto(3));
-        
-        
+        retornaCampos();
+
+
     }//GEN-LAST:event_jTableUserMouseClicked
 
     private void jTableUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableUserKeyReleased
         //Faz com que a os campos de texto mostrem o que está na tabela apartir das setinhas
         //Faz a mesma coisa que o evento do mouse Click
-        jButtonSalvar.setEnabled(false);
-        jButtonExcluir.setEnabled(true);
-        jButtonAlterar.setEnabled(true);
-        txtLogin.setText(pegarTexto(1));
-        txtNome.setText(pegarTexto(2));
-        jPasswordField.setText(pegarTexto(4));
-        jComboBoxAcesso.setSelectedItem(pegarTexto(3));
+        retornaCampos();
     }//GEN-LAST:event_jTableUserKeyReleased
 
     private void jButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewActionPerformed
         // Botão habilita a criação de novo Usuario:
-        
+
         jButtonSalvar.setEnabled(true);
         jButtonExcluir.setEnabled(false);
         jButtonAlterar.setEnabled(false);
         limparCampos();
-        
+
     }//GEN-LAST:event_jButtonNewActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         //Ação de Excluir do Registro
-        
-        int resp =  JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Exluir?");
-        
-        if (resp == 0){//Somente apaga caso o verificador seja Sim
-            
-            UsuarioControl.apagarUsuario(Integer.parseInt(pegarTexto(0)));
-            
+
+        int resp = JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Exluir?");
+
+        if (resp == 0) {
+            try {
+                //Somente apaga caso o verificador seja Sim
+
+                UsuarioControl.apagarUsuario(Integer.parseInt(pegarTexto(0)));
+
+                JOptionPane.showMessageDialog(null, "Excluído Com Sucesso!");
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao Excluir do Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+            }
+
             tableModel.removeAll(); // Remova para não haver Duplicação
-            tableModel.addLista(UsuarioControl.lerUsuario()); // Recarrega a Tabela
+            try {
+                tableModel.addLista(UsuarioControl.lerUsuario()); // Recarrega a Tabela
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao Acessar Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+            }
         }
-        
+
         limparCampos(); //Limpa os campos após o salvamento dos coisas
         jButtonExcluir.setEnabled(false);//Seta botões e excluir a alterar como não editaveis
         jButtonAlterar.setEnabled(false);
-        
-        
+
+
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     /**
@@ -382,10 +418,8 @@ public class JFrameCadastroUsuario extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameCadastroUsuario().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new JFrameCadastroUsuario().setVisible(true);
         });
     }
 
