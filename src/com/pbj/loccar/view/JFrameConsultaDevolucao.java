@@ -7,6 +7,7 @@ package com.pbj.loccar.view;
 
 import com.pbj.loccar.control.LocacaoControl;
 import com.pbj.loccar.view.tables.LocacaoTable;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,26 +17,38 @@ import javax.swing.JOptionPane;
 public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
 
     LocacaoTable tableModel;
+
     /**
      * Creates new form JFrameDevolverVeiculo
      */
     public JFrameConsultaDevolucao() {
         initComponents();
-        
-        tableModel = new LocacaoTable(LocacaoControl.lerLocacao(false));
+
+        tableModel = new LocacaoTable();
+        atualizaTabela();
+
         jTableLoc.setModel(tableModel);
-        
-        
-     
+
     }
-    private String[] pegarLoc(){
-        if(jTableLoc.getSelectedRow() != -1 ){      
+
+    private String[] pegarLoc() {
+        if (jTableLoc.getSelectedRow() != -1) {
             String loc[] = tableModel.getLinha(jTableLoc.getSelectedRow());
-     
-        return loc;
-        }else{
+
+            return loc;
+        } else {
             return null;
         }
+    }
+
+    private void atualizaTabela() {
+        tableModel.removeAll();
+        try {
+            tableModel.addLista(LocacaoControl.lerLocacao(false));
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Acessar Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
     /**
@@ -213,75 +226,81 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
 
     private void jButtonChamaDevolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChamaDevolActionPerformed
         // TODO add your handling code here:
-        
-        if(jTableLoc.getSelectedRow() != -1){
 
-         int resp;
-        resp = JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Devolver?","Devolver Veículo", JOptionPane.YES_OPTION, JOptionPane.QUESTION_MESSAGE);
-        
-        if (resp == 0){
-            
-            String getLoc[] = pegarLoc();
-            
-             new JFrameDevolucao(Integer.parseInt(getLoc[0])).setVisible(true);
+        if (jTableLoc.getSelectedRow() != -1) {
+
+            int resp;
+            resp = JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Devolver?", "Devolver Veículo", JOptionPane.YES_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+            if (resp == 0) {
+
+                String getLoc[] = pegarLoc();
+
+                new JFrameDevolucao(Integer.parseInt(getLoc[0])).setVisible(true);
+            }
+
         }
-            
-    }
-         
-         
-        
+
+
     }//GEN-LAST:event_jButtonChamaDevolActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
-         this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
         // TODO add your handling code here:
-        if("Abertos".equals(jComboBoxStatus.getSelectedItem())){
-            
-            tableModel.removeAll();
-            tableModel.addLista(LocacaoControl.lerLocacao(false));
-            jButtonChamaDevol.setEnabled(true);
 
-            
-        }else if("Finalizados".equals(jComboBoxStatus.getSelectedItem())){
-            tableModel.removeAll();
-            tableModel.addLista(LocacaoControl.lerLocacao(true));
-            jButtonChamaDevol.setEnabled(false);
-            jButtonDel.setEnabled(false);
-            
-        }else{
-            tableModel.removeAll();
-            tableModel.addLista(LocacaoControl.lerLocacao());
-            jButtonChamaDevol.setEnabled(false);
-            jButtonDel.setEnabled(false);
+        try {
+            if ("Abertos".equals(jComboBoxStatus.getSelectedItem())) {
+
+                tableModel.removeAll();
+                tableModel.addLista(LocacaoControl.lerLocacao(false));
+                jButtonChamaDevol.setEnabled(true);
+
+            } else if ("Finalizados".equals(jComboBoxStatus.getSelectedItem())) {
+                tableModel.removeAll();
+                tableModel.addLista(LocacaoControl.lerLocacao(true));
+                jButtonChamaDevol.setEnabled(false);
+                jButtonDel.setEnabled(false);
+
+            } else {
+                tableModel.removeAll();
+                tableModel.addLista(LocacaoControl.lerLocacao());
+                jButtonChamaDevol.setEnabled(false);
+                jButtonDel.setEnabled(false);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Acessar Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_jComboBoxStatusActionPerformed
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         // TODO add your handling code here:
-        if("Abertos".equals(jComboBoxStatus.getSelectedItem())){
-            
-            tableModel.removeAll();
-            tableModel.addLista(LocacaoControl.lerLocacao(false,txtBusca.getText()));
+        try {
+            if ("Abertos".equals(jComboBoxStatus.getSelectedItem())) {
 
-            
-        }else if("Finalizados".equals(jComboBoxStatus.getSelectedItem())){
-            tableModel.removeAll();
-            tableModel.addLista(LocacaoControl.lerLocacao(true,txtBusca.getText()));
-            
-        }else{
-            tableModel.removeAll();
-            tableModel.addLista(LocacaoControl.lerLocacao(txtBusca.getText()));
+                tableModel.removeAll();
+                tableModel.addLista(LocacaoControl.lerLocacao(false, txtBusca.getText()));
+
+            } else if ("Finalizados".equals(jComboBoxStatus.getSelectedItem())) {
+                tableModel.removeAll();
+                tableModel.addLista(LocacaoControl.lerLocacao(true, txtBusca.getText()));
+
+            } else {
+                tableModel.removeAll();
+                tableModel.addLista(LocacaoControl.lerLocacao(txtBusca.getText()));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Acessar Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jButtonAtualizarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarTActionPerformed
         // TODO add your handling code here:
-        tableModel.removeAll();
-        tableModel.addLista(LocacaoControl.lerLocacao(false));
+        atualizaTabela();
         jButtonChamaDevol.setEnabled(true);
         jComboBoxStatus.setSelectedIndex(0);
         txtBusca.setText("");
@@ -289,22 +308,27 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
 
     private void jButtonDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDelActionPerformed
         // TODO add your handling code here:
-                if(jTableLoc.getSelectedRow() != -1){
+        if (jTableLoc.getSelectedRow() != -1) {
 
-         int resp;
-        resp = JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Apagar o Registro?","", JOptionPane.YES_OPTION, JOptionPane.QUESTION_MESSAGE);
-        
-        if (resp == 0){
-            
-            String getLoc[] = pegarLoc();
-            
-             LocacaoControl.apagarLocacao(Integer.parseInt(getLoc[0]));
+            int resp;
+            resp = JOptionPane.showConfirmDialog(rootPane, "Tem Certeza que deseja Apagar o Registro?", "", JOptionPane.YES_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+            if (resp == 0) {
+
+                String getLoc[] = pegarLoc();
+
+                try {
+                    LocacaoControl.apagarLocacao(Integer.parseInt(getLoc[0]));
+                    JOptionPane.showMessageDialog(null, "Registro Apagado do Banco de Dados!");
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao Acessar Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+
+                }
+            }
+
         }
-            
-    }
 
-      
-        
+
     }//GEN-LAST:event_jButtonDelActionPerformed
 
     /**
@@ -342,10 +366,8 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameConsultaDevolucao().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new JFrameConsultaDevolucao().setVisible(true);
         });
     }
 

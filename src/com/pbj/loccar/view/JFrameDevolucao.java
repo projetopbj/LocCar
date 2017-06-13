@@ -6,9 +6,10 @@
 package com.pbj.loccar.view;
 
 import com.pbj.loccar.control.LocacaoControl;
+import com.pbj.loccar.exceptions.DataInvalidaException;
 import com.pbj.loccar.util.DataHora;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -18,24 +19,29 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameDevolucao
+     *
      * @param id
      */
-    
     private int id;
-    
+
     public JFrameDevolucao(int id) {
-        
+
         initComponents();
-        
-        
-       populaCampos(LocacaoControl.pegaLocacao(id));
-       setaSub();
-        
-        
+
+        try {
+            populaCampos(LocacaoControl.pegaLocacao(id));
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Acessar Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+        }
+        txtGetDataHoj.setText(DataHora.getData());
+        setaSub();
+
     }
+
     public JFrameDevolucao() {
         initComponents();
     }
+
     private void populaCampos(String[] loc) {
         id = Integer.parseInt(loc[0]);
         txtId.setText(loc[0]);
@@ -52,22 +58,32 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
         txtGetDataEsp.setText(DataHora.convertData2(loc[11]));
         txtGetDesc.setText(loc[12]);
         txtSubTotal.setText(loc[13]);
-        txtGetDataHoj.setText(DataHora.getData());
+
     }
-    private void setaSub(){
-        long dias = DataHora.subDias(txtGetDataEsp.getText(), txtGetDataHoj.getText());
-        
+
+    private void setaSub() {
+        long dias = 0;
+        try {
+            dias = DataHora.subDias(txtGetDataEsp.getText(), txtGetDataHoj.getText());
+            if (dias < 0) {
+                dias = 0;
+            }
+        } catch (DataInvalidaException ex) {
+
+        }
+
         txtDiasExc.setText(Long.toString(dias));
         try {
-            double sub = Double.parseDouble( txtSubTotal.getText() );
-            double days =  Double.parseDouble( txtDiasExc.getText() );
-            double valorE = Double.parseDouble(  txtGetKmU.getText() );
-            double total = sub + (valorE * days); 
+            double sub = Double.parseDouble(txtSubTotal.getText());
+            double days = Double.parseDouble(txtDiasExc.getText());
+            double valorE = Double.parseDouble(txtGetKmU.getText());
+            double total = sub + (valorE * days);
             txtGetTotal.setText(Double.toString(total));
-        } catch (Exception e) {
-            
+        } catch (NumberFormatException e) {
+
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -142,31 +158,16 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        txtGetCPF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGetCPFActionPerformed(evt);
-            }
-        });
 
         jLabelVeic.setText("Veículo");
 
         txtGetVeiculo.setEditable(false);
         txtGetVeiculo.setBackground(new java.awt.Color(204, 204, 204));
-        txtGetVeiculo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGetVeiculoActionPerformed(evt);
-            }
-        });
 
         jLabelPlaca.setText("Placa");
 
         txtGetPlaca.setEditable(false);
         txtGetPlaca.setBackground(new java.awt.Color(204, 204, 204));
-        txtGetPlaca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGetPlacaActionPerformed(evt);
-            }
-        });
 
         jLabelCateg.setText("Categoria");
 
@@ -178,60 +179,40 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
         txtGetDiaria.setEditable(false);
         txtGetDiaria.setBackground(new java.awt.Color(204, 204, 204));
         txtGetDiaria.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
-        txtGetDiaria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGetDiariaActionPerformed(evt);
-            }
-        });
+        txtGetDiaria.setFocusable(false);
 
         jLabelKmU.setText("Valor Dia Excedente");
 
         txtGetKmU.setEditable(false);
         txtGetKmU.setBackground(new java.awt.Color(204, 204, 204));
+        txtGetKmU.setFocusable(false);
 
         jLabel9.setText("Data da Locação");
 
         txtGetDataLoc.setEditable(false);
         txtGetDataLoc.setBackground(new java.awt.Color(204, 204, 204));
         txtGetDataLoc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
+        txtGetDataLoc.setFocusable(false);
 
         jLabelQtdDias.setText("Dias");
 
         txtGetDias.setEditable(false);
         txtGetDias.setBackground(new java.awt.Color(204, 204, 204));
-        txtGetDias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGetDiasActionPerformed(evt);
-            }
-        });
+        txtGetDias.setFocusable(false);
 
         jLabelDesco.setText("Desconto");
 
         txtGetDesc.setEditable(false);
         txtGetDesc.setBackground(new java.awt.Color(204, 204, 204));
-        txtGetDesc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGetDescActionPerformed(evt);
-            }
-        });
+        txtGetDesc.setFocusable(false);
 
         jLabelid.setText("ID Locação");
 
         txtDescricao.setEditable(false);
         txtDescricao.setBackground(new java.awt.Color(204, 204, 204));
-        txtDescricao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescricaoActionPerformed(evt);
-            }
-        });
 
         txtId.setEditable(false);
         txtId.setBackground(new java.awt.Color(204, 204, 204));
-        txtId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdActionPerformed(evt);
-            }
-        });
 
         jLabelDescricao.setText("Descrição da Locação");
 
@@ -240,16 +221,31 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
         txtSubTotal.setEditable(false);
         txtSubTotal.setBackground(new java.awt.Color(204, 204, 204));
         txtSubTotal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtSubTotal.setFocusable(false);
 
         txtGetDataHoj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
         txtGetDataHoj.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtGetDataHojFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtGetDataHojFocusLost(evt);
             }
         });
-        txtGetDataHoj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGetDataHojActionPerformed(evt);
+        txtGetDataHoj.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtGetDataHojMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                txtGetDataHojMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtGetDataHojMouseExited(evt);
+            }
+        });
+        txtGetDataHoj.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtGetDataHojKeyPressed(evt);
             }
         });
 
@@ -257,17 +253,15 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
 
         jLabelDiasExc.setText("Dias Excedentes");
 
+        txtDiasExc.setEditable(false);
         txtDiasExc.setBackground(new java.awt.Color(204, 204, 204));
         txtDiasExc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-        txtDiasExc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDiasExcActionPerformed(evt);
-            }
-        });
+        txtDiasExc.setFocusable(false);
 
         txtGetTotal.setEditable(false);
         txtGetTotal.setBackground(new java.awt.Color(204, 204, 204));
         txtGetTotal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
+        txtGetTotal.setFocusable(false);
         txtGetTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtGetTotalActionPerformed(evt);
@@ -279,6 +273,7 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
         txtGetDataEsp.setEditable(false);
         txtGetDataEsp.setBackground(new java.awt.Color(204, 204, 204));
         txtGetDataEsp.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
+        txtGetDataEsp.setFocusable(false);
 
         jLabel10.setText("Data Esperada");
 
@@ -483,76 +478,67 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGetClienteActionPerformed
 
-    private void txtGetVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGetVeiculoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGetVeiculoActionPerformed
-
-    private void txtGetDiariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGetDiariaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGetDiariaActionPerformed
-
     private void txtGetTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGetTotalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGetTotalActionPerformed
 
     private void jButtonDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDevolverActionPerformed
         // TODO add your handling code here:
-        
-        if("".equals(txtGetDataHoj.getText())|| "".equals(txtDiasExc.getText())){
-             JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
-        }else{
-            
-            int dias = Integer.parseInt(txtDiasExc.getText());
-            LocacaoControl.encerraLocacao(id, dias);
-            JOptionPane.showMessageDialog(null, "Devolução Concluída");
-            
-            this.dispose();
-        }
-        
-    }//GEN-LAST:event_jButtonDevolverActionPerformed
 
-    private void txtGetDiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGetDiasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGetDiasActionPerformed
+        if ("".equals(txtGetDataHoj.getText()) || "".equals(txtDiasExc.getText())) {
+            JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios", "", JOptionPane.ERROR_MESSAGE);
+        } else {
+
+            int dias = Integer.parseInt(txtDiasExc.getText());
+            try {
+                LocacaoControl.encerraLocacao(id, dias);
+
+                JOptionPane.showMessageDialog(null, "Devolução Concluída");
+                this.dispose();
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao Finalizar Locação Acesso ao Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+
+    }//GEN-LAST:event_jButtonDevolverActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
-        
-         this.dispose();
+
+        this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
-
-    private void txtDiasExcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiasExcActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDiasExcActionPerformed
-
-    private void txtDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescricaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescricaoActionPerformed
-
-    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdActionPerformed
-
-    private void txtGetDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGetDescActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGetDescActionPerformed
-
-    private void txtGetPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGetPlacaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGetPlacaActionPerformed
-
-    private void txtGetCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGetCPFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtGetCPFActionPerformed
 
     private void txtGetDataHojFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGetDataHojFocusLost
         // TODO add your handling code here:
         setaSub();
     }//GEN-LAST:event_txtGetDataHojFocusLost
 
-    private void txtGetDataHojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGetDataHojActionPerformed
+    private void txtGetDataHojMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtGetDataHojMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtGetDataHojActionPerformed
+        setaSub();
+    }//GEN-LAST:event_txtGetDataHojMouseExited
+
+    private void txtGetDataHojMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtGetDataHojMouseEntered
+        // TODO add your handling code here:
+        setaSub();
+    }//GEN-LAST:event_txtGetDataHojMouseEntered
+
+    private void txtGetDataHojFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtGetDataHojFocusGained
+        // TODO add your handling code here:
+        setaSub();
+    }//GEN-LAST:event_txtGetDataHojFocusGained
+
+    private void txtGetDataHojMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtGetDataHojMouseClicked
+        // TODO add your handling code here:
+        setaSub();
+    }//GEN-LAST:event_txtGetDataHojMouseClicked
+
+    private void txtGetDataHojKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGetDataHojKeyPressed
+        // TODO add your handling code here:
+        setaSub();
+    }//GEN-LAST:event_txtGetDataHojKeyPressed
 
     /**
      * @param args the command line arguments
@@ -582,10 +568,8 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameDevolucao().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new JFrameDevolucao().setVisible(true);
         });
     }
 
@@ -631,5 +615,4 @@ public final class JFrameDevolucao extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtSubTotal;
     // End of variables declaration//GEN-END:variables
 
-   
 }

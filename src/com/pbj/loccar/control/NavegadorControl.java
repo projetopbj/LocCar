@@ -5,7 +5,7 @@
  */
 package com.pbj.loccar.control;
 
-import com.pbj.loccar.util.Navegador;
+import com.pbj.loccar.util.InvocaNav;
 
 /**
  *
@@ -13,9 +13,10 @@ import com.pbj.loccar.util.Navegador;
  */
 public class NavegadorControl {
     
-    public void metodoBuscarhtml(){
+    public static void metodoBuscarhtml() throws Exception{
            
-      Navegador.openURL(".\\src\\com\\pbj\\loccar\\others\\manual\\manualHtml\\index.html");
+            InvocaNav.openURL("src/com/pbj/loccar/others/manual/manualHtml/index.html");
+        
         
     }
     

@@ -6,6 +6,7 @@
 package com.pbj.loccar.persistence;
 
 import com.pbj.loccar.model.Cliente;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -15,26 +16,26 @@ import java.util.List;
 public interface ClientePersistence {
 
     //Salva Novo CLiente no Banco de Dados
-    void createCliente(Cliente cliente);
+    void createCliente(Cliente cliente) throws SQLException;
 
     //Deleta o Cliente Informada do Banco de Dados
-    void deleteCliente(Cliente cliente);
+    void deleteCliente(Cliente cliente) throws SQLException;
 
     //Retorna A lista de todas os clientes do Banco de dados
-    List<Cliente> readCliente();
+    List<Cliente> readCliente() throws SQLException;
 
     //Busca uma Lista de clientes pelo nome do cliente
-    List<Cliente> readCliente(String nome);
+    List<Cliente> readCliente(String nome) throws SQLException;
 
-    List<Cliente> readCliente(String cpf, boolean bool);
+    List<Cliente> readCliente(String cpf, boolean bool) throws SQLException;
 
     //Retorna apenas um CLiente recebendo o CPF como parametro.
-    Cliente retornaCliente(String cpf);
+    Cliente retornaCliente(String cpf) throws SQLException;
 
     //Retorna do Banco de dados um Cliente recebendo apenas o id
-    Cliente retornaCliente(int id);
+    Cliente retornaCliente(int id) throws SQLException;
 
     //Recebe o Cliente e retorna e atualiza ele no Banco de dados
-    void updateCliente(Cliente cliente);
+    void updateCliente(Cliente cliente) throws SQLException;
     
 }

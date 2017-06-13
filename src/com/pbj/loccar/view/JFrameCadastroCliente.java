@@ -6,11 +6,16 @@
 package com.pbj.loccar.view;
 
 import com.pbj.loccar.control.ClienteControl;
+import com.pbj.loccar.exceptions.DataInvalidaException;
 import com.pbj.loccar.util.DataHora;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import static com.pbj.loccar.util.DataHora.dataToString;
 import com.pbj.loccar.util.StringCampos;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,65 +26,72 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
     /**
      * Creates new form JFrameCadastroCliente
      */
-    
     private int id;
-    public JFrameCadastroCliente(String[] client ) {
+
+    public JFrameCadastroCliente(String[] client) {
         initComponents();
         setCampos(client);
         jButtonSalvar.setVisible(false);
 
     }
-    
+
     public JFrameCadastroCliente() {
         initComponents();
-        
+
         jButtonAtualizar.setVisible(false);
 
     }
+
     //Seta campos como vazio
-    private void limpaCampos(){
-       txtNome.setText("");
-       txtRG.setText("");
-       txtFCpf.setText("");
-       txtFNascimento.setText("");
-       txtEmail.setText("");
-       txtFCelular.setText("");
-       txtFTelefone.setText("");
-       txtRua.setText("");
-       txtComplemento.setText("");
-       txtFCep.setText("");
-       txtBairro.setText("");
-       txtCidade.setText("");
+    private void limpaCampos() {
+        txtNome.setText("");
+        txtRG.setText("");
+        txtFCpf.setText("");
+        txtFNascimento.setText("");
+        txtEmail.setText("");
+        txtFCelular.setText("");
+        txtFTelefone.setText("");
+        txtRua.setText("");
+        txtComplemento.setText("");
+        txtFCep.setText("");
+        txtBairro.setText("");
+        txtCidade.setText("");
     }
+
     //Verifica Campos Vazios
-    private boolean comparaCampos(){
-        
-      boolean nam =  StringCampos.vazio(txtNome.getText());
-      boolean rg =  StringCampos.vazio(txtRG.getText());
-      boolean cpf =  StringCampos.vazio(txtFCpf.getText());
-      boolean nas = StringCampos.vazio(txtFNascimento.getText());
-      boolean cel = StringCampos.vazio(txtFCelular.getText());
-      boolean tel = StringCampos.vazio(txtFTelefone.getText());
-      boolean em = StringCampos.vazio(txtEmail.getText());
-      boolean rua = StringCampos.vazio(txtRua.getText());
-      boolean com = StringCampos.vazio(txtComplemento.getText());
-      boolean cep = StringCampos.vazio(txtFCep.getText());
-      boolean bai = StringCampos.vazio(txtBairro.getText());
-      boolean cid = StringCampos.vazio(txtCidade.getText());
-        
-        return (nam  ||rg  || cpf|| nas|| cel|| tel|| em|| rua|| com|| cep|| bai|| cid);
-        
+    private boolean comparaCampos() {
+
+        boolean nam = StringCampos.vazio(txtNome.getText());
+        boolean rg = StringCampos.vazio(txtRG.getText());
+        boolean cpf = StringCampos.vazio(txtFCpf.getText());
+        boolean nas = StringCampos.vazio(txtFNascimento.getText());
+        boolean cel = StringCampos.vazio(txtFCelular.getText());
+        boolean tel = StringCampos.vazio(txtFTelefone.getText());
+        boolean em = StringCampos.vazio(txtEmail.getText());
+        boolean rua = StringCampos.vazio(txtRua.getText());
+        boolean com = StringCampos.vazio(txtComplemento.getText());
+        boolean cep = StringCampos.vazio(txtFCep.getText());
+        boolean bai = StringCampos.vazio(txtBairro.getText());
+        boolean cid = StringCampos.vazio(txtCidade.getText());
+
+        return (nam || rg || cpf || nas || cel || tel || em || rua || com || cep || bai || cid);
+
     }
+
     //Popula Campos
-    private void setCampos(String[] client){
-        
+    private void setCampos(String[] client) {
+
         id = Integer.parseInt(client[0]);
         txtNome.setText(client[1]);
         txtRG.setText(client[2]);
         txtFCpf.setText(client[3]);
         jComboBoxEstadoC.setSelectedItem(client[4]);
         jComboBoxSexo.setSelectedItem(client[5]);
-        txtFNascimento.setText(DataHora.stringToData(DataHora.convertData(client[6])));
+        try {
+            txtFNascimento.setText(DataHora.stringToData(DataHora.convertData(client[6])));
+        } catch (DataInvalidaException ex) {
+            txtFNascimento.setText(DataHora.getData());
+        }
         txtEmail.setText(client[7]);
         txtFTelefone.setText(client[8]);
         txtFCelular.setText(client[9]);
@@ -89,8 +101,7 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
         txtBairro.setText(client[13]);
         txtCidade.setText(client[14]);
         jComboBoxUF.setSelectedItem(client[15]);
-        
-        
+
     }
 
     /**
@@ -503,54 +514,74 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
         // TODO add your handling code here
-                        //Verificando os campos Vazios
-        if (comparaCampos())
-        {
+        //Verificando os campos Vazios
+        if (comparaCampos()) {
             //Mensagem informando caso exista algum campo vazio;
-           JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
-        }else                 
-        {
-            Date dataNasc = DataHora.dataToString(txtFNascimento.getText());
-            
-            ClienteControl.atualizarCliente(id,txtNome.getText(), txtRG.getText(), txtFCpf.getText(), (String) jComboBoxEstadoC.getSelectedItem(),
-            (String) jComboBoxSexo.getSelectedItem(), dataNasc,txtEmail.getText(), txtFTelefone.getText(),
-            txtFCelular.getText(), txtRua.getText(), txtFCep.getText(), txtComplemento.getText(), txtBairro.getText(), txtCidade.getText(),
-            (String) jComboBoxUF.getSelectedItem());
+            JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios", "", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                Date dataNasc = DataHora.dataToString(txtFNascimento.getText());
+                
+                try {
+                    ClienteControl.atualizarCliente(id, txtNome.getText(), txtRG.getText(), txtFCpf.getText(), (String) jComboBoxEstadoC.getSelectedItem(),
+                            (String) jComboBoxSexo.getSelectedItem(), dataNasc, txtEmail.getText(), txtFTelefone.getText(),
+                            txtFCelular.getText(), txtRua.getText(), txtFCep.getText(), txtComplemento.getText(), txtBairro.getText(), txtCidade.getText(),
+                            (String) jComboBoxUF.getSelectedItem());
+                    JOptionPane.showMessageDialog(null, "CLiente Salvo no Banco de Dados!");
+                    
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao Salvar No Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+                }
+                
+                //Fecha A janela depois de atualizar.
+                this.dispose();
+                
+            } catch (ParseException ex) {
+                Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-            //Fecha A janela depois de atualizar.
-             this.dispose();
-            
         }
-        
-               
-              
+
+
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
-                //Verificando os campos Vazios
-        if (comparaCampos())
-        {
+        //Verificando os campos Vazios
+        if (comparaCampos()) {
             //Mensagem informando caso exista algum campo vazio;
-           JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
-        }else                 
-        {
-            Date dataNasc = dataToString(txtFNascimento.getText());
-            
-            ClienteControl.salvarCliente(txtNome.getText(), txtRG.getText(), txtFCpf.getText(), (String) jComboBoxEstadoC.getSelectedItem(),
-            (String) jComboBoxSexo.getSelectedItem(), dataNasc,txtEmail.getText(), txtFTelefone.getText(),
-            txtFCelular.getText(), txtRua.getText(), txtFCep.getText(), txtComplemento.getText(), txtBairro.getText(), txtCidade.getText(),
-            (String) jComboBoxUF.getSelectedItem());
+            JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios", "", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                Date dataNasc = dataToString(txtFNascimento.getText());
+                
+                try {
+                    ClienteControl.salvarCliente(txtNome.getText(), txtRG.getText(), txtFCpf.getText(), (String) jComboBoxEstadoC.getSelectedItem(),
+                            (String) jComboBoxSexo.getSelectedItem(), dataNasc, txtEmail.getText(), txtFTelefone.getText(),
+                            txtFCelular.getText(), txtRua.getText(), txtFCep.getText(), txtComplemento.getText(), txtBairro.getText(), txtCidade.getText(),
+                            (String) jComboBoxUF.getSelectedItem());
+                    
+                    JOptionPane.showMessageDialog(null, "Cliente Atualizado no Banco de Dados!");
+                    
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao Salvar No Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+                }
+                
+                //Pergunta se deseja cadastrar outro cliente
+                int resp = JOptionPane.showConfirmDialog(null, "Deseja cadastrar Novo Cliente?");
+                //Se responder Não a Janela fecha
+                if (resp == 1 || resp == 2) {
+                    this.dispose();
+                }
+                
+                limpaCampos();
+                
+            } catch (ParseException ex) {
+                Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-            //Pergunta se deseja cadastrar outro cliente
-            int resp = JOptionPane.showConfirmDialog(null, "Deseja cadastrar Novo Cliente?");
-            //Se responder Não a Janela fecha
-            if (resp == 1 ||resp == 2 ){  this.dispose(); }
-            
-           limpaCampos(); 
-            
         }
-        
+
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
@@ -567,7 +598,7 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
-         this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void txtRuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRuaActionPerformed
@@ -606,10 +637,8 @@ public final class JFrameCadastroCliente extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameCadastroCliente().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new JFrameCadastroCliente().setVisible(true);
         });
     }
 

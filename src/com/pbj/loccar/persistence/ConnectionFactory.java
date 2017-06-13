@@ -28,7 +28,6 @@ public class ConnectionFactory {
     private static final String URL = prop.getProperty("prop.url");
     private static final String USER = prop.getProperty("prop.user");
     private static final String PASS = prop.getProperty("prop.pass");
-    
     /**
      *Construtor Vazio e privado para classe não ser instanciada
      */
@@ -47,7 +46,7 @@ public class ConnectionFactory {
         try {
             Class.forName(DRIVER);
             
-            return DriverManager.getConnection(URL,USER,PASS);
+            return DriverManager.getConnection(URL, USER, PASS);
             
         } catch (ClassNotFoundException | SQLException ex) {
                 
@@ -59,9 +58,9 @@ public class ConnectionFactory {
     
    
     //Método Statico para fechar a Conexão passando a Connection, Statement, e ResultSet;
-    public static void fecharConnection(Connection con, PreparedStatement stmt, ResultSet rs){
+    public static void closeConnection(Connection con, PreparedStatement stmt, ResultSet rs){
         
-        fecharConnection(con, stmt);
+        ConnectionFactory.closeConnection(con, stmt);
         
         if (rs != null){
             try {
@@ -73,9 +72,9 @@ public class ConnectionFactory {
         
     }
     //Método Statico para fechar a Conexão passando a Connection, e Statement;
-    public static void fecharConnection(Connection con, PreparedStatement stmt){
+    public static void closeConnection(Connection con, PreparedStatement stmt){
        
-        fecharConnection(con);
+        closeConnection(con);
           		
         if (stmt != null){
             try {
@@ -87,7 +86,7 @@ public class ConnectionFactory {
             
     }
     //Método Statico para fechar a Conexão passando a Connection;
-    public static void fecharConnection(Connection con){
+    public static void closeConnection(Connection con){
         
         if(con != null){
             try {
@@ -96,9 +95,6 @@ public class ConnectionFactory {
                 Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-            
-            
-        
     }
     
     

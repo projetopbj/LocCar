@@ -6,6 +6,7 @@
 package com.pbj.loccar.persistence;
 
 import com.pbj.loccar.model.Veiculo;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -15,34 +16,33 @@ import java.util.List;
 public interface VeiculoPersistence {
 
     //Salva Novo Veiculo no Banco de Dados
-    void createVeiculo(Veiculo veiculo);
+    void createVeiculo(Veiculo veiculo) throws SQLException;
 
     //Deleta o Veiculo Informada do Banco de Dados
-    void deleteVeiculo(Veiculo veiculo);
+    void deleteVeiculo(Veiculo veiculo) throws SQLException;
 
     //Retorna A lista de todas os veiculos do Banco de dados
-    List<Veiculo> readVeiculo();
-    
-    List<Veiculo> readVeiculo(String modelo, boolean alugado);
-    
-    List<Veiculo> readVeiculo(String modelo);
-    
-    List<Veiculo> readVeiculo(int ano);
-    
-    List<Veiculo> readVeiculo(boolean alugado);
+    List<Veiculo> readVeiculo() throws SQLException;
 
-    
-    List<Veiculo> readVeiculo(int ano, boolean alugado);
-    
+    List<Veiculo> readVeiculo(boolean alugado) throws SQLException;
+
+    List<Veiculo> readVeiculo(String modelo, boolean alugado) throws SQLException;
+
+    List<Veiculo> readVeiculo(String modelo) throws SQLException;
+
+    List<Veiculo> readVeiculo(int ano, boolean alugado) throws SQLException;
+
+    List<Veiculo> readVeiculo(int ano) throws SQLException;
+
     //Retorna apenas uma categoria recebendo o nome como parametro.
-    Veiculo retornaVeiculo(String placa);
+    Veiculo retornaVeiculo(String modelo) throws SQLException;
 
     //Retorna do Banco de dados um Veiculo recebendo apenas o id
-    Veiculo retornaVeiculo(int id);
+    Veiculo retornaVeiculo(int id) throws SQLException;
 
     //Recebe o Veiculo e retorna e atualiza ele no Banco de dados
-    void updateVeiculo(Veiculo veiculo);
-    //Recebe o veiculo e um boolean e atualiza veiculo como alugado ou não;
-    void updateVeiculo(Veiculo veiculo, boolean alugado);
+    void updateVeiculo(Veiculo veiculo) throws SQLException;
+
+    void updateVeiculo(Veiculo veiculo, boolean alugado) throws SQLException;
     
 }

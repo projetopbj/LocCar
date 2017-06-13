@@ -10,13 +10,13 @@ import java.util.Objects;
 /**
  *
  * @author lucas
- * 
+ *
  * Classe de Categoria que vai ser usado com composição da classe veiculo;
  */
 public class Categoria {
-    
+
     private static int iterador; //Variavel statica para iterar;
-    
+
     private int id;
     private String nome;
     private boolean ar;
@@ -24,17 +24,16 @@ public class Categoria {
     private boolean direcao;
     private double valorDia;
     private double valorKm;
-    
+
     /*
     *
     * Varias SobreCargas de Construtores
     * Cada um recebe algo diferente.
-    */
- 
-    public Categoria(){
-           
-      id = iterador++;
-        
+     */
+    public Categoria() {
+
+        id = iterador++;
+
     }
 
     public int getId() {
@@ -45,7 +44,6 @@ public class Categoria {
         this.id = id;
     }
 
-
     public String getNome() {
         return nome;
     }
@@ -55,13 +53,15 @@ public class Categoria {
     }
 
     public boolean isAr() {
-       return this.ar;
+        return this.ar;
     }
+
     public String getAr() {
-        if (this.ar == true)
+        if (this.ar == true) {
             return "Sim";
-        else
+        } else {
             return "Não";
+        }
     }
 
     public void setAr(boolean ar) {
@@ -71,11 +71,13 @@ public class Categoria {
     public boolean isVidro() {
         return vidro;
     }
+
     public String getVidro() {
-        if (this.vidro == true)
+        if (this.vidro == true) {
             return "Sim";
-        else
+        } else {
             return "Não";
+        }
     }
 
     public void setVidro(boolean vidro) {
@@ -85,11 +87,13 @@ public class Categoria {
     public boolean isDirecao() {
         return direcao;
     }
+
     public String getDirecao() {
-        if (this.direcao == true)
+        if (this.direcao == true) {
             return "Sim";
-        else
+        } else {
             return "Não";
+        }
     }
 
     public void setDirecao(boolean direcao) {
@@ -111,8 +115,6 @@ public class Categoria {
     public void setValorKm(double valorKm) {
         this.valorKm = valorKm;
     }
-
-
 
     @Override //HashCode
     public int hashCode() {
@@ -140,9 +142,7 @@ public class Categoria {
         return Objects.equals(this.nome, other.nome);
     }
 
-    
-    
-        @Override//ToString
+    @Override//ToString
     public String toString() {
         return "Categoria{" + "id=" + id + ", nome=" + nome + ", ar=" + ar + ", vidro=" + vidro + ", direcao=" + direcao + ", valorDia=" + valorDia + ", valorKm=" + valorKm + '}';
     }

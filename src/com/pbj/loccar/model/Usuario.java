@@ -12,22 +12,19 @@ import java.util.Objects;
  * @author lucas
  */
 public class Usuario {
-    
-    
+
     private static int iterador; //Variavel statica para iterar;
-    
+
     private int id;
     private String loginUser;
     private String senhaUser;
     private String nomeUser;
     private String acessoUser;
 
-    
-    public Usuario(){ 
-        
+    public Usuario() {
+
         iterador++;
         id = iterador;
-
 
     }
 
@@ -37,18 +34,17 @@ public class Usuario {
      * @param nome
      * @param acesso
      */
-    public Usuario(String login, String nome, String acesso){
-        
+    public Usuario(String login, String nome, String acesso) {
+
         iterador++;
         id = iterador;
 
         this.loginUser = login;
         this.nomeUser = nome;
         this.acessoUser = acesso;
-        
-        
+
     }
-    
+
     public int getId() {
         return id;
     }
@@ -56,7 +52,7 @@ public class Usuario {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public String getLoginUser() {
         return loginUser;
     }
@@ -118,8 +114,6 @@ public class Usuario {
         }
         return this.acessoUser.equals(other.acessoUser);
     }
-    
-    
 
     @Override
     public String toString() {

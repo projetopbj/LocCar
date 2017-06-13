@@ -8,12 +8,16 @@ package com.pbj.loccar.view;
 import com.pbj.loccar.control.ClienteControl;
 import com.pbj.loccar.control.LocacaoControl;
 import com.pbj.loccar.control.VeiculoControl;
+import com.pbj.loccar.exceptions.DataInvalidaException;
+import com.pbj.loccar.exceptions.ValorInvalidoException;
 import com.pbj.loccar.util.DataHora;
 import com.pbj.loccar.util.StringCampos;
-import java.util.Date;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -24,35 +28,49 @@ public final class JFrameLocar extends javax.swing.JFrame {
     /**
      * Creates new form JFrameLocar
      */
-    
     public JFrameLocar() {
-    
+
         initComponents();
         popularComboBoxVeiculos();
         popularComboBoxClientes();
         jPanelCheck.setVisible(false);
-        
-        txtFDataLoc.setText(DataHora.getData());
-     
-    }   
-    //Método para popular os campos do combo box 
-    private void popularComboBoxClientes(){
-        List<String> clientes = ClienteControl.returnClienteID();
 
-        clientes.forEach((temp) -> {
-            jComboBoxEscClient.addItem(temp);
-        });  
-        
-    }       
-    //Método para popular os campos do combo box 
-    private void popularComboBoxVeiculos(){
-        List<String> veiculos = VeiculoControl.returnVeiculoID();
-        veiculos.forEach((temp) -> {
-            jComboBoxEscVeic.addItem(temp);
-        });  
+        txtFDataLoc.setText(DataHora.getData());
+
     }
+
+    //Método para popular os campos do combo box 
+    private void popularComboBoxClientes() {
+        List<String> clientes;
+        try {
+            clientes = ClienteControl.returnClienteID();
+            clientes.forEach((temp) -> {
+                jComboBoxEscClient.addItem(temp);
+            });
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Acessar Tabela Cliente do Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+    }
+
+    //Método para popular os campos do combo box 
+    private void popularComboBoxVeiculos() {
+        List<String> veiculos;
+        try {
+            veiculos = VeiculoControl.returnVeiculoID();
+
+            veiculos.forEach((temp) -> {
+                jComboBoxEscVeic.addItem(temp);
+            });
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Acessar Tabela Veículo do Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
     //Metpdo para limpar os campos
-    private void limpaCampos(){
+    private void limpaCampos() {
         txtDesc.setText("");
         txtFDataLoc.setText("");
         txtDias.setText("");
@@ -60,47 +78,53 @@ public final class JFrameLocar extends javax.swing.JFrame {
         txtDataDevol.setText("");
         txtFSubTotal.setText("");
 
-
     }
-    private boolean verificaCampos(){
-           
+
+    private boolean verificaCampos() {
+
         boolean desc = StringCampos.vazio(txtDesc.getText());
         boolean data = StringCampos.vazio(txtFDataLoc.getText());
         boolean dias = StringCampos.vazio(txtDias.getText());
         boolean car = StringCampos.vazio((String) jComboBoxEscVeic.getSelectedItem());
         boolean client = StringCampos.vazio((String) jComboBoxEscClient.getSelectedItem());
-        return ( desc || data  || dias );
-           
+        return (desc || data || dias);
+
     }
-    
-    private String getSubT(){
-             
-       double valor = Double.parseDouble(txtGetValorDiaria.getText());
-       double dias = Double.parseDouble(txtDias.getText());
+
+    private String getSubT() {
+
+        double valor = Double.parseDouble(txtGetValorDiaria.getText());
+        double dias = Double.parseDouble(txtDias.getText());
 
         return Double.toString(valor * dias);
     }
-    private String getSubT(String valor){
-             
-        try{
-        double desc = Double.parseDouble(txtDesconto.getText())* 0.01;
-        desc = desc * Double.parseDouble(valor);
-        Double subt = Double.parseDouble(valor) - desc;
-        return Double.toString(subt);
-        
-        }catch(NumberFormatException e){
-            
+
+    private String getSubT(String valor) {
+
+        try {
+            double desc = Double.parseDouble(txtDesconto.getText()) * 0.01;
+            desc = desc * Double.parseDouble(valor);
+            Double subt = Double.parseDouble(valor) - desc;
+            return Double.toString(subt);
+
+        } catch (NumberFormatException e) {
+
             return getSubT();
         }
     }
-    private void setaCompleta(){    
-        
-        if(!"".equals(txtFDataLoc.getText()) && !"".equals(txtDias.getText())){
-            try{
-            txtDataDevol.setText(DataHora.somaDias(txtFDataLoc.getText(), txtDias.getText()));
-            txtFSubTotal.setText(getSubT());
-            }catch(Exception e){
+
+    private void setaCompleta() {
+
+        if (!"".equals(txtFDataLoc.getText()) && !"".equals(txtDias.getText())) {
+            try {
+                txtDataDevol.setText(DataHora.somaDias(txtFDataLoc.getText(), txtDias.getText()));
+                txtFSubTotal.setText(getSubT());
+            } catch (ValorInvalidoException e) {
                 txtDias.setText("");
+            } catch (DataInvalidaException ex) {
+                Logger.getLogger(JFrameLocar.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(JFrameLocar.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -116,12 +140,12 @@ public final class JFrameLocar extends javax.swing.JFrame {
 
         jPanelInfoLoc = new javax.swing.JPanel();
         jPanelOther = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelDtAlug = new javax.swing.JLabel();
+        jLabeldays = new javax.swing.JLabel();
+        jLabelSubT = new javax.swing.JLabel();
         txtFDataLoc = new javax.swing.JFormattedTextField();
         txtFSubTotal = new javax.swing.JFormattedTextField();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelDtDev = new javax.swing.JLabel();
         txtDataDevol = new javax.swing.JFormattedTextField();
         jCheckBoxDesconto = new javax.swing.JCheckBox();
         jLabelDescricao = new javax.swing.JLabel();
@@ -157,23 +181,25 @@ public final class JFrameLocar extends javax.swing.JFrame {
 
         jPanelOther.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel1.setText("Data do Aluguel");
+        jLabelDtAlug.setText("Data do Aluguel");
 
-        jLabel2.setText("Dias");
+        jLabeldays.setText("Dias");
 
-        jLabel3.setText("SubTotal");
+        jLabelSubT.setText("SubTotal");
 
         txtFDataLoc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
 
         txtFSubTotal.setEditable(false);
         txtFSubTotal.setBackground(new java.awt.Color(204, 204, 204));
         txtFSubTotal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
+        txtFSubTotal.setFocusable(false);
 
-        jLabel4.setText("Data de Devolução");
+        jLabelDtDev.setText("Data de Devolução");
 
         txtDataDevol.setEditable(false);
         txtDataDevol.setBackground(new java.awt.Color(204, 204, 204));
         txtDataDevol.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM))));
+        txtDataDevol.setFocusable(false);
         txtDataDevol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDataDevolActionPerformed(evt);
@@ -249,20 +275,20 @@ public final class JFrameLocar extends javax.swing.JFrame {
                     .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelDescricao)
                     .addComponent(txtDataDevol, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabelDtDev))
                 .addGap(23, 23, 23)
                 .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelOtherLayout.createSequentialGroup()
                         .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                            .addComponent(jLabelDtAlug)
                             .addComponent(txtFDataLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
+                            .addComponent(jLabeldays)
                             .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanelOtherLayout.createSequentialGroup()
                         .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
+                            .addComponent(jLabelSubT)
                             .addComponent(txtFSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(50, 50, 50)
                         .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,18 +304,18 @@ public final class JFrameLocar extends javax.swing.JFrame {
                     .addGroup(jPanelOtherLayout.createSequentialGroup()
                         .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelDescricao)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabelDtAlug))
                         .addGap(5, 5, 5)
                         .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFDataLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanelOtherLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(jLabeldays)
                         .addGap(26, 26, 26)))
                 .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabelDtDev, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelSubT)
                     .addComponent(jCheckBoxDesconto))
                 .addGap(4, 4, 4)
                 .addGroup(jPanelOtherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -516,41 +542,45 @@ public final class JFrameLocar extends javax.swing.JFrame {
     }//GEN-LAST:event_txtGetFabricanteActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
-         this.dispose();
-         
-         
+        this.dispose();
+
+
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonLocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLocarActionPerformed
         // TODO add your handling code here:
-        if(verificaCampos()){
-           //Mensagem informando caso exista algum campo vazio;
-           JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
-            
-        }else{
-            boolean bool = jCheckBoxDesconto.isSelected();
-            if(bool == true && !"".equals(txtDesconto.getText())){
-                
-                 
+        if (verificaCampos()) {
+            //Mensagem informando caso exista algum campo vazio;
+            JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios", "", JOptionPane.ERROR_MESSAGE);
 
-                 LocacaoControl.salvarLocacao(txtDesc.getText(), DataHora.dataToString(txtFDataLoc.getText()), Integer.parseInt(txtDias.getText()) ,
-                    Integer.parseInt((String)jComboBoxEscClient.getSelectedItem()),
-                    Integer.parseInt((String) jComboBoxEscVeic.getSelectedItem()), true, 
-                    Integer.parseInt(txtDesconto.getText()));
-                VeiculoControl.atualizarVeiculo(Integer.parseInt((String)jComboBoxEscVeic.getSelectedItem()), true);
-            }else{
-                
-                LocacaoControl.salvarLocacao(txtDesc.getText(), DataHora.dataToString(txtFDataLoc.getText()), Integer.parseInt(txtDias.getText()) ,
-                    Integer.parseInt((String)jComboBoxEscClient.getSelectedItem()),
-                    Integer.parseInt((String) jComboBoxEscVeic.getSelectedItem()), false, 0);
-                VeiculoControl.atualizarVeiculo(Integer.parseInt((String)jComboBoxEscVeic.getSelectedItem()), true);
+        } else {
+            try {
+                boolean bool = jCheckBoxDesconto.isSelected();
+                if (bool == true && !"".equals(txtDesconto.getText())) {
+
+                    LocacaoControl.salvarLocacao(txtDesc.getText(), DataHora.dataToString(txtFDataLoc.getText()), Integer.parseInt(txtDias.getText()),
+                            Integer.parseInt((String) jComboBoxEscClient.getSelectedItem()),
+                            Integer.parseInt((String) jComboBoxEscVeic.getSelectedItem()), true,
+                            Integer.parseInt(txtDesconto.getText()));
+                    VeiculoControl.atualizarVeiculo(Integer.parseInt((String) jComboBoxEscVeic.getSelectedItem()), true);
+                } else {
+
+                    LocacaoControl.salvarLocacao(txtDesc.getText(), DataHora.dataToString(txtFDataLoc.getText()), Integer.parseInt(txtDias.getText()),
+                            Integer.parseInt((String) jComboBoxEscClient.getSelectedItem()),
+                            Integer.parseInt((String) jComboBoxEscVeic.getSelectedItem()), false, 0);
+                    VeiculoControl.atualizarVeiculo(Integer.parseInt((String) jComboBoxEscVeic.getSelectedItem()), true);
+                }
+
+                this.dispose();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao Cadastrar Locação no Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+            } catch (ParseException ex) {
+                Logger.getLogger(JFrameLocar.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            this.dispose();
 
         }
-       limpaCampos();
-       
+        limpaCampos();
+
 
     }//GEN-LAST:event_jButtonLocarActionPerformed
 
@@ -569,21 +599,25 @@ public final class JFrameLocar extends javax.swing.JFrame {
 
     private void jComboBoxEscVeicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEscVeicActionPerformed
         // Sempre que um Id é setado as informações do veiculo aparecem.
-       String veic[] = new String[11];
-        
-       int index;
-       index = Integer.parseInt((String) jComboBoxEscVeic.getSelectedItem());
-       
-       veic = VeiculoControl.pegaVeiculo(index);
-       
-       txtGetCategoria.setText(veic[9]);
-       txtCor.setText(veic[7]);
-       txtGetValorDiaria.setText(veic[10]);
-       txtNameVeic.setText(veic[2]);
-       txtGetPlaca.setText(veic[1]);
-       txtGetFabricante.setText(veic[5]);
-       
-        
+
+        try {
+            String veic[] = new String[11];
+
+            int index;
+            index = Integer.parseInt((String) jComboBoxEscVeic.getSelectedItem());
+
+            veic = VeiculoControl.pegaVeiculo(index);
+            txtGetCategoria.setText(veic[9]);
+            txtCor.setText(veic[7]);
+            txtGetValorDiaria.setText(veic[10]);
+            txtNameVeic.setText(veic[2]);
+            txtGetPlaca.setText(veic[1]);
+            txtGetFabricante.setText(veic[5]);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Acessar Tabela Veiculo do Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_jComboBoxEscVeicActionPerformed
 
     private void txtGetNameClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGetNameClientActionPerformed
@@ -592,17 +626,21 @@ public final class JFrameLocar extends javax.swing.JFrame {
 
     private void jComboBoxEscClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEscClientActionPerformed
         // Seta as informações do cliente assim que ele é selecionado.
-       String client[] = new String[16];
-        
-       int index;
-       index = Integer.parseInt((String) jComboBoxEscClient.getSelectedItem());
-       
-       client = ClienteControl.pegarCliente(index);
-       
-       txtGetNameClient.setText(client[1]);
-       txtGetCPF.setText(client[3]);
-        
-        
+
+        try {
+            String client[] = new String[16];
+
+            int index;
+            index = Integer.parseInt((String) jComboBoxEscClient.getSelectedItem());
+
+            client = ClienteControl.pegarCliente(index);
+
+            txtGetNameClient.setText(client[1]);
+            txtGetCPF.setText(client[3]);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Acessar Tabela Cliente do Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_jComboBoxEscClientActionPerformed
 
     private void txtDiasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDiasFocusLost
@@ -616,8 +654,8 @@ public final class JFrameLocar extends javax.swing.JFrame {
 
     private void txtDescontoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescontoFocusLost
         // TODO add your handling code here:
-        if(!"".equals(txtFDataLoc.getText()) && !"".equals(txtDias.getText())&& !"".equals(txtDesconto.getText())){
-            
+        if (!"".equals(txtFDataLoc.getText()) && !"".equals(txtDias.getText()) && !"".equals(txtDesconto.getText())) {
+
             txtFSubTotal.setText(getSubT(getSubT()));
         }
     }//GEN-LAST:event_txtDescontoFocusLost
@@ -655,10 +693,8 @@ public final class JFrameLocar extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameLocar().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new JFrameLocar().setVisible(true);
         });
     }
 
@@ -668,20 +704,20 @@ public final class JFrameLocar extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBoxDesconto;
     private javax.swing.JComboBox<String> jComboBoxEscClient;
     private javax.swing.JComboBox<String> jComboBoxEscVeic;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelCPF;
     private javax.swing.JLabel jLabelCateg;
     private javax.swing.JLabel jLabelCor;
     private javax.swing.JLabel jLabelDescricao;
+    private javax.swing.JLabel jLabelDtAlug;
+    private javax.swing.JLabel jLabelDtDev;
     private javax.swing.JLabel jLabelEscCLient;
     private javax.swing.JLabel jLabelEscVeic;
     private javax.swing.JLabel jLabelMarca;
     private javax.swing.JLabel jLabelNameVeic;
     private javax.swing.JLabel jLabelPlaca;
+    private javax.swing.JLabel jLabelSubT;
     private javax.swing.JLabel jLabelValorDiaria;
+    private javax.swing.JLabel jLabeldays;
     private javax.swing.JPanel jPanelCheck;
     private javax.swing.JPanel jPanelInfoLoc;
     private javax.swing.JPanel jPanelInfoLoc2;

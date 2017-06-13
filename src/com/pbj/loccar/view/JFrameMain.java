@@ -5,15 +5,15 @@
  */
 package com.pbj.loccar.view;
 
-import com.pbj.loccar.control.NavegadorControl;
 import com.pbj.loccar.control.UsuarioControl;
 import com.pbj.loccar.util.DataHora;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Akr-Taku
- * 
+ *
  * JFrame Principal do Sistema que chama os demais dependendo do Nível de acesso
  * do usuário Logado
  */
@@ -21,16 +21,16 @@ public final class JFrameMain extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameMain
-     */ 
-    
+     */
     String user[];
 
-    public JFrameMain() {      
+    public JFrameMain() {
         initComponents();
         //Inicia todo acesso ao usuario como não visivel
         jMenuBarBarraPrincipal.setVisible(false);
         jPanelDataHora.setVisible(false);
         jLabelUser.setVisible(false);
+        jLabelLogoGray.setVisible(false);
         getRootPane().setDefaultButton(jButtonLogar);
     }
 
@@ -49,7 +49,9 @@ public final class JFrameMain extends javax.swing.JFrame {
         txtLogin = new javax.swing.JTextField();
         jButtonLogar = new javax.swing.JButton();
         txtSenha = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelLogo = new javax.swing.JLabel();
+        jPanelGrid = new javax.swing.JPanel();
+        jLabelLogoGray = new javax.swing.JLabel();
         jPanelDataHora = new javax.swing.JPanel();
         jLabelData = new javax.swing.JLabel();
         jLabelHora = new javax.swing.JLabel();
@@ -79,7 +81,8 @@ public final class JFrameMain extends javax.swing.JFrame {
         jMenuSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("LocCar");
+        setTitle("RentSoft");
+        setBackground(new java.awt.Color(217, 217, 217));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -88,6 +91,7 @@ public final class JFrameMain extends javax.swing.JFrame {
 
         jPanelLogin.setBackground(new java.awt.Color(255, 255, 255));
         jPanelLogin.setBorder(javax.swing.BorderFactory.createTitledBorder("Autentificação"));
+        jPanelLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabelLogin.setText("Login");
 
@@ -112,36 +116,36 @@ public final class JFrameMain extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/pbj/loccar/others/manual/manualHtml/images/RentsoftModeloBranco.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
+        jLabelLogo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/pbj/loccar/others/manual/manualHtml/images/RentsoftModeloBranco.png"))); // NOI18N
+        jLabelLogo.setText("jLabel1");
 
         javax.swing.GroupLayout jPanelLoginLayout = new javax.swing.GroupLayout(jPanelLogin);
         jPanelLogin.setLayout(jPanelLoginLayout);
         jPanelLoginLayout.setHorizontalGroup(
             jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(jPanelLoginLayout.createSequentialGroup()
                 .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanelLoginLayout.createSequentialGroup()
-                        .addGap(65, 65, 65)
+                        .addGap(71, 71, 71)
                         .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelSenha)
                             .addComponent(jLabelLogin))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtLogin)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 72, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jPanelLoginLayout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addComponent(jButtonLogar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelLoginLayout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(jButtonLogar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         jPanelLoginLayout.setVerticalGroup(
             jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLoginLayout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addContainerGap()
+                .addComponent(jLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelLogin)
@@ -152,22 +156,27 @@ public final class JFrameMain extends javax.swing.JFrame {
                     .addComponent(jLabelSenha))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonLogar)
-                .addGap(27, 27, 27))
+                .addGap(15, 15, 15))
         );
 
-        jPanelDataHora.setBackground(new java.awt.Color(51, 51, 51));
+        jPanelGrid.setLayout(new java.awt.GridBagLayout());
+
+        jLabelLogoGray.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelLogoGray.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/pbj/loccar/others/manual/manualHtml/images/Rentsoft.PNG"))); // NOI18N
+
+        jPanelDataHora.setBackground(new java.awt.Color(102, 102, 102));
         jPanelDataHora.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelDataHora.setFocusable(false);
         jPanelDataHora.setPreferredSize(new java.awt.Dimension(120, 110));
 
         jLabelData.setBackground(new java.awt.Color(255, 255, 255));
-        jLabelData.setFont(new java.awt.Font("Meiryo", 3, 12)); // NOI18N
-        jLabelData.setForeground(new java.awt.Color(204, 204, 204));
+        jLabelData.setFont(new java.awt.Font("Meiryo", 1, 12)); // NOI18N
+        jLabelData.setForeground(new java.awt.Color(217, 217, 217));
         jLabelData.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelData.setText("Data");
 
         jLabelHora.setFont(new java.awt.Font("Meiryo", 0, 22)); // NOI18N
-        jLabelHora.setForeground(new java.awt.Color(204, 204, 204));
+        jLabelHora.setForeground(new java.awt.Color(217, 217, 217));
         jLabelHora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelHora.setText("Hora");
 
@@ -184,12 +193,16 @@ public final class JFrameMain extends javax.swing.JFrame {
         jPanelDataHoraLayout.setVerticalGroup(
             jPanelDataHoraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDataHoraLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelHora, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabelData, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelData, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7))
         );
 
+        jLabelUser.setFont(new java.awt.Font("Meiryo", 1, 14)); // NOI18N
+        jLabelUser.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelUser.setText("Bem Vindo!");
 
         jMenuBarBarraPrincipal.setBackground(new java.awt.Color(255, 255, 255));
@@ -347,24 +360,37 @@ public final class JFrameMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelDataHora, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelUser, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanelDataHora, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanelGrid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 90, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelLogoGray, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanelGrid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabelLogoGray, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelUser)
-                .addGap(30, 30, 30)
-                .addComponent(jPanelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(jPanelDataHora, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addComponent(jPanelDataHora, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -374,7 +400,7 @@ public final class JFrameMain extends javax.swing.JFrame {
     private void jMenuItemCadasVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadasVeiculoActionPerformed
         // TODO add your handling code here:
         new JFrameCadastroVeiculo().setVisible(true);
-        
+
     }//GEN-LAST:event_jMenuItemCadasVeiculoActionPerformed
 
     private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
@@ -382,40 +408,45 @@ public final class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSenhaActionPerformed
 
     private void jButtonLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogarActionPerformed
-       // Botão que faz a verificação de login
-        
-        //Chama o Usuario do Banco de dados
-        user = UsuarioControl.logarUsuario(txtLogin.getText(), new String(txtSenha.getPassword()));
-        
+        try {
+            // Botão que faz a verificação de login
+
+            //Chama o Usuario do Banco de dados
+            user = UsuarioControl.logarUsuario(txtLogin.getText(), new String(txtSenha.getPassword()));
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Acessar Tabela de Usuários do Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+        }
+
         //Verifica se o usuario tem o nivel de acesso para acessar o sistema
-        if("Admin".equals(user[3]))
-        { //Caso seja acesso admin Libera Tudo do Sistema
+        if ("Admin".equals(user[3])) { //Caso seja acesso admin Libera Tudo do Sistema
             jPanelLogin.setVisible(false);
             jPanelDataHora.setVisible(true);
             jMenuBarBarraPrincipal.setVisible(true);
-            jLabelUser.setText("Bem Vindo! "+ user[2]);
+            jLabelUser.setText("Bem Vindo! " + user[2]);
             jLabelUser.setVisible(true);
-        
-        
-        }else if("Parceiro".equals(user[3])){
+            jLabelLogoGray.setVisible(true);
+
+        } else if ("Parceiro".equals(user[3])) {
             //Caso seja Parceiro é inibido alguns menus de controle
             jPanelLogin.setVisible(false);
             jPanelDataHora.setVisible(true);
             jMenuBarBarraPrincipal.setVisible(true);
-            jLabelUser.setText("Bem Vindo! "+ user[2]);
+            jLabelUser.setText("Bem Vindo! " + user[2]);
             jLabelUser.setVisible(true);
             jMenuItemCadastroUser.setVisible(false);
             jMenuItemCadasVeiculo.setVisible(false);
             jMenuCadastroCategoria.setVisible(false);
             jMenuConfigBD.setVisible(false);
-        }else{
+            jLabelLogoGray.setVisible(true);
+
+        } else {
             //Caso não tenha acesso ou usuario e senha errado mostra mensagem no sistema
-            JOptionPane.showMessageDialog(null, "Login ou Senha Incorreta!"); 
+            JOptionPane.showMessageDialog(null, "Login ou Senha Incorreta!");
         }
         //Limpa os campos de login e senha;
         txtLogin.setText("");
         txtSenha.setText("");
-        
+
     }//GEN-LAST:event_jButtonLogarActionPerformed
 
     private void txtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginActionPerformed
@@ -449,12 +480,12 @@ public final class JFrameMain extends javax.swing.JFrame {
 
     private void jMenuFatLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFatLocActionPerformed
         // TODO add your handling code here:
-        
+
         new JFrameRelatorios().setVisible(true);
     }//GEN-LAST:event_jMenuFatLocActionPerformed
 
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
-        
+
         System.exit(0);//Sai do programa! 
     }//GEN-LAST:event_jMenuSairActionPerformed
 
@@ -466,22 +497,24 @@ public final class JFrameMain extends javax.swing.JFrame {
         jLabelUser.setVisible(false);
         jMenuBarBarraPrincipal.setVisible(false);
         jPanelDataHora.setVisible(false);
+        jLabelLogoGray.setVisible(false);
+
     }//GEN-LAST:event_jMenuDeslogarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       //Ao abrir a Janela é setado a Data e a Hora do Sistema
-       //Iniciado Thread de mostrar Hora
-       
-       jLabelData.setText(DataHora.getData());//èga a data e joga no Label
-       
-       new Thread(){
-           public void run(){
-               while(true){
+        //Ao abrir a Janela é setado a Data e a Hora do Sistema
+        //Iniciado Thread de mostrar Hora
+
+        jLabelData.setText(DataHora.getData());//èga a data e joga no Label
+
+        new Thread() {
+            public void run() {
+                while (true) {
                     //Inicia a thread e atualiza o rélogio em tempo real
                     jLabelHora.setText(DataHora.getHora());
-               }
-           }
-       }.start();   
+                }
+            }
+        }.start();
     }//GEN-LAST:event_formWindowOpened
 
     private void jMenuItemCadastroUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroUserActionPerformed
@@ -508,9 +541,8 @@ public final class JFrameMain extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-      NavegadorControl arquivo = new NavegadorControl();
-      arquivo.metodoBuscarhtml();
-      
+       new JFrameManual().setVisible(true);
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSobreActionPerformed
@@ -553,10 +585,11 @@ public final class JFrameMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLogar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelData;
     private javax.swing.JLabel jLabelHora;
     private javax.swing.JLabel jLabelLogin;
+    private javax.swing.JLabel jLabelLogo;
+    private javax.swing.JLabel jLabelLogoGray;
     private javax.swing.JLabel jLabelSenha;
     private javax.swing.JLabel jLabelUser;
     private javax.swing.JMenu jMenuAjuda;
@@ -582,6 +615,7 @@ public final class JFrameMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuSair;
     private javax.swing.JMenuItem jMenuSobre;
     private javax.swing.JPanel jPanelDataHora;
+    private javax.swing.JPanel jPanelGrid;
     private javax.swing.JPanel jPanelLogin;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextField txtLogin;

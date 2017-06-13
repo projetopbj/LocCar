@@ -8,6 +8,7 @@ package com.pbj.loccar.view;
 import com.pbj.loccar.control.CategoriaControl;
 import com.pbj.loccar.control.VeiculoControl;
 import com.pbj.loccar.util.StringCampos;
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -19,32 +20,33 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrameCadastroVeiculos
+     *
      * @param veic
      */
-    public JFrameCadastroVeiculo(String[] veic ) {
+    public JFrameCadastroVeiculo(String[] veic) {
         initComponents();
-        
+
         //Popula o Combobox Vindo das categorias
-        popularComboBoxCateg(); 
+        popularComboBoxCateg();
         //Set os valores recebidos como parametro nos campos
         setCampos(veic);
         //COloca o salvar como invisel e o atualizar como vizivel
         jButtonSalvarVeiculo.setVisible(false);
-       
+
     }
-    
+
     public JFrameCadastroVeiculo() {
         initComponents();
         //Coloca o atualizar como invizivel e o salvar como vizivel.
         jButtonAtualizar.setVisible(false);
         popularComboBoxCateg();
     }
-    
+
     private int id;
-    
+
     //Seta os Campos editaveis de acordo com o que vem da tabela.
-    private void setCampos(String[] veic){
-        
+    private void setCampos(String[] veic) {
+
         id = Integer.parseInt(veic[0]);
         txtFPlaca.setText(veic[1]);
         txtModelo.setText(veic[2]);
@@ -56,43 +58,46 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
         //O 8 é o status de alugado que não se modifica por aqui.
         jComboBoxCategoria.setSelectedItem(veic[9]);
     }
+
     //Limpa os campos e seta ""
-     private void limparCampos(){
-        
+    private void limparCampos() {
+
         txtModelo.setText("");
         txtFPlaca.setText("");
         txtMarca.setText("");
         txtNPortas.setText("");
         txtAno.setText("");
         txtChassi.setText("");
-        
+
     }
-     //Verifica se os campos são vazios
-     private boolean comparaCampos(){
-        
-      boolean pla =  StringCampos.vazio(txtFPlaca.getText());
-      boolean mod =  StringCampos.vazio(txtModelo.getText());
-      boolean mar =  StringCampos.vazio(txtMarca.getText());
-      boolean cha = StringCampos.vazio(txtChassi.getText());
-      boolean ano = StringCampos.vazio(txtAno.getText());
-      boolean por = StringCampos.vazio(txtNPortas.getText());
-      boolean cor = StringCampos.vazio(txtCor.getText());
- 
-        
-        return (pla  ||mod  || mar|| cha|| ano|| mod|| por|| cor);
-        
+    //Verifica se os campos são vazios
+
+    private boolean comparaCampos() {
+
+        boolean pla = StringCampos.vazio(txtFPlaca.getText());
+        boolean mod = StringCampos.vazio(txtModelo.getText());
+        boolean mar = StringCampos.vazio(txtMarca.getText());
+        boolean cha = StringCampos.vazio(txtChassi.getText());
+        boolean ano = StringCampos.vazio(txtAno.getText());
+        boolean por = StringCampos.vazio(txtNPortas.getText());
+        boolean cor = StringCampos.vazio(txtCor.getText());
+
+        return (pla || mod || mar || cha || ano || mod || por || cor);
+
     }
-    
-    
-    private void popularComboBoxCateg(){
-         
-        List<String> categorias = CategoriaControl.returnNamesCategoria();
-        
-        categorias.forEach(jComboBoxCategoria::addItem);  
+
+    private void popularComboBoxCateg() {
+
+        List<String> categorias;
+        try {
+            categorias = CategoriaControl.returnNamesCategoria();
+            categorias.forEach(jComboBoxCategoria::addItem);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Acessar o Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
- 
-        
-        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -359,49 +364,61 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
 
     private void jButtonSalvarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarVeiculoActionPerformed
         //Salva no banco de dados o Veiculo;
-        
+
         //Verificando os campos Vazios
-        if (comparaCampos())
-        {
+        if (comparaCampos()) {
             //Mensagem informando caso exista algum campo vazio;
-           JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
-        }else
-        {
-            VeiculoControl.salvarVeiculo(txtFPlaca.getText(), txtModelo.getText(), txtChassi.getText(), Integer.parseInt(txtAno.getText()),
-                    txtMarca.getText(), Integer.parseInt(txtNPortas.getText()), txtCor.getText(), (String) jComboBoxCategoria.getSelectedItem());
-            
+            JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios", "", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                VeiculoControl.salvarVeiculo(txtFPlaca.getText(), txtModelo.getText(), txtChassi.getText(), Integer.parseInt(txtAno.getText()),
+                        txtMarca.getText(), Integer.parseInt(txtNPortas.getText()), txtCor.getText(), (String) jComboBoxCategoria.getSelectedItem());
+
+                JOptionPane.showMessageDialog(null, "Veículo Salvo no Banco de Dados!");
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao Salvar No Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+            }
+
             //Pergunta se deseja cadastrar outro veiculo
             int resp = JOptionPane.showConfirmDialog(null, "Deseja cadastrar Novo Veiculo?");
             //Se responder Não a Janela fecha
-            if (resp == 1 ||resp == 2 ){  this.dispose(); }
-            
-           limparCampos(); 
-            
+            if (resp == 1 || resp == 2) {
+                this.dispose();
+            }
+
+            limparCampos();
+
         }
-        
-        
+
+
     }//GEN-LAST:event_jButtonSalvarVeiculoActionPerformed
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
         // Botão para atualizar o veiculo
-         //Verificando os campos Vazios
-        if (comparaCampos())
-        {
+        //Verificando os campos Vazios
+        if (comparaCampos()) {
             //Mensagem informando caso exista algum campo vazio;
-           JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios","",JOptionPane.ERROR_MESSAGE);
-        }else
-        {
+            JOptionPane.showMessageDialog(null, "Não é Possivel Salvar Campos Vazios", "", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
                 VeiculoControl.atualizarVeiculo(id, txtFPlaca.getText(), txtModelo.getText(), txtChassi.getText(),
-                Integer.parseInt(txtAno.getText()), txtMarca.getText(), Integer.parseInt(txtNPortas.getText()),
-                txtCor.getText(), (String) jComboBoxCategoria.getSelectedItem());
-            
+                        Integer.parseInt(txtAno.getText()), txtMarca.getText(), Integer.parseInt(txtNPortas.getText()),
+                        txtCor.getText(), (String) jComboBoxCategoria.getSelectedItem());
+
+                JOptionPane.showMessageDialog(null, "Veículo Atualizado no Banco de Dados!");
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao Atualizar No Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
+            }
+
             this.dispose();
         }
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
-         this.dispose();//Fecha a aba atual;
+        this.dispose();//Fecha a aba atual;
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
@@ -433,10 +450,8 @@ public final class JFrameCadastroVeiculo extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameCadastroVeiculo().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new JFrameCadastroVeiculo().setVisible(true);
         });
     }
 

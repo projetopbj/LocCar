@@ -12,28 +12,27 @@ import java.util.Objects;
  * @author lucas
  */
 public class Veiculo {
-    
+
     private static int iterador; //Variavel statica para iterar;
-    
+
     private int id;
-    
-    private String placa; 
+
+    private String placa;
     private String modelo;// modelo do veículo Gol, Siena, Palio, etc.
     private String marca;
-    private String chassi; 
-    private int  ano; // ano de fabricação do veículo
+    private String chassi;
+    private int ano; // ano de fabricação do veículo
     private int nPortas;
     private String cor;
     private Categoria categoria;
     private boolean alugado;
-    
-    
-    public Veiculo(){
-        
+
+    public Veiculo() {
+
         id = iterador++;
-       
+
     }
-    
+
     public int getId() {
         return id;
     }
@@ -41,7 +40,6 @@ public class Veiculo {
     public void setId(int id) {
         this.id = id;
     }
-    
 
     public int getAno() {
         return ano;
@@ -110,13 +108,15 @@ public class Veiculo {
     public boolean isAlugado() {
         return alugado;
     }
+
     public String getAlugado() {
-       if(this.alugado == true){
-           return "Alugado";
-       }else{
-           return "Disponivel";
-       }
+        if (this.alugado == true) {
+            return "Alugado";
+        } else {
+            return "Disponivel";
+        }
     }
+
     public void setAlugado(boolean alugado) {
         this.alugado = alugado;
     }
@@ -153,15 +153,10 @@ public class Veiculo {
         }
         return true;
     }
-    
-    
-    
 
     @Override
     public String toString() {
         return "Veiculo{" + "id=" + id + ", placa=" + placa + ", modelo=" + modelo + ", marca=" + marca + ", chassi=" + chassi + ", ano=" + ano + ", nPortas=" + nPortas + ", cor=" + cor + ", alugado=" + alugado + '}';
     }
 
- 
-    
 }

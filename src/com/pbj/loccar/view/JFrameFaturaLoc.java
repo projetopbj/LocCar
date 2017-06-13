@@ -5,12 +5,6 @@
  */
 package com.pbj.loccar.view;
 
-import com.pbj.loccar.control.RelatorioControl;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import net.sf.jasperreports.engine.JRException;
-
 /**
  *
  * @author Akr-Taku
@@ -22,8 +16,7 @@ public final class JFrameFaturaLoc extends javax.swing.JFrame {
      */
     public JFrameFaturaLoc() {
         initComponents();
-        
-        
+
     }
 
     /**
@@ -280,7 +273,7 @@ public final class JFrameFaturaLoc extends javax.swing.JFrame {
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
         // TODO add your handling code here:
-         this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**
@@ -311,10 +304,8 @@ public final class JFrameFaturaLoc extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameFaturaLoc().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new JFrameFaturaLoc().setVisible(true);
         });
     }
 

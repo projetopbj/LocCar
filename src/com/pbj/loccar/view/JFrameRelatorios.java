@@ -6,8 +6,10 @@
 package com.pbj.loccar.view;
 
 import com.pbj.loccar.control.RelatorioControl;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.IOException;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -21,6 +23,43 @@ public class JFrameRelatorios extends javax.swing.JFrame {
     public JFrameRelatorios() {
         initComponents();
         jProgressBar.setVisible(false);
+    }
+
+    private void geraRelat(String param) {
+        RelatorioControl rela = new RelatorioControl();
+        Thread barra;
+        barra = new Thread() {
+
+            @Override
+            public void run() {
+                jProgressBar.setVisible(true);
+                jProgressBar.setIndeterminate(true);
+            }
+        };
+        Thread relatorio = new Thread() {
+            @Override
+            public void run() {
+
+                jButtonGerar.setEnabled(false);
+                jButtonCancelar.setEnabled(false);
+                try {
+                    RelatorioControl.geraRelatorio(param);
+                    dispose();
+                } catch (IOException | JRException | SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Erro ao Gerar Relatório: " + ex, "", JOptionPane.ERROR_MESSAGE);
+                }
+
+            }
+        };
+        try {
+            barra.start();
+            relatorio.join();
+            relatorio.start();
+
+        } catch (InterruptedException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Gerar Relatório: " + ex, "", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
     /**
@@ -37,12 +76,16 @@ public class JFrameRelatorios extends javax.swing.JFrame {
         jButtonGerar = new javax.swing.JButton();
         jProgressBar = new javax.swing.JProgressBar();
         jComboBoxSelect = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jButtonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gerar Relatórios");
         setResizable(false);
 
+        jPanelFrame.setBackground(new java.awt.Color(217, 217, 217));
+
+        jPanelGeraRel.setBackground(new java.awt.Color(217, 217, 217));
         jPanelGeraRel.setBorder(javax.swing.BorderFactory.createTitledBorder("Gerar Relatórios"));
 
         jButtonGerar.setText("Gerar Relátorio");
@@ -54,6 +97,10 @@ public class JFrameRelatorios extends javax.swing.JFrame {
 
         jComboBoxSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Locações", "Clientes" }));
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/pbj/loccar/others/manual/manualHtml/images/RentsoftLogo.PNG"))); // NOI18N
+        jLabel1.setToolTipText("");
+
         javax.swing.GroupLayout jPanelGeraRelLayout = new javax.swing.GroupLayout(jPanelGeraRel);
         jPanelGeraRel.setLayout(jPanelGeraRelLayout);
         jPanelGeraRelLayout.setHorizontalGroup(
@@ -61,13 +108,17 @@ public class JFrameRelatorios extends javax.swing.JFrame {
             .addGroup(jPanelGeraRelLayout.createSequentialGroup()
                 .addGroup(jPanelGeraRelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelGeraRelLayout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(jButtonGerar))
-                    .addGroup(jPanelGeraRelLayout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addGroup(jPanelGeraRelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanelGeraRelLayout.createSequentialGroup()
+                                .addGap(75, 75, 75)
+                                .addComponent(jComboBoxSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanelGeraRelLayout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addGroup(jPanelGeraRelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jButtonGerar))))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
         jPanelGeraRelLayout.setVerticalGroup(
@@ -75,9 +126,11 @@ public class JFrameRelatorios extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelGeraRelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jComboBoxSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonGerar)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(jProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
@@ -106,8 +159,8 @@ public class JFrameRelatorios extends javax.swing.JFrame {
             jPanelFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelGeraRel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jPanelGeraRel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonCancelar)
                 .addGap(26, 26, 26))
         );
@@ -134,74 +187,15 @@ public class JFrameRelatorios extends javax.swing.JFrame {
 
     private void jButtonGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerarActionPerformed
         // TODO add your handling code here
-        if("Clientes".equals(jComboBoxSelect.getSelectedItem())){
-        
-            RelatorioControl rela = new RelatorioControl();
-            Thread barra;
-            barra = new Thread(){
-                
-                @Override
-                public void run(){
-                     jProgressBar.setVisible(true);
-                    jProgressBar.setIndeterminate(true);
-                }
-            };
-            Thread relatorio = new Thread(){
-                @Override
-                public void run(){
-               
-                    jButtonGerar.setEnabled(false);
-                    jButtonCancelar.setEnabled(false);
-                    rela.relatorio("locacaoCliente");
-                    dispose();
-                } 
-            };
-        
-            try {
-                barra.start();
-                relatorio.join();
-                relatorio.start();
-            
-            
-            } catch (InterruptedException ex) {
-            Logger.getLogger(JFrameRelatorios.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-        }else{
-            RelatorioControl rela = new RelatorioControl();
-            Thread barra;
-            barra = new Thread(){
-                
-                @Override
-                public void run(){
-                     jProgressBar.setVisible(true);
-                    jProgressBar.setIndeterminate(true);
-                }
-            };
-            Thread relatorio = new Thread(){
-                @Override
-                public void run(){
-               
-                    jButtonGerar.setEnabled(false);
-                    jButtonCancelar.setEnabled(false);
-                    rela.relatorio("locacao");
-                    dispose();
-                } 
-            };
-        
-            try {
-                barra.start();
-                relatorio.join();
-                relatorio.start();
-            
-            
-            } catch (InterruptedException ex) {
-            Logger.getLogger(JFrameRelatorios.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            
+        if ("Clientes".equals(jComboBoxSelect.getSelectedItem())) {
+
+            geraRelat("locacao");
+
+        } else {
+            geraRelat("locacaoCliente");
+
         }
-        
+
     }//GEN-LAST:event_jButtonGerarActionPerformed
 
     /**
@@ -233,10 +227,8 @@ public class JFrameRelatorios extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameRelatorios().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new JFrameRelatorios().setVisible(true);
         });
     }
 
@@ -244,6 +236,7 @@ public class JFrameRelatorios extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGerar;
     private javax.swing.JComboBox<String> jComboBoxSelect;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanelFrame;
     private javax.swing.JPanel jPanelGeraRel;
     private javax.swing.JProgressBar jProgressBar;
