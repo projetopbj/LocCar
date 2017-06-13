@@ -189,10 +189,10 @@ public class JFrameRelatorios extends javax.swing.JFrame {
         // TODO add your handling code here
         if ("Clientes".equals(jComboBoxSelect.getSelectedItem())) {
 
-            geraRelat("locacao");
+            geraRelat("locacaoCliente");
 
         } else {
-            geraRelat("locacaoCliente");
+            geraRelat("locacao");
 
         }
 
