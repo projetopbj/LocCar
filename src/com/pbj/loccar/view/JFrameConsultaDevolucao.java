@@ -8,6 +8,9 @@ package com.pbj.loccar.view;
 import com.pbj.loccar.control.LocacaoControl;
 import com.pbj.loccar.view.tables.LocacaoTable;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -320,7 +323,7 @@ public final class JFrameConsultaDevolucao extends javax.swing.JFrame {
                 try {
                     LocacaoControl.apagarLocacao(Integer.parseInt(getLoc[0]));
                     JOptionPane.showMessageDialog(null, "Registro Apagado do Banco de Dados!");
-                } catch (SQLException ex) {
+                } catch (SQLException | ParseException ex) {
                     JOptionPane.showMessageDialog(null, "Erro ao Acessar Banco de dados: " + ex, "", JOptionPane.ERROR_MESSAGE);
 
                 }
